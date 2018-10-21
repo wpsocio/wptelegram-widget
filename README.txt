@@ -4,15 +4,15 @@ Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 3.8.0
 Tested up to: 4.9.8
-Requires PHP: 5.2.4
+Requires PHP: 5.3
 Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display the Telegram Public Channel or Group Feed in a widget or anywhere using a shortcode.
+Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a simple shortcode.
 
 == Description ==
-Display the Telegram Public Channel or Group Feed in a widget or anywhere using a shortcode.
+Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a simple shortcode.
 
 You can display the feed anywhere you want using a simple shortcode `[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
 

@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Telegram Widget
  * Plugin URI:        https://t.me/WPTelegram
- * Description:       Display the Telegram Public Channel or Group Feed in a widget or anywhere using a shortcode.
+ * Description:       Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.
  * Version:           1.3.2
  * Author:            Manzoor Wani
  * Author URI:        https://t.me/manzoorwanijk
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
+ * Current plugin version.
  */
 define( 'WPTELEGRAM_WIDGET_VER', '1.3.2' );
 
