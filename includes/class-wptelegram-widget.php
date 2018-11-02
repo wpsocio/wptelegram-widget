@@ -258,9 +258,7 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'tgmpa_register', $plugin_admin, 'register_required_plugins' );
 
-		//$this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notice_for_cmb2' );
-
-		$this->loader->add_action( 'cmb2_admin_init', $plugin_admin, 'create_options_page' );
+		$this->loader->add_action( 'cmb2_admin_init', $plugin_admin, 'create_options_page', 11 );
 
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_widgets' );
 

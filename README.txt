@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 3.8.0
 Tested up to: 4.9.8
 Requires PHP: 5.3
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,9 @@ You can also contribute in translating this plugin into your local language. Joi
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.3.3 =
+* Prepare for WP Telegram 2.0.0
 
 = 1.3.2 =
 * Fixed the DOMDocument error when allow_url_fopen is off
