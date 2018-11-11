@@ -1,0 +1,19 @@
+# Changelog
+
+## 1.2.0
+* Fixed the problem with empty widget title
+* Universalized Telegram Bot API Library
+* Minor fixes
+
+## 1.1.2
+* Fixed the CSS issue with message width
+
+## 1.1.1
+* Fixed the CSS issue with narrow sidebars
+
+## 1.1.0
+* Added Messages List Table
+* Added Manual pulling of the messages
+
+## 1.0.0
+* Initial Release.

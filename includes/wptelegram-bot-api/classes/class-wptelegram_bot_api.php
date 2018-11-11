@@ -159,24 +159,16 @@ class WPTelegram_Bot_API {
     private function sendRequest( $api_method, $params ) {
         
         if ( null == $this->get_bot_token() ) {
-            return new WP_Error( 'invalid_bot_token', __( 'Bot Token is required to make a request', 'wptelegram' ) );
+            return new WP_Error( 'invalid_bot_token', 'Bot Token is required to make a request' );
         }
 
-        $this->request = $this->request( $api_method, $params );;
-
-        $log_enabled = (bool) apply_filters( 'wptelegram_bot_api_enable_log', false );
-        if ( $log_enabled ) {
-            // override the remote post blocking arg
-            add_filter( 'wptelegram_bot_api_request_arg_blocking', '__return_true', 20 );
-        }
+        $this->request = $this->request( $api_method, $params );
         
-        do_action( 'wptelegram_bot_api_before_request', $this->get_request() );
+        do_action( 'wptelegram_bot_api_before_request', $this->get_request(), $this->last_response );
 
         $this->last_response = $this->get_client()->sendRequest( $this->get_request() );
         
-        if ( $log_enabled ) {
-            $this->api_log();
-        }
+        do_action( 'wptelegram_bot_api_after_request', $this->get_request(), $this->last_response );
 
         do_action( 'wptelegram_bot_api_debug', $this->last_response, $this );
 
@@ -190,7 +182,7 @@ class WPTelegram_Bot_API {
      */
     public function is_success( $res = NULL ) {
 
-        if ( empty( $res ) ) {
+        if ( is_null( $res ) ) {
             $res = $this->last_response;
         }
 
@@ -214,32 +206,6 @@ class WPTelegram_Bot_API {
             $api_method,
             $params
         );
-    }
-
-    /**
-     * Create a log of the API requests
-     *
-     * @since 1.0.0
-     *
-     */
-    private function api_log() {
-        $res = $this->get_last_response();
-        // add the method and request params
-        $text = 'Method: ' . $this->get_request()->get_api_method() . PHP_EOL . 'Params: ' . json_encode( $this->get_request()->get_params() ) . PHP_EOL . '--------------------------------' . PHP_EOL;
-
-        // add the response
-        if ( is_wp_error( $res ) ) {
-            $text .= 'WP_Error: ' . $res->get_error_code() . ' ' . $res->get_error_message();
-        } else{
-            $text .= 'Response: ' . $res->get_body();
-        }
-
-        $filename = WP_CONTENT_DIR . '/wptelegram-bot-api.log';
-        $filename = apply_filters( 'wptelegram_bot_api_log_filename', $filename );
-
-        $data = PHP_EOL . '[' . current_time( 'mysql' ) . ']' . PHP_EOL . $text . PHP_EOL . PHP_EOL;
-
-        file_put_contents( $filename, $data, FILE_APPEND );
     }
 }
 endif;

@@ -132,43 +132,6 @@ class WPTelegram_Widget_Admin {
 	}
 
 	/**
-	 * Register required plugins
-	 * 
-	 */
-	public function register_required_plugins() {
-		$plugins = array(
-			array(
-				'name'               => 'CMB2',
-				'slug'               => 'cmb2',
-				'required'           => true,
-				'version'            => '2.3.0',
-			),
-		);
-
-		$notice_singular = $notice_plural = sprintf( '%s requires the following to be installed and active:', $this->title ) . ' %1$s';
-		$notice = _n_noop( $notice_singular, $notice_singular, 'wptelegram-widget' );
-
-		$config = array(
-			'id'           => 'wptelegram',
-			'domain'       => 'wptelegram-widget',
-			'default_path' => '',
-			'menu'         => 'install-required-plugins',
-			'parent_slug'  => 'wptelegram',
-			'capability'   => 'manage_options',
-			'has_notices'  => true,
-			'dismissable'  => false,
-	        'is_automatic' => true,
-			'strings'      => array(
-				'notice_can_install_required'	=> $notice,
-				'notice_can_activate_required'	=> $notice,
-				'nag_type'						=> 'notice-error',
-			)
-		);
-
-		tgmpa( $plugins, $config );
-	}
-
-	/**
 	 * Build Options page
 	 *
 	 * @since    1.0.0
@@ -952,11 +915,9 @@ class WPTelegram_Widget_Admin {
 
 		$url = $this->get_embed_url( $username, $message_id );
 
-		$response = wp_remote_get( $url );
-		$code = wp_remote_retrieve_response_code( $response );
-		$html = wp_remote_retrieve_body( $response );
+		$html = $this->get_post_html( $url );
 
-		if ( 200 !== $code || empty( $html ) ) {
+		if ( empty( $html ) ) {
 			return;
 		}
 
@@ -971,6 +932,28 @@ class WPTelegram_Widget_Admin {
 
 	    // remove the post from saved messages
 	    $this->remove_post( $message_id );
+	}
+
+	/**
+	 * Retrieve post html from Telegram
+	 *
+	 * @since  1.3.x
+	 */
+	public function get_post_html( $url ) {
+
+		$args = array(
+            'headers'   => array( 'wptelegram_bot' => true ), // for proxy check
+        );
+
+		$response = wp_remote_get( $url, $args );
+		$code = wp_remote_retrieve_response_code( $response );
+		$html = wp_remote_retrieve_body( $response );
+
+		if ( 200 !== $code ) {
+			return false;
+		}
+
+		return $html;
 	}
 
 	/**

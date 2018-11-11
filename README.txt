@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 3.8.0
 Tested up to: 4.9.8
 Requires PHP: 5.3
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ You can also contribute in translating this plugin into your local language. Joi
 
 == Changelog ==
 
+= 1.3.4 =
+* Bundled CMB2 to handle the dependency
+
 = 1.3.3 =
 * Prepare for WP Telegram 2.0.0
 
@@ -76,23 +79,5 @@ You can also contribute in translating this plugin into your local language. Joi
 * Fixes the static width of widgets
 * Auto remove deleted messages
 * Performance improvements
-
-= 1.2.0 =
-* Fixed the problem with empty widget title
-* Universalized Telegram Bot API Library
-* Minor fixes
-
-= 1.1.2 =
-* Fixed the CSS issue with message width
-
-= 1.1.1 =
-* Fixed the CSS issue with narrow sidebars
-
-= 1.1.0 =
-* Added Messages List Table
-* Added Manual pulling of the messages
-
-= 1.0.0 =
-* Initial Release.
 
 == Upgrade Notice ==
