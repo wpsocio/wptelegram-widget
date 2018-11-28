@@ -4,7 +4,7 @@ Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 3.8.0
 Tested up to: 4.9.8
-Requires PHP: 5.3
+Requires PHP: 5.2.4
 Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,53 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 == Description ==
 Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a simple shortcode.
 
-You can display the feed anywhere you want using a simple shortcode `[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
+== Excellent Support ==
+
+**Join the Chat**
+
+We have a public group on Telegram to provide help setting up the plugin, discuss issues, features, translations etc. Join [@WPTelegramChat](https://t.me/WPTelegramChat)
+For rules, see the pinned message. No spam please.
+
+== Features ==
+
+*	Pulls updates automatically from Telegram
+*	Uses a responsive widget to display the feed
+*	Fits anywhere you want it to be
+*	The received messages can be seen from /wp-admin
+*	Automatically removes deleted messages
+*	Can be displayed using a shortcode
+*	Can be extended with custom code
+
+## Widget Info
+Goto **Appearance** > **Widgets** and click/drag **WP Telegram Widget** and place it where you want it to be.
+
+Alternately, you can use the below shortcode.
+
+Inside page or post content:
+
+`[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
+
+Inside the theme templates
+~~~
+<?php
+if ( function_exists( 'wptelegram_widget' ) ) {
+    $args = array(
+        // 'num_messages'    => 5,
+        // 'widget_width'    => 100,
+        // 'author_photo'    => 'auto',
+    );
+
+    wptelegram_widget( $args );
+}
+?>
+~~~
+or
+
+~~~
+<?php
+    echo do_shortcode( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_show"]' );
+?>
+~~~
 
 **Get in touch**
 
@@ -23,16 +69,16 @@ You can display the feed anywhere you want using a simple shortcode `[wptelegram
 *	Facebook [@WPTelegram](https://fb.com/WPTelegram)
 *	Twitter [@WPTelegram](https://twitter.com/WPTelegram)
 
-== Excellent LIVE Support on Telegram ==
-
-**Join the Chat**
-
-We have a public group on Telegram to provide help setting up the plugin, discuss issues, features, translations etc. Join [@WPTelegramChat](https://t.me/WPTelegramChat)
-For rules, see the pinned message. No spam please.
+**Contribution**
+Development occurs on [Github](https://github.com/manzoorwanijk/wptelegram-widget), and all contributions welcome.
 
 **Translations**
 
-You can also contribute in translating this plugin into your local language. Join the Chat (above)
+Many thanks to the translators for the great job!
+
+* [Алексей Семёнов](https://profiles.wordpress.org/els7777) (Russian)
+
+* Note: You can also contribute in translating this plugin into your local language. Join the Chat (above)
 
 
 == Installation ==
@@ -60,6 +106,9 @@ You can also contribute in translating this plugin into your local language. Joi
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.3.5 =
+* Added Russian translation
 
 = 1.3.4 =
 * Bundled CMB2 to handle the dependency
