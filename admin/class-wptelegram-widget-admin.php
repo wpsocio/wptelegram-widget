@@ -331,7 +331,7 @@ class WPTelegram_Widget_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-     * @param WP_Screen $screen Current WP_Screen object.
+	 * @param WP_Screen $screen Current WP_Screen object.
 	 */
 	public function set_screen_options( $screen ) {
 		/*
@@ -341,7 +341,7 @@ class WPTelegram_Widget_Admin {
 			return;
 		}
 
-	    $option = 'per_page';
+		$option = 'per_page';
 		$args = array(
 			'label'		=> __( 'Messages', 'wptelegram-widget' ),
 			'default'	=> 10,
@@ -566,19 +566,19 @@ class WPTelegram_Widget_Admin {
 	public static function get_telegram_guide( $field_args, $field ) { ?>
 		<p style="color:#f10e0e;"><b><?php echo __( 'INSTRUCTIONS!','wptelegram-widget'); ?></b></p>
 		 <ol style="list-style-type: decimal;">
-		 	<li><?php esc_html_e( 'Create a Channel/group/supergroup', 'wptelegram-widget' );?></a>&nbsp;(<?php esc_html_e( 'If you haven\'t', 'wptelegram-widget' );?>)</li>
-		 	<li><?php echo sprintf( __( 'Create a Bot by sending %s command to %s', 'wptelegram-widget' ), '<code>/newbot</code>', '<a href="https://t.me/BotFather"  target="_blank">@BotFather</a>' );
-            ?></li>
-		 	<li><?php echo sprintf( __( 'After completing the steps %s will provide you the Bot Token.', 'wptelegram-widget' ), '@BotFather' );?></li>
-		 	<li><?php esc_html_e( 'Copy the token and paste into the Bot Token field below.', 'wptelegram-widget' );?>&nbsp;<?php esc_html_e( 'For ease, use', 'wptelegram-widget' );?>&nbsp;<a href="<?php echo esc_url( 'https://web.telegram.org' ); ?>" target="_blank">Telegram Web</a></li>
-		 	<li><?php echo __( 'Add the Bot as Administrator to your Channel/Group', 'wptelegram-widget' );?></li>
-		 	<li><?php esc_html_e( 'Enter the Channel/Group Username in the field below', 'wptelegram-widget' );?>
-		 	</li>
-		 	<li><?php echo sprintf( __( 'Hit %s below', 'wptelegram-widget' ), '<b>' . __( 'Save Changes' ) . '</b>' );?></li>
-		 	<li><?php esc_html_e( 'That\'s it. You are ready to rock :)', 'wptelegram-widget' );?></li>
+			<li><?php esc_html_e( 'Create a Channel/group/supergroup', 'wptelegram-widget' );?></a>&nbsp;(<?php esc_html_e( 'If you haven\'t', 'wptelegram-widget' );?>)</li>
+			<li><?php echo sprintf( __( 'Create a Bot by sending %s command to %s', 'wptelegram-widget' ), '<code>/newbot</code>', '<a href="https://t.me/BotFather"  target="_blank">@BotFather</a>' );
+			?></li>
+			<li><?php echo sprintf( __( 'After completing the steps %s will provide you the Bot Token.', 'wptelegram-widget' ), '@BotFather' );?></li>
+			<li><?php esc_html_e( 'Copy the token and paste into the Bot Token field below.', 'wptelegram-widget' );?>&nbsp;<?php printf( __( 'For ease, use %s', 'wptelegram-widget' ), '<a href="' . esc_url( 'https://desktop.telegram.org' ) . '" target="_blank">Telegram Desktop</a>' );?>&nbsp;<a href="<?php echo esc_url( 'https://web.telegram.org' ); ?>" target="_blank">Telegram Web</a></li>
+			<li><?php echo __( 'Add the Bot as Administrator to your Channel/Group', 'wptelegram-widget' );?></li>
+			<li><?php esc_html_e( 'Enter the Channel/Group Username in the field below', 'wptelegram-widget' );?>
+			</li>
+			<li><?php echo sprintf( __( 'Hit %s below', 'wptelegram-widget' ), '<b>' . __( 'Save Changes' ) . '</b>' );?></li>
+			<li><?php esc_html_e( 'That\'s it. You are ready to rock :)', 'wptelegram-widget' );?></li>
 		 </ol>
 		 <p style="color:#396609;"><b><?php echo __( 'Tip!','wptelegram-widget'), '💡'; ?></b>&nbsp;<span><?php esc_html_e( 'Updates are pulled every five minutes if someone visits your website.', 'wptelegram-widget' );?></span>&nbsp;<span><?php esc_html_e( 'To make sure the updates are pulled in time, it is recommended to set up a cron on your hosting server that hits the below URL every five minutes or so.', 'wptelegram-widget' );?></span>
-		 	<pre><?php echo esc_html( admin_url( 'admin-post.php?action=wptelegram_widget_pull_updates' ) ); ?></pre>
+			<pre><?php echo esc_html( admin_url( 'admin-post.php?action=wptelegram_widget_pull_updates' ) ); ?></pre>
 		 </p>
 		 <p style="color:#f10e0e;"><b><?php echo __( 'Note!','wptelegram-widget'); ?></b>&nbsp;<span><?php esc_html_e( 'Do not use the same Bot Token that you use for sending messages to the channel. The messages sent with the same Bot Token will not appear in the widget.', 'wptelegram-widget' );?></span></p>
 		 <?php
@@ -627,13 +627,13 @@ class WPTelegram_Widget_Admin {
 		return $html;
 	}
 
- 	/**
+	/**
 	 * Create our feed widget
 	 *
 	 * @since    1.0.0
 	 */
 	public function register_widgets() {
-	    register_widget( 'WPTelegram_Widget_Widget' );
+		register_widget( 'WPTelegram_Widget_Widget' );
 	}
 
 	/**
@@ -643,10 +643,10 @@ class WPTelegram_Widget_Admin {
 	 */
 	public function pull_updates() {
 
-        /**
-         * Fires before doing anything
-         */
-        do_action( 'wptelegram_widget_pull_updates_init' );
+		/**
+		 * Fires before doing anything
+		 */
+		do_action( 'wptelegram_widget_pull_updates_init' );
 
 		$bot_token = WPTG_Widget()->options()->get( 'bot_token' );
 		$username = WPTG_Widget()->options()->get( 'username' );
@@ -666,9 +666,9 @@ class WPTelegram_Widget_Admin {
 			do_action( 'wptelegram_widget_getupdates_failed', $res, $bot_token );
 
 			// Conflict: when webhook is active
-            if ( ! is_wp_error( $res ) && 409 === $res->get_response_code() ) {
-                $bot_api->deleteWebhook();
-            }
+			if ( ! is_wp_error( $res ) && 409 === $res->get_response_code() ) {
+				$bot_api->deleteWebhook();
+			}
 			return;
 		}
 
@@ -685,9 +685,9 @@ class WPTelegram_Widget_Admin {
 		}
 
 		/**
-         * Fires after doing everything
-         */
-        do_action( 'wptelegram_widget_pull_updates_finish', $updates );
+		 * Fires after doing everything
+		 */
+		do_action( 'wptelegram_widget_pull_updates_finish', $updates );
 
 		exit( ':)' );
 	}
@@ -738,10 +738,10 @@ class WPTelegram_Widget_Admin {
 	 */
 	private function handle_updates( $updates ) {
 
-        /**
-         * Fires before doing anything
-         */
-        do_action( 'wptelegram_widget_handle_updates_init', $updates );
+		/**
+		 * Fires before doing anything
+		 */
+		do_action( 'wptelegram_widget_handle_updates_init', $updates );
 
 		$new_messages = $edited_messages = array();
 		$messages = WPTG_Widget()->options()->get( 'messages', array() );
@@ -775,10 +775,10 @@ class WPTelegram_Widget_Admin {
 			$this->save_messages( $edited_messages, 'edited' );
 		}*/
 
-        /**
-         * Fires after doing everything
-         */
-        do_action( 'wptelegram_widget_handle_updates_finish', $updates, $new_messages, $edited_messages );
+		/**
+		 * Fires after doing everything
+		 */
+		do_action( 'wptelegram_widget_handle_updates_finish', $updates, $new_messages, $edited_messages );
 	}
 
 	/**
@@ -893,165 +893,5 @@ class WPTelegram_Widget_Admin {
 		}
 
 		WPTG_Widget()->options()->set( "{$type}messages", $messages );
-	}
-
-	/**
-	 * Render the HTML of the widget message
-	 *
-	 * @since  1.3.0
-	 */
-	public function render_widget_view() {
-		if ( ! isset( $_GET['message_id'] ) ) {
-			return;
-		}
-
-		$message_id = sanitize_text_field( $_GET['message_id'] );
-
-		$username = WPTG_Widget()->options()->get( 'username' );
-
-		if ( empty( $username ) ) {
-			return;
-		}
-
-		$url = $this->get_embed_url( $username, $message_id );
-
-		$html = $this->get_post_html( $url );
-
-		if ( empty( $html ) ) {
-			return;
-		}
-
-		$dom = new DOMDocument;
-
-	    @$dom->loadHTML( $html );
-
-	    if ( $this->post_still_exists( $dom ) ) {
-	    	echo $this->get_widget_html( $dom );
-	    	return;
-	    }
-
-	    // remove the post from saved messages
-	    $this->remove_post( $message_id );
-	}
-
-	/**
-	 * Retrieve post html from Telegram
-	 *
-	 * @since  1.3.x
-	 */
-	public function get_post_html( $url ) {
-
-		$args = array(
-            'headers'   => array( 'wptelegram_bot' => true ), // for proxy check
-        );
-
-		$response = wp_remote_get( $url, $args );
-		$code = wp_remote_retrieve_response_code( $response );
-		$html = wp_remote_retrieve_body( $response );
-
-		if ( 200 !== $code ) {
-			return false;
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Remove the post message from saved messages
-	 *
-	 * @since  1.3.0
-	 */
-	public function remove_post( $message_id ) {
-
-		$messages = WPTG_Widget()->options()->get( 'messages', array() );
-
-		// use array_keys() instead of array_search()
-		$keys = array_keys( $messages, $message_id );
-		unset( $messages[ reset( $keys ) ] );
-
-		// destroy keys
-		$messages = array_values( $messages );
-
-		WPTG_Widget()->options()->set( 'messages', $messages );
-	}
-
-	/**
-	 * Get the widget HTML after processing
-	 *
-	 * @since  1.3.0
-	 */
-	public function get_widget_html( $dom ) {
-
-		/* Inject Override style */
-	    $heads = $dom->getElementsByTagName( 'head' );
-	    // for some weird PHP installations
-	    if ( $heads->length ) {
-	    	$head = $heads->item( 0 );
-	    	$style_elm = $dom->createElement( 'style', 'body.body_widget_post { min-width: initial; }' );
-			$elm_type_attr = $dom->createAttribute( 'type' );
-			$elm_type_attr->value = 'text/css';
-			$style_elm->appendChild( $elm_type_attr );
-			$head->appendChild( $style_elm );
-	    }
-		/* Inject Override style */
-
-	    /* Remove Google Analytics Code to avoid console errors */
-	    $scripts = $dom->getElementsByTagName( 'script' );
-	    foreach ( $scripts as $script ) {
-	    	
-	    	if ( false !== strpos( $script->nodeValue, 'GoogleAnalyticsObject' ) ) {
-	    		$script->parentNode->removeChild ( $script );
-	    		break;
-	    	}
-	    }
-		/* Remove Google Analytics Code to avoid console errors */
-
-		$html = $dom->saveHTML();
-
-	    return (string) apply_filters( 'wptelegram_widget_widget_html', $html, $dom );
-	}
-
-	/**
-	 * If the post is found - not deleted
-	 *
-	 * Searches for "tgme_widget_message_error" class
-	 * in the widget HTML
-	 *
-	 * @since  1.3.0
-	 */
-	public function post_still_exists( $dom ) {
-		$finder = new DomXPath( $dom );
-		$classname = 'tgme_widget_message_error';
-		$nodes = $finder->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]" );
-
-		foreach ( $nodes as $node ) {
-
-			if ( preg_match( '/not found/iu', $node->nodeValue ) ) {
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Render the HTML of the widget message
-	 *
-	 * @since  1.3.0
-	 */
-	public function get_embed_url( $username, $message_id ) {
-
-		$url = "https://t.me/{$username}/{$message_id}";
-		$args = array(
-			'embed'	=> true,
-		);
-		if ( isset( $_GET['userpic'] ) ) {
-			$args['userpic'] = sanitize_text_field( $_GET['userpic'] );
-		}
-
-		$url = add_query_arg( $args, $url );
-
-		return (string) apply_filters( 'wptelegram_widget_embed_url', $url, $username );
 	}
 }

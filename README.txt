@@ -3,9 +3,9 @@ Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 3.8.0
-Tested up to: 4.9.8
+Tested up to: 5.0.3
 Requires PHP: 5.2.4
-Stable tag: 1.3.4
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,7 @@ Development occurs on [Github](https://github.com/manzoorwanijk/wptelegram-widge
 Many thanks to the translators for the great job!
 
 * [Алексей Семёнов](https://profiles.wordpress.org/els7777) (Russian)
+* [robertskiba](https://profiles.wordpress.org/robertskiba/) (German)
 
 * Note: You can also contribute in translating this plugin into your local language. Join the Chat (above)
 
@@ -107,8 +108,10 @@ Many thanks to the translators for the great job!
 
 == Changelog ==
 
-= 1.3.5 =
+= 1.4.0 =
+* Moved the widget message links to front-end
 * Added Russian translation
+* Fixed the issue with Cyrillic characters in the widget
 
 = 1.3.4 =
 * Bundled CMB2 to handle the dependency

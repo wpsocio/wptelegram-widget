@@ -292,6 +292,12 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'do_upgrade' );
 
+		$this->loader->add_action( 'init', $plugin_public, 'add_rewrite_rules' );
+
+		$this->loader->add_filter( 'template_include', $plugin_public, 'set_message_template', 99 );
+
+		$this->loader->add_action( 'wptelegram_widget_render_single_message', $plugin_public, 'render_single_message', 10, 2 );
+
 		$this->loader->add_action( 'wptelegram_widget_pull_updates', $plugin_public, 'trigger_pull_updates' );
 
 		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $plugin_public ), 'feed_widget_shortcode' );

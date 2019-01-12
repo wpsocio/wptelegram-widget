@@ -14,3 +14,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 delete_option( 'wptelegram_widget' );
+delete_option( 'wptelegram_widget_ver' );

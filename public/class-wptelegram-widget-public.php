@@ -108,6 +108,198 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
+	 * Register the URL rewrite
+	 *
+	 * @since    1.4.0
+	 */
+	public function add_rewrite_rules() {
+
+		add_rewrite_tag( '%core%', '([^&]+)' );
+		add_rewrite_tag( '%module%', '([^&]+)' );
+		add_rewrite_tag( '%action%', '([^&]+)' );
+		add_rewrite_tag( '%username%', '([^&]+)' );
+		add_rewrite_tag( '%message_id%', '([^&]+)' );
+
+		add_rewrite_rule( '^wptelegram/widget/view/@([a-zA-Z]\w{3,30}[^\W_])/([0-9]+)/?', 'index.php?core=wptelegram&module=widget&action=view&username=$matches[1]&message_id=$matches[2]', 'top' );
+	}
+
+	/**
+	 * Set widget Message Template based on WP Query
+	 *
+	 * @since    1.4.0
+	 */
+	public function set_message_template( $template ) {
+
+		global $wp_query;
+		$qvs = $wp_query->query_vars;
+
+		if ( isset( $qvs['core'], $qvs['module'], $qvs['action'], $qvs['username'], $qvs['message_id'] ) && 'wptelegram' === $qvs['core'] && 'widget' === $qvs['module'] ) {
+			
+			if ( 'view' === $qvs['action'] ) {
+				
+				$template = dirname( __FILE__ ) . '/partials/message-view.php';
+			}
+		}
+
+		return $template; 
+	}
+
+	/**
+	 * Render the HTML of the widget message
+	 *
+	 * @since  1.3.0
+	 */
+	public function render_single_message( $username, $message_id ) {
+
+		$url = $this->get_embed_url( $username, $message_id );
+
+		$html = $this->get_post_html( $url );
+
+		if ( empty( $html ) ) {
+			return;
+		}
+
+		if ( extension_loaded( 'mbstring' ) ) {
+			// fix the issue with Cyrillic characters
+			$html = mb_convert_encoding( $html, 'UTF-8', mb_detect_encoding( $html ) );
+			$html = mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' );
+		}
+
+		$dom = new DOMDocument;
+
+		@$dom->loadHTML( $html );
+
+		if ( $this->post_still_exists( $dom ) ) {
+			echo $this->get_widget_html( $dom );
+			return;
+		}
+
+		// remove the post from saved messages
+		$this->remove_post( $message_id );
+	}
+
+	/**
+	 * Retrieve post html from Telegram
+	 *
+	 * @since  1.3.x
+	 */
+	public function get_post_html( $url ) {
+
+		$args = array(
+			'headers'   => array( 'wptelegram_bot' => true ), // for proxy check
+		);
+
+		$response = wp_remote_get( $url, $args );
+		$code = wp_remote_retrieve_response_code( $response );
+		$html = wp_remote_retrieve_body( $response );
+
+		if ( 200 !== $code ) {
+			return false;
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Remove the post message from saved messages
+	 *
+	 * @since  1.3.0
+	 */
+	public function remove_post( $message_id ) {
+
+		$messages = WPTG_Widget()->options()->get( 'messages', array() );
+
+		// use array_keys() instead of array_search()
+		$keys = array_keys( $messages, $message_id );
+		unset( $messages[ reset( $keys ) ] );
+
+		// destroy keys
+		$messages = array_values( $messages );
+
+		WPTG_Widget()->options()->set( 'messages', $messages );
+	}
+
+	/**
+	 * Get the widget HTML after processing
+	 *
+	 * @since  1.3.0
+	 */
+	public function get_widget_html( $dom ) {
+
+		/* Inject Override style */
+		$heads = $dom->getElementsByTagName( 'head' );
+		// for some weird PHP installations
+		if ( $heads->length ) {
+			$head = $heads->item( 0 );
+			$style_elm = $dom->createElement( 'style', 'body.body_widget_post { min-width: initial; }' );
+			$elm_type_attr = $dom->createAttribute( 'type' );
+			$elm_type_attr->value = 'text/css';
+			$style_elm->appendChild( $elm_type_attr );
+			$head->appendChild( $style_elm );
+		}
+		/* Inject Override style */
+
+		/* Remove Google Analytics Code to avoid console errors */
+		$scripts = $dom->getElementsByTagName( 'script' );
+		foreach ( $scripts as $script ) {
+			
+			if ( false !== strpos( $script->nodeValue, 'GoogleAnalyticsObject' ) ) {
+				$script->parentNode->removeChild ( $script );
+				break;
+			}
+		}
+		/* Remove Google Analytics Code to avoid console errors */
+
+		$html = $dom->saveHTML();
+
+		return (string) apply_filters( 'wptelegram_widget_widget_html', $html, $dom );
+	}
+
+	/**
+	 * If the post is found - not deleted
+	 *
+	 * Searches for "tgme_widget_message_error" class
+	 * in the widget HTML
+	 *
+	 * @since  1.3.0
+	 */
+	public function post_still_exists( $dom ) {
+		$finder = new DomXPath( $dom );
+		$classname = 'tgme_widget_message_error';
+		$nodes = $finder->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]" );
+
+		foreach ( $nodes as $node ) {
+
+			if ( preg_match( '/not found/iu', $node->nodeValue ) ) {
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Render the HTML of the widget message
+	 *
+	 * @since  1.3.0
+	 */
+	public function get_embed_url( $username, $message_id ) {
+
+		$url = "https://t.me/{$username}/{$message_id}";
+		$args = array(
+			'embed'	=> true,
+		);
+		if ( isset( $_GET['userpic'] ) ) {
+			$args['userpic'] = sanitize_text_field( $_GET['userpic'] );
+		}
+
+		$url = add_query_arg( $args, $url );
+
+		return (string) apply_filters( 'wptelegram_widget_embed_url', $url, $username );
+	}
+
+	/**
 	 * Registers shortcode to display channel feed
 	 *
 	 * @since    1.0.0
@@ -155,28 +347,28 @@ class WPTelegram_Widget_Public {
 
 		switch ( $author_photo ) {
 			case 'always_show':
-				$author_photo = 'true';
+				$userpic = 'true';
 				break;
 			case 'always_hide':
-				$author_photo = 'false';
+				$userpic = 'false';
 				break;
 			default:
-				$author_photo = null;
+				$userpic = null;
 				break;
 		}
-		
-		$action = 'wptelegram_widget_view';
-		if ( ! is_null( $author_photo ) ) {
-			$userpic = $author_photo;
-		}
-		$widget_args = compact( 'action', 'userpic' );
 
-	    set_query_var( 'widget_messages', $messages );
+		$message_view_urls = array();
+
+		foreach ( $messages as $message_id ) {
+
+			$message_view_urls[] = self::get_message_view_url( $username, $message_id, $userpic );
+		}
+
+	    set_query_var( 'message_view_urls', $message_view_urls );
 	    set_query_var( 'widget_width', $widget_width );
-	    set_query_var( 'widget_args', $widget_args );
 
 		ob_start();
-        if ( $overridden_template = locate_template( 'wptelegram-widget/widget-template.php' ) ) {
+        if ( $overridden_template = locate_template( 'wptelegram-widget/widget-view.php' ) ) {
 		    /**
 		     * locate_template() returns path to file.
 		     * if either the child theme or the parent theme have overridden the template.
@@ -190,11 +382,48 @@ class WPTelegram_Widget_Public {
 		     * If neither the child nor parent theme have overridden the template,
 		     * we load the template from the 'partials' sub-directory of the directory this file is in.
 		     */
-		    load_template( dirname( __FILE__ ) . '/partials/widget-template.php' );
+		    load_template( dirname( __FILE__ ) . '/partials/widget-view.php' );
 		}
         $html = ob_get_contents();
         ob_get_clean();
         return $html;
+	}
+
+	/**
+	 * Get the iframe URL for a message view
+	 *
+	 * @since	1.4.0
+	 * @return	bool
+	 */
+	public static function get_message_view_url( $username, $message_id, $userpic = null ) {
+
+		$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false, $username );
+
+		// check for permalink structure
+		$structure = get_option( 'permalink_structure' );
+
+		if ( empty( $structure ) || $use_ugly_urls ) {
+
+			$args = array(
+				'core'			=> 'wptelegram',
+				'module'		=> 'widget',
+				'action'		=> 'view',
+				'username'		=> $username,
+				'message_id'	=> $message_id,
+			);
+
+			$url = add_query_arg( $args, site_url() );
+
+		} else {
+
+			$url = site_url( "/wptelegram/widget/view/@{$username}/{$message_id}/" );
+		}
+
+		if ( ! is_null( $userpic ) ) {
+			$url = add_query_arg( 'userpic', $userpic, $url );
+		}
+		
+		return (string) apply_filters( 'wptelegram_widget_message_view_url', $url, $username, $message_id, $userpic );
 	}
 
 	/**
@@ -278,19 +507,81 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
-	 * Upgrade the options etc.
+	 * Do the necessary db upgrade, if needed
+	 *
+	 * @since    2.0.0
 	 */
 	public function do_upgrade() {
+
+		$current_version = get_option( 'wptelegram_widget_ver', '1.2.0' );
+
+		if ( ! version_compare( $current_version, WPTELEGRAM_WIDGET_VER, '<' ) ) {
+			return;
+		}
+
+		do_action( 'wptelegram_widget_before_do_upgrade', $current_version );
+
+		// the sequential upgrades
+		// subsequent upgrade depends upon the previous one
+		$version_upgrades = array(
+			'1.3.0', // first upgrade
+			'1.4.0',
+		);
+
+		// always
+		if ( ! in_array( WPTELEGRAM_WIDGET_VER, $version_upgrades ) ) {
+			$version_upgrades[] = WPTELEGRAM_WIDGET_VER;
+		}
 		
+		foreach ( $version_upgrades as $target_version ) {
+			
+			if ( version_compare( $current_version, $target_version, '<' ) ) {
+
+				$this->upgrade_to( $target_version );
+
+				$current_version = $target_version;
+			}
+		}
+
+		do_action( 'wptelegram_widget_after_do_upgrade', $current_version );
+	}
+
+	/**
+	 * Upgrade to a specific version
+	 *
+	 * @since    2.0.0
+	 */
+	private function upgrade_to( $version ) {
+
+		// 2.0.1 becomes 201
+		$_version = str_replace( '.', '', $version );
+
+		$method = array( $this, "upgrade_to_{$_version}" );
+
+		if ( is_callable( $method ) ) {
+
+			call_user_func( $method );
+		}
+
+		update_option( 'wptelegram_widget_ver', $version );
+	}
+
+	/**
+	 * Upgrade to version 1.3.0
+	 *
+	 * @since    1.4.0
+	 */
+	private function upgrade_to_130() {
+
 		$option = 'wptelegram_widget_messages';
 		$messages = get_option( $option, array() );
 
 		if ( ! empty( $messages ) ) {
 
 			WPTG_Widget()->options()->set( 'messages', $messages );
-
-			delete_option( $option );
 		}
+
+		delete_option( $option );
 
 		$transient = 'wptelegram_widget_last_update_id';
 		if ( $update_id = (int) get_site_transient( $transient ) ) {
@@ -302,5 +593,14 @@ class WPTelegram_Widget_Public {
 		if ( ! wp_next_scheduled ( 'wptelegram_widget_pull_updates' ) ) {
 			wp_schedule_event( time(), 'wptelegram_five_minutely', 'wptelegram_widget_pull_updates' );
 		}
+	}
+
+	/**
+	 * Upgrade to version 1.4.0
+	 *
+	 * @since    1.4.0
+	 */
+	private function upgrade_to_140() {
+		flush_rewrite_rules();
 	}
 }

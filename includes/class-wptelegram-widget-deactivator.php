@@ -32,6 +32,12 @@ class WPTelegram_Widget_Deactivator {
 	public static function deactivate() {
 
 		wp_clear_scheduled_hook( 'wptelegram_widget_pull_updates' );
+
+		// flush_rewrite_rules();
+		/**
+		 * @see http://core.trac.wordpress.org/ticket/14761#comment:12
+		 */
+		delete_option( 'rewrite_rules' );
 	}
 
 }

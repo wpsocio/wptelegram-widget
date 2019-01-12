@@ -124,7 +124,8 @@ class WPTelegram_Widget_Messages_List extends WP_List_Table {
 	 */
 	private function get_message_widget( $message_id ){
 
-		$url = admin_url( 'admin-post.php?action=wptelegram_widget_view&message_id=' . $message_id );
+		$username = WPTG_Widget()->options()->get( 'username' );
+		$url = WPTelegram_Widget_Public::get_message_view_url( $username, $message_id );
 		
 		$html = '<div class="wptelegram_widget_list-message" style="max-height:300px;"><iframe frameborder="0" scrolling="no" width="100%" src="' . esc_attr( $url ) . '">Your Browser Does Not Support iframes!</iframe><div>';
 		return $html;
