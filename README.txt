@@ -113,23 +113,4 @@ Many thanks to the translators for the great job!
 * Added Russian translation
 * Fixed the issue with Cyrillic characters in the widget
 
-= 1.3.4 =
-* Bundled CMB2 to handle the dependency
-
-= 1.3.3 =
-* Prepare for WP Telegram 2.0.0
-
-= 1.3.2 =
-* Fixed the DOMDocument error when allow_url_fopen is off
-* Switched to normal HTTP requests to fetch the remote HTML
-
-= 1.3.1 =
-* Fixed the Parse Error in older PHP versions
-
-= 1.3.0 =
-* Major upgrade
-* Fixes the static width of widgets
-* Auto remove deleted messages
-* Performance improvements
-
 == Upgrade Notice ==
