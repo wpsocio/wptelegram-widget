@@ -9,6 +9,17 @@ module.exports = function(grunt) {
 	// load all grunt tasks in package.json matching the `grunt-*` pattern
 	require('load-grunt-tasks')(grunt);
 
+	var verion_updater = {
+		version: '', // to be set dynamically
+		update: function (match, p1) {
+			if (!this.version) {
+				grunt.warn('No version number set!');
+			}
+			return match.replace(p1,this.version);
+		}
+	};
+	verion_updater.update = verion_updater.update.bind(verion_updater);
+
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON( 'package.json' ),
@@ -143,7 +154,7 @@ module.exports = function(grunt) {
 		},
 
 		checktextdomain: {
-			core: {
+			all: {
 				files: [
 					{
 						expand: true,
@@ -254,6 +265,19 @@ module.exports = function(grunt) {
 				src: []
 			}
 		},
+		phplint: {
+			options: {
+				phpCmd: '/usr/bin/php5.6',
+	            phpArgs: {
+								'-d': ['display_errors', 'display_startup_errors']
+	            }
+	        },
+	        all: {
+				expand: true,
+				cwd: SOURCE_DIR,
+				src: [ '**/*.php' ],
+			},
+		},
 		jshint: {
 			options: jshintrc,
 			config: {
@@ -275,16 +299,6 @@ module.exports = function(grunt) {
 				options: {
 					curly: false,
 					eqeqeq: false
-				}
-			}
-		},
-
-		asciify: {
-			banner: {
-				text    : 'WPTelegram',
-				options : {
-					font : 'univers',
-					log  : true
 				}
 			}
 		},
@@ -374,7 +388,91 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
+		update_files: {
+			config: {
+				files: {
+					'./': 'package{-lock.json,.json}',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /"version":\s*"(\d+\.\d+\.\d+)"/i,
+							replacement: verion_updater.update
+						}
+					]
+				}
+			},
+			readme: {
+				files: {
+					'./': 'README.md',
+					[SOURCE_DIR]: SOURCE_DIR + 'README.txt',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /Stable tag:(?:\*\*)?[\s\t]*(\d+\.\d+\.\d+)/i,
+							replacement: verion_updater.update
+						}
+					]
+				}
+			},
+			mainfile: {
+				files: {
+					[SOURCE_DIR]: SOURCE_DIR + 'wptelegram.php'
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /Version:\s*(\d+\.\d+\.\d+)/i,
+							replacement: verion_updater.update
+						},
+						{
+							pattern: /'WPTELEGRAM_VER',\s*'(\d+\.\d+\.\d+)'/i,
+							replacement: verion_updater.update
+						}
+					]
+				}
+			},
+			'since-xyz': {
+				files: [
+					{
+						expand: true,
+						cwd: SOURCE_DIR,
+						src: '**/*.php',
+						dest: SOURCE_DIR
+				    }
+			    ],
+				options: {
+					replacements: [
+						{
+							pattern: /@since[\s\t]*(x\.y\.z)/ig,
+							replacement: verion_updater.update
+						}
+					]
+				}
+			},
+			changelog: {
+				files: {
+					'./': 'changelog.md'
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /## (Unreleased)/i,
+							replacement: function (match, p1) {
+								const { version } = verion_updater;
+								if (!version) {
+									grunt.warn('No version number set!');
+								}
+								var today = new Date();
+								var replace = '[' + version + ' - ' + today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + today.getDate() + '](https://github.com/manzoorwanijk/wptelegram/releases/tag/v' + version + ')';
+								return match.replace(p1, replace);
+							}
+						}
+					]
+				}
+			}
+		},
 		buildcontrol: {
 		    options: {
 		      dir: 'build',
@@ -403,14 +501,25 @@ module.exports = function(grunt) {
 
 	});
 
+	// RTL task.
+	grunt.registerTask('rtl', [
+		'rtlcss:core'
+	]);
+
+	// CSS Task
+	grunt.registerTask( 'build:css', [
+		'clean:css',
+		'rtl',
+		'cssmin:core',
+		'cssmin:blocks',
+		'cssmin:rtl'
+	] );
+
 	// JSHint task.
 	grunt.registerTask( 'jshint:all', [
 		'jshint:config',
 		'jshint:core'
 	] );
-
-	// RTL task.
-	grunt.registerTask('rtl', ['rtlcss:core']);
 
 	// JS Minify task
 	grunt.registerTask( 'uglify:all', [
@@ -426,14 +535,6 @@ module.exports = function(grunt) {
 		'uglify:core'
 	] );
 
-	grunt.registerTask( 'build:css', [
-		'clean:css',
-		'rtl',
-		'cssmin:core',
-		'cssmin:blocks',
-		'cssmin:rtl'
-	] );
-
 	grunt.registerTask( 'build:files', [
 		'clean:all',
 		'copy:all'
@@ -441,6 +542,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask( 'build', function() {
 		grunt.task.run( [
+			'phplint:all',
 			'jshint:all',
 			'build:files',
 			'build:webpack',
@@ -454,26 +556,61 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask( 'i18n:all', [
-		'checktextdomain:core',
+		'checktextdomain:all',
 		'makepot:gen',
 		'potomo:gen',
 		'clean:i18n',
 		'copy:i18n',
 	] );
 
-	grunt.registerTask( 'precommit', [
+	grunt.renameTask( 'string-replace', 'update_files' );
+
+	grunt.registerTask( 'update:version', function() {
+
+		let version = grunt.option('to');
+		if (!version) {
+			grunt.warn('No version number supplied! usage: grunt update:version --to=x.y.z');
+		}
+
+		verion_updater.version = version;
+
+		grunt.task.run( [
+			'update_files:config',
+			'update_files:readme',
+			'update_files:mainfile',
+			'update_files:since-xyz',
+		] );
+	} );
+
+	grunt.registerTask( 'update:changelog', function() {
+
+		let version = grunt.option('to');
+		if (!version) {
+			grunt.warn('No version number supplied! usage: grunt update:changelog --to=x.y.z');
+		}
+
+		verion_updater.version = version;
+
+		grunt.task.run( [
+			'update_files:changelog',
+		] );
+	} );
+
+	grunt.registerTask( 'prerelease', [
 		'build',
 		'bundle:cmb2',
 		'i18n:all',
 		'copy:changelog',
 	] );
 
-	grunt.registerTask( 'gitpush:trunk', [
-		'buildcontrol'
-	]);
+	grunt.registerTask( 'precommit', [
+		'update:version',
+		'update:changelog',
+		'prerelease',
+	] );
 
 	grunt.registerTask( 'commit:git:trunk', [
-		'gitpush:trunk'
+		'buildcontrol'
 	] );
 
 	// Default task.

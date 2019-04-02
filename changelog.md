@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## [1.5.0 - 2019-04-2](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.5.0)
 ### Enhancements
 * Added Gutengerg blocks for the channel feed.
 * Added Gutenberg block to embed any Telegram Message.

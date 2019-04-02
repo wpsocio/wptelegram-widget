@@ -139,7 +139,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Enqueue assets for the Gutenberg block.
 	 *
-	 * @since    x.y.z
+	 * @since    1.5.0
 	 */
 	public function enqueue_block_editor_assets() {
 
@@ -168,7 +168,7 @@ class WPTelegram_Widget_Admin {
 
 		$box = array(
 			'id'			=> $this->plugin_name,
-			'title'			=> esc_html__( $this->title ),
+			'title'			=> $this->title,
 			'object_types'	=> array( 'options-page' ),
 			'option_key'	=> $this->plugin_name,
 			'icon_url'		=> WPTELEGRAM_WIDGET_URL . '/admin/icons/icon-16x16-white.svg',
@@ -540,7 +540,7 @@ class WPTelegram_Widget_Admin {
 	public function render_shortcode_guide( $field_args, $field ){
 		?>
 		<div class="cmb-row">
-			<p><?php printf( __( 'Goto %s and click/drag %s and place it where you want it to be.', 'wptelegram-widget' ), '<b>' . __( 'Appearance' ) . ' &gt; <a href="' . admin_url( 'widgets.php' ) . '">' . __( 'Widgets' ) . '</a></b>', '<b>' . $this->title . '</b>' ); ?></p>
+			<p><?php printf( __( 'Goto %s and click/drag %s and place it where you want it to be.', 'wptelegram-widget' ), '<b>' . __( 'Appearance', 'wptelegram-widget' ) . ' &gt; <a href="' . admin_url( 'widgets.php' ) . '">' . __( 'Widgets', 'wptelegram-widget' ) . '</a></b>', '<b>' . $this->title . '</b>' ); ?></p>
 			<p><?php echo __( 'Alternately, you can use the below shortcode.', 'wptelegram-widget' ); ?></p>
 			<h4><?php echo __( 'Inside page or post content:', 'wptelegram-widget' ); ?></h4>
 			<p><code><?php echo esc_html( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_hide"]' ); ?></code></p>
@@ -586,7 +586,7 @@ class WPTelegram_Widget_Admin {
 			?>
 			<div class="cmb-row">
 				<p>
-					<span style="color:red;font-weight:bold;"><?php esc_html_e( 'Note:' ); ?> <?php esc_html_e( 'Old messages are not pulled by default.' ); ?></span><br>
+					<span style="color:red;font-weight:bold;"><?php esc_html_e( 'Note:', 'wptelegram-widget' ); ?> <?php esc_html_e( 'Old messages are not pulled by default.', 'wptelegram-widget' ); ?></span><br>
 					<span><?php printf( __( 'Please goto %s to view or pull the existing messages.','wptelegram-widget' ), '<a href="' . esc_attr( admin_url( 'admin.php?page=wptelegram_widget_messages' ) ) . '">' . __( 'Widget Messages', 'wptelegram-widget' ) . '</a>' ); ?></span>
 				</p>
 			</div>
@@ -606,11 +606,11 @@ class WPTelegram_Widget_Admin {
 			<li><?php esc_html_e( 'Create a Channel/group/supergroup', 'wptelegram-widget' ); ?></a>&nbsp;(<?php esc_html_e( 'If you haven\'t', 'wptelegram-widget' ); ?>)</li>
 			<li><?php echo sprintf( __( 'Create a Bot by sending %s command to %s', 'wptelegram-widget' ), '<code>/newbot</code>', '<a href="https://t.me/BotFather"  target="_blank">@BotFather</a>' ); ?></li>
 			<li><?php echo sprintf( __( 'After completing the steps %s will provide you the Bot Token.', 'wptelegram-widget' ), '@BotFather' ); ?></li>
-			<li><?php esc_html_e( 'Copy the token and paste into the Bot Token field below.', 'wptelegram-widget' ); ?>&nbsp;<?php printf( __( 'For ease, use %s', 'wptelegram-widget' ), '<a href="' . esc_url( 'https://desktop.telegram.org' ) . '" target="_blank">Telegram Desktop</a>' ); ?>&nbsp;<a href="<?php echo esc_url( 'https://web.telegram.org' ); ?>" target="_blank">Telegram Web</a></li>
-			<li><?php echo __( 'Add the Bot as Administrator to your Channel/Group', 'wptelegram-widget' ); ?></li>
+			<li><?php esc_html_e( 'Copy the token and paste into the Bot Token field below.', 'wptelegram-widget' ); ?>&nbsp;<?php printf( __( 'For ease, use %s', 'wptelegram-widget' ), '<a href="' . esc_url( 'https://desktop.telegram.org' ) . '" target="_blank">Telegram Desktop</a>' ); ?></li>
+			<li><?php esc_html_e( 'Add the Bot as Administrator to your Channel/Group', 'wptelegram-widget' ); ?></li>
 			<li><?php esc_html_e( 'Enter the Channel/Group Username in the field below', 'wptelegram-widget' ); ?>
 			</li>
-			<li><?php echo sprintf( __( 'Hit %s below', 'wptelegram-widget' ), '<b>' . __( 'Save Changes' ) . '</b>' ); ?></li>
+			<li><?php echo sprintf( __( 'Hit %s below', 'wptelegram-widget' ), '<b>' . __( 'Save Changes', 'wptelegram-widget' ) . '</b>' ); ?></li>
 			<li><?php esc_html_e( 'That\'s it. You are ready to rock :)', 'wptelegram-widget' ); ?></li>
 		</ol>
 		<p style="color:#396609;"><b><?php echo __( 'Tip!','wptelegram-widget'), '💡'; ?></b>&nbsp;<span><?php esc_html_e( 'Updates are pulled every five minutes if someone visits your website.', 'wptelegram-widget' ); ?></span>&nbsp;<span><?php esc_html_e( 'To make sure the updates are pulled in time, it is recommended to set up a cron on your hosting server that hits the below URL every five minutes or so.', 'wptelegram-widget' ); ?></span>
@@ -634,7 +634,7 @@ class WPTelegram_Widget_Admin {
 
 		<?php elseif ( 'username' == $id ) : ?>
 			<p><span id="username-err" class="hidden wptelegram-err info">&nbsp;<?php esc_html_e( 'Invalid Username', 'wptelegram-widget' ); ?></span></p>
-			<p><span id="username-info" class="hidden info"><?php esc_html_e( 'Members Count:', 'wptelegram' ); ?></span></p>
+			<p><span id="username-info" class="hidden info"><?php esc_html_e( 'Members Count:', 'wptelegram-widget' ); ?></span></p>
 			<table id="username-chat-table" class="hidden">
 				<tbody>
 					<tr>
@@ -675,7 +675,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Fire the pull updates action.
 	 *
-	 * @since    x.y.z
+	 * @since    1.5.0
 	 */
 	public function fire_pull_updates() {
 		do_action( 'wptelegram_widget_pull_the_updates' );
@@ -684,7 +684,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Pull the updates from Telegram.
 	 *
-	 * @since x.y.z
+	 * @since 1.5.0
 	 */
 	public function pull_the_updates() {
 
@@ -943,7 +943,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Save the messages sent by WP Telegram P2TG
 	 *
-	 * @since  x.y.z
+	 * @since  1.5.0
 	 *
 	 */
 	public function save_messages_sent_by_p2tg( $res, $responses, $post, $options, $bot_api ) {

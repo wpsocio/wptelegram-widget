@@ -205,7 +205,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Retrieve post html from Telegram.
 	 *
-	 * @since  x.y.z
+	 * @since  1.5.0
 	 *
 	 * @param string $url The Telegram channel/group post URL.
 	 */
@@ -250,7 +250,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Get the widget HTML after processing.
 	 *
-	 * @since  x.y.z
+	 * @since  1.5.0
 	 *
 	 * @param DOMDocument $dom The dom object for the post HTML.
 	 */
@@ -291,7 +291,7 @@ class WPTelegram_Widget_Public {
 	 * Searches for "tgme_widget_message_error" class
 	 * in the widget HTML
 	 *
-	 * @since  x.y.z
+	 * @since  1.5.0
 	 *
 	 * @param DOMDocument $dom The dom object for the post HTML.
 	 */
@@ -314,7 +314,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Render the HTML of the widget message.
 	 *
-	 * @since  x.y.z
+	 * @since  1.5.0
 	 *
 	 * @param string $username The Telegram channel/group username.
 	 * @param int    $message_id Unique identifier of group/channel message.
@@ -505,7 +505,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Pull updates from Telegram
 	 *
-	 * @since x.y.z
+	 * @since 1.5.0
 	 */
 	public function may_be_fire_pull_updates() {
 
@@ -518,7 +518,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Pull the updates from Telegram
 	 *
-	 * @since x.y.z
+	 * @since 1.5.0
 	 */
 	public function cron_pull_updates() {
 		do_action( 'wptelegram_widget_pull_the_updates' );
@@ -644,7 +644,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Upgrade to version 1.5.0
 	 *
-	 * @since    x.y.z
+	 * @since    1.5.0
 	 */
 	private function upgrade_to_150() {
 		wp_clear_scheduled_hook( 'wptelegram_widget_pull_updates' );
