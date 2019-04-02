@@ -28,6 +28,8 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 * The received messages can be seen from `/wp-admin`
 * Automatically removes deleted messages
 * Can be displayed using a shortcode
+* Available as a Gutengerg block
+* Allows embeding of Telegram public channel messages
 * Can be extended with custom code
 
 ## Widget Info
