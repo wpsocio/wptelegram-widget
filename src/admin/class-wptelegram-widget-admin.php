@@ -260,6 +260,18 @@ class WPTelegram_Widget_Admin {
 				),
 			),
 			array(
+				'name'      => __( 'Google Script', 'wptelegram-widget' ),
+				'type'      => 'title',
+				'id'        => 'google_script_title',
+				'after_row' => array( __CLASS__, 'render_gs_warning' ),
+			),
+			array(
+				'name'    => __( 'Google Script URL', 'wptelegram-widget' ),
+				'id'      => 'google_script_url',
+				'desc'    => __( 'The requests to Telegram will be sent via your Google Script.', 'wptelegram-widget' ) . ' <a href="https://gist.github.com/manzoorwanijk/7b1786ad69826d1a7acf20b8be83c5aa#how-to-deploy" target="_blank">' . __( 'See this tutorial', 'wptelegram-widget' ) . '</a>',
+				'type'    => 'text',
+			),
+			array(
 				'name' => __( 'Widget Info', 'wptelegram-widget' ),
 				'type' => 'title',
 				'id'   => 'tg_shortcode_title',
@@ -595,6 +607,22 @@ class WPTelegram_Widget_Admin {
 	}
 
 	/**
+	 * Output the Messages Button
+	 * @param  object $field_args Current field args
+	 * @param  object $field      Current field object
+	 */
+	public static function render_gs_warning( $field_args, $field ) {
+
+		?>
+		<div class="cmb-row">
+			<p>
+				<span style="color:red;font-weight:bold;"><?php esc_html_e( 'Warning:', 'wptelegram-widget' ); ?> <?php esc_html_e( 'Use Google Script only if your host blocks Telegram.', 'wptelegram-widget' ); ?></span>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Output the Telegram Instructions
 	 * @param  object $field_args Current field args
 	 * @param  object $field      Current field object
@@ -669,7 +697,10 @@ class WPTelegram_Widget_Admin {
 	 * @since    1.0.0
 	 */
 	public function register_widgets() {
+
 		register_widget( 'WPTelegram_Widget_Widget' );
+
+		register_widget( 'WPTelegram_Widget_Ajax_Widget' );
 	}
 
 	/**
