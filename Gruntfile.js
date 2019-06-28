@@ -418,7 +418,7 @@ module.exports = function(grunt) {
 			},
 			mainfile: {
 				files: {
-					[SOURCE_DIR]: SOURCE_DIR + 'wptelegram.php'
+					[SOURCE_DIR]: SOURCE_DIR + 'wptelegram-widget.php'
 				},
 				options: {
 					replacements: [
@@ -427,7 +427,7 @@ module.exports = function(grunt) {
 							replacement: verion_updater.update
 						},
 						{
-							pattern: /'WPTELEGRAM_VER',\s*'(\d+\.\d+\.\d+)'/i,
+							pattern: /'WPTELEGRAM_WIDGET_VER',\s*'(\d+\.\d+\.\d+)'/i,
 							replacement: verion_updater.update
 						}
 					]
