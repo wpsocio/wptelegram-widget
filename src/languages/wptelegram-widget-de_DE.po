@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2019-04-02 17:51:08+00:00\n"
+"POT-Creation-Date: 2019-06-28 11:11:44+00:00\n"
 "PO-Revision-Date: 2019-01-12 22:07+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -71,7 +71,7 @@ msgid "Please read the instructions above"
 msgstr "Bitte die obenstehende Anleitung beachten"
 
 #: admin/class-wptelegram-widget-admin.php:205
-#: admin/class-wptelegram-widget-admin.php:641
+#: admin/class-wptelegram-widget-admin.php:669
 msgid "Username"
 msgstr "Benutzername"
 
@@ -88,6 +88,7 @@ msgid "Widget Options"
 msgstr "Widget-Optionen"
 
 #: admin/class-wptelegram-widget-admin.php:228
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:115
 #: public/widgets/class-wptelegram-widget-widget.php:122
 msgid "Widget Width"
 msgstr "Widget-Breite"
@@ -123,27 +124,43 @@ msgid "Number of messages to display in the widget"
 msgstr "Anzahl der Nachrichten, die im Widget angezeigt werden sollen"
 
 #: admin/class-wptelegram-widget-admin.php:263
+msgid "Google Script"
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:269
+msgid "Google Script URL"
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:271
+msgid "The requests to Telegram will be sent via your Google Script."
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:271
+msgid "See this tutorial"
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:275
 msgid "Widget Info"
 msgstr "Widget-Infos"
 
-#: admin/class-wptelegram-widget-admin.php:276
+#: admin/class-wptelegram-widget-admin.php:288
 msgid "WP Telegram Widget Messages"
 msgstr "WP Telegram Widget Nachrichten"
 
-#: admin/class-wptelegram-widget-admin.php:281
-#: admin/class-wptelegram-widget-admin.php:590
+#: admin/class-wptelegram-widget-admin.php:293
+#: admin/class-wptelegram-widget-admin.php:602
 msgid "Widget Messages"
 msgstr "Widget-Nachrichten"
 
-#: admin/class-wptelegram-widget-admin.php:284
+#: admin/class-wptelegram-widget-admin.php:296
 msgid "Pull Messages"
 msgstr "Nachrichten abrufen"
 
-#: admin/class-wptelegram-widget-admin.php:290
+#: admin/class-wptelegram-widget-admin.php:302
 msgid "Latest Post Link"
 msgstr "Link zum letzten Beitrag"
 
-#: admin/class-wptelegram-widget-admin.php:291
+#: admin/class-wptelegram-widget-admin.php:303
 msgid ""
 "Goto your channel, Tap or Right-Click on the latest post and choose \"Copy "
 "Post Link\""
@@ -151,87 +168,87 @@ msgstr ""
 "Im Channel mit rechter Maustaste auf den Beitrag klicken und \"Beitrags-Link "
 "kopieren\" wählen"
 
-#: admin/class-wptelegram-widget-admin.php:300
+#: admin/class-wptelegram-widget-admin.php:312
 msgid "Number of messages"
 msgstr "Anzahl Nachrichten"
 
-#: admin/class-wptelegram-widget-admin.php:340
+#: admin/class-wptelegram-widget-admin.php:352
 msgid "Messages pulled successfully"
 msgstr "Nachrichten wurden erfolgreich abgerufen"
 
-#: admin/class-wptelegram-widget-admin.php:342
+#: admin/class-wptelegram-widget-admin.php:354
 msgid "Invalid number"
 msgstr "Falscher Wert"
 
-#: admin/class-wptelegram-widget-admin.php:344
+#: admin/class-wptelegram-widget-admin.php:356
 msgid "Invalid Post Link"
 msgstr "Der Link auf den Beitrag ist nicht korrekt"
 
-#: admin/class-wptelegram-widget-admin.php:346
+#: admin/class-wptelegram-widget-admin.php:358
 msgid "Bad request"
 msgstr "Fehler bei der Anfrage"
 
-#: admin/class-wptelegram-widget-admin.php:348
+#: admin/class-wptelegram-widget-admin.php:360
 msgid "Invalid request"
 msgstr "Ungültige Anfrage"
 
-#: admin/class-wptelegram-widget-admin.php:379
+#: admin/class-wptelegram-widget-admin.php:391
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: admin/class-wptelegram-widget-admin.php:413
+#: admin/class-wptelegram-widget-admin.php:425
 msgid "Please enter the Bot Token and Username in Widget Settings page."
 msgstr ""
 "Bitte das Bot-Token und den Benutzernamen auf der Seite \"Widget-Optionen\" "
 "konfigurieren."
 
-#: admin/class-wptelegram-widget-admin.php:421
+#: admin/class-wptelegram-widget-admin.php:433
 msgid "Manually Pull the messages from your channel"
 msgstr "Nachrichten manuell aus dem Channel abrufen"
 
-#: admin/class-wptelegram-widget-admin.php:505
+#: admin/class-wptelegram-widget-admin.php:517
 msgid "Settings updated"
 msgstr "Die Einstellungen wurden aktualisiert"
 
-#: admin/class-wptelegram-widget-admin.php:521
+#: admin/class-wptelegram-widget-admin.php:533
 msgid "%s is empty"
 msgstr "%s ist leer"
 
-#: admin/class-wptelegram-widget-admin.php:523
+#: admin/class-wptelegram-widget-admin.php:535
 msgid "Invalid %s"
 msgstr "Ungültig: %s"
 
-#: admin/class-wptelegram-widget-admin.php:543
+#: admin/class-wptelegram-widget-admin.php:555
 msgid "Goto %s and click/drag %s and place it where you want it to be."
 msgstr ""
 "Im Menüpunkt %s kann das %s an die passende Stelle im Theme positioniert "
 "werden."
 
-#: admin/class-wptelegram-widget-admin.php:543
+#: admin/class-wptelegram-widget-admin.php:555
 msgid "Appearance"
 msgstr "Design"
 
-#: admin/class-wptelegram-widget-admin.php:543
+#: admin/class-wptelegram-widget-admin.php:555
 msgid "Widgets"
 msgstr "Widgets"
 
-#: admin/class-wptelegram-widget-admin.php:544
+#: admin/class-wptelegram-widget-admin.php:556
 msgid "Alternately, you can use the below shortcode."
 msgstr "Alternativ kann auch der folgende Shortcode verwendet werden."
 
-#: admin/class-wptelegram-widget-admin.php:545
+#: admin/class-wptelegram-widget-admin.php:557
 msgid "Inside page or post content:"
 msgstr "Auf einer Seite oder in einem Beitrag:"
 
-#: admin/class-wptelegram-widget-admin.php:547
+#: admin/class-wptelegram-widget-admin.php:559
 msgid "Inside the theme templates"
 msgstr "Direkt in einem Theme-Template:"
 
-#: admin/class-wptelegram-widget-admin.php:550
+#: admin/class-wptelegram-widget-admin.php:562
 msgid "or"
 msgstr "oder"
 
-#: admin/class-wptelegram-widget-admin.php:570
+#: admin/class-wptelegram-widget-admin.php:582
 msgid ""
 "With this plugin, you can display your public Telegram Channel or Group feed "
 "in a WordPress widget or anywhere else using a shortcode."
@@ -239,86 +256,94 @@ msgstr ""
 "Mit diesem Plugin kann ein öffentlicher Telegram-Channel oder ein Gruppen-"
 "Feed per WordPress-Widget oder per Shortcode ausgegeben werden."
 
-#: admin/class-wptelegram-widget-admin.php:589
+#: admin/class-wptelegram-widget-admin.php:601
 #, fuzzy
 msgid "Note:"
 msgstr "Wichtig!"
 
-#: admin/class-wptelegram-widget-admin.php:589
+#: admin/class-wptelegram-widget-admin.php:601
 msgid "Old messages are not pulled by default."
 msgstr ""
 
-#: admin/class-wptelegram-widget-admin.php:590
+#: admin/class-wptelegram-widget-admin.php:602
 msgid "Please goto %s to view or pull the existing messages."
 msgstr ""
 
-#: admin/class-wptelegram-widget-admin.php:604
+#: admin/class-wptelegram-widget-admin.php:619
+msgid "Warning:"
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:619
+msgid "Use Google Script only if your host blocks Telegram."
+msgstr ""
+
+#: admin/class-wptelegram-widget-admin.php:632
 msgid "INSTRUCTIONS!"
 msgstr "ANLEITUNG:"
 
-#: admin/class-wptelegram-widget-admin.php:606
+#: admin/class-wptelegram-widget-admin.php:634
 msgid "Create a Channel/group/supergroup"
 msgstr "Auf Telegram einen Channel/Gruppe/Supergruppe erstellen"
 
-#: admin/class-wptelegram-widget-admin.php:606
+#: admin/class-wptelegram-widget-admin.php:634
 msgid "If you haven't"
 msgstr "falls noch nicht geschehen"
 
-#: admin/class-wptelegram-widget-admin.php:607
+#: admin/class-wptelegram-widget-admin.php:635
 msgid "Create a Bot by sending %s command to %s"
 msgstr "Einen Bot erstellen, indem der Befehl %s an den %s geschickt wird"
 
-#: admin/class-wptelegram-widget-admin.php:608
+#: admin/class-wptelegram-widget-admin.php:636
 msgid "After completing the steps %s will provide you the Bot Token."
 msgstr ""
 "Der %s fragt nach Bezeichnung und Benutzername des neuen Bot und teilt im "
 "Anschluss das API-Token des Bot mit."
 
-#: admin/class-wptelegram-widget-admin.php:609
+#: admin/class-wptelegram-widget-admin.php:637
 msgid "Copy the token and paste into the Bot Token field below."
 msgstr ""
 "Das API-Token des Bot kopieren und in das unten stehende Feld \"Bot API-Token"
 "\" einfügen."
 
-#: admin/class-wptelegram-widget-admin.php:609
+#: admin/class-wptelegram-widget-admin.php:637
 msgid "For ease, use %s"
 msgstr "Zum einfacheren kopieren %s benutzen!"
 
-#: admin/class-wptelegram-widget-admin.php:610
+#: admin/class-wptelegram-widget-admin.php:638
 msgid "Add the Bot as Administrator to your Channel/Group"
 msgstr ""
 "Der Bot muss nun als Administrator zu einem Channel oder einer Gruppe "
 "hinzugefügt werden"
 
-#: admin/class-wptelegram-widget-admin.php:611
+#: admin/class-wptelegram-widget-admin.php:639
 msgid "Enter the Channel/Group Username in the field below"
 msgstr ""
 "Nun muss der Nutzername des Channel in das untere Feld eingetragen werden. "
 "Mehrere Nutzernamen bitte mit Komma trennen"
 
-#: admin/class-wptelegram-widget-admin.php:613
+#: admin/class-wptelegram-widget-admin.php:641
 msgid "Hit %s below"
 msgstr "Die Änderungen übernehmen durch Klick auf %s!"
 
-#: admin/class-wptelegram-widget-admin.php:613
+#: admin/class-wptelegram-widget-admin.php:641
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: admin/class-wptelegram-widget-admin.php:614
+#: admin/class-wptelegram-widget-admin.php:642
 msgid "That's it. You are ready to rock :)"
 msgstr "Das sollte es gewesen sein! Viel Spaß mit dem WP Telegram Widget!"
 
-#: admin/class-wptelegram-widget-admin.php:616
+#: admin/class-wptelegram-widget-admin.php:644
 msgid "Tip!"
 msgstr "Hinweis:"
 
-#: admin/class-wptelegram-widget-admin.php:616
+#: admin/class-wptelegram-widget-admin.php:644
 msgid "Updates are pulled every five minutes if someone visits your website."
 msgstr ""
 "Aktualisieren werden alle 5 Minuten durchgeführt, wenn jemand die Website "
 "besucht."
 
-#: admin/class-wptelegram-widget-admin.php:616
+#: admin/class-wptelegram-widget-admin.php:644
 msgid ""
 "To make sure the updates are pulled in time, it is recommended to set up a "
 "cron on your hosting server that hits the below URL every five minutes or so."
@@ -327,35 +352,35 @@ msgstr ""
 "empfohlen, einen Cronjob auf dem Webserver zu erstellen, der die folgende "
 "URL beispielsweise alle 5 Minuten aufruft."
 
-#: admin/class-wptelegram-widget-admin.php:633
+#: admin/class-wptelegram-widget-admin.php:661
 msgid "Invalid Bot Token"
 msgstr "Bot Token ungültig"
 
-#: admin/class-wptelegram-widget-admin.php:636
+#: admin/class-wptelegram-widget-admin.php:664
 msgid "Invalid Username"
 msgstr "Benutzername ungültig"
 
-#: admin/class-wptelegram-widget-admin.php:637
+#: admin/class-wptelegram-widget-admin.php:665
 msgid "Members Count:"
 msgstr "Anzahl Mitglieder:"
 
-#: admin/class-wptelegram-widget-admin.php:642
+#: admin/class-wptelegram-widget-admin.php:670
 msgid "Name/Title"
 msgstr "Name/Titel"
 
-#: admin/class-wptelegram-widget-admin.php:643
+#: admin/class-wptelegram-widget-admin.php:671
 msgid "Type"
 msgstr "Typ"
 
-#: admin/class-wptelegram-widget-admin.php:644
+#: admin/class-wptelegram-widget-admin.php:672
 msgid "Test Status"
 msgstr "Test Status"
 
-#: admin/class-wptelegram-widget-admin.php:656
+#: admin/class-wptelegram-widget-admin.php:684
 msgid "Test Token"
 msgstr "Test Token"
 
-#: admin/class-wptelegram-widget-admin.php:659
+#: admin/class-wptelegram-widget-admin.php:687
 msgid "Send Test"
 msgstr "Sende Test"
 
@@ -412,19 +437,43 @@ msgstr "Follow %s"
 msgid "Join %s"
 msgstr "Join %s"
 
-#: public/class-wptelegram-widget-public.php:537
+#: public/class-wptelegram-widget-public.php:827
 msgid "Every 5 Minutes"
 msgstr "Alle 5 Minuten"
+
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:14
+#, fuzzy
+msgid "WP Telegram Ajax Widget"
+msgstr "WP Telegram Widget"
+
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:14
+msgid "(Beta)"
+msgstr ""
+
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:15
+#, fuzzy
+msgid ""
+"Display the Telegram Public Channel Feed in an ajax widget with infinite "
+"scroll."
+msgstr ""
+"Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Widget "
+"an"
+
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:111
+#: public/widgets/class-wptelegram-widget-widget.php:118
+msgid "Title"
+msgstr "Titel"
+
+#: public/widgets/class-wptelegram-widget-ajax-widget.php:120
+#, fuzzy
+msgid "Widget Height"
+msgstr "Widget-Breite"
 
 #: public/widgets/class-wptelegram-widget-widget.php:15
 msgid "Display the Telegram Public Channel or Group Feed in a widget"
 msgstr ""
 "Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Widget "
 "an"
-
-#: public/widgets/class-wptelegram-widget-widget.php:118
-msgid "Title"
-msgstr "Titel"
 
 #: admin/class-wptelegram-widget-messages-list.php:169
 #, fuzzy
@@ -444,6 +493,3 @@ msgstr "Löschen"
 #~ "Es darf nicht der selbe Bot Token verwendet werden, der bereits "
 #~ "Nachrichten in den Channel sendet. Die Nachrichten, die mit dem selben "
 #~ "Bot Token gesendet wurden, werden im Widget nicht angezeigt."
-
-#~ msgid "WP Telegram Widget"
-#~ msgstr "WP Telegram Widget"

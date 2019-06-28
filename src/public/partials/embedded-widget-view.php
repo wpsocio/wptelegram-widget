@@ -3,7 +3,7 @@
  * Provide a public-facing view for the whole channel
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      1.6.0
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/public/partials

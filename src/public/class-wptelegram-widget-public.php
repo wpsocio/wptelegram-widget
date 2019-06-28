@@ -184,7 +184,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Send request to t.me/...
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.0
 	 *
 	 * @param string $username The Telegram channel username.
 	 */
@@ -211,7 +211,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Render the HTML of the embedded widget.
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.0
 	 *
 	 * @param string $username The Telegram channel username.
 	 */
@@ -297,7 +297,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Replace the Telegram links with site links.
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.0
 	 *
 	 * @param string $content  The HTML content.
 	 * @param string $username Telegram channel username.
@@ -329,7 +329,7 @@ class WPTelegram_Widget_Public {
 	 * The embedded widget needs to return some fields
 	 * to be able to use the search feature
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.0
 	 *
 	 * @param string $username Telegram channel username.
 	 */
@@ -358,7 +358,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Get the embedd URL for widget view.
 	 *
-	 * @since x.y.z
+	 * @since 1.6.0
 	 *
 	 * @param string $username   The Telegram channel/group username.
 	 *
@@ -391,7 +391,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Get the URl for ajax widget.
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.0
 	 *
 	 * @param string $username The Telegram channel/group username.
 	 */
@@ -409,7 +409,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Registers shortcode to display the ajax channel feed.
 	 *
-	 * @since    x.y.z
+	 * @since    1.6.0
 	 *
 	 * @param array $atts The shortcode attributes.
 	 */
@@ -629,7 +629,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Registers shortcode to display channel feed.
 	 *
-	 * @since    x.y.z
+	 * @since    1.6.0
 	 *
 	 * @param array $atts The shortcode attributes.
 	 */
