@@ -12,7 +12,7 @@ if ( ! function_exists( 'wptelegram_widget' ) ) {
 	 * @return NULL|string        The html output
 	 */
 	function wptelegram_widget( $args = array(), $echo = true ) {
-		$output = WPTelegram_Widget_Public::feed_widget_shortcode( $args );
+		$output = WPTelegram_Widget_Public::post_embed_shortcode( $args );
 		if ( $echo ) {
 			echo $output;
 		} else {

@@ -300,17 +300,21 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'init', $plugin_public, 'add_rewrite_rules' );
 
-		$this->loader->add_filter( 'template_include', $plugin_public, 'set_message_template', 99 );
+		$this->loader->add_filter( 'template_include', $plugin_public, 'set_embed_template', 99 );
 
 		$this->loader->add_action( 'init', $plugin_public, 'may_be_fire_pull_updates' );
 
-		$this->loader->add_action( 'wptelegram_widget_render_single_message', $plugin_public, 'render_single_message', 10, 2 );
+		$this->loader->add_action( 'wptelegram_widget_render_embedded_widget', $plugin_public, 'render_embedded_widget', 10, 1 );
+
+		$this->loader->add_action( 'wptelegram_widget_render_embedded_post', $plugin_public, 'render_embedded_post', 10, 2 );
 
 		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $plugin_public, 'cron_pull_updates' );
 
-		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $plugin_public ), 'feed_widget_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram-ajax-widget', get_class( $plugin_public ), 'ajax_widget_shortcode' );
 
-		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $plugin_public ), 'feed_widget_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $plugin_public ), 'post_embed_shortcode' );
+
+		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $plugin_public ), 'post_embed_shortcode' );
 
 		// better be safe by using PHP_INT_MAX to make sure
 		// some dumb people don't remove your schedule

@@ -1,6 +1,6 @@
 <?php
 /**
- * Provide a public-facing view for a single widget message
+ * Provide a public-facing view for a single embedded post
  *
  * @link       https://t.me/manzoorwanijk
  * @since      1.4.0
@@ -20,6 +20,6 @@ if ( ! $username || ! $message_id ) {
 $message_id = sanitize_text_field( $message_id );
 $username = sanitize_text_field( $username );
 
-do_action( 'wptelegram_widget_render_single_message', $username, $message_id );
+do_action( 'wptelegram_widget_render_embedded_post', $username, $message_id );
 
-do_action( "wptelegram_widget_render_{$username}_single_message", $message_id );
+do_action( "wptelegram_widget_render_{$username}_embedded_post", $message_id );

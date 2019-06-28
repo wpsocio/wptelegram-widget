@@ -67,6 +67,15 @@ class WPTelegram_Widget_Public {
 	private $tg_api;
 
 	/**
+	 * Use ugly URLs
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 * @var bool $use_ugly_urls Whether to use ugly URLS.
+	 */
+	private static $use_ugly_urls;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -83,6 +92,8 @@ class WPTelegram_Widget_Public {
 
 		// Use minified libraries if SCRIPT_DEBUG is turned off.
 		$this->suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+		self::$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false );
 	}
 
 	/**
@@ -120,21 +131,25 @@ class WPTelegram_Widget_Public {
 		add_rewrite_tag( '%username%', '([^&]+)' );
 		add_rewrite_tag( '%message_id%', '([^&]+)' );
 
+		// For embedded post (legacy widget).
 		add_rewrite_rule( '^wptelegram/widget/view/@([a-zA-Z]\w{3,30}[^\W_])/([0-9]+)/?', 'index.php?core=wptelegram&module=widget&action=view&username=$matches[1]&message_id=$matches[2]', 'top' );
+
+		// For embedded widget.
+		add_rewrite_rule( '^wptelegram/widget/view/@([a-zA-Z]\w{3,30}[^\W_])/?', 'index.php?core=wptelegram&module=widget&action=view&username=$matches[1]', 'top' );
 	}
 
 	/**
-	 * Set widget Message Template based on WP Query.
+	 * Set the embed Template based on WP Query.
 	 *
 	 * @since 1.4.0
 	 * @param string $template The page template to be used.
 	 */
-	public function set_message_template( $template ) {
+	public function set_embed_template( $template ) {
 
 		global $wp_query;
 		$qvs = $wp_query->query_vars;
 
-		if ( isset( $qvs['core'], $qvs['module'], $qvs['action'], $qvs['username'], $qvs['message_id'] ) && 'wptelegram' === $qvs['core'] && 'widget' === $qvs['module'] ) {
+		if ( isset( $qvs['core'], $qvs['module'], $qvs['action'], $qvs['username'] ) && 'wptelegram' === $qvs['core'] && 'widget' === $qvs['module'] ) {
 
 			if ( 'view' === $qvs['action'] ) {
 
@@ -145,7 +160,17 @@ class WPTelegram_Widget_Public {
 				$allow_all_embeds = apply_filters( "wptelegram_widget_allow_embeds_for_{$qvs['username']}", $allow_all_embeds );
 
 				if ( $allow_all_embeds || strtolower( $qvs['username'] ) === $saved_username ) {
-					$template = dirname( __FILE__ ) . '/partials/message-view.php';
+
+					// if it's for single post
+					if ( isset( $qvs['message_id'] ) ) {
+						
+						$template = dirname( __FILE__ ) . '/partials/embedded-post-view.php';
+
+					} else {
+
+						$template = dirname( __FILE__ ) . '/partials/embedded-widget-view.php';
+					}
+
 				} else {
 					status_header( 401 );
 					exit;
@@ -157,6 +182,256 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
+	 * Send request to t.me/...
+	 *
+	 * @since  x.y.z
+	 *
+	 * @param string $username The Telegram channel username.
+	 */
+	public static function send_request_to_t_dot_me( $url, $args = array() ) {
+
+		$response = wp_remote_request( $url, $args );
+		$code     = wp_remote_retrieve_response_code( $response );
+
+		if ( 200 !== $code ) {
+			return false;
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+
+		return $body;
+	}
+
+	/**
+	 * Render the HTML of the embedded widget.
+	 *
+	 * @since  x.y.z
+	 *
+	 * @param string $username The Telegram channel username.
+	 */
+	public function render_embedded_widget( $username ) {
+
+		$json = false;
+
+		if ( isset( $_GET['url'] ) ) {
+
+			$url = sanitize_text_field( $_GET['url'] );
+
+			if ( ! preg_match( '/\Ahttps:\/\/t\.me\/s\/' . $username . '.*/i', $url ) ) {
+				exit;
+			}
+
+			$json = self::send_request_to_t_dot_me( $url, array(
+				'method'  => 'POST',
+				'headers' => array(
+					'X-Requested-With'	=> 'XMLHttpRequest'
+				),
+			) );
+
+			if ( empty( $json ) ) {
+				exit;
+			}
+
+			$content = json_decode( $json );
+
+			$json = true;
+
+		} else {
+
+			$url = $this->get_telegram_channel_ajax_url( $username );
+
+			$content = self::send_request_to_t_dot_me( $url );
+
+			if ( empty( $content ) ) {
+				exit;
+			}
+
+			if ( extension_loaded( 'mbstring' ) ) {
+				// fix the issue with Cyrillic characters.
+				$content = mb_convert_encoding( $content, 'UTF-8', mb_detect_encoding( $content ) );
+				$content = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
+			}
+
+		}
+
+		$output = $this->replace_tg_links( $content, $username );
+
+		if ( $json ) {
+			$output = json_encode( $output );
+		}
+
+		echo $output;
+
+		exit;
+	}
+
+	/**
+	 * Replace the Telegram links with site links.
+	 *
+	 * @since  x.y.z
+	 *
+	 * @param string $content  The HTML content.
+	 * @param string $username Telegram channel username.
+	 */
+	public function replace_tg_links( $content, $username ) {
+
+		$pattern = '/(?<=href=")\/s\/' . $username . '\?[^"]*?(?:before|after)=\d+[^"]*?(?=")/i';
+
+		// Replace the ajax links.
+		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
+
+			return add_query_arg( 'url', urlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
+		}, $content );
+
+		$pattern = '/<form[^>]+action="([^"]+)">/i';
+
+		// Replace the form action link.
+		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
+
+			// Append the fields to the <form> tag if needed
+			return str_replace( $matches[1], self::get_embedded_widget_url( $username ), $matches[0] ) . $this->get_injected_form_fields( $username );
+
+		}, $content );
+
+		return $content;
+	}
+
+	/**
+	 * The embedded widget needs to return some fields
+	 * to be able to use the search feature
+	 *
+	 * @since  x.y.z
+	 *
+	 * @param string $username Telegram channel username.
+	 */
+	public function get_injected_form_fields ( $username ) {
+
+		$html = '';
+
+		if ( self::$use_ugly_urls ) {
+
+			$fields = array(
+				'core'     => 'wptelegram',
+				'module'   => 'widget',
+				'action'   => 'view',
+				'username' => $username,
+			);
+
+			foreach ( $fields as $name => $value ) {
+
+				$html .= '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
+			}
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Get the embedd URL for widget view.
+	 *
+	 * @since x.y.z
+	 *
+	 * @param string $username   The Telegram channel/group username.
+	 *
+	 * @return string
+	 */
+	public static function get_embedded_widget_url( $username ) {
+
+		// check for permalink structure.
+		$structure = get_option( 'permalink_structure' );
+
+		if ( empty( $structure ) || self::$use_ugly_urls ) {
+
+			$args = array(
+				'core'       => 'wptelegram',
+				'module'     => 'widget',
+				'action'     => 'view',
+				'username'   => $username,
+			);
+
+			$url = add_query_arg( $args, site_url() );
+
+		} else {
+
+			$url = site_url( "/wptelegram/widget/view/@{$username}/" );
+		}
+
+		return (string) apply_filters( 'wptelegram_widget_embedded_widget_url', $url, $username );
+	}
+
+	/**
+	 * Get the URl for ajax widget.
+	 *
+	 * @since  x.y.z
+	 *
+	 * @param string $username The Telegram channel/group username.
+	 */
+	public function get_telegram_channel_ajax_url( $username ) {
+
+		$url  = "https://t.me/s/{$username}";
+
+		if ( isset( $_GET['q'] ) ) {
+			$url = add_query_arg( 'q', sanitize_text_field( $_GET['q'] ), $url );
+		}
+
+		return (string) apply_filters( 'wptelegram_widget_channel_ajax_url', $url, $username );
+	}
+
+	/**
+	 * Registers shortcode to display the ajax channel feed.
+	 *
+	 * @since    x.y.z
+	 *
+	 * @param array $atts The shortcode attributes.
+	 */
+	public static function ajax_widget_shortcode( $atts ) {
+
+		$defaults = array(
+			'widget_width'  => 'auto',
+			'widget_height' => 600,
+		);
+
+		// use global options.
+		foreach ( $defaults as $key => $default ) {
+			$defaults[ $key ] = WPTG_Widget()->options()->get( $key, $default );
+		}
+
+		$args = shortcode_atts( $defaults, $atts, 'wptelegram-ajax-widget' );
+
+		$args = array_map( 'sanitize_text_field', $args );
+
+		$username = WPTG_Widget()->options()->get( 'username' );
+		
+		$embedded_widget_url = self::get_embedded_widget_url( $username );
+
+		set_query_var( 'embedded_widget_url', $embedded_widget_url );
+		set_query_var( 'widget_width', $args['widget_width'] );
+		set_query_var( 'widget_height', $args['widget_height'] );
+
+		ob_start();
+		$overridden_template = locate_template( 'wptelegram-widget/embed-widget.php' );
+		if ( $overridden_template ) {
+			/**
+			 * The value returned by locate_template() is a path to file.
+			 * if either the child theme or the parent theme have overridden the template.
+			 */
+
+			if ( self::is_valid_template( $overridden_template ) ) {
+				load_template( $overridden_template );
+			}
+		} else {
+			/*
+			 * If neither the child nor parent theme have overridden the template,
+			 * we load the template from the 'partials' sub-directory of the directory this file is in.
+			 */
+			load_template( dirname( __FILE__ ) . '/partials/embed-widget.php' );
+		}
+		$html = ob_get_contents();
+		ob_get_clean();
+		return $html;
+	}
+
+	/**
 	 * Render the HTML of the widget message.
 	 *
 	 * @since  1.3.0
@@ -164,13 +439,13 @@ class WPTelegram_Widget_Public {
 	 * @param string $username The Telegram channel/group username.
 	 * @param int    $message_id Unique identifier of group/channel message.
 	 */
-	public function render_single_message( $username, $message_id ) {
+	public function render_embedded_post( $username, $message_id ) {
 
 		$saved_username = WPTG_Widget()->options()->get( 'username' );
 
 		$url = $this->get_telegram_post_embed_url( $username, $message_id );
 
-		$html = $this->get_post_html_from_telegram( $url );
+		$html = self::send_request_to_t_dot_me( $url );
 
 		if ( empty( $html ) ) {
 			return;
@@ -186,7 +461,7 @@ class WPTelegram_Widget_Public {
 
 		@$dom->loadHTML( $html );
 
-		$final_output = $this->get_the_single_message_output( $dom );
+		$final_output = $this->get_the_embedded_post_output( $dom );
 
 		if ( strtolower( $saved_username ) !== strtolower( $username ) ) {
 			echo $final_output;
@@ -200,30 +475,6 @@ class WPTelegram_Widget_Public {
 
 		// remove the post from saved messages.
 		$this->remove_post( $message_id );
-	}
-
-	/**
-	 * Retrieve post html from Telegram.
-	 *
-	 * @since  1.5.0
-	 *
-	 * @param string $url The Telegram channel/group post URL.
-	 */
-	public function get_post_html_from_telegram( $url ) {
-
-		$args = array(
-			'headers' => array( 'wptelegram_bot' => true ), // for proxy check.
-		);
-
-		$response = wp_remote_get( $url, $args );
-		$code     = wp_remote_retrieve_response_code( $response );
-		$html     = wp_remote_retrieve_body( $response );
-
-		if ( 200 !== $code ) {
-			return false;
-		}
-
-		return $html;
 	}
 
 	/**
@@ -254,14 +505,14 @@ class WPTelegram_Widget_Public {
 	 *
 	 * @param DOMDocument $dom The dom object for the post HTML.
 	 */
-	public function get_the_single_message_output( $dom ) {
+	public function get_the_embedded_post_output( $dom ) {
 
 		/* Inject Override style */
 		$heads = $dom->getElementsByTagName( 'head' );
 		// for some weird PHP installations.
 		if ( $heads->length ) {
 			$head                 = $heads->item( 0 );
-			$style_elm            = $dom->createElement( 'style', 'body.body_widget_post { min-width: initial; }' );
+			$style_elm            = $dom->createElement( 'style', 'body.body_widget_post { min-width: initial !important; }' );
 			$elm_type_attr        = $dom->createAttribute( 'type' );
 			$elm_type_attr->value = 'text/css';
 			$style_elm->appendChild( $elm_type_attr );
@@ -282,7 +533,7 @@ class WPTelegram_Widget_Public {
 
 		$html = $dom->saveHTML();
 
-		return (string) apply_filters( 'wptelegram_widget_single_message_output', $html, $dom );
+		return (string) apply_filters( 'wptelegram_widget_embedded_post_output', $html, $dom );
 	}
 
 	/**
@@ -312,7 +563,7 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
-	 * Render the HTML of the widget message.
+	 * Get the embed URL of the Telegram Channel post.
 	 *
 	 * @since  1.5.0
 	 *
@@ -337,11 +588,11 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Registers shortcode to display channel feed.
 	 *
-	 * @since    1.0.0
+	 * @since    x.y.z
 	 *
 	 * @param array $atts The shortcode attributes.
 	 */
-	public static function feed_widget_shortcode( $atts ) {
+	public static function post_embed_shortcode( $atts ) {
 
 		// fetch messages.
 		$messages = array_reverse( WPTG_Widget()->options()->get( 'messages', array() ) );
@@ -405,7 +656,7 @@ class WPTelegram_Widget_Public {
 		set_query_var( 'widget_width', $widget_width );
 
 		ob_start();
-		$overridden_template = locate_template( 'wptelegram-widget/widget-view.php' );
+		$overridden_template = locate_template( 'wptelegram-widget/post-loop.php' );
 		if ( $overridden_template ) {
 			/**
 			 * The value returned by locate_template() is a path to file.
@@ -420,7 +671,7 @@ class WPTelegram_Widget_Public {
 			 * If neither the child nor parent theme have overridden the template,
 			 * we load the template from the 'partials' sub-directory of the directory this file is in.
 			 */
-			load_template( dirname( __FILE__ ) . '/partials/widget-view.php' );
+			load_template( dirname( __FILE__ ) . '/partials/post-loop.php' );
 		}
 		$html = ob_get_contents();
 		ob_get_clean();
@@ -440,12 +691,10 @@ class WPTelegram_Widget_Public {
 	 */
 	public static function get_message_view_url( $username, $message_id, $userpic = null ) {
 
-		$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false, $username );
-
 		// check for permalink structure.
 		$structure = get_option( 'permalink_structure' );
 
-		if ( empty( $structure ) || $use_ugly_urls ) {
+		if ( empty( $structure ) || self::$use_ugly_urls ) {
 
 			$args = array(
 				'core'       => 'wptelegram',
