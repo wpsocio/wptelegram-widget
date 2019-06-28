@@ -850,6 +850,7 @@ class WPTelegram_Widget_Public {
 			'1.3.0', // first upgrade.
 			'1.4.0',
 			'1.5.0',
+			'1.6.1',
 		);
 
 		// always.
@@ -943,5 +944,14 @@ class WPTelegram_Widget_Public {
 		if ( ! wp_next_scheduled( 'wptelegram_widget_cron_pull_updates' ) ) {
 			wp_schedule_event( time(), 'wptelegram_five_minutely', 'wptelegram_widget_cron_pull_updates' );
 		}
+	}
+
+	/**
+	 * Upgrade to version 1.6.1
+	 *
+	 * @since    1.6.1
+	 */
+	private function upgrade_to_161() {
+		flush_rewrite_rules();
 	}
 }
