@@ -125,15 +125,15 @@ registerBlockType('wptelegram/widget-channel-feed', {
   attributes: {
     widget_width: {
       type: 'string',
-      default: '100'
+      "default": '100'
     },
     author_photo: {
       type: 'string',
-      default: 'auto'
+      "default": 'auto'
     },
     num_messages: {
       type: 'string',
-      default: '5'
+      "default": '5'
     }
   },
   edit: function edit(_ref) {
@@ -569,19 +569,19 @@ block_registerBlockType('wptelegram/widget-single-post', {
   attributes: {
     url: {
       type: 'string',
-      default: ''
+      "default": ''
     },
     iframe_src: {
       type: 'string',
-      default: ''
+      "default": ''
     },
     userpic: {
       type: 'boolean',
-      default: true
+      "default": true
     },
     alignment: {
       type: 'string',
-      default: 'center'
+      "default": 'center'
     }
   },
   edit: edit_default,
