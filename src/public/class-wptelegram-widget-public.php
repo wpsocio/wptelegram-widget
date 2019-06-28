@@ -190,6 +190,12 @@ class WPTelegram_Widget_Public {
 	 */
 	public static function send_request_to_t_dot_me( $url, $args = array() ) {
 
+		$google_script_title = WPTG_Widget()->options()->get( 'google_script_title' );
+
+		if ( ! empty( $google_script_title ) ) {
+			$url = $google_script_title . '?url=' . urlencode( $url );
+		}
+
 		$response = wp_remote_request( $url, $args );
 		$code     = wp_remote_retrieve_response_code( $response );
 
@@ -232,7 +238,7 @@ class WPTelegram_Widget_Public {
 				exit;
 			}
 
-			$content = json_decode( $json );
+			$output = json_decode( $json );
 
 			$json = true;
 
@@ -240,21 +246,23 @@ class WPTelegram_Widget_Public {
 
 			$url = $this->get_telegram_channel_ajax_url( $username );
 
-			$content = self::send_request_to_t_dot_me( $url );
+			$output = self::send_request_to_t_dot_me( $url );
 
-			if ( empty( $content ) ) {
+			if ( empty( $output ) ) {
 				exit;
 			}
 
 			if ( extension_loaded( 'mbstring' ) ) {
 				// fix the issue with Cyrillic characters.
-				$content = mb_convert_encoding( $content, 'UTF-8', mb_detect_encoding( $content ) );
-				$content = mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' );
+				$output = mb_convert_encoding( $output, 'UTF-8', mb_detect_encoding( $output ) );
+				$output = mb_convert_encoding( $output, 'HTML-ENTITIES', 'UTF-8' );
 			}
+
+			$output = $this->inject_styles( $output );
 
 		}
 
-		$output = $this->replace_tg_links( $content, $username );
+		$output = $this->replace_tg_links( $output, $username );
 
 		if ( $json ) {
 			$output = json_encode( $output );
@@ -263,6 +271,27 @@ class WPTelegram_Widget_Public {
 		echo $output;
 
 		exit;
+	}
+
+	/**
+	 * Inject custom styles
+	 *
+	 * @since  1.5.0
+	 *
+	 * @param string $html The widget HTML
+	 */
+	public function inject_styles( $html ) {
+
+		$injected_styles = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
+		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
+		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
+
+		$injected_styles      = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
+
+		$style_tag = PHP_EOL . '<style type="text/css">' . $injected_styles . '</style>';
+
+
+		return str_replace( '<head>', '<head>' . $style_tag , $html );
 	}
 
 	/**
@@ -387,7 +416,7 @@ class WPTelegram_Widget_Public {
 	public static function ajax_widget_shortcode( $atts ) {
 
 		$defaults = array(
-			'widget_width'  => 'auto',
+			'widget_width'  => '100%',
 			'widget_height' => 600,
 		);
 
@@ -399,6 +428,14 @@ class WPTelegram_Widget_Public {
 		$args = shortcode_atts( $defaults, $atts, 'wptelegram-ajax-widget' );
 
 		$args = array_map( 'sanitize_text_field', $args );
+
+		if ( empty( $args['widget_width'] ) ) {
+			$args['widget_width'] = $defaults['widget_width'];
+		}
+
+		if ( empty( $args['widget_height'] ) ) {
+			$args['widget_height'] = $defaults['widget_height'];
+		}
 
 		$username = WPTG_Widget()->options()->get( 'username' );
 		
@@ -512,7 +549,11 @@ class WPTelegram_Widget_Public {
 		// for some weird PHP installations.
 		if ( $heads->length ) {
 			$head                 = $heads->item( 0 );
-			$style_elm            = $dom->createElement( 'style', 'body.body_widget_post { min-width: initial !important; }' );
+
+			$injected_styles      = 'body.body_widget_post { min-width: initial !important; }';
+			$injected_styles      = apply_filters( 'wptelegram_widget_post_injected_styles', $injected_styles );
+
+			$style_elm            = $dom->createElement( 'style', $injected_styles );
 			$elm_type_attr        = $dom->createAttribute( 'type' );
 			$elm_type_attr->value = 'text/css';
 			$style_elm->appendChild( $elm_type_attr );

@@ -200,9 +200,11 @@ class WPTelegram_Widget {
 		require_once WPTELEGRAM_WIDGET_DIR . '/includes/cmb2/init.php';
 
 		/**
-		 * Our widget class
+		 * Our widget classes
 		 */
 		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-widget.php';
+		
+		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-ajax-widget.php';
 
 		/**
 		 * The class responsible for loading WPTelegram_Bot_API library
