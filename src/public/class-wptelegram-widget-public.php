@@ -258,7 +258,7 @@ class WPTelegram_Widget_Public {
 				$output = mb_convert_encoding( $output, 'HTML-ENTITIES', 'UTF-8' );
 			}
 
-			$output = $this->inject_styles( $output );
+			$output = $this->customize_widget_output( $output );
 
 		}
 
@@ -274,24 +274,29 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
-	 * Inject custom styles
+	 * Inject Customizations
 	 *
-	 * @since  1.5.0
+	 * @since  x.y.z
 	 *
 	 * @param string $html The widget HTML
 	 */
-	public function inject_styles( $html ) {
+	public function customize_widget_output( $html ) {
 
 		$injected_styles = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
 		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
 		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
 
-		$injected_styles      = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
+		$injected_styles = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
 
 		$style_tag = PHP_EOL . '<style type="text/css">' . $injected_styles . '</style>';
 
+		$base_tag = PHP_EOL . '<base target="_blank" />';
 
-		return str_replace( '<head>', '<head>' . $style_tag , $html );
+		$customizations = $base_tag . $style_tag;
+
+		$output = str_replace( '<head>', '<head>' . $customizations , $html );
+
+		return apply_filters( 'wptelegram_widget_ajax_widget_customized_output', $output, $customizations, $html );
 	}
 
 	/**
