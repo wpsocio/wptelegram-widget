@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.2)
 ### Enhancements
 * Change Join Link to channel link
 

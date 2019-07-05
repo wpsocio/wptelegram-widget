@@ -276,7 +276,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Inject Customizations
 	 *
-	 * @since  x.y.z
+	 * @since  1.6.2
 	 *
 	 * @param string $html The widget HTML
 	 */
