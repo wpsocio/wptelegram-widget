@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## Unreleased
+### Enhancements
+* Change Join Link to channel link
+
+### Bug Fixes
+* Fixed the issue with click on links
+
 ## [1.6.1 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.1)
 ### Enhancements
 * Fix the upgrade to new rewrite rules
