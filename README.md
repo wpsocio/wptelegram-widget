@@ -22,6 +22,8 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 
 ## Features:
 
+* Provides an ajax widget to display channel feed
+* Ajax widget contains a Join Channel link
 * Pulls updates automatically from Telegram
 * Uses a responsive widget to display the feed
 * Fits anywhere you want it to be
