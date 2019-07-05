@@ -1,6 +1,23 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.2)
+### Enhancements
+* Change Join Link to channel link
+
+### Bug Fixes
+* Fixed the issue with click on links
+
+## [1.6.1 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.1)
+### Enhancements
+* Fix the upgrade to new rewrite rules
+
+## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.1)
+### Enhancements
+* Added the new ajax widget with fixed height and infinite scroll
+* Added Added support for Google Script to bypass the ban on t.me.
+* Added filters to inject custom widget styles.
+
 ## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.0)
 ### Enhancements
 * Added the new ajax widget with fixed height and infinite scroll
