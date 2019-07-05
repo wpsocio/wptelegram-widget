@@ -451,7 +451,35 @@ module.exports = function(grunt) {
 					]
 				}
 			},
-			changelog: {
+			'changelog-readme': {
+				files: {
+					[SOURCE_DIR]: SOURCE_DIR + 'README.txt',
+				},
+				options: {
+					replacements: [
+						{
+							pattern: /== Changelog ==([\s\S])/i,
+							replacement: function (match, p1) {
+
+								const { version } = verion_updater;
+								if (!version) {
+									grunt.warn('No version number set!');
+								}
+
+								const changes = grunt.file.read('./changelog.md') // get contents of changelog file
+								.match(/(?<=\#\#\sUnreleased)[\s\S]+?(?=##\s?\[\d+\.\d+\.\d+)/i)[0] // match the changes in Unreleased section
+								.replace(/(^|\n)(\#\#.+)/g,'') // remove headings like Enhancements, Bug fixes
+								.replace(/\n[\s\t]*\n/g,`\n`) // replace empty lines
+								.trim(); // cleanup
+
+								const replace = `\n\n= ${version} =\n${changes}\n`;
+								return match.replace(p1, replace);
+							}
+						}
+					]
+				}
+			},
+			'changelog-md': {
 				files: {
 					'./': 'changelog.md'
 				},
@@ -592,7 +620,8 @@ module.exports = function(grunt) {
 		verion_updater.version = version;
 
 		grunt.task.run( [
-			'update_files:changelog',
+			'update_files:changelog-readme',
+			'update_files:changelog-md',
 		] );
 	} );
 

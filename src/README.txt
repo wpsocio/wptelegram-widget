@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 4.0
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,8 @@ For rules, see the pinned message. No spam please.
 
 == Features ==
 
+*	Provides an ajax widget to display channel feed
+*	Ajax widget contains a Join Channel link
 *	Pulls updates automatically from Telegram
 *	Uses a responsive widget to display the feed
 *	Fits anywhere you want it to be
@@ -109,6 +111,10 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.6.2 =
+* Change Join Link to channel link
+* Fixed the issue with click on links
 
 = 1.4.0 =
 * Moved the widget message links to front-end
