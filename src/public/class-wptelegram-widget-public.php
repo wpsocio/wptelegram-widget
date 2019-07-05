@@ -285,6 +285,8 @@ class WPTelegram_Widget_Public {
 		$injected_styles = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
 		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
 		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
+		$injected_styles .= '.tgme_header_search { display: none; }' . PHP_EOL;
+		$injected_styles .= '@media (max-width: 720px){ .tgme_header_info { margin-right: initial !important; }}' . PHP_EOL;
 
 		$injected_styles = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
 
@@ -324,6 +326,15 @@ class WPTelegram_Widget_Public {
 
 			// Append the fields to the <form> tag if needed
 			return str_replace( $matches[1], self::get_embedded_widget_url( $username ), $matches[0] ) . $this->get_injected_form_fields( $username );
+
+		}, $content );
+
+		$pattern = '/<a[^>]*?class="[^"]*?tgme_channel_join_telegram[^"]*?"[^>]*?href="([^"]+)"[^>]*?>/i';
+
+		// Replace the join link.
+		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
+
+			return str_replace( $matches[1], "https://t.me/{$username}", $matches[0] );
 
 		}, $content );
 
