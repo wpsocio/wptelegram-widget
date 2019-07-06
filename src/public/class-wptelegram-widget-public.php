@@ -285,18 +285,28 @@ class WPTelegram_Widget_Public {
 		$injected_styles = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
 		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
 		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
-		$injected_styles .= '.tgme_header_search { display: none; }' . PHP_EOL;
-		$injected_styles .= '@media (max-width: 720px){ .tgme_header_info { margin-right: initial !important; }}' . PHP_EOL;
 
 		$injected_styles = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
 
+		// Add style tag
 		$style_tag = PHP_EOL . '<style type="text/css">' . $injected_styles . '</style>';
 
+		// Make all the links open in new tab, outside the iframe.
 		$base_tag = PHP_EOL . '<base target="_blank" />';
 
 		$customizations = $base_tag . $style_tag;
 
 		$output = str_replace( '<head>', '<head>' . $customizations , $html );
+
+		$pattern = '/<form[^>]+?(\s?>)/i';
+
+		// Set the target attribute for <form>
+		// to open search results in same iframe.
+		$output = preg_replace_callback( $pattern, function ( $matches ) {
+
+			return str_replace( $matches[1], ' target="_self">', $matches[0] );
+
+		}, $output );
 
 		return apply_filters( 'wptelegram_widget_ajax_widget_customized_output', $output, $customizations, $html );
 	}
@@ -319,7 +329,7 @@ class WPTelegram_Widget_Public {
 			return add_query_arg( 'url', urlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
 		}, $content );
 
-		$pattern = '/<form[^>]+action="([^"]+)">/i';
+		$pattern = '/<form[^>]+?action="([^"]+)"[^>]+?>/i';
 
 		// Replace the form action link.
 		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
