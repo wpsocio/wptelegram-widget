@@ -269,7 +269,7 @@ module.exports = function(grunt) {
 			options: {
 				phpCmd: '/usr/bin/php5.6',
 	            phpArgs: {
-								'-d': ['display_errors', 'display_startup_errors']
+					'-d': ['display_errors', 'display_startup_errors']
 	            }
 	        },
 	        all: {
