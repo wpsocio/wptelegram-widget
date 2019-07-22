@@ -3,7 +3,7 @@
  * Plugin settings endpoint for WordPress REST API.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      1.7.0
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
@@ -12,7 +12,7 @@
 /**
  * Class to handle the settings endpoint.
  *
- * @since x.y.z
+ * @since 1.7.0
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
@@ -23,7 +23,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Constructor
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 */
 	public function __construct() {
 		$this->rest_base = 'bot-api';
@@ -32,7 +32,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Register the routes for the objects of the controller.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 */
 	public function register_routes() {
 
@@ -53,7 +53,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Check request permissions.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 *
 	 * @return bool
 	 */
@@ -64,7 +64,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Handle the test request for settings tests.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 *
 	 * @param WP_REST_Request $request WP REST API request.
 	 */
@@ -106,7 +106,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Retrieves the query params for the settings.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 *
 	 * @return array Query parameters for the settings.
 	 */
@@ -136,7 +136,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Validate params.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 *
 	 * @param mixed           $value   Value of the param.
 	 * @param WP_REST_Request $request WP REST API request.
@@ -155,7 +155,7 @@ class WPTelegram_Widget_Bot_API_Controller extends WPTelegram_Widget_REST_Contro
 	/**
 	 * Sanitize params.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 *
 	 * @param mixed $input Value of the param.
 	 */

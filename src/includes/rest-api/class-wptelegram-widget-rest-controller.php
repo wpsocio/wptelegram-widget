@@ -3,7 +3,7 @@
  * WP REST API functionality of the plugin.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      1.7.0
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
@@ -12,7 +12,7 @@
 /**
  * Base class for all the endpoints.
  *
- * @since x.y.z
+ * @since 1.7.0
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
@@ -23,7 +23,7 @@ abstract class WPTelegram_Widget_REST_Controller extends WP_REST_Controller {
 	/**
 	 * The namespace of this controller's route.
 	 *
-	 * @since x.y.z
+	 * @since 1.7.0
 	 * @var string
 	 */
 	protected $namespace = 'wptelegram-widget/v1';

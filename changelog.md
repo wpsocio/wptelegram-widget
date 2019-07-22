@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## [1.7.0 - 2019-07-23](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.0)
 ### Enhancements
 * Migrated from CMB2 to React for settings page.
 * Added Guternberg block for Ajax Widget.
