@@ -14948,7 +14948,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var App_App = function App() {
   // const [formState, setFormState] = useState({});
-  return react_default.a.createElement(es_Container, null, react_default.a.createElement(es_Row, null, react_default.a.createElement(es_Col, {
+  return react_default.a.createElement(es_Container, {
+    className: "mw-100"
+  }, react_default.a.createElement(es_Row, null, react_default.a.createElement(es_Col, {
     xs: true,
     sm: true,
     md: 12,
