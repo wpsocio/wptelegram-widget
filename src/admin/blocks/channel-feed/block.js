@@ -80,7 +80,7 @@ registerBlockType( 'wptelegram/widget-channel-feed', {
 
 		let text = '[wptelegram-widget';
 		text += attributes.widget_width ? ` widget_width="${attributes.widget_width}"` : '';
-		text += ` author_photo="${attributes.author_photo}" num_messages="${attributes.num_messages}"`;
+		text += ` author_photo="${attributes.author_photo}" num_messages="${attributes.num_messages}"]`;
 
 		return [
 			controls,

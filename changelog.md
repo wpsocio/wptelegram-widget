@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [1.7.0 - 2019-07-23](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.0)
+### Enhancements
+* Migrated from CMB2 to React for settings page.
+* Added Guternberg block for Ajax Widget.
+* Removed Widget Messages list in favour of Ajax Widget.
+* Bot Token is no more required for the ajax widget to work.
+* Made the ajax widget search form visible again.
+* Search form results are now displayed in the same iframe, instead of new tab.
+
+### Bug Fixes
+* Fixed the Google Script URL not being used.
+
 ## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.2)
 ### Enhancements
 * Change Join Link to channel link
