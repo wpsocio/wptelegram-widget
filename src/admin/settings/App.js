@@ -8,7 +8,7 @@ const App = () => {
   // const [formState, setFormState] = useState({});
 
   return (
-    <Container>
+    <Container className="mw-100">
       <Row>
         <Col xs sm md={12} lg={8} xl={9}>
           <Header />
