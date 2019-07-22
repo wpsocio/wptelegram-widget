@@ -36,9 +36,9 @@ registerBlockType( 'wptelegram/widget-single-post', {
 			default: true,
 		},
 		alignment: {
-            type: 'string',
-            default: 'center',
-        },
+				type: 'string',
+				default: 'center',
+		},
 	},
 	
 	edit: edit,

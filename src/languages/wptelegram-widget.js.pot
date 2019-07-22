@@ -1,0 +1,314 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/admin/blocks/ajax-channel-feed/block.js:49
+#: src/admin/blocks/channel-feed/block.js:43
+msgid "Widget Options"
+msgstr ""
+
+#: src/admin/blocks/ajax-channel-feed/block.js:51
+#: src/admin/blocks/channel-feed/block.js:45
+#: src/admin/settings/fields.js:64
+msgid "Widget Width"
+msgstr ""
+
+#: src/admin/blocks/ajax-channel-feed/block.js:56
+#: src/admin/settings/fields.js:65
+msgid "Widget Height"
+msgstr ""
+
+#: src/admin/blocks/ajax-channel-feed/block.js:68
+msgid "Telegram Channel Ajax Feed"
+msgstr ""
+
+#: src/admin/blocks/channel-feed/block.js:53
+#: src/admin/blocks/single-post/controls.js:35
+#: src/admin/settings/fields.js:67
+msgid "Author Photo"
+msgstr ""
+
+#: src/admin/blocks/channel-feed/block.js:63
+#: src/admin/settings/fields.js:68
+msgid "Number of Messages"
+msgstr ""
+
+#: src/admin/blocks/channel-feed/block.js:77
+msgid "Telegram Channel Feed"
+msgstr ""
+
+#: src/admin/blocks/single-post/block.js:16
+msgid "Telegram Single Post"
+msgstr ""
+
+#: src/admin/blocks/single-post/controls.js:33
+msgid "Options"
+msgstr ""
+
+#: src/admin/blocks/single-post/controls.js:50
+msgid "Edit URL"
+msgstr ""
+
+#: src/admin/blocks/single-post/edit.js:101
+msgid "Telegram post URL"
+msgstr ""
+
+#: src/admin/blocks/single-post/edit.js:132
+msgid "Loading…"
+msgstr ""
+
+#: src/admin/blocks/single-post/placeholder.js:32
+msgid "Embed"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:11
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:11
+msgid "Widget Info"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:13
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:13
+msgid "Goto %1$s and click/drag %2$s and place it where you want it to be."
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:13
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:13
+msgid "Appearance"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:13
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:13
+msgid "Widgets"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:13
+msgid "WP Telegram Ajax Widget"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:16
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:16
+msgid ""
+"Alternately, you can use the below shortCode or the block available in "
+"block editor."
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:19
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:19
+msgid "Inside page or post content:"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:25
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:25
+msgid "Inside the theme templates"
+msgstr ""
+
+#: src/admin/settings/components/AjaxWidgetInfoCard.js:30
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:30
+#: src/admin/settings/components/SettingsForm.js:91
+msgid "or"
+msgstr ""
+
+#: src/admin/settings/components/BotTestResult.js:8
+#: src/admin/settings/components/TestMessageResult.js:8
+msgid "Test Result:"
+msgstr ""
+
+#: src/admin/settings/components/Header.js:30
+msgid ""
+"With this plugin, you can display your public Telegram Channel or Group "
+"feed in a WordPress widget or anywhere else using a shortcode."
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:11
+msgid "INSTRUCTIONS!"
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:13
+msgid "Create a Bot by sending %1$s command to %2$s."
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:14
+msgid "After completing the steps %s will provide you the Bot Token."
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:15
+msgid "Copy the token and paste into the Bot Token field below."
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:15
+msgid "For ease, use %s"
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:16
+msgid "Add the Bot as Administrator to your Channel/Group"
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:19
+msgid "Tip!"
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:21
+msgid "Updates are pulled every five minutes if someone visits your website."
+msgstr ""
+
+#: src/admin/settings/components/Instructions.js:24
+msgid ""
+"To make sure the updates are pulled in time, it is recommended to set up a "
+"cron on your hosting server that hits the below URL every five minutes or "
+"so."
+msgstr ""
+
+#: src/admin/settings/components/LegacyWidgetInfoCard.js:13
+msgid "WP Telegram Legacy Widget"
+msgstr ""
+
+#: src/admin/settings/components/MemberCountResult.js:8
+msgid "Members Count:"
+msgstr ""
+
+#: src/admin/settings/components/PluginInfoCard.js:14
+msgid ""
+"Display the Telegram Public Channel or Group Feed in a WordPress widget or "
+"anywhere you want using a shortcode."
+msgstr ""
+
+#: src/admin/settings/components/PluginInfoCard.js:19
+msgid "Do you like %s?"
+msgstr ""
+
+#: src/admin/settings/components/PluginInfoCard.js:26
+msgid "Need help?"
+msgstr ""
+
+#: src/admin/settings/components/PluginInfoCard.js:27
+msgid "Get LIVE support on Telegram"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:101
+msgid "Ajax Widget"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:117
+msgid "Legacy Widget"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:123
+msgid "Please read the instructions above"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:142
+msgid "Please wait..."
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:142
+msgid "Test Token"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:152
+msgid "Auto"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:153
+msgid "Always show"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:154
+msgid "Always hide"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:165
+msgid "Number of messages to display in the widget"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:182
+msgid "Google Script"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:187
+msgid "Yes"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:188
+msgid "No"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:198
+msgid "The requests to Telegram will be sent via your Google Script."
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:199
+msgid "See this tutorial"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:209
+msgid "Save Changes"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:211
+msgid "Changes saved successfully."
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:50
+msgid "Common Options"
+msgstr ""
+
+#: src/admin/settings/components/SettingsForm.js:81
+msgid "Send Test"
+msgstr ""
+
+#: src/admin/settings/components/SocialIcons.js:15
+msgid "Follow %s"
+msgstr ""
+
+#: src/admin/settings/components/SocialIcons.js:24
+msgid "Join %s"
+msgstr ""
+
+#: src/admin/settings/fields.js:49
+msgid "Invalid %s"
+msgstr ""
+
+#: src/admin/settings/fields.js:52
+msgid "%s is required."
+msgstr ""
+
+#: src/admin/settings/fields.js:56
+msgid "Changes could not be saved."
+msgstr ""
+
+#: src/admin/settings/fields.js:63
+msgid "Channel Username"
+msgstr ""
+
+#: src/admin/settings/fields.js:66
+msgid "Bot Token"
+msgstr ""
+
+#: src/admin/settings/fields.js:69
+msgid "Your host blocks Telegram?"
+msgstr ""
+
+#: src/admin/settings/fields.js:70
+msgid "Google Script URL"
+msgstr ""
+
+#: src/admin/settings/utils/TelegramUtils.js:50
+msgid "A message will be sent to the Channel/Group. You can modify the text below"
+msgstr ""
+
+#: src/admin/settings/utils/TelegramUtils.js:50
+msgid "This is a test message"
+msgstr ""
+
+#: src/admin/settings/utils/TelegramUtils.js:69
+msgid "Success"
+msgstr ""
+
+#: src/admin/settings/utils/ajax.js:42
+msgid "Some error occured"
+msgstr ""
+
+#: src/admin/settings/utils/ajax.js:45
+msgid "Could not connect"
+msgstr ""

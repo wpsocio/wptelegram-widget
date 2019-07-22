@@ -1,4 +1,4 @@
-# WP Telegram Channel Widget
+# WP Telegram Widget and Join Link
 
 **Contributors:**      [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:**              telegram, feed, widget, channel, group  

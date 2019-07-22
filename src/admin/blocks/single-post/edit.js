@@ -10,7 +10,7 @@ const el = wp.element.createElement;
 const { Component, Fragment, createRef } = wp.element;
 const { __ } = wp.i18n;
 const { FocusableIframe, Spinner } = wp.components;
-const { message_view_url } = window.wptelegram_widget.misc;
+const { wptelegram_widget: { blocks: { assets: { message_view_url } } } } = window;
 const { addQueryArgs } = wp.url;
 
 // export function getPostEditComponent() {

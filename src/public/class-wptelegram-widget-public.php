@@ -161,9 +161,9 @@ class WPTelegram_Widget_Public {
 
 				if ( $allow_all_embeds || strtolower( $qvs['username'] ) === $saved_username ) {
 
-					// if it's for single post
+					// if it's for single post.
 					if ( isset( $qvs['message_id'] ) ) {
-						
+
 						$template = dirname( __FILE__ ) . '/partials/embedded-post-view.php';
 
 					} else {
@@ -190,10 +190,11 @@ class WPTelegram_Widget_Public {
 	 */
 	public static function send_request_to_t_dot_me( $url, $args = array() ) {
 
-		$google_script_title = WPTG_Widget()->options()->get( 'google_script_title' );
+		$telegram_blocked  = WPTG_Widget()->options()->get( 'telegram_blocked' );
+		$google_script_url = WPTG_Widget()->options()->get( 'google_script_url' );
 
-		if ( ! empty( $google_script_title ) ) {
-			$url = $google_script_title . '?url=' . urlencode( $url );
+		if ( 'yes' === $telegram_blocked && ! empty( $google_script_url ) ) {
+			$url = $google_script_url . '?url=' . rawurlencode( $url );
 		}
 
 		$response = wp_remote_request( $url, $args );
@@ -227,12 +228,15 @@ class WPTelegram_Widget_Public {
 				exit;
 			}
 
-			$json = self::send_request_to_t_dot_me( $url, array(
-				'method'  => 'POST',
-				'headers' => array(
-					'X-Requested-With'	=> 'XMLHttpRequest'
-				),
-			) );
+			$json = self::send_request_to_t_dot_me(
+				$url,
+				array(
+					'method'  => 'POST',
+					'headers' => array(
+						'X-Requested-With'	=> 'XMLHttpRequest'
+					),
+				)
+			);
 
 			if ( empty( $json ) ) {
 				exit;
@@ -278,17 +282,17 @@ class WPTelegram_Widget_Public {
 	 *
 	 * @since  1.6.2
 	 *
-	 * @param string $html The widget HTML
+	 * @param string $html The widget HTML.
 	 */
 	public function customize_widget_output( $html ) {
 
-		$injected_styles = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
+		$injected_styles  = '::-webkit-scrollbar { display: none; }' . PHP_EOL;
 		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
 		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
 
-		$injected_styles = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
+		$injected_styles  = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
 
-		// Add style tag
+		// Add style tag.
 		$style_tag = PHP_EOL . '<style type="text/css">' . $injected_styles . '</style>';
 
 		// Make all the links open in new tab, outside the iframe.
@@ -302,11 +306,13 @@ class WPTelegram_Widget_Public {
 
 		// Set the target attribute for <form>
 		// to open search results in same iframe.
-		$output = preg_replace_callback( $pattern, function ( $matches ) {
-
-			return str_replace( $matches[1], ' target="_self">', $matches[0] );
-
-		}, $output );
+		$output = preg_replace_callback(
+			$pattern,
+			function ( $matches ) {
+				return str_replace( $matches[1], ' target="_self">', $matches[0] );
+			},
+			$output
+		);
 
 		return apply_filters( 'wptelegram_widget_ajax_widget_customized_output', $output, $customizations, $html );
 	}
@@ -324,29 +330,38 @@ class WPTelegram_Widget_Public {
 		$pattern = '/(?<=href=")\/s\/' . $username . '\?[^"]*?(?:before|after)=\d+[^"]*?(?=")/i';
 
 		// Replace the ajax links.
-		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
-
-			return add_query_arg( 'url', urlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
-		}, $content );
+		$content = preg_replace_callback(
+			$pattern,
+			function ( $matches ) use ( $username ) {
+				return add_query_arg( 'url', urlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
+			},
+			$content
+		);
 
 		$pattern = '/<form[^>]+?action="([^"]+)"[^>]+?>/i';
 
 		// Replace the form action link.
-		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
+		$content = preg_replace_callback(
+			$pattern,
+			function ( $matches ) use ( $username ) {
 
-			// Append the fields to the <form> tag if needed
-			return str_replace( $matches[1], self::get_embedded_widget_url( $username ), $matches[0] ) . $this->get_injected_form_fields( $username );
+				// Append the fields to the <form> tag if needed.
+				return str_replace( $matches[1], self::get_embedded_widget_url( $username ), $matches[0] ) . $this->get_injected_form_fields( $username );
 
-		}, $content );
+			},
+			$content
+		);
 
 		$pattern = '/<a[^>]*?class="[^"]*?tgme_channel_join_telegram[^"]*?"[^>]*?href="([^"]+)"[^>]*?>/i';
 
 		// Replace the join link.
-		$content = preg_replace_callback( $pattern, function ( $matches ) use ( $username ) {
-
-			return str_replace( $matches[1], "https://t.me/{$username}", $matches[0] );
-
-		}, $content );
+		$content = preg_replace_callback(
+			$pattern,
+			function ( $matches ) use ( $username ) {
+				return str_replace( $matches[1], "https://t.me/{$username}", $matches[0] );
+			},
+			$content
+		);
 
 		return $content;
 	}
@@ -359,7 +374,7 @@ class WPTelegram_Widget_Public {
 	 *
 	 * @param string $username Telegram channel username.
 	 */
-	public function get_injected_form_fields ( $username ) {
+	public function get_injected_form_fields( $username ) {
 
 		$html = '';
 
@@ -398,10 +413,10 @@ class WPTelegram_Widget_Public {
 		if ( empty( $structure ) || self::$use_ugly_urls ) {
 
 			$args = array(
-				'core'       => 'wptelegram',
-				'module'     => 'widget',
-				'action'     => 'view',
-				'username'   => $username,
+				'core'     => 'wptelegram',
+				'module'   => 'widget',
+				'action'   => 'view',
+				'username' => $username,
 			);
 
 			$url = add_query_arg( $args, site_url() );
@@ -464,7 +479,7 @@ class WPTelegram_Widget_Public {
 		}
 
 		$username = WPTG_Widget()->options()->get( 'username' );
-		
+
 		$embedded_widget_url = self::get_embedded_widget_url( $username );
 
 		set_query_var( 'embedded_widget_url', $embedded_widget_url );
@@ -811,7 +826,7 @@ class WPTelegram_Widget_Public {
 		$path = realpath( $template );
 
 		foreach ( $valid_paths as $valid_path ) {
-			if ( preg_match( '#\A' . preg_quote( $valid_path ) . '#', $path ) ) {
+			if ( preg_match( '#\A' . preg_quote( $valid_path, '#' ) . '#', $path ) ) {
 				return true;
 			}
 		}
@@ -877,6 +892,7 @@ class WPTelegram_Widget_Public {
 			'1.4.0',
 			'1.5.0',
 			'1.6.1',
+			'1.7.0',
 		);
 
 		// always.
@@ -979,5 +995,23 @@ class WPTelegram_Widget_Public {
 	 */
 	private function upgrade_to_161() {
 		flush_rewrite_rules();
+	}
+
+	/**
+	 * Upgrade to version 1.7.0
+	 *
+	 * @since    1.7.0
+	 */
+	private function upgrade_to_170() {
+
+		$google_script_url = WPTG_Widget()->options()->get( 'google_script_url' );
+
+		if ( ! empty( $google_script_url ) ) {
+			$telegram_blocked = 'yes';
+		} else {
+			$telegram_blocked = 'no';
+		}
+
+		WPTG_Widget()->options()->set( 'telegram_blocked', $telegram_blocked );
 	}
 }
