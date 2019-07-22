@@ -1,11 +1,11 @@
-=== WP Telegram Channel Widget ===
+=== WP Telegram Widget and Join Link ===
 Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 4.0
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.6.2
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,13 +112,13 @@ Many thanks to the translators for the great job!
 
 == Changelog ==
 
-= 1.6.2 =
-* Change Join Link to channel link
-* Fixed the issue with click on links
-
-= 1.4.0 =
-* Moved the widget message links to front-end
-* Added Russian translation
-* Fixed the issue with Cyrillic characters in the widget
+= 1.7.0 =
+* Migrated from CMB2 to React for settings page.
+* Added Guternberg block for Ajax Widget.
+* Removed Widget Messages list in favour of Ajax Widget.
+* Bot Token is no more required for the ajax widget to work.
+* Made the ajax widget search form visible again.
+* Search form results are now displayed in the same iframe, instead of new tab.
+* Fixed the Google Script URL not being used.
 
 == Upgrade Notice ==

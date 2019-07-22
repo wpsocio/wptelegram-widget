@@ -129,7 +129,7 @@ class WPTelegram_Widget {
 
 		$this->load_dependencies();
 		$this->set_options();
-		
+
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
@@ -174,14 +174,16 @@ class WPTelegram_Widget {
 		require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-options.php';
 
 		/**
+		 * The classes responsible for WP REST API of the plugin.
+		 */
+		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-rest-controller.php';
+		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-settings-controller.php';
+		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-bot-api-controller.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once WPTELEGRAM_WIDGET_DIR . '/admin/class-wptelegram-widget-admin.php';
-
-		/**
-		 * The class responsible for displaying messages list
-		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/admin/class-wptelegram-widget-messages-list.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -195,15 +197,10 @@ class WPTelegram_Widget {
 		require_once WPTELEGRAM_WIDGET_DIR . '/includes/helper-functions.php';
 
 		/**
-		 * CMB2 library responsible for rendering fields
-		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/cmb2/init.php';
-
-		/**
 		 * Our widget classes
 		 */
 		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-widget.php';
-		
+
 		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-ajax-widget.php';
 
 		/**
@@ -260,7 +257,9 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_block_editor_assets' );
 
-		$this->loader->add_action( 'cmb2_admin_init', $plugin_admin, 'create_options_page', 11 );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu', 11 );
+
+		$this->loader->add_action( 'rest_api_init', $plugin_admin, 'register_rest_routes' );
 
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_widgets' );
 
@@ -273,12 +272,6 @@ class WPTelegram_Widget {
 		// to be used for displaying the widget messages
 		$this->loader->add_action( 'admin_post_nopriv_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
 		$this->loader->add_action( 'admin_post_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
-
-		$this->loader->add_action( 'current_screen', $plugin_admin, 'set_screen_options' );
-
-		$this->loader->add_filter( 'set-screen-option', $plugin_admin, 'save_screen_option', 10, 3 );
-
-		$this->loader->add_action( 'wp_ajax_wptelegram_widget_pull_messages', $plugin_admin, 'pull_messages' );
 
 		$this->loader->add_action( 'wptelegram_p2tg_api_response', $plugin_admin, 'save_messages_sent_by_p2tg', 10, 5 );
 
@@ -341,7 +334,7 @@ class WPTelegram_Widget {
 	 */
 	public function options() {
 
-		return $this->options;	
+		return $this->options;
 	}
 
 	/**

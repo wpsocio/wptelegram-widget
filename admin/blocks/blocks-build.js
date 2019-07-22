@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -98,15 +98,21 @@
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ./src/admin/blocks/channel-feed/editor.scss
+// EXTERNAL MODULE: ./src/admin/blocks/ajax-channel-feed/editor.scss
 var editor = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./src/admin/blocks/channel-feed/block.js
+// CONCATENATED MODULE: ./src/admin/blocks/ajax-channel-feed/block.js
 //  Import CSS.
 
 var el = wp.element.createElement;
@@ -115,11 +121,98 @@ var registerBlockType = wp.blocks.registerBlockType;
 var InspectorControls = wp.editor.InspectorControls;
 var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
-    RadioControl = _wp$components.RadioControl,
     TextControl = _wp$components.TextControl,
     Dashicon = _wp$components.Dashicon;
-registerBlockType('wptelegram/widget-channel-feed', {
-  title: __('Telegram Channel Feed'),
+
+var getShortcodeFromAttrs = function getShortcodeFromAttrs(attributes) {
+  var atts = ['widget_width', 'widget_height'].filter(function (att) {
+    return attributes[att];
+  }).map(function (att) {
+    return "".concat(att, "=\"").concat(attributes[att], "\"");
+  });
+  var text = '[wptelegram-ajax-widget';
+
+  if (atts.length) {
+    text += ' ' + atts.join(' ');
+  }
+
+  text += ']';
+  return text;
+};
+
+registerBlockType('wptelegram/widget-ajax-channel-feed', {
+  title: __('Telegram Channel Ajax Feed'),
+  icon: 'format-aside',
+  category: 'widgets',
+  attributes: {
+    widget_width: {
+      type: 'string',
+      "default": '100%'
+    },
+    widget_height: {
+      type: 'string',
+      "default": '600'
+    }
+  },
+  edit: function edit(_ref) {
+    var attributes = _ref.attributes,
+        setAttributes = _ref.setAttributes,
+        className = _ref.className;
+    var widget_width = attributes.widget_width,
+        widget_height = attributes.widget_height;
+    var controls = [el(InspectorControls, null, el(PanelBody, {
+      title: __('Widget Options')
+    }, el(TextControl, {
+      label: __('Widget Width'),
+      value: widget_width,
+      onChange: function onChange(newWidth) {
+        return setAttributes({
+          widget_width: newWidth
+        });
+      }
+    }), el(TextControl, {
+      label: __('Widget Height'),
+      value: widget_height,
+      onChange: function onChange(newHeight) {
+        return setAttributes({
+          widget_height: newHeight
+        });
+      },
+      type: "number"
+    })))];
+    var label = el("label", null, el(Dashicon, {
+      icon: "shortcode"
+    }), el("span", null, __('Telegram Channel Ajax Feed')));
+    var text = getShortcodeFromAttrs(attributes);
+    return [controls, el("div", {
+      className: className
+    }, label, el("code", {
+      className: "widget-shortcode"
+    }, text))];
+  },
+  save: function save(_ref2) {
+    var attributes = _ref2.attributes;
+    var text = getShortcodeFromAttrs(attributes);
+    return el("div", null, text);
+  }
+});
+// EXTERNAL MODULE: ./src/admin/blocks/channel-feed/editor.scss
+var channel_feed_editor = __webpack_require__(1);
+
+// CONCATENATED MODULE: ./src/admin/blocks/channel-feed/block.js
+//  Import CSS.
+
+var block_el = wp.element.createElement;
+var block_ = wp.i18n.__;
+var block_registerBlockType = wp.blocks.registerBlockType;
+var block_InspectorControls = wp.editor.InspectorControls;
+var block_wp$components = wp.components,
+    block_PanelBody = block_wp$components.PanelBody,
+    RadioControl = block_wp$components.RadioControl,
+    block_TextControl = block_wp$components.TextControl,
+    block_Dashicon = block_wp$components.Dashicon;
+block_registerBlockType('wptelegram/widget-channel-feed', {
+  title: block_('Telegram Channel Feed'),
   icon: 'format-aside',
   category: 'widgets',
   attributes: {
@@ -143,10 +236,10 @@ registerBlockType('wptelegram/widget-channel-feed', {
     var widget_width = attributes.widget_width,
         author_photo = attributes.author_photo,
         num_messages = attributes.num_messages;
-    var controls = [el(InspectorControls, null, el(PanelBody, {
-      title: __('Widget Options')
-    }, el(TextControl, {
-      label: __('Widget Width'),
+    var controls = [block_el(block_InspectorControls, null, block_el(block_PanelBody, {
+      title: block_('Widget Options')
+    }, block_el(block_TextControl, {
+      label: block_('Widget Width'),
       value: widget_width,
       onChange: function onChange(newWidth) {
         return setAttributes({
@@ -156,8 +249,8 @@ registerBlockType('wptelegram/widget-channel-feed', {
       type: "number",
       min: "10",
       max: "100"
-    }), el(RadioControl, {
-      label: __('Author Photo'),
+    }), block_el(RadioControl, {
+      label: block_('Author Photo'),
       selected: author_photo,
       onChange: function onChange(newStyle) {
         return setAttributes({
@@ -174,8 +267,8 @@ registerBlockType('wptelegram/widget-channel-feed', {
         label: 'Always hide',
         value: 'always_hide'
       }]
-    }), el(TextControl, {
-      label: __('Number of Messages'),
+    }), block_el(block_TextControl, {
+      label: block_('Number of Messages'),
       value: num_messages,
       onChange: function onChange(newValue) {
         return setAttributes({
@@ -186,15 +279,15 @@ registerBlockType('wptelegram/widget-channel-feed', {
       min: "1",
       max: "50"
     })))];
-    var label = el("label", null, el(Dashicon, {
+    var label = block_el("label", null, block_el(block_Dashicon, {
       icon: "shortcode"
-    }), el("span", null, __('Telegram Channel Feed')));
+    }), block_el("span", null, block_('Telegram Channel Feed')));
     var text = '[wptelegram-widget';
     text += attributes.widget_width ? " widget_width=\"".concat(attributes.widget_width, "\"") : '';
-    text += " author_photo=\"".concat(attributes.author_photo, "\" num_messages=\"").concat(attributes.num_messages, "\"");
-    return [controls, el("div", {
+    text += " author_photo=\"".concat(attributes.author_photo, "\" num_messages=\"").concat(attributes.num_messages, "\"]");
+    return [controls, block_el("div", {
       className: className
-    }, label, el("code", {
+    }, label, block_el("code", {
       className: "widget-shortcode"
     }, text))];
   },
@@ -205,11 +298,11 @@ registerBlockType('wptelegram/widget-channel-feed', {
         num_messages = attributes.num_messages;
     var text = "[wptelegram-widget author_photo=\"".concat(author_photo, "\" num_messages=\"").concat(num_messages, "\"");
     text += widget_width ? " widget_width=\"".concat(widget_width, "\"]") : ']';
-    return el("div", null, text);
+    return block_el("div", null, text);
   }
 });
 // EXTERNAL MODULE: ./src/admin/blocks/single-post/editor.scss
-var single_post_editor = __webpack_require__(1);
+var single_post_editor = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./src/admin/blocks/single-post/placeholder.js
 /**
@@ -341,7 +434,8 @@ var edit_ = wp.i18n.__;
 var edit_wp$components = wp.components,
     FocusableIframe = edit_wp$components.FocusableIframe,
     Spinner = edit_wp$components.Spinner;
-var message_view_url = window.wptelegram_widget.misc.message_view_url;
+var _window = window,
+    message_view_url = _window.wptelegram_widget.blocks.assets.message_view_url;
 var addQueryArgs = wp.url.addQueryArgs; // export function getPostEditComponent() {
 
 var edit_default =
@@ -550,11 +644,11 @@ function (_Component) {
  * WordPress dependencies
  */
 
-var block_el = wp.element.createElement;
-var block_ = wp.i18n.__;
-var block_registerBlockType = wp.blocks.registerBlockType;
-block_registerBlockType('wptelegram/widget-single-post', {
-  title: block_('Telegram Single Post'),
+var single_post_block_el = wp.element.createElement;
+var single_post_block_ = wp.i18n.__;
+var single_post_block_registerBlockType = wp.blocks.registerBlockType;
+single_post_block_registerBlockType('wptelegram/widget-single-post', {
+  title: single_post_block_('Telegram Single Post'),
   icon: 'format-aside',
   category: 'widgets',
   getEditWrapperProps: function getEditWrapperProps(attributes) {
@@ -589,9 +683,9 @@ block_registerBlockType('wptelegram/widget-single-post', {
     var attributes = _ref.attributes;
     var alignment = attributes.alignment,
         iframe_src = attributes.iframe_src;
-    return block_el("div", {
+    return single_post_block_el("div", {
       className: 'wp-block-wptelegram-widget-single-post wptelegram-widget-message align' + alignment
-    }, block_el("iframe", {
+    }, single_post_block_el("iframe", {
       frameBorder: "0",
       scrolling: "no",
       src: iframe_src
@@ -605,6 +699,7 @@ block_registerBlockType('wptelegram/widget-single-post', {
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  */
+
 
 
 

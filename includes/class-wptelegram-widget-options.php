@@ -141,6 +141,8 @@ class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
 	public function set_option_key( $option_key ) {
 		$this->option_key = $option_key;
 		$this->set_data();
+
+		return $this;
 	}
 
 	/**
@@ -165,6 +167,8 @@ class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
 		} else {
 			$this->data = (array) $options;
 		}
+
+		return $this;
 	}
 
 	/**
