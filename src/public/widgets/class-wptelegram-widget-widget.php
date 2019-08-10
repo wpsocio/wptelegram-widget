@@ -1,4 +1,14 @@
 <?php
+/**
+ * The legacy widget.
+ *
+ * @link       https://t.me/manzoorwanijk
+ * @since      1.6.0
+ *
+ * @package    WPTelegram_Widget
+ * @subpackage WPTelegram_Widget/public
+ */
+
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 /**
  * Adds WP Telegram Widget widget
@@ -45,15 +55,15 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 		$content = wptelegram_widget( $instance, false );
 
 		if ( ! empty( $content ) ) {
-			echo $args['before_widget'];
+			echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput
 			if ( $title ) {
-				echo $args['before_title'] . $title . $args['after_title'];
+				echo $args['before_title'] . $title . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput
 			} ?>
 			<div>
-				<?php echo $content; ?>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 			<?php
-				echo $args['after_widget'];
+				echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput
 		}
 	}
 

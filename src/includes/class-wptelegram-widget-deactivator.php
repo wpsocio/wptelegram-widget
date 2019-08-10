@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired during plugin deactivation
  *
@@ -18,7 +17,7 @@
  * @since      1.0.0
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani 
+ * @author     Manzoor Wani
  */
 class WPTelegram_Widget_Deactivator {
 
@@ -33,8 +32,9 @@ class WPTelegram_Widget_Deactivator {
 
 		wp_clear_scheduled_hook( 'wptelegram_widget_cron_pull_updates' );
 
-		// flush_rewrite_rules();
 		/**
+		 * Calling flush_rewrite_rules() does not work in certain cases.
+		 *
 		 * @see http://core.trac.wordpress.org/ticket/14761#comment:12
 		 */
 		delete_option( 'rewrite_rules' );

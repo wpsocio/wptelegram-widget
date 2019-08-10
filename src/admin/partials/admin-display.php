@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a admin area view for the plugin
  *
@@ -11,6 +10,8 @@
  * @package    Wptelegram_Widget
  * @subpackage Wptelegram_Widget/admin/partials
  */
+
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<div id="wptelegram-widget-settings"></div>

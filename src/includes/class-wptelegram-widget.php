@@ -1,8 +1,6 @@
 <?php
-
 /**
  * The file that defines the core plugin class
- *
  *
  * @link       https://t.me/manzoorwanijk
  * @since      1.0.0
@@ -23,7 +21,7 @@
  * @since      1.0.0
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani 
+ * @author     Manzoor Wani
  */
 class WPTelegram_Widget {
 
@@ -31,8 +29,9 @@ class WPTelegram_Widget {
 	 * The single instance of the class.
 	 *
 	 * @since 1.0.0
+	 * @var   WPTelegram_Widget|null $instance The instance.
 	 */
-	protected static $_instance = null;
+	protected static $instance = null;
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -86,14 +85,14 @@ class WPTelegram_Widget {
 	 * Ensures only one instance of the class is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return Main instance.
 	 */
 	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
@@ -123,7 +122,7 @@ class WPTelegram_Widget {
 
 		$this->version = WPTELEGRAM_WIDGET_VER;
 
-		$this->title =  __( 'WP Telegram Widget', 'wptelegram-widget' );
+		$this->title = __( 'WP Telegram Widget', 'wptelegram-widget' );
 
 		$this->plugin_name = strtolower( __CLASS__ );
 
@@ -160,53 +159,53 @@ class WPTelegram_Widget {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-loader.php';
+		require_once $this->dir( '/includes/class-wptelegram-widget-loader.php' );
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-i18n.php';
+		require_once $this->dir( '/includes/class-wptelegram-widget-i18n.php' );
 
 		/**
 		 * The class responsible for plugin options
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-options.php';
+		require_once $this->dir( '/includes/class-wptelegram-widget-options.php' );
 
 		/**
 		 * The classes responsible for WP REST API of the plugin.
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-rest-controller.php';
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-settings-controller.php';
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/rest-api/class-wptelegram-widget-bot-api-controller.php';
+		require_once $this->dir( '/includes/rest-api/class-wptelegram-widget-rest-controller.php' );
+		require_once $this->dir( '/includes/rest-api/class-wptelegram-widget-settings-controller.php' );
+		require_once $this->dir( '/includes/rest-api/class-wptelegram-widget-bot-api-controller.php' );
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/admin/class-wptelegram-widget-admin.php';
+		require_once $this->dir( '/admin/class-wptelegram-widget-admin.php' );
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/public/class-wptelegram-widget-public.php';
+		require_once $this->dir( '/public/class-wptelegram-widget-public.php' );
 
 		/**
 		 * Helper functions
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/helper-functions.php';
+		require_once $this->dir( '/includes/helper-functions.php' );
 
 		/**
 		 * Our widget classes
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-widget.php';
+		require_once $this->dir( '/public/widgets/class-wptelegram-widget-widget.php' );
 
-		require_once WPTELEGRAM_WIDGET_DIR . '/public/widgets/class-wptelegram-widget-ajax-widget.php';
+		require_once $this->dir( '/public/widgets/class-wptelegram-widget-ajax-widget.php' );
 
 		/**
 		 * The class responsible for loading WPTelegram_Bot_API library
 		 */
-		require_once WPTELEGRAM_WIDGET_DIR . '/includes/wptelegram-bot-api/class-wptelegram-bot-api-loader.php';
+		require_once $this->dir( '/includes/wptelegram-bot-api/class-wptelegram-bot-api-loader.php' );
 
 		$this->loader = new WPTelegram_Widget_Loader();
 
@@ -235,7 +234,7 @@ class WPTelegram_Widget {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WPTelegram_Widget_i18n();
+		$plugin_i18n = new WPTelegram_Widget_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -250,12 +249,14 @@ class WPTelegram_Widget {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new WPTelegram_Widget_Admin( $this->get_plugin_title(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new WPTelegram_Widget_Admin( $this );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_block_editor_assets' );
+
+		$this->loader->add_filter( 'script_loader_tag', $plugin_admin, 'format_twitter_script_tag', 10, 3 );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu', 11 );
 
@@ -263,13 +264,13 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_widgets' );
 
-		// to be used for long polling
+		// To be used for long polling.
 		$this->loader->add_action( 'admin_post_nopriv_wptelegram_widget_pull_updates', $plugin_admin, 'fire_pull_updates' );
 		$this->loader->add_action( 'admin_post_wptelegram_widget_pull_updates', $plugin_admin, 'fire_pull_updates' );
 
 		$this->loader->add_action( 'wptelegram_widget_pull_the_updates', $plugin_admin, 'pull_the_updates' );
 
-		// to be used for displaying the widget messages
+		// To be used for displaying the widget messages.
 		$this->loader->add_action( 'admin_post_nopriv_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
 		$this->loader->add_action( 'admin_post_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
 
@@ -286,7 +287,7 @@ class WPTelegram_Widget {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new WPTelegram_Widget_Public( $this->get_plugin_title(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new WPTelegram_Widget_Public( $this );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -312,8 +313,8 @@ class WPTelegram_Widget {
 		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $plugin_public ), 'post_embed_shortcode' );
 
 		// better be safe by using PHP_INT_MAX to make sure
-		// some dumb people don't remove your schedule
-		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 );
+		// some dumb people don't remove your schedule.
+		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
 
 	}
 
@@ -340,10 +341,10 @@ class WPTelegram_Widget {
 	/**
 	 * The title of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     1.7.1
 	 * @return    string    The title of the plugin.
 	 */
-	public function get_plugin_title() {
+	public function title() {
 		return $this->title;
 	}
 
@@ -351,11 +352,54 @@ class WPTelegram_Widget {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     1.7.1
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function name() {
 		return $this->plugin_name;
+	}
+
+	/**
+	 * Retrieve the version number of the plugin.
+	 *
+	 * @since     1.7.1
+	 * @return    string    The version number of the plugin.
+	 */
+	public function version() {
+		return $this->version;
+	}
+
+	/**
+	 * Retrieve directory path to the plugin.
+	 *
+	 * @since 1.7.1
+	 * @param string $path Path to append.
+	 * @return string Directory with optional path appended
+	 */
+	public function dir( $path = '' ) {
+		return WPTELEGRAM_WIDGET_DIR . $path;
+	}
+
+	/**
+	 * Retrieve URL path to the plugin.
+	 *
+	 * @since 1.7.1
+	 * @param string $path Path to append.
+	 * @return string URL with optional path appended
+	 */
+	public function url( $path = '' ) {
+		return WPTELEGRAM_WIDGET_URL . $path;
+	}
+
+	/**
+	 * The suffix to use for plugin assets.
+	 *
+	 * @since 1.7.1
+	 *
+	 * @return string The suffix to use.
+	 */
+	public function suffix() {
+		return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	}
 
 	/**
@@ -367,15 +411,4 @@ class WPTelegram_Widget {
 	public function get_loader() {
 		return $this->loader;
 	}
-
-	/**
-	 * Retrieve the version number of the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_version() {
-		return $this->version;
-	}
-
 }
