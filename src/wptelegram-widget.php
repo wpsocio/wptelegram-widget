@@ -1,7 +1,7 @@
 <?php
-
 /**
- * 
+ * The main plugin file.
+ *
  * @link              https://t.me/manzoorwanijk
  * @since             1.0.0
  * @package           WPTelegram_Widget
@@ -33,7 +33,7 @@ define( 'WPTELEGRAM_WIDGET_BASENAME', plugin_basename( __FILE__ ) );
 
 define( 'WPTELEGRAM_WIDGET_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-define( 'WPTELEGRAM_WIDGET_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+defined( 'WPTELEGRAM_WIDGET_URL' ) || define( 'WPTELEGRAM_WIDGET_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
 
 /**
  * The code that runs during plugin activation.
@@ -73,12 +73,12 @@ require WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget.php';
  *
  * @since    1.0.0
  */
-function WPTG_Widget() {
+function WPTG_Widget() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName -- Ignore  snake_case
 
 	return WPTelegram_Widget::instance();
 }
 
-// Fire
+// Fire.
 WPTG_Widget();
 
 define( 'WPTELEGRAM_WIDGET_LOADED', true );

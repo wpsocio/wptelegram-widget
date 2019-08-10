@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -18,70 +17,28 @@
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/admin
- * @author     Manzoor Wani 
+ * @author     Manzoor Wani
  */
 class WPTelegram_Widget_Admin {
 
 	/**
-	 * Title of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $title    Title of the plugin
-	 */
-	protected $title;
-
-	/**
-	 * The ID of this plugin.
+	 * The plugin class instance.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      WPTelegram_Widget $plugin The plugin class instance.
 	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
-
-	/**
-	 * The suffix to be used for JS and CSS files
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $suffix    The suffix to be used for JS and CSS files
-	 */
-	private $suffix;
-
-	/**
-	 * Messages WP_List_Table object
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 */
-	public $list_table;
+	private $plugin;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since	1.0.0
-	 * @param 	string    $title		Title of the plugin
-	 * @param	string    $plugin_name	The name of the plugin.
-	 * @param	string    $version		The version of this plugin.
+	 * @since 1.0.0
+	 * @param WPTelegram_Widget $plugin The plugin class instance.
 	 */
-	public function __construct( $title, $plugin_name, $version ) {
+	public function __construct( $plugin ) {
 
-		$this->title       = $title;
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-
-		// Use minified libraries if SCRIPT_DEBUG is turned off
-		$this->suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$this->plugin = $plugin;
 	}
 
 	/**
@@ -91,17 +48,10 @@ class WPTelegram_Widget_Admin {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function enqueue_styles( $hook_suffix ) {
-		wp_enqueue_style(
-			$this->plugin_name,
-			WPTELEGRAM_WIDGET_URL . '/admin/css/wptelegram-widget-admin' . $this->suffix . '.css',
-			array(),
-			$this->version,
-			'all'
-		);
 
 		// Load only on settings page.
 		if ( $this->is_settings_page( $hook_suffix ) ) {
-			wp_enqueue_style( $this->plugin_name . '-bootstrap', WPTELEGRAM_WIDGET_URL . '/admin/css/bootstrap/bootstrap' . $this->suffix . '.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin->name() . '-bootstrap', $this->plugin->url( '/admin/css/bootstrap/bootstrap' ) . $this->plugin->suffix() . '.css', array(), $this->plugin->version(), 'all' );
 		}
 	}
 
@@ -114,18 +64,18 @@ class WPTelegram_Widget_Admin {
 	public function enqueue_scripts( $hook_suffix ) {
 
 		wp_enqueue_script(
-			$this->plugin_name,
-			WPTELEGRAM_WIDGET_URL . '/admin/js/wptelegram-widget-admin' . $this->suffix . '.js',
+			$this->plugin->name(),
+			$this->plugin->url( '/admin/js/wptelegram-widget-admin' ) . $this->plugin->suffix() . '.js',
 			array( 'jquery' ),
-			$this->version,
+			$this->plugin->version(),
 			false
 		);
 
 		// script localization.
 		$translation_array = array(
-			'title'   => $this->title,
-			'name'    => $this->plugin_name,
-			'version' => $this->version,
+			'title'   => $this->plugin->title(),
+			'name'    => $this->plugin->name(),
+			'version' => $this->plugin->version(),
 			'api'     => array(
 				'ajax' => array(
 					'nonce' => wp_create_nonce( 'wptelegram-widget' ),
@@ -140,7 +90,7 @@ class WPTelegram_Widget_Admin {
 		);
 
 		wp_localize_script(
-			$this->plugin_name,
+			$this->plugin->name(),
 			'wptelegram_widget',
 			$translation_array
 		);
@@ -148,34 +98,38 @@ class WPTelegram_Widget_Admin {
 		// Load only on settings page.
 		if ( $this->is_settings_page( $hook_suffix ) ) {
 
-			wp_enqueue_script( $this->plugin_name . '-settings', WPTELEGRAM_WIDGET_URL . '/admin/settings/settings-build' . $this->suffix . '.js', array( 'jquery' ), $this->version, true );
+			// Avoid caching for development.
+			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? date( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/settings-build.js' ) ) ) : $this->plugin->version();
+
+			wp_enqueue_script( $this->plugin->name() . '-settings', $this->plugin->url( '/admin/settings/settings-build' ) . $this->plugin->suffix() . '.js', array( 'jquery' ), $version, true );
 
 			// Pass data to JS.
 			$data = array(
 				'settings' => array(
 					'info'       => array(
+						// phpcs:ignore Squiz.PHP.CommentedOutCode
 						'use' => 'server', // or 'browser'.
 					),
 					'saved_opts' => current_user_can( 'manage_options' ) ? WPTelegram_Widget_Settings_Controller::get_default_settings() : array(), // Not to expose bot token to non-admins.
 					'assets'     => array(
 						'pull_updates_url' => add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() ),
 						'admin_url'        => untrailingslashit( admin_url() ),
-						'logo_url'         => WPTELEGRAM_WIDGET_URL . '/admin/icons/icon-100x100.svg',
-						'tg_icon'          => WPTELEGRAM_WIDGET_URL . '/admin/icons/tg-icon.svg',
+						'logo_url'         => $this->plugin->url( '/admin/icons/icon-100x100.svg' ),
+						'tg_icon'          => $this->plugin->url( '/admin/icons/tg-icon.svg' ),
 					),
 					'i18n'       => wptelegram_get_jed_locale_data( 'wptelegram-widget' ),
 				),
 			);
 
 			wp_add_inline_script(
-				$this->plugin_name,
-				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ),
+				$this->plugin->name(),
+				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
 				'before'
 			);
 
 			// For Facebook like button.
 			wp_add_inline_script(
-				$this->plugin_name . '-settings',
+				$this->plugin->name() . '-settings',
 				'(function(d, s, id) {'
 				. '  var js, fjs = d.getElementsByTagName(s)[0];'
 				. '  if (d.getElementById(id)) return;'
@@ -187,7 +141,7 @@ class WPTelegram_Widget_Admin {
 			);
 
 			// For Twitter Follow button.
-			wp_enqueue_script( $this->plugin_name . '-twitter', 'https://platform.twitter.com/widgets.js', array(), $this->version, true );
+			wp_enqueue_script( $this->plugin->name() . '-twitter', 'https://platform.twitter.com/widgets.js', array(), $this->plugin->version(), true );
 		}
 
 		// If the block editor assets are loaded.
@@ -201,8 +155,8 @@ class WPTelegram_Widget_Admin {
 			);
 
 			wp_add_inline_script(
-				$this->plugin_name,
-				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ),
+				$this->plugin->name(),
+				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
 				'before'
 			);
 		}
@@ -220,9 +174,10 @@ class WPTelegram_Widget_Admin {
 	 * @return string
 	 */
 	public function format_twitter_script_tag( $tag, $handle, $src ) {
-		if ( $this->plugin_name . '-twitter' !== $handle ) {
+		if ( $this->plugin->name() . '-twitter' !== $handle ) {
 			return $tag;
 		}
+		// phpcs:ignore WordPress.WP.EnqueuedResources
 		return '<script async src="' . $src . '" charset="utf-8"></script>' . PHP_EOL;
 	}
 
@@ -233,7 +188,7 @@ class WPTelegram_Widget_Admin {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function is_settings_page( $hook_suffix ) {
-		return ( current_user_can( 'manage_options' ) && false !== strpos( $hook_suffix, '_page_' . $this->plugin_name ) );
+		return ( current_user_can( 'manage_options' ) && false !== strpos( $hook_suffix, '_page_' . $this->plugin->name() ) );
 	}
 
 	/**
@@ -244,18 +199,18 @@ class WPTelegram_Widget_Admin {
 	public function enqueue_block_editor_assets() {
 
 		wp_enqueue_script(
-			$this->plugin_name . '-block',
-			WPTELEGRAM_WIDGET_URL . '/admin/blocks/blocks-build' . $this->suffix . '.js',
+			$this->plugin->name() . '-block',
+			$this->plugin->url( '/admin/blocks/blocks-build' ) . $this->plugin->suffix() . '.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-			$this->version,
+			$this->plugin->version(),
 			true
 		);
 
 		wp_enqueue_style(
-			$this->plugin_name . '-block',
-			WPTELEGRAM_WIDGET_URL . '/admin/blocks/blocks-build' . $this->suffix . '.css',
+			$this->plugin->name() . '-block',
+			$this->plugin->url( '/admin/blocks/blocks-build' ) . $this->plugin->suffix() . '.css',
 			array( 'wp-edit-blocks' ),
-			$this->version
+			$this->plugin->version()
 		);
 	}
 
@@ -281,20 +236,20 @@ class WPTelegram_Widget_Admin {
 		if ( defined( 'WPTELEGRAM_LOADED' ) && WPTELEGRAM_LOADED ) {
 			add_submenu_page(
 				'wptelegram',
-				esc_html( $this->title ),
+				esc_html( $this->plugin->title() ),
 				esc_html__( 'Telegram Widget', 'wptelegram-widget' ),
 				'manage_options',
-				$this->plugin_name,
+				$this->plugin->name(),
 				array( $this, 'display_plugin_admin_page' )
 			);
 		} else {
 			add_menu_page(
-				esc_html( $this->title ),
-				esc_html( $this->title ),
+				esc_html( $this->plugin->title() ),
+				esc_html( $this->plugin->title() ),
 				'manage_options',
-				$this->plugin_name,
+				$this->plugin->name(),
 				array( $this, 'display_plugin_admin_page' ),
-				WPTELEGRAM_WIDGET_URL . '/admin/icons/icon-16x16-white.svg'
+				$this->plugin->url( '/admin/icons/icon-16x16-white.svg' )
 			);
 		}
 	}
@@ -308,9 +263,7 @@ class WPTelegram_Widget_Admin {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		?>
-			<div id="wptelegram-widget-settings"></div>
-		<?php
+		include $this->plugin->dir( '/admin/partials/admin-display.php' );
 	}
 
 	/**
@@ -346,8 +299,8 @@ class WPTelegram_Widget_Admin {
 		 */
 		do_action( 'wptelegram_widget_pull_updates_init' );
 
-		$bot_token = WPTG_Widget()->options()->get( 'bot_token' );
-		$username  = WPTG_Widget()->options()->get( 'username' );
+		$bot_token = $this->plugin->options()->get( 'bot_token' );
+		$username  = $this->plugin->options()->get( 'username' );
 
 		if ( ! $bot_token || ! $username ) {
 			return;
@@ -397,13 +350,13 @@ class WPTelegram_Widget_Admin {
 	 */
 	private function get_update_params() {
 
-		$update_id = (int) WPTG_Widget()->options()->get( 'last_update_id' );
+		$update_id = (int) $this->plugin->options()->get( 'last_update_id' );
 
 		if ( $update_id ) {
 			$offset = ++$update_id;
 		}
 
-		$allowed_updates = json_encode( $this->get_allowed_updates() );
+		$allowed_updates = json_encode( $this->get_allowed_updates() ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 
 		$update_params = compact( 'offset', 'allowed_updates' );
 
@@ -441,8 +394,9 @@ class WPTelegram_Widget_Admin {
 		 */
 		do_action( 'wptelegram_widget_handle_updates_init', $updates );
 
-		$new_messages = $edited_messages = array();
-		$messages     = WPTG_Widget()->options()->get( 'messages', array() );
+		$new_messages    = array();
+		$edited_messages = array();
+		$messages        = $this->plugin->options()->get( 'messages', array() );
 
 		foreach ( (array) $updates as $update ) {
 
@@ -452,7 +406,7 @@ class WPTelegram_Widget_Admin {
 			if ( $message_id ) {
 
 				// if it exists in the existing message IDs.
-				if ( $is_edited && in_array( $message_id, $messages ) ) {
+				if ( $is_edited && in_array( $message_id, $messages, true ) ) {
 					$edited_messages[] = $message_id;
 				} else {
 					$new_messages[] = $message_id;
@@ -461,17 +415,12 @@ class WPTelegram_Widget_Admin {
 		}
 
 		$update_id = $update['update_id'];
-		WPTG_Widget()->options()->set( 'last_update_id', $update_id );
+		$this->plugin->options()->set( 'last_update_id', $update_id );
 
 		if ( ! empty( $new_messages ) ) {
 
 			$this->save_messages( $new_messages );
 		}
-
-		/*if ( ! empty( $edited_messages ) ) {
-
-			$this->save_messages( $edited_messages, 'edited' );
-		}*/
 
 		/**
 		 * Fires after doing everything
@@ -480,9 +429,10 @@ class WPTelegram_Widget_Admin {
 	}
 
 	/**
-	 * Process an update
+	 * Process an update.
 	 *
-	 * @param array $update Update object
+	 * @param array $update    Update object.
+	 * @param bool  $is_edited If the update is an edit.
 	 *
 	 * @since    1.3.0
 	 */
@@ -521,8 +471,8 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Get the update_type.
 	 *
-	 * @since  1.0.0
-	 *
+	 * @since 1.0.0
+	 * @param array $update The update object.
 	 */
 	private function get_update_type( $update ) {
 
@@ -543,11 +493,11 @@ class WPTelegram_Widget_Admin {
 	}
 
 	/**
-	 * Verify that the update if from the saved channel
-	 * Verify by comparing username 
+	 * Verify that the update if from the saved channel.
+	 * Verify by comparing username.
 	 *
-	 * @since  1.0.0
-	 *
+	 * @since 1.0.0
+	 * @param array $message The message object.
 	 */
 	private function verify_username( $message ) {
 
@@ -560,7 +510,7 @@ class WPTelegram_Widget_Admin {
 			$username = $message['chat']['username'];
 		}
 
-		$saved_username = WPTG_Widget()->options()->get( 'username' );
+		$saved_username = $this->plugin->options()->get( 'username' );
 
 		if ( ! empty( $saved_username ) && strtolower( $saved_username ) === strtolower( $username ) ) {
 			$verified = true;
@@ -570,27 +520,33 @@ class WPTelegram_Widget_Admin {
 	}
 
 	/**
-	 * Store the message_ids
+	 * Store the message_ids.
 	 *
 	 * @since  1.0.0
 	 *
+	 * @param array  $messages The mesage IDs.
+	 * @param string $type     Edited or new.
+	 * @return void
 	 */
 	private function save_messages( array $messages, $type = '' ) {
 
-		$type = $type ? "{$type}_" : $type;
+		$type           = $type ? "{$type}_" : $type;
+		$saved_messages = $this->plugin->options()->get( "{$type}messages", array() );
+		$messages       = array_unique( array_merge( $saved_messages, $messages ) );
+		$messages       = array_filter( $messages );
 
-		$saved_messages = WPTG_Widget()->options()->get( "{$type}messages", array() );
-		$messages = array_unique( array_merge( $saved_messages, $messages ) );
-		$messages = array_filter( $messages );
-
-		// allow maximum 50 messages
+		// Allow maximum 50 messages.
 		$limit = (int) apply_filters( 'wptelegram_widget_saved_messages_limit', 50 );
 
-		while ( count( $messages ) > $limit ) {
+		$count = count( $messages );
+
+		while ( $count > $limit ) {
 			array_shift( $messages );
+
+			$count = count( $messages );
 		}
 
-		WPTG_Widget()->options()->set( "{$type}messages", $messages );
+		$this->plugin->options()->set( "{$type}messages", $messages );
 	}
 
 	/**
@@ -598,6 +554,11 @@ class WPTelegram_Widget_Admin {
 	 *
 	 * @since  1.5.0
 	 *
+	 * @param Object  $res       The response from API call.
+	 * @param array   $responses The responses sent via P2TG.
+	 * @param WP_Post $post      The post being sent.
+	 * @param Object  $options   P2TG options object.
+	 * @param Object  $bot_api   Bot API object.
 	 */
 	public function save_messages_sent_by_p2tg( $res, $responses, $post, $options, $bot_api ) {
 
@@ -607,7 +568,7 @@ class WPTelegram_Widget_Admin {
 		}
 
 		// if the same bot token was not used.
-		if ( $bot_api->get_bot_token() !== WPTG_Widget()->options()->get( 'bot_token' ) ) {
+		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get( 'bot_token' ) ) {
 			return;
 		}
 
@@ -618,7 +579,7 @@ class WPTelegram_Widget_Admin {
 		}
 
 		$used_username  = strtolower( $result['chat']['username'] );
-		$saved_username = strtolower( WPTG_Widget()->options()->get( 'username' ) );
+		$saved_username = strtolower( $this->plugin->options()->get( 'username' ) );
 
 		if ( $used_username !== $saved_username ) {
 			return;

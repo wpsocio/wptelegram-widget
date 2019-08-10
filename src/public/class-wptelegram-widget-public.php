@@ -22,40 +22,13 @@
 class WPTelegram_Widget_Public {
 
 	/**
-	 * Title of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $title    Title of the plugin
-	 */
-	protected $title;
-
-	/**
-	 * The ID of this plugin.
+	 * The plugin class instance.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      WPTelegram_Widget $plugin The plugin class instance.
 	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
-
-	/**
-	 * The suffix to be used for JS and CSS files
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @var string $suffix The suffix to be used for JS and CSS files.
-	 */
-	private $suffix;
+	private $plugin;
 
 	/**
 	 * The Telegram API
@@ -79,19 +52,11 @@ class WPTelegram_Widget_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param string $title       Title of the plugin.
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
+	 * @param WPTelegram_Widget $plugin The plugin class instance.
 	 */
-	public function __construct( $title, $plugin_name, $version ) {
+	public function __construct( $plugin ) {
 
-		$this->title       = $title;
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
-
-		// Use minified libraries if SCRIPT_DEBUG is turned off.
-		$this->suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$this->plugin = $plugin;
 
 		self::$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false );
 	}
@@ -103,7 +68,7 @@ class WPTelegram_Widget_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, WPTELEGRAM_WIDGET_URL . '/public/css/wptelegram-widget-public' . $this->suffix . '.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin->name(), $this->plugin->url( '/public/css/wptelegram-widget-public' ) . $this->plugin->suffix() . '.css', array(), $this->plugin->version(), 'all' );
 
 	}
 
@@ -114,7 +79,7 @@ class WPTelegram_Widget_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, WPTELEGRAM_WIDGET_URL . '/public/js/wptelegram-widget-public' . $this->suffix . '.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin->name(), $this->plugin->url( '/public/js/wptelegram-widget-public' ) . $this->plugin->suffix() . '.js', array( 'jquery' ), $this->plugin->version(), false );
 
 	}
 
@@ -153,7 +118,7 @@ class WPTelegram_Widget_Public {
 
 			if ( 'view' === $qvs['action'] ) {
 
-				$saved_username   = strtolower( WPTG_Widget()->options()->get( 'username' ) );
+				$saved_username = strtolower( WPTG_Widget()->options()->get( 'username' ) );
 				// Whether to allow embeds for all channels.
 				$allow_all_embeds = apply_filters( 'wptelegram_widget_allow_embeds_for_all', true, $qvs['username'] );
 				// Dynamic filter based on the username.
@@ -170,7 +135,6 @@ class WPTelegram_Widget_Public {
 
 						$template = dirname( __FILE__ ) . '/partials/embedded-widget-view.php';
 					}
-
 				} else {
 					status_header( 401 );
 					exit;
@@ -186,7 +150,8 @@ class WPTelegram_Widget_Public {
 	 *
 	 * @since  1.6.0
 	 *
-	 * @param string $username The Telegram channel username.
+	 * @param string $url  The t.me URL.
+	 * @param array  $args The request args.
 	 */
 	public static function send_request_to_t_dot_me( $url, $args = array() ) {
 
@@ -219,10 +184,10 @@ class WPTelegram_Widget_Public {
 	public function render_embedded_widget( $username ) {
 
 		$json = false;
-
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['url'] ) ) {
 
-			$url = sanitize_text_field( $_GET['url'] );
+			$url = sanitize_text_field( wp_unslash( $_GET['url'] ) );
 
 			if ( ! preg_match( '/\Ahttps:\/\/t\.me\/s\/' . $username . '.*/i', $url ) ) {
 				exit;
@@ -233,7 +198,7 @@ class WPTelegram_Widget_Public {
 				array(
 					'method'  => 'POST',
 					'headers' => array(
-						'X-Requested-With'	=> 'XMLHttpRequest'
+						'X-Requested-With' => 'XMLHttpRequest',
 					),
 				)
 			);
@@ -269,9 +234,10 @@ class WPTelegram_Widget_Public {
 		$output = $this->replace_tg_links( $output, $username );
 
 		if ( $json ) {
-			$output = json_encode( $output );
+			$output = json_encode( $output ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput
 		echo $output;
 
 		exit;
@@ -290,7 +256,7 @@ class WPTelegram_Widget_Public {
 		$injected_styles .= '::-webkit-scrollbar-button { display: none; }' . PHP_EOL;
 		$injected_styles .= 'body { -ms-overflow-style:none; }' . PHP_EOL;
 
-		$injected_styles  = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
+		$injected_styles = apply_filters( 'wptelegram_widget_ajax_widget_injected_styles', $injected_styles );
 
 		// Add style tag.
 		$style_tag = PHP_EOL . '<style type="text/css">' . $injected_styles . '</style>';
@@ -300,7 +266,7 @@ class WPTelegram_Widget_Public {
 
 		$customizations = $base_tag . $style_tag;
 
-		$output = str_replace( '<head>', '<head>' . $customizations , $html );
+		$output = str_replace( '<head>', '<head>' . $customizations, $html );
 
 		$pattern = '/<form[^>]+?(\s?>)/i';
 
@@ -333,7 +299,7 @@ class WPTelegram_Widget_Public {
 		$content = preg_replace_callback(
 			$pattern,
 			function ( $matches ) use ( $username ) {
-				return add_query_arg( 'url', urlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
+				return add_query_arg( 'url', rawurlencode( 'https://t.me' . $matches[0] ), self::get_embedded_widget_url( $username ) );
 			},
 			$content
 		);
@@ -438,10 +404,10 @@ class WPTelegram_Widget_Public {
 	 */
 	public function get_telegram_channel_ajax_url( $username ) {
 
-		$url  = "https://t.me/s/{$username}";
+		$url = "https://t.me/s/{$username}";
 
 		if ( isset( $_GET['q'] ) ) {
-			$url = add_query_arg( 'q', sanitize_text_field( $_GET['q'] ), $url );
+			$url = add_query_arg( 'q', sanitize_text_field( wp_unslash( $_GET['q'] ) ), $url );
 		}
 
 		return (string) apply_filters( 'wptelegram_widget_channel_ajax_url', $url, $username );
@@ -537,17 +503,18 @@ class WPTelegram_Widget_Public {
 
 		$dom = new DOMDocument();
 
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors
 		@$dom->loadHTML( $html );
 
 		$final_output = $this->get_the_embedded_post_output( $dom );
 
 		if ( strtolower( $saved_username ) !== strtolower( $username ) ) {
-			echo $final_output;
+			echo $final_output; // phpcs:ignore WordPress.Security.EscapeOutput
 			return;
 		}
 
 		if ( $this->post_still_exists_on_telegram( $dom ) ) {
-			echo $final_output;
+			echo $final_output; // phpcs:ignore WordPress.Security.EscapeOutput
 			return;
 		}
 
@@ -567,7 +534,7 @@ class WPTelegram_Widget_Public {
 		$messages = WPTG_Widget()->options()->get( 'messages', array() );
 
 		// use array_keys() instead of array_search().
-		$keys = array_keys( $messages, $message_id );
+		$keys = array_keys( $messages, $message_id, true );
 		unset( $messages[ reset( $keys ) ] );
 
 		// destroy keys.
@@ -589,10 +556,9 @@ class WPTelegram_Widget_Public {
 		$heads = $dom->getElementsByTagName( 'head' );
 		// for some weird PHP installations.
 		if ( $heads->length ) {
-			$head                 = $heads->item( 0 );
-
-			$injected_styles      = 'body.body_widget_post { min-width: initial !important; }';
-			$injected_styles      = apply_filters( 'wptelegram_widget_post_injected_styles', $injected_styles );
+			$head            = $heads->item( 0 );
+			$injected_styles = 'body.body_widget_post { min-width: initial !important; }';
+			$injected_styles = apply_filters( 'wptelegram_widget_post_injected_styles', $injected_styles );
 
 			$style_elm            = $dom->createElement( 'style', $injected_styles );
 			$elm_type_attr        = $dom->createAttribute( 'type' );
@@ -606,8 +572,9 @@ class WPTelegram_Widget_Public {
 		$scripts = $dom->getElementsByTagName( 'script' );
 		foreach ( $scripts as $script ) {
 
+			// phpcs:ignore WordPress.NamingConventions.ValidVariableName -- Ignore  snake_case
 			if ( false !== strpos( $script->nodeValue, 'GoogleAnalyticsObject' ) ) {
-				$script->parentNode->removeChild ( $script );
+				$script->parentNode->removeChild( $script ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName -- Ignore  snake_case
 				break;
 			}
 		}
@@ -634,7 +601,7 @@ class WPTelegram_Widget_Public {
 		$nodes     = $finder->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]" );
 
 		foreach ( $nodes as $node ) {
-
+			// phpcs:ignore WordPress.NamingConventions.ValidVariableName -- Ignore  snake_case
 			if ( preg_match( '/not found/i', $node->nodeValue ) ) {
 
 				return false;
@@ -879,7 +846,7 @@ class WPTelegram_Widget_Public {
 
 		$current_version = get_option( 'wptelegram_widget_ver', '1.2.0' );
 
-		if ( ! version_compare( $current_version, WPTELEGRAM_WIDGET_VER, '<' ) ) {
+		if ( ! version_compare( $current_version, $this->plugin->version(), '<' ) ) {
 			return;
 		}
 
@@ -896,8 +863,8 @@ class WPTelegram_Widget_Public {
 		);
 
 		// always.
-		if ( ! in_array( WPTELEGRAM_WIDGET_VER, $version_upgrades, true ) ) {
-			$version_upgrades[] = WPTELEGRAM_WIDGET_VER;
+		if ( ! in_array( $this->plugin->version(), $version_upgrades, true ) ) {
+			$version_upgrades[] = $this->plugin->version();
 		}
 
 		foreach ( $version_upgrades as $target_version ) {

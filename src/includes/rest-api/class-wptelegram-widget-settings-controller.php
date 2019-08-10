@@ -145,7 +145,6 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 		return array(
 			'username'          => array(
 				'type'              => 'string',
-				'required'          => ( 'edit' === $context ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( __CLASS__, 'validate_param' ),
 			),
@@ -207,6 +206,9 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 	public static function validate_param( $value, WP_REST_Request $request, $key ) {
 		switch ( $key ) {
 			case 'bot_token':
+				if ( ! $value ) {
+					return true;
+				}
 				$pattern = '/\A\d{9}:[\w-]{35}\Z/';
 				break;
 			case 'username':
