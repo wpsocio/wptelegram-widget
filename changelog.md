@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## [1.7.1 - 2019-08-11](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.1)
 ### Enhancements
 * Improved compatibility with different browsers.
 * Improved the code as per WPCS.
