@@ -1,5 +1,15 @@
 <?php
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+/**
+ * The ajax widget.
+ *
+ * @link       https://t.me/manzoorwanijk
+ * @since      1.6.0
+ *
+ * @package    WPTelegram_Widget
+ * @subpackage WPTelegram_Widget/public
+ */
+
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 /**
  * Adds WP Telegram Widget widget.
  */
@@ -21,7 +31,7 @@ class WPTelegram_Widget_Ajax_Widget extends WP_Widget {
 	/**
 	 * Outputs the content for the widget.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $args     Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Pages widget instance.
@@ -32,7 +42,7 @@ class WPTelegram_Widget_Ajax_Widget extends WP_Widget {
 		/**
 		 * Filters the widget title.
 		 *
-		 * @since 1.0.0
+		 * @since 1.6.0
 		 *
 		 * @param string $title    The widget title. Default 'Pages'.
 		 * @param array  $instance Array of settings for the current widget.
@@ -45,22 +55,22 @@ class WPTelegram_Widget_Ajax_Widget extends WP_Widget {
 		$content = wptelegram_ajax_widget( $instance, false );
 
 		if ( ! empty( $content ) ) {
-			echo $args['before_widget'];
+			echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput
 			if ( $title ) {
-				echo $args['before_title'] . $title . $args['after_title'];
+				echo $args['before_title'] . $title . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput
 			} ?>
 			<div>
-				<?php echo $content; ?>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			</div>
 			<?php
-				echo $args['after_widget'];
+				echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput
 		}
 	}
 
 	/**
 	 * Handles updating settings for the widget instance.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $new_instance New settings for this instance as input by the user via WP_Widget::form().
 	 * @param array $old_instance Old settings for this instance.
@@ -88,7 +98,7 @@ class WPTelegram_Widget_Ajax_Widget extends WP_Widget {
 	/**
 	 * Outputs the settings form for the widget.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $instance Current settings.
 	 */
@@ -100,7 +110,7 @@ class WPTelegram_Widget_Ajax_Widget extends WP_Widget {
 			'widget_height' => 600,
 		);
 
-		// use global options
+		// use global options.
 		foreach ( $defaults as $key => $value ) {
 			$defaults[ $key ] = WPTG_Widget()->options()->get( $key, $value );
 		}

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -22,9 +21,9 @@
  * @since      1.0.0
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani 
+ * @author     Manzoor Wani
  */
-class WPTelegram_Widget_i18n {
+class WPTelegram_Widget_I18n {
 
 
 	/**
@@ -41,7 +40,4 @@ class WPTelegram_Widget_i18n {
 		);
 
 	}
-
-
-
 }

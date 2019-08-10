@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 4.0
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,11 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.7.1 =
+* Improved compatibility with different browsers.
+* Improved the code as per WPCS.
+* Fixed the issue of settings not being saved without Bot Token.
 
 = 1.7.0 =
 * Migrated from CMB2 to React for settings page.

@@ -18,7 +18,7 @@ if ( ! $username || ! $message_id ) {
 }
 
 $message_id = sanitize_text_field( $message_id );
-$username = sanitize_text_field( $username );
+$username   = sanitize_text_field( $username );
 
 do_action( 'wptelegram_widget_render_embedded_post', $username, $message_id );
 
