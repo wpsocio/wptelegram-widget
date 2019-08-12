@@ -2,7 +2,7 @@
 Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
-Requires at least: 4.0
+Requires at least: 4.7
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
 Stable tag: 1.7.1
