@@ -2,10 +2,10 @@
 Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
-Requires at least: 4.0
+Requires at least: 4.7
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,9 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.7.2 =
+* Fixed the issue of settings not being saved without Bot Token.
 
 = 1.7.1 =
 * Improved compatibility with different browsers.

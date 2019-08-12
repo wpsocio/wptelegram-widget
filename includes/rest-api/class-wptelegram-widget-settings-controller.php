@@ -145,6 +145,7 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 		return array(
 			'username'          => array(
 				'type'              => 'string',
+				'required'          => ( 'edit' === $context ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( __CLASS__, 'validate_param' ),
 			),
@@ -162,7 +163,6 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 			),
 			'bot_token'         => array(
 				'type'              => 'string',
-				'required'          => ( 'edit' === $context ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( __CLASS__, 'validate_param' ),
 			),
