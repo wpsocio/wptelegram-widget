@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## Unreleased
+## [1.7.2 - 2019-08-12](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.2)
 
 ### Bug Fixes
 * Fixed the issue of settings not being saved without Bot Token.
