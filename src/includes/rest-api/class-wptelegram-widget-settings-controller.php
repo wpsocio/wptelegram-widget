@@ -209,7 +209,7 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 				if ( ! $value ) {
 					return true;
 				}
-				$pattern = '/\A\d{9}:[\w-]{35}\Z/';
+				$pattern = '/\A\d{9,11}:[\w-]{35}\Z/';
 				break;
 			case 'username':
 				$pattern = '/\A[a-z]\w{3,30}[^\W_]\Z/i';
