@@ -1,12 +1,15 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [1.7.2 - 2019-08-12](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.2)
+## [1.7.3 - 2019-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.3)
+### Enhancements
+* Updated bot token pattern.
 
+## [1.7.2 - 2019-08-12](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.2)
 ### Bug Fixes
 * Fixed the issue of settings not being saved without Bot Token.
 
-## [1.7.1 - 2019-08-11](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.1)
+## [1.7.1 - 2019-08-11](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.1)
 ### Enhancements
 * Improved compatibility with different browsers.
 * Improved the code as per WPCS.
@@ -14,7 +17,7 @@ All notable changes to this project are documented in this file.
 ### Bug Fixes
 * Fixed the issue of settings not being saved without Bot Token.
 
-## [1.7.0 - 2019-07-23](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.7.0)
+## [1.7.0 - 2019-07-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.0)
 ### Enhancements
 * Migrated from CMB2 to React for settings page.
 * Added Guternberg block for Ajax Widget.
@@ -26,30 +29,30 @@ All notable changes to this project are documented in this file.
 ### Bug Fixes
 * Fixed the Google Script URL not being used.
 
-## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.2)
+## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.2)
 ### Enhancements
 * Change Join Link to channel link
 
 ### Bug Fixes
 * Fixed the issue with click on links
 
-## [1.6.1 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.1)
+## [1.6.1 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.1)
 ### Enhancements
 * Fix the upgrade to new rewrite rules
 
-## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.1)
+## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.1)
 ### Enhancements
 * Added the new ajax widget with fixed height and infinite scroll
 * Added Added support for Google Script to bypass the ban on t.me.
 * Added filters to inject custom widget styles.
 
-## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.6.0)
+## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.0)
 ### Enhancements
 * Added the new ajax widget with fixed height and infinite scroll
 * Added Added support for Google Script to bypass the ban on t.me.
 * Added filters to inject custom widget styles.
 
-## [1.5.0 - 2019-04-2](https://github.com/manzoorwanijk/wptelegram/releases/tag/v1.5.0)
+## [1.5.0 - 2019-04-2](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.5.0)
 ### Enhancements
 * Added Gutengerg blocks for the channel feed.
 * Added Gutenberg block to embed any Telegram Message.

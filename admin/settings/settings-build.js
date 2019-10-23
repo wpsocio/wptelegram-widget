@@ -14694,7 +14694,7 @@ var validationSchema = lib["object"]({
     },
     excludeEmptyString: true
   }),
-  bot_token: lib["string"]().matches(/^\d{9}:[a-z0-9_-]{35}$/i, {
+  bot_token: lib["string"]().matches(/^\d{9,11}:[a-z0-9_-]{35}$/i, {
     message: function message() {
       return fields_getErrorMessage('bot_token', 'invalid');
     },
@@ -15170,7 +15170,7 @@ function () {
                         errors[key] = fields_getErrorMessage(key);
                       });
                     } else if ('rest_missing_callback_param' === code) {
-                      Object.keys(data.params).forEach(function (key) {
+                      data.params.forEach(function (key) {
                         errors[key] = fields_getErrorMessage(key, 'required');
                       });
                     }
