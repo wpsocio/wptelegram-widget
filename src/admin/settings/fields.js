@@ -34,7 +34,7 @@ const validationSchema = yup.object( {
 		message: () => getErrorMessage( 'widget_height', 'invalid' ),
 		excludeEmptyString: true,
 	} ),
-	bot_token: yup.string().matches( /^\d{9}:[a-z0-9_-]{35}$/i, {
+	bot_token: yup.string().matches( /^\d{9,11}:[a-z0-9_-]{35}$/i, {
 		message: () => getErrorMessage( 'bot_token', 'invalid' ),
 		excludeEmptyString: true,
 	} ),
