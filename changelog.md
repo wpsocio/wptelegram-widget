@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [1.7.4 - 2019-11-2](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.4)
+### Bug Fixes
+* Updated bot token pattern for test token.
+
 ## [1.7.3 - 2019-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.3)
 ### Enhancements
 * Updated bot token pattern.
