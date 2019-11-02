@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 4.7
 Tested up to: 5.2.4
 Requires PHP: 5.6
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,9 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.7.4 =
+* Updated bot token pattern for test token.
 
 = 1.7.3 =
 * Updated bot token pattern.
