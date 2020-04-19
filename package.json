@@ -1,7 +1,7 @@
 {
   "name": "wptelegram-widget",
   "title": "WP Telegram Widget",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "description": "Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.",
   "main": "Gruntfile.js",
   "repository": {

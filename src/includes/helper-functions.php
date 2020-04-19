@@ -55,7 +55,7 @@ if ( ! function_exists( 'wptelegram_join_channel' ) ) {
 	/**
 	 * Display join channel button.
 	 *
-	 * @since x.y.z
+	 * @since 1.8.0
 	 *
 	 * @param  array   $args Shortcode Params.
 	 * @param  boolean $echo Whether to display or return.

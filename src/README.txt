@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.0
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.7.4
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,27 +169,7 @@ Many thanks to the translators for the great job!
 
 == Changelog ==
 
-= 1.7.4 =
-* Updated bot token pattern for test token.
-
-= 1.7.3 =
-* Updated bot token pattern.
-
-= 1.7.2 =
-* Fixed the issue of settings not being saved without Bot Token.
-
-= 1.7.1 =
-* Improved compatibility with different browsers.
-* Improved the code as per WPCS.
-* Fixed the issue of settings not being saved without Bot Token.
-
-= 1.7.0 =
-* Migrated from CMB2 to React for settings page.
-* Added Guternberg block for Ajax Widget.
-* Removed Widget Messages list in favour of Ajax Widget.
-* Bot Token is no more required for the ajax widget to work.
-* Made the ajax widget search form visible again.
-* Search form results are now displayed in the same iframe, instead of new tab.
-* Fixed the Google Script URL not being used.
+= 1.8.0 =
+* Added Join Channel widget/block/shortcode
 
 == Upgrade Notice ==

@@ -74,7 +74,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Register the stylesheets for blocks.
 	 *
-	 * @since x.y.z
+	 * @since 1.8.0
 	 */
 	public function register_blocks() {
 
@@ -441,7 +441,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Registers shortcode to display join link.
 	 *
-	 * @since x.y.z
+	 * @since 1.8.0
 	 *
 	 * @param array $atts The shortcode attributes.
 	 */
