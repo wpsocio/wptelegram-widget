@@ -99,9 +99,9 @@ class WPTelegram_Widget_Admin {
 		if ( $this->is_settings_page( $hook_suffix ) ) {
 
 			// Avoid caching for development.
-			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? date( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/settings-build.js' ) ) ) : $this->plugin->version();
+			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? date( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/dist/settings-dist.js' ) ) ) : $this->plugin->version();
 
-			wp_enqueue_script( $this->plugin->name() . '-settings', $this->plugin->url( '/admin/settings/settings-build' ) . $this->plugin->suffix() . '.js', array( 'jquery' ), $version, true );
+			wp_enqueue_script( $this->plugin->name() . '-settings', $this->plugin->url( '/admin/settings/dist/settings-dist.js' ), array( 'jquery' ), $version, true );
 
 			// Pass data to JS.
 			$data = array(
@@ -148,9 +148,10 @@ class WPTelegram_Widget_Admin {
 		if ( did_action( 'enqueue_block_editor_assets' ) ) {
 			$data = array(
 				'blocks' => array(
-					'assets' => array(
+					'assets'   => array(
 						'message_view_url' => WPTelegram_Widget_Public::get_message_view_url( '%username%', '%message_id%', '%userpic%' ),
 					),
+					'username' => $this->plugin->options()->get( 'username' ),
 				),
 			);
 
@@ -200,7 +201,7 @@ class WPTelegram_Widget_Admin {
 
 		wp_enqueue_script(
 			$this->plugin->name() . '-block',
-			$this->plugin->url( '/admin/blocks/blocks-build' ) . $this->plugin->suffix() . '.js',
+			$this->plugin->url( '/blocks/dist/blocks-build' ) . $this->plugin->suffix() . '.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			$this->plugin->version(),
 			true
@@ -208,7 +209,7 @@ class WPTelegram_Widget_Admin {
 
 		wp_enqueue_style(
 			$this->plugin->name() . '-block',
-			$this->plugin->url( '/admin/blocks/blocks-build' ) . $this->plugin->suffix() . '.css',
+			$this->plugin->url( '/blocks/dist/blocks-build' ) . $this->plugin->suffix() . '.css',
 			array( 'wp-edit-blocks' ),
 			$this->plugin->version()
 		);
@@ -276,6 +277,8 @@ class WPTelegram_Widget_Admin {
 		register_widget( 'WPTelegram_Widget_Widget' );
 
 		register_widget( 'WPTelegram_Widget_Ajax_Widget' );
+
+		register_widget( 'WPTelegram_Widget_Join_Channel' );
 	}
 
 	/**

@@ -202,6 +202,8 @@ class WPTelegram_Widget {
 
 		require_once $this->dir( '/public/widgets/class-wptelegram-widget-ajax-widget.php' );
 
+		require_once $this->dir( '/public/widgets/class-wptelegram-widget-join-channel.php' );
+
 		/**
 		 * The class responsible for loading WPTelegram_Bot_API library
 		 */
@@ -300,6 +302,8 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'init', $plugin_public, 'may_be_fire_pull_updates' );
 
+		$this->loader->add_action( 'init', $plugin_public, 'register_blocks' );
+
 		$this->loader->add_action( 'wptelegram_widget_render_embedded_widget', $plugin_public, 'render_embedded_widget', 10, 1 );
 
 		$this->loader->add_action( 'wptelegram_widget_render_embedded_post', $plugin_public, 'render_embedded_post', 10, 2 );
@@ -307,6 +311,8 @@ class WPTelegram_Widget {
 		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $plugin_public, 'cron_pull_updates' );
 
 		$this->loader->add_shortcode( 'wptelegram-ajax-widget', get_class( $plugin_public ), 'ajax_widget_shortcode' );
+
+		$this->loader->add_shortcode( 'wptelegram-join-channel', get_class( $plugin_public ), 'join_channel_shortcode' );
 
 		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $plugin_public ), 'post_embed_shortcode' );
 

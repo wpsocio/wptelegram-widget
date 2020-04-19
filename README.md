@@ -2,9 +2,9 @@
 
 **Contributors:**      [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:**              telegram, feed, widget, channel, group  
-**Requires at least:** 4.7  
-**Tested up to:**      5.2.4  
-**Stable tag:**        1.7.4  
+**Requires at least:** 5.0  
+**Tested up to:**      5.4  
+**Stable tag:**        1.8.0  
 **License:**           GPLv2 or later  
 **License URI:**       [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -24,6 +24,7 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 
 * Provides an ajax widget to display channel feed
 * Ajax widget contains a Join Channel link
+* A separate Join Channel Link/Button
 * Pulls updates automatically from Telegram
 * Uses a responsive widget to display the feed
 * Fits anywhere you want it to be
@@ -35,7 +36,31 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 * Can be extended with custom code
 
 ## Widget Info
-Goto **Appearance** > **Widgets** and click/drag **WP Telegram Widget** and place it where you want it to be.
+
+### Ajax Widget
+Goto **Appearance** > **Widgets** and click/drag **WP Telegram Ajax Widget** and place it where you want it to be.
+
+Alternately, you can use the below shortcode.
+
+Inside page or post content:
+
+`[wptelegram-ajax-widget widget_width="100%" widget_height="500"]`
+
+Inside the theme templates
+```php
+<?php
+if ( function_exists( 'wptelegram_ajax_widget' ) ) {
+    wptelegram_ajax_widget();
+}
+?>
+```
+or
+```php
+<?php echo do_shortcode( '[wptelegram-ajax-widget widget_width="98%" widget_height="700"]' ); ?>
+```
+
+### Legacy Widget
+Goto **Appearance** > **Widgets** and click/drag **WP Telegram Legacy Widget** and place it where you want it to be.
 
 Alternately, you can use the below shortcode.
 
@@ -60,6 +85,32 @@ if ( function_exists( 'wptelegram_widget' ) ) {
 or
 ```php
 <?php echo do_shortcode( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_show"]' ); ?>
+```
+
+### Join Link
+Goto **Appearance** > **Widgets** and click/drag **WP Telegram Join Channel** and place it where you want it to be.
+
+Alternately, you can use the below shortcode.
+
+Inside page or post content:
+
+`[wptelegram-join-channel link="https://t.me/WPTelegram" text="Join @WPTelegram on Telegram"]`
+
+Inside the theme templates
+```php
+<?php
+if ( function_exists( 'wptelegram_join_channel' ) ) {
+    $args = array(
+        'link' => 'https://t.me/WPTelegram',
+		'text' => 'Join @WPTelegram on Telegram',
+    );
+    wptelegram_join_channel( $args );
+}
+?>
+```
+or
+```php
+<?php echo do_shortcode( '[wptelegram-join-channel link="https://t.me/WPTelegram" text="Join us on Telegram"]' ); ?>
 ```
 
 ### Contribution
