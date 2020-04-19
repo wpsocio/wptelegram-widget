@@ -51,6 +51,27 @@ if ( ! function_exists( 'wptelegram_ajax_widget' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wptelegram_join_channel' ) ) {
+	/**
+	 * Display join channel button.
+	 *
+	 * @since x.y.z
+	 *
+	 * @param  array   $args Shortcode Params.
+	 * @param  boolean $echo Whether to display or return.
+	 *
+	 * @return NULL|string        The html output
+	 */
+	function wptelegram_join_channel( $args = array(), $echo = true ) {
+		$output = WPTelegram_Widget_Public::join_channel_shortcode( $args );
+		if ( $echo ) {
+			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
+		} else {
+			return $output;
+		}
+	}
+}
+
 if ( ! function_exists( 'wptelegram_get_jed_locale_data' ) ) {
 
 	/**

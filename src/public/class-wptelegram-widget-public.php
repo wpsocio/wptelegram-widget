@@ -69,7 +69,32 @@ class WPTelegram_Widget_Public {
 	public function enqueue_styles() {
 
 		wp_enqueue_style( $this->plugin->name(), $this->plugin->url( '/public/css/wptelegram-widget-public' ) . $this->plugin->suffix() . '.css', array(), $this->plugin->version(), 'all' );
+	}
 
+	/**
+	 * Register the stylesheets for blocks.
+	 *
+	 * @since x.y.z
+	 */
+	public function register_blocks() {
+
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		wp_register_style(
+			$this->plugin->name() . '-blocks',
+			$this->plugin->url( '/blocks/dist/blocks-build.css' ),
+			array( 'wp-components' ),
+			$this->plugin->version()
+		);
+
+		register_block_type(
+			'wptelegram/widget-join-channel',
+			array(
+				'style' => $this->plugin->name() . '-blocks',
+			)
+		);
 	}
 
 	/**
@@ -414,6 +439,56 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
+	 * Registers shortcode to display join link.
+	 *
+	 * @since x.y.z
+	 *
+	 * @param array $atts The shortcode attributes.
+	 */
+	public static function join_channel_shortcode( $atts ) {
+
+		$defaults = array(
+			'link' => 'https://t.me/WPTelegram',
+			'text' => 'Join @WPTelegram on Telegram',
+		);
+
+		$args = shortcode_atts( $defaults, $atts, 'wptelegram-join-channel' );
+
+		$args = array_map( 'sanitize_text_field', $args );
+
+		if ( empty( $args['link'] ) ) {
+			$args['link'] = $defaults['link'];
+		}
+
+		if ( empty( $args['text'] ) ) {
+			$args['text'] = $defaults['text'];
+		}
+
+		set_query_var( 'link', $args['link'] );
+		set_query_var( 'text', $args['text'] );
+
+		ob_start();
+		$overridden_template = locate_template( 'wptelegram-widget/join-channel.php' );
+		if ( $overridden_template ) {
+			/**
+			 * The value returned by locate_template() is a path to file.
+			 * if either the child theme or the parent theme have overridden the template.
+			 */
+			if ( self::is_valid_template( $overridden_template ) ) {
+				load_template( $overridden_template );
+			}
+		} else {
+			/*
+			 * If neither the child nor parent theme have overridden the template,
+			 * we load the template from the 'partials' sub-directory of the directory this file is in.
+			 */
+			load_template( dirname( __FILE__ ) . '/partials/join-channel.php' );
+		}
+		$html = ob_get_clean();
+		return $html;
+	}
+
+	/**
 	 * Registers shortcode to display the ajax channel feed.
 	 *
 	 * @since    1.6.0
@@ -470,8 +545,7 @@ class WPTelegram_Widget_Public {
 			 */
 			load_template( dirname( __FILE__ ) . '/partials/embed-widget.php' );
 		}
-		$html = ob_get_contents();
-		ob_get_clean();
+		$html = ob_get_clean();
 		return $html;
 	}
 
@@ -711,7 +785,6 @@ class WPTelegram_Widget_Public {
 			 * The value returned by locate_template() is a path to file.
 			 * if either the child theme or the parent theme have overridden the template.
 			 */
-
 			if ( self::is_valid_template( $overridden_template ) ) {
 				load_template( $overridden_template );
 			}
@@ -722,8 +795,7 @@ class WPTelegram_Widget_Public {
 			 */
 			load_template( dirname( __FILE__ ) . '/partials/post-loop.php' );
 		}
-		$html = ob_get_contents();
-		ob_get_clean();
+		$html = ob_get_clean();
 		return $html;
 	}
 
