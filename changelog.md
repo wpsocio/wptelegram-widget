@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## Unreleased
+### Enhancements
+* Added Join Channel widget/block/shortcode
+
 ## [1.7.4 - 2019-11-2](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.4)
 ### Bug Fixes
 * Updated bot token pattern for test token.

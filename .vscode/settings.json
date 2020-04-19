@@ -1,0 +1,6 @@
+{
+	"[php]": {
+		// "editor.formatOnSave": true,
+		"editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+	}
+}
