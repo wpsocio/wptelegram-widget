@@ -37,8 +37,8 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.9.0",
-    "@wordpress/babel-plugin-makepot": "^3.4.0",
-    "@wordpress/eslint-plugin": "^4.1.0",
+    "@wordpress/babel-plugin-makepot": "^3.5.0",
+    "@wordpress/eslint-plugin": "^5.0.1",
     "autoprefixer": "^9.7.6",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
@@ -94,7 +94,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@wordpress/i18n": "^3.10.0",
+    "@wordpress/i18n": "^3.11.0",
     "bootstrap": "^4.4.1",
     "final-form": "^4.19.1",
     "lodash-webpack-plugin": "^0.11.5",
