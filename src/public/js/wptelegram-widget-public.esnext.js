@@ -1,22 +1,22 @@
 ( function( $ ) {
 	'use strict';
-	var widget = {};
-	widget.configure = function() {
+	const widget = {};
+	widget.configure = () => {
 		widget.wrap = $( '.wptelegram-widget-wrap' );
 		widget.iframe = $( '.wptelegram-widget-message iframe' );
 	};
-	widget.init = function() {
+	widget.init = () => {
 		widget.configure();
 		widget.iframe.on( 'load', widget.set_iframe );
 		// widget.iframe.on( 'load', widget.resize_iframe );
 		widget.iframe.on( 'resize_iframe', widget.resize_iframe );
 
-		$( window ).on( 'resize', function() {
+		$( window ).on( 'resize', () => {
 			widget.iframe.trigger( 'resize_iframe' );
 		} );
 	};
-	widget.set_iframe = function() {
-		var $this = $( this );
+	widget.set_iframe = () => {
+		const $this = $( this );
 		if (
 			$this
 				.contents()
@@ -30,7 +30,7 @@
 			$this.trigger( 'resize_iframe' );
 		}
 	};
-	widget.resize_iframe = function() {
+	widget.resize_iframe = () => {
 		// this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
 		$( this ).height(
 			$( this )

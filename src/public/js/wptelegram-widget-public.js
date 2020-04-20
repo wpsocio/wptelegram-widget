@@ -3,6 +3,8 @@
 ( function( $ ) {
 	'use strict';
 
+	var _this = this;
+
 	var widget = {};
 
 	widget.configure = function() {
@@ -21,7 +23,7 @@
 	};
 
 	widget.set_iframe = function() {
-		var $this = $( this );
+		var $this = $( _this );
 
 		if (
 			$this
@@ -39,8 +41,8 @@
 
 	widget.resize_iframe = function() {
 		// this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
-		$( this ).height(
-			$( this )
+		$( _this ).height(
+			$( _this )
 				.contents()
 				.find( 'body' )
 				.height()
