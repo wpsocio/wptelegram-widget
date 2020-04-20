@@ -3,6 +3,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [1.8.1 - 2020-04-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.8.1)
+### Bug Fixes
+* Fix admin .min.js.
+
 ## [1.8.0 - 2020-04-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.8.0)
 ### Enhancements
 * Added Join Channel widget/block/shortcode
