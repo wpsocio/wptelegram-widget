@@ -278,6 +278,8 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'wptelegram_p2tg_api_response', $plugin_admin, 'save_messages_sent_by_p2tg', 10, 5 );
 
+		$this->loader->add_filter( 'block_categories', $plugin_admin, 'register_block_category', 10, 1 );
+
 	}
 
 	/**
