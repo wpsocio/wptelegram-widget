@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.0
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.8.1
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,14 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.9.0 =
+-   Added join link automatically to posts
+-   Added options to customize join link for posts
+-   Added WP Telegram Block category
+-   Improved blocks
+-   Fixed JS bundle path for blocks
+-   Fixed single post iframe height
 
 = 1.8.1 =
 * Fix admin .min.js.

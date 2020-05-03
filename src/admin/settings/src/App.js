@@ -8,7 +8,8 @@ import Sidebar from './components/Sidebar';
 const App = () => {
 	const [formState, setFormState] = useState({});
 
-	const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+	const isDev =
+		!process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 	return (
 		<Container className="mw-100">

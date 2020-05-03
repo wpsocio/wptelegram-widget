@@ -1,6 +1,5 @@
+import { Button } from '@wordpress/components';
 import TelegramIcon from './TelegramIcon';
-
-const { Button } = wp.components;
 
 const JoinButton = ({ link, text, isEditing }) => {
 	return (

@@ -5,6 +5,7 @@ import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin-with-rtl';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import WebpackRTLPlugin from 'webpack-rtl-plugin';
+import camelCase from 'camelCase';
 /**
  * Internal dependencies
  */
@@ -12,7 +13,10 @@ import { createConfig } from './tools/webpack';
 
 const mainSettings = (isDev) => {
 	return createConfig({
-		entry: ['regenerator-runtime/runtime', './src/admin/settings/src/index.js'],
+		entry: [
+			'regenerator-runtime/runtime',
+			'./src/admin/settings/src/index.js',
+		],
 		output: {
 			path: path.resolve(__dirname, 'src/admin/settings/dist'),
 			filename: 'settings-dist.js',
@@ -24,7 +28,9 @@ const mainSettings = (isDev) => {
 					test: /\.css$/, // .less and .css
 					use: [
 						{
-							loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+							loader: isDev
+								? 'style-loader'
+								: MiniCssExtractPlugin.loader,
 						},
 						{
 							loader: 'css-loader',
@@ -47,12 +53,37 @@ const mainSettings = (isDev) => {
 
 const blocks = (isDev) => {
 	const settings = mainSettings(isDev);
+
+	const externals = {};
+	// Define WordPress dependencies
+	const wpPackages = [
+		'block-editor',
+		'blocks',
+		'components',
+		'element',
+		'i18n',
+		'url',
+	];
+	// Setup externals for all WordPress dependencies
+	wpPackages.forEach((wpPackage) => {
+		externals['@wordpress/' + wpPackage] = {
+			this: [
+				'wp',
+				wpPackage.includes('-') ? camelCase(wpPackage) : wpPackage, // 'block-editor' => 'blockEditor'
+			],
+		};
+	});
 	return {
 		...settings,
 		entry: './src/blocks/src/index.js',
 		output: {
 			path: path.resolve(__dirname, 'src/blocks/dist'),
 			filename: 'blocks-build.js',
+			libraryTarget: 'this',
+		},
+		externals: {
+			...settings.externals,
+			...externals,
 		},
 		plugins: [
 			// new BundleAnalyzerPlugin(),
@@ -85,7 +116,8 @@ const blocks = (isDev) => {
 						{
 							loader: 'sass-loader',
 							options: {
-								prependData: '@import "./src/blocks/src/common.scss";\n',
+								prependData:
+									'@import "./src/blocks/src/common.scss";\n',
 								sassOptions: {
 									outputStyle: 'expanded',
 								},

@@ -16,7 +16,9 @@ const SettingsForm = ({ setFormState }) => {
 			onSubmit={submitForm}
 			validate={validate}
 			mutators={mutators}
-			render={(props) => <FormRenderer {...props} setFormState={setFormState} />}
+			render={(props) => (
+				<FormRenderer {...props} setFormState={setFormState} />
+			)}
 		/>
 	);
 };

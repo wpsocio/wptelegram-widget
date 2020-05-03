@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { FORM_ERROR } from 'final-form';
+import { FORM_ERROR, setIn } from 'final-form';
 
 import { __, sprintf } from './i18n';
 
@@ -7,15 +7,11 @@ export const validate = async (values) => {
 	try {
 		await validationSchema.validate(values, { abortEarly: false });
 	} catch (err) {
-		const errors = err.inner.reduce(
-			(formError, innerError) => ({
-				...formError,
-				[innerError.path]: innerError.message,
-			}),
+		return err?.inner?.reduce(
+			(formError, innerError) =>
+				setIn(formError, innerError.path, innerError.message),
 			{}
 		);
-
-		return errors;
 	}
 };
 
@@ -46,6 +42,11 @@ const validationSchema = yup.object({
 	}),
 	telegram_blocked: yup.string(),
 	google_script_url: yup.string().url(),
+	join_link_url: yup
+		.string()
+		.url(() => getErrorMessage('join_link_url', 'invalid')),
+	join_link_post_types: yup.array().of(yup.string()),
+	join_link_position: yup.mixed().oneOf(['before_content', 'after_content']),
 });
 
 export const getErrorMessage = (fieldName, errorType = 'invalid') => {
@@ -53,9 +54,11 @@ export const getErrorMessage = (fieldName, errorType = 'invalid') => {
 
 	switch (errorType) {
 		case 'invalid':
+			/* translators: %s is field name */
 			message = __('Invalid %s');
 			break;
 		case 'required':
+			/* translators: %s is field name */
 			message = __('%s is required.');
 			break;
 
@@ -75,15 +78,18 @@ const fieldLabels = {
 	num_messages: () => __('Number of Messages'),
 	telegram_blocked: () => __('Your host blocks Telegram?'),
 	google_script_url: () => __('Google Script URL'),
+	join_link_url: () => __('Channel Link'),
+	join_link_text: () => __('Button text'),
+	join_link_post_types: () => __('Add to post types'),
+	join_link_position: () => __('Position'),
 };
 
 export const getFieldLabel = (name) => fieldLabels[name]();
 
 export const formatValue = (val, name) => {
 	switch (name) {
-		case 'custom_error_message':
+		case 'join_link_text':
 			return shallowCleanUp(val);
-		case 'avatar_meta_key':
 		case 'bot_username':
 			return sanitizeKey(val);
 		default:
@@ -107,9 +113,7 @@ export const shallowCleanUp = (val) => {
 
 export const deepCleanUp = (val) => {
 	if ('string' === typeof val) {
-		return shallowCleanUp(val)
-			.replace(/\s/g, '')
-			.trim();
+		return shallowCleanUp(val).replace(/\s/g, '').trim();
 	}
 	return val;
 };

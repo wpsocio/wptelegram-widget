@@ -1,16 +1,13 @@
+import { __ } from '@wordpress/i18n';
+import { FocusableIframe, Spinner } from '@wordpress/components';
+import { Component, Fragment, createRef } from '@wordpress/element';
+import { addQueryArgs } from '@wordpress/url';
 import { blocks } from 'plugin-data';
 
 import BlockPlaceholder from './placeholder';
 import AllControls from './controls';
 
-const { Component, Fragment, createRef } = wp.element;
-const { __ } = wp.i18n;
-const { FocusableIframe, Spinner } = wp.components;
-const { addQueryArgs } = wp.url;
-
-const {
-	assets: { message_view_url },
-} = blocks;
+const { message_view_url } = blocks?.assets;
 
 class Edit extends Component {
 	constructor() {
@@ -84,10 +81,14 @@ class Edit extends Component {
 	}
 
 	resizeIframe() {
-		if (null === this.iframe_ref.current || 'undefined' === typeof this.iframe_ref.current.contentWindow) {
+		if (
+			null === this.iframe_ref.current ||
+			'undefined' === typeof this.iframe_ref.current.contentWindow
+		) {
 			return;
 		}
-		const iframe_height = this.iframe_ref.current.contentWindow.document.body.scrollHeight;
+		const iframe_height = this.iframe_ref.current.contentWindow.document
+			.body.scrollHeight;
 		if (iframe_height !== this.state.iframe_height) {
 			this.setState({ iframe_height });
 		}
@@ -106,7 +107,9 @@ class Edit extends Component {
 					label={label}
 					error={error}
 					url={url}
-					onChangeURL={(event) => this.setState({ url: event.target.value })}
+					onChangeURL={(event) =>
+						this.setState({ url: event.target.value })
+					}
 					onSubmit={this.setUrl}
 				/>
 			);

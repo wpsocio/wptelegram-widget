@@ -99,25 +99,28 @@ class WPTelegram_Widget_Admin {
 		if ( $this->is_settings_page( $hook_suffix ) ) {
 
 			// Avoid caching for development.
-			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? date( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/dist/settings-dist.js' ) ) ) : $this->plugin->version();
+			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? gmdate( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/dist/settings-dist.js' ) ) ) : $this->plugin->version();
 
 			wp_enqueue_script( $this->plugin->name() . '-settings', $this->plugin->url( '/admin/settings/dist/settings-dist.js' ), array( 'jquery' ), $version, true );
 
 			// Pass data to JS.
 			$data = array(
 				'settings' => array(
-					'info'       => array(
+					'info'        => array(
 						// phpcs:ignore Squiz.PHP.CommentedOutCode
 						'use' => 'server', // or 'browser'.
 					),
-					'saved_opts' => current_user_can( 'manage_options' ) ? WPTelegram_Widget_Settings_Controller::get_default_settings() : array(), // Not to expose bot token to non-admins.
-					'assets'     => array(
+					'saved_opts'  => current_user_can( 'manage_options' ) ? WPTelegram_Widget_Settings_Controller::get_default_settings() : array(), // Not to expose bot token to non-admins.
+					'assets'      => array(
 						'pull_updates_url' => add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() ),
 						'admin_url'        => untrailingslashit( admin_url() ),
 						'logo_url'         => $this->plugin->url( '/admin/icons/icon-100x100.svg' ),
 						'tg_icon'          => $this->plugin->url( '/admin/icons/tg-icon.svg' ),
 					),
-					'i18n'       => wptelegram_get_jed_locale_data( 'wptelegram-widget' ),
+					'select_opts' => array(
+						'post_types' => $this->get_post_type_options(),
+					),
+					'i18n'        => wptelegram_get_jed_locale_data( 'wptelegram-widget' ),
 				),
 			);
 
@@ -148,10 +151,11 @@ class WPTelegram_Widget_Admin {
 		if ( did_action( 'enqueue_block_editor_assets' ) ) {
 			$data = array(
 				'blocks' => array(
-					'assets'   => array(
+					'assets'         => array(
 						'message_view_url' => WPTelegram_Widget_Public::get_message_view_url( '%username%', '%message_id%', '%userpic%' ),
 					),
-					'username' => $this->plugin->options()->get( 'username' ),
+					'join_link_url'  => $this->plugin->options()->get( 'join_link_url' ),
+					'join_link_text' => $this->plugin->options()->get( 'join_link_text' ),
 				),
 			);
 
@@ -161,6 +165,29 @@ class WPTelegram_Widget_Admin {
 				'before'
 			);
 		}
+	}
+
+	/**
+	 * Get the registered post types.
+	 *
+	 * @since  1.9.0
+	 * @return array
+	 */
+	public function get_post_type_options() {
+
+		$options = array();
+
+		$post_types = get_post_types( array( 'public' => true ), 'objects' );
+
+		foreach ( $post_types  as $post_type ) {
+
+			if ( 'attachment' !== $post_type->name ) {
+
+				$options[ $post_type->name ] = "{$post_type->labels->singular_name} ({$post_type->name})";
+			}
+		}
+
+		return apply_filters( 'wptelegram_widget_post_type_options', $options, $post_types );
 	}
 
 	/**
@@ -201,7 +228,7 @@ class WPTelegram_Widget_Admin {
 
 		wp_enqueue_script(
 			$this->plugin->name() . '-block',
-			$this->plugin->url( '/blocks/dist/blocks-build' ) . $this->plugin->suffix() . '.js',
+			$this->plugin->url( '/blocks/dist/blocks-build.js' ),
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			$this->plugin->version(),
 			true
@@ -209,9 +236,35 @@ class WPTelegram_Widget_Admin {
 
 		wp_enqueue_style(
 			$this->plugin->name() . '-block',
-			$this->plugin->url( '/blocks/dist/blocks-build' ) . $this->plugin->suffix() . '.css',
+			$this->plugin->url( '/blocks/dist/blocks-build.css' ),
 			array( 'wp-edit-blocks' ),
 			$this->plugin->version()
+		);
+	}
+
+	/**
+	 * Registers custom category for blocks.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param array $categories The block categories.
+	 * @return array
+	 */
+	public function register_block_category( $categories ) {
+		$slugs = wp_list_pluck( $categories, 'slug' );
+		$slug  = 'wptelegram';
+		if ( in_array( $slug, $slugs, true ) ) {
+			return $categories;
+		}
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug'  => $slug,
+					'title' => __( 'WP Telegram', 'wptelegram-widget' ),
+					'icon'  => null,
+				),
+			)
 		);
 	}
 

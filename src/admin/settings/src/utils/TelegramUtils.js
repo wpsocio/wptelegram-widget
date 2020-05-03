@@ -4,7 +4,13 @@ import { getErrorResultFromXHR } from './ajax';
 import { setEvent } from './FormUtils';
 
 export const checkMemberCount = (args) => {
-	const { bot_token, username, setInProgress, setResult, setResultType } = args;
+	const {
+		bot_token,
+		username,
+		setInProgress,
+		setResult,
+		setResultType,
+	} = args;
 
 	setInProgress(true);
 
@@ -30,10 +36,18 @@ export const checkMemberCount = (args) => {
 export const sendTestMessage = (args, event) => {
 	setEvent(event);
 
-	const { bot_token, username, setInProgress, setResult, setResultType } = args;
+	const {
+		bot_token,
+		username,
+		setInProgress,
+		setResult,
+		setResultType,
+	} = args;
 
 	const text = window.prompt(
-		__('A message will be sent to the Channel/Group. You can modify the text below'),
+		__(
+			'A message will be sent to the Channel/Group. You can modify the text below'
+		),
 		__('This is a test message')
 	);
 	if (!text) {

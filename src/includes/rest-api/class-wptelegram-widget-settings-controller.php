@@ -143,53 +143,75 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 	 */
 	public static function get_settings_params( $context = 'edit' ) {
 		return array(
-			'username'          => array(
+			'username'             => array(
 				'type'              => 'string',
 				'required'          => ( 'edit' === $context ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( __CLASS__, 'validate_param' ),
 			),
-			'widget_width'      => array(
+			'widget_width'         => array(
 				'type'              => 'string',
 				'default'           => '100%',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
 			),
-			'widget_height'     => array(
+			'widget_height'        => array(
 				'type'              => 'string',
 				'default'           => '600',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
 			),
-			'bot_token'         => array(
+			'bot_token'            => array(
 				'type'              => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( __CLASS__, 'validate_param' ),
 			),
-			'author_photo'      => array(
+			'author_photo'         => array(
 				'type'              => 'string',
 				'default'           => 'auto',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
 				'enum'              => array( 'auto', 'always_show', 'always_hide' ),
 			),
-			'num_messages'      => array(
+			'num_messages'         => array(
 				'type'              => 'string',
 				'default'           => '5',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
 			),
-			'telegram_blocked'  => array(
+			'telegram_blocked'     => array(
 				'type'              => 'string',
 				'default'           => 'no',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
 				'enum'              => array( 'yes', 'no' ),
 			),
-			'google_script_url' => array(
+			'google_script_url'    => array(
 				'type'              => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => 'rest_validate_request_arg',
+			),
+			'join_link_url'        => array(
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+				'validate_callback' => 'rest_validate_request_arg',
+			),
+			'join_link_text'       => array(
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+				'validate_callback' => 'rest_validate_request_arg',
+			),
+			'join_link_post_types' => array(
+				'type'    => 'array',
+				'default' => array( 'post' ),
+				'items'   => array(
+					'type' => 'string',
+				),
+			),
+			'join_link_position'   => array(
+				'type'    => 'string',
+				'default' => 'after_content',
+				'enum'    => array( 'before_content', 'after_content' ),
 			),
 		);
 	}

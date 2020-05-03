@@ -278,6 +278,8 @@ class WPTelegram_Widget {
 
 		$this->loader->add_action( 'wptelegram_p2tg_api_response', $plugin_admin, 'save_messages_sent_by_p2tg', 10, 5 );
 
+		$this->loader->add_filter( 'block_categories', $plugin_admin, 'register_block_category', 10, 1 );
+
 	}
 
 	/**
@@ -321,6 +323,8 @@ class WPTelegram_Widget {
 		// better be safe by using PHP_INT_MAX to make sure
 		// some dumb people don't remove your schedule.
 		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
+
+		$this->loader->add_filter( 'the_content', $plugin_public, 'add_join_link_to_post_content', 10, 1 );
 
 	}
 
