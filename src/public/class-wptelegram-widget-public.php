@@ -441,7 +441,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Adds join link to post content.
 	 *
-	 * @since x.y.z
+	 * @since 1.9.0
 	 *
 	 * @param string $content Content of the current post.
 	 */
@@ -1080,7 +1080,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Upgrade to version 1.9.0
 	 *
-	 * @since    x.y.z
+	 * @since    1.9.0
 	 */
 	private function upgrade_to_190() {
 

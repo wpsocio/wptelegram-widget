@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2020-04-20 08:54:17+00:00\n"
+"POT-Creation-Date: 2020-05-03 19:41:35+00:00\n"
 "PO-Revision-Date: 2020-04-20 02:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -20,7 +20,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: blocks\n"
 "X-Poedit-SearchPathExcluded-1: admin/settings\n"
 
-#: admin/class-wptelegram-widget-admin.php:241
+#: admin/class-wptelegram-widget-admin.php:264
+#, fuzzy
+msgid "WP Telegram"
+msgstr "WP Telegram Widget"
+
+#: admin/class-wptelegram-widget-admin.php:294
 msgid "Telegram Widget"
 msgstr "Telegram Widget"
 
@@ -354,7 +359,7 @@ msgstr "Es sind Fehler aufgetreten"
 msgid "Could not connect"
 msgstr "Verbindung konnte nicht hergestellt werden"
 
-#: public/class-wptelegram-widget-public.php:907
+#: public/class-wptelegram-widget-public.php:929
 msgid "Every 5 Minutes"
 msgstr "Alle 5 Minuten"
 

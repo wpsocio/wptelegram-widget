@@ -170,7 +170,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Get the registered post types.
 	 *
-	 * @since  x.y.z
+	 * @since  1.9.0
 	 * @return array
 	 */
 	public function get_post_type_options() {
@@ -245,7 +245,7 @@ class WPTelegram_Widget_Admin {
 	/**
 	 * Registers custom category for blocks.
 	 *
-	 * @since x.y.z
+	 * @since 1.9.0
 	 *
 	 * @param array $categories The block categories.
 	 * @return array

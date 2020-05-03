@@ -16,7 +16,7 @@ const config = {
 		[
 			"@wordpress/babel-plugin-makepot",
 			{
-				output: "src/languages/wptelegram-login.js.pot"
+				output: "src/languages/wptelegram-widget.js.pot"
 			}
 		] */
 	]
