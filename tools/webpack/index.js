@@ -39,6 +39,9 @@ export const createConfig = (options) => {
 			jquery: 'jQuery',
 			'plugin-data': 'wptelegram_widget',
 		},
+		resolve: {
+			extensions: ['.js', '.jsx'],
+		},
 		...rest,
 	};
 
