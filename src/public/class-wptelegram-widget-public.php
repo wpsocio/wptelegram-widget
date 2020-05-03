@@ -439,6 +439,28 @@ class WPTelegram_Widget_Public {
 	}
 
 	/**
+	 * Adds join link to post content.
+	 *
+	 * @since x.y.z
+	 *
+	 * @param string $content Content of the current post.
+	 */
+	public function add_join_link_to_post_content( $content ) {
+		$post_types = WPTG_Widget()->options()->get( 'join_link_post_types', '' );
+		$link       = WPTG_Widget()->options()->get( 'join_link_url', '' );
+		$text       = WPTG_Widget()->options()->get( 'join_link_text', '' );
+
+		if ( ! is_singular( $post_types ) || ! $link || ! $text ) {
+			return $content;
+		}
+		$position = WPTG_Widget()->options()->get( 'join_link_position', 'after_content' );
+
+		$join_link = self::join_channel_shortcode( compact( 'link', 'text' ) );
+
+		return 'after_content' === $position ? $content . $join_link : $join_link . $content;
+	}
+
+	/**
 	 * Registers shortcode to display join link.
 	 *
 	 * @since 1.8.0
@@ -932,6 +954,7 @@ class WPTelegram_Widget_Public {
 			'1.5.0',
 			'1.6.1',
 			'1.7.0',
+			'1.9.0',
 		);
 
 		// always.
@@ -1052,5 +1075,29 @@ class WPTelegram_Widget_Public {
 		}
 
 		WPTG_Widget()->options()->set( 'telegram_blocked', $telegram_blocked );
+	}
+
+	/**
+	 * Upgrade to version 1.9.0
+	 *
+	 * @since    x.y.z
+	 */
+	private function upgrade_to_190() {
+
+		$username = WPTG_Widget()->options()->get( 'username' );
+
+		$field_values = array(
+			'join_link_post_types' => array( 'post' ),
+			'join_link_position'   => 'after_content',
+		);
+
+		if ( $username ) {
+			$field_values['join_link_url']  = sprintf( 'https://t.me/%s', $username );
+			$field_values['join_link_text'] = sprintf( 'Join @%s on Telegram', $username );
+		}
+
+		foreach ( $field_values as $field => $value ) {
+			WPTG_Widget()->options()->set( $field, $value );
+		}
 	}
 }

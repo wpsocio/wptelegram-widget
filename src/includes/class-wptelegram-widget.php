@@ -324,6 +324,8 @@ class WPTelegram_Widget {
 		// some dumb people don't remove your schedule.
 		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
 
+		$this->loader->add_filter( 'the_content', $plugin_public, 'add_join_link_to_post_content', 10, 1 );
+
 	}
 
 	/**
