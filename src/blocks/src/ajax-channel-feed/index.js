@@ -1,10 +1,9 @@
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Dashicon, PanelBody, TextControl } from '@wordpress/components';
 //  Import CSS.
 import './editor.scss';
-
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, TextControl, Dashicon } = wp.components;
 
 const getShortcodeFromAttrs = (attributes) => {
 	const atts = ['widget_width', 'widget_height']
@@ -34,7 +33,7 @@ const blockAttributes = {
 registerBlockType('wptelegram/widget-ajax-channel-feed', {
 	title: __('Telegram Channel Ajax Feed'),
 	icon: 'format-aside',
-	category: 'widgets',
+	category: 'wptelegram',
 	attributes: blockAttributes,
 	edit: ({ attributes, setAttributes, className }) => {
 		const { widget_width, widget_height } = attributes;
@@ -45,12 +44,16 @@ registerBlockType('wptelegram/widget-ajax-channel-feed', {
 					<TextControl
 						label={__('Widget Width')}
 						value={widget_width}
-						onChange={(newWidth) => setAttributes({ widget_width: newWidth })}
+						onChange={(newWidth) => {
+							setAttributes({ widget_width: newWidth });
+						}}
 					/>
 					<TextControl
 						label={__('Widget Height')}
 						value={widget_height}
-						onChange={(newHeight) => setAttributes({ widget_height: newHeight })}
+						onChange={(newHeight) => {
+							setAttributes({ widget_height: newHeight });
+						}}
 						type="number"
 					/>
 				</PanelBody>

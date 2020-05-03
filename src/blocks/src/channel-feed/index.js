@@ -1,10 +1,14 @@
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { InspectorControls } from '@wordpress/block-editor';
+import {
+	Dashicon,
+	PanelBody,
+	RadioControl,
+	TextControl,
+} from '@wordpress/components';
 //  Import CSS.
 import './editor.scss';
-
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, RadioControl, TextControl, Dashicon } = wp.components;
 
 const blockAttributes = {
 	widget_width: {
@@ -24,7 +28,7 @@ const blockAttributes = {
 registerBlockType('wptelegram/widget-channel-feed', {
 	title: __('Telegram Channel Feed'),
 	icon: 'format-aside',
-	category: 'widgets',
+	category: 'wptelegram',
 	attributes: blockAttributes,
 	edit: ({ attributes, setAttributes, className }) => {
 		const { widget_width, author_photo, num_messages } = attributes;
@@ -35,7 +39,9 @@ registerBlockType('wptelegram/widget-channel-feed', {
 					<TextControl
 						label={__('Widget Width')}
 						value={widget_width}
-						onChange={(newWidth) => setAttributes({ widget_width: newWidth })}
+						onChange={(newWidth) =>
+							setAttributes({ widget_width: newWidth })
+						}
 						type="number"
 						min="10"
 						max="100"
@@ -43,7 +49,9 @@ registerBlockType('wptelegram/widget-channel-feed', {
 					<RadioControl
 						label={__('Author Photo')}
 						selected={author_photo}
-						onChange={(newStyle) => setAttributes({ author_photo: newStyle })}
+						onChange={(newStyle) =>
+							setAttributes({ author_photo: newStyle })
+						}
 						options={[
 							{ label: 'Auto', value: 'auto' },
 							{ label: 'Always show', value: 'always_show' },
@@ -53,7 +61,9 @@ registerBlockType('wptelegram/widget-channel-feed', {
 					<TextControl
 						label={__('Number of Messages')}
 						value={num_messages}
-						onChange={(newValue) => setAttributes({ num_messages: newValue })}
+						onChange={(newValue) =>
+							setAttributes({ num_messages: newValue })
+						}
 						type="number"
 						min="1"
 						max="50"
@@ -71,7 +81,9 @@ registerBlockType('wptelegram/widget-channel-feed', {
 		);
 
 		let text = '[wptelegram-widget';
-		text += attributes.widget_width ? ` widget_width="${attributes.widget_width}"` : '';
+		text += attributes.widget_width
+			? ` widget_width="${attributes.widget_width}"`
+			: '';
 		text += ` author_photo="${attributes.author_photo}" num_messages="${attributes.num_messages}"]`;
 
 		return [
