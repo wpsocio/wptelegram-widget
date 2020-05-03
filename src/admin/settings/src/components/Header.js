@@ -20,7 +20,9 @@ const Header = () => {
 				/>
 				<div className="d-inline-block">
 					<h6 className="d-inline-block">{title}</h6>{' '}
-					<small className="text-secondary font-italic">v{version}</small>
+					<small className="text-secondary font-italic">
+						v{version}
+					</small>
 				</div>
 			</Card.Header>
 			<Card.Body className="pb-1">

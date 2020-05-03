@@ -45,7 +45,11 @@ const SocialIcons = () => {
 						textDecoration: 'none',
 					}}
 				>
-					<img src={assets.tg_icon} className="d-inline-block align-middle mr-1" alt={' '} />
+					<img
+						src={assets.tg_icon}
+						className="d-inline-block align-middle mr-1"
+						alt={' '}
+					/>
 					<small>{sprintf(__('Join %s'), '@WPTelegram')}</small>
 				</a>
 			</Nav.Item>

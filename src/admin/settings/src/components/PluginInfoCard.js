@@ -21,7 +21,14 @@ const PluginInfoCard = () => {
 			<ListGroup variant="flush">
 				<ListGroup.Item>
 					<div>
-						<span>{sprintf(__('Do you like %s?'), title)}</span>
+						<span>
+							{sprintf(
+								/* translators: %s Plugin name */ __(
+									'Do you like %s?'
+								),
+								title
+							)}
+						</span>
 					</div>
 					<div>
 						<a
@@ -31,7 +38,11 @@ const PluginInfoCard = () => {
 							className="text-center text-info ml-1"
 							style={{ textDecoration: 'none' }}
 						>
-							<span style={{ color: 'orange', fontSize: '1.5rem' }}>★★★★★</span>
+							<span
+								style={{ color: 'orange', fontSize: '1.5rem' }}
+							>
+								★★★★★
+							</span>
 						</a>
 					</div>
 				</ListGroup.Item>
@@ -43,11 +54,20 @@ const PluginInfoCard = () => {
 						<span>{__('Need help?')}</span>
 					</div>
 					<div>
-						<span style={{ fontWeight: '600' }}>{__('Get LIVE support on Telegram')}</span>
+						<span style={{ fontWeight: '600' }}>
+							{__('Get LIVE support on Telegram')}
+						</span>
 					</div>
 				</ListGroup.Item>
-				<ListGroup.Item action href="https://t.me/WPTelegramChat" target="_blank" variant="primary">
-					<span className="font-weight-bold font-italic">@WPTelegramChat</span>
+				<ListGroup.Item
+					action
+					href="https://t.me/WPTelegramChat"
+					target="_blank"
+					variant="primary"
+				>
+					<span className="font-weight-bold font-italic">
+						@WPTelegramChat
+					</span>
 				</ListGroup.Item>
 			</ListGroup>
 			<Card.Footer>

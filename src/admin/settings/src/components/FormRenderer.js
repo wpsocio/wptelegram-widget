@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Tabs, Tab } from 'react-bootstrap';
 
 import { __ } from '../i18n';
-import BotTestResult from './BotTestResult';
 import MemberCountResult from './MemberCountResult';
 import TestMessageResult from './TestMessageResult';
 import SectionCard from './SectionCard';
-import TabCard from './TabCard';
 import FormField from './FormField';
-import Instructions from './Instructions';
-import AjaxWidgetInfoCard from './AjaxWidgetInfoCard';
-import LegacyWidgetInfoCard from './LegacyWidgetInfoCard';
 import { getFieldLabel } from '../fields';
-import { testBotToken, sendTestMessage, checkMemberCount } from '../utils/TelegramUtils';
+import { sendTestMessage, checkMemberCount } from '../utils/TelegramUtils';
+import AjaxWidgetTab from './AjaxWidgetTab';
+import LegacyWidgetTab from './LegacyWidgetTab';
+import JoinLinkTab from './JoinLinkTab';
 
 const FormRenderer = ({
 	handleSubmit,
@@ -26,22 +24,19 @@ const FormRenderer = ({
 	form: { getState },
 	setFormState,
 }) => {
-	const [testingBotToken, setTestingBotToken] = useState(false);
 	// The result string
 	const [botTokenTestResult, setBotTokenTestResult] = useState('');
-	// e.g. "succes" or "danger"
-	const [botTokenTestResultType, setBotTokenTestResultType] = useState('');
 
 	const [sendingTestMessage, setSendingTestMessage] = useState(false);
 	// The result string
 	const [testMessageResult, setTestMessageResult] = useState('');
-	// e.g. "succes" or "danger"
+	// e.g. "success" or "danger"
 	const [testMessageResultType, setTestMessageResultType] = useState('');
 
 	const [checkingMemberCount, setCheckingMemberCount] = useState(false);
 	// The result string
 	const [memberCountResult, setMemberCountResult] = useState('');
-	// e.g. "succes" or "danger"
+	// e.g. "success" or "danger"
 	const [memberCountResultType, setMemberCountResultType] = useState('');
 
 	if ('could_not_connect' === botTokenTestResult) {
@@ -77,22 +72,38 @@ const FormRenderer = ({
 					}}
 					after={
 						<div>
-							{values.bot_token && values.username && !checkingMemberCount ? (
-								<MemberCountResult result={memberCountResult} type={memberCountResultType} />
-							) : null}
-							{values.bot_token && values.username && !sendingTestMessage ? (
-								<TestMessageResult result={testMessageResult} type={testMessageResultType} />
+							{values.bot_token &&
+								values.username &&
+								!checkingMemberCount && (
+									<MemberCountResult
+										result={memberCountResult}
+										type={memberCountResultType}
+									/>
+								)}
+							{values.bot_token &&
+							values.username &&
+							!sendingTestMessage ? (
+								<TestMessageResult
+									result={testMessageResult}
+									type={testMessageResultType}
+								/>
 							) : null}
 						</div>
 					}
 					inputGroupProps={{
-						prepend: (InputGroup) => <InputGroup.Text>@</InputGroup.Text>,
+						prepend: (InputGroup) => (
+							<InputGroup.Text>@</InputGroup.Text>
+						),
 						append: () =>
 							values.bot_token && (
 								<Button
 									variant="outline-secondary"
 									size="sm"
-									disabled={!values.username || sendingTestMessage || errors.username}
+									disabled={
+										!values.username ||
+										sendingTestMessage ||
+										errors.username
+									}
 									onClick={(e) =>
 										sendTestMessage(
 											{
@@ -106,7 +117,9 @@ const FormRenderer = ({
 										)
 									}
 								>
-									{sendingTestMessage ? __('Please wait...') : __('Send Test')}
+									{sendingTestMessage
+										? __('Please wait…')
+										: __('Send Test')}
 								</Button>
 							),
 						style: { maxWidth: '300px' },
@@ -125,93 +138,21 @@ const FormRenderer = ({
 				/>
 			</SectionCard>
 			<div
-				style={{ borderWidth: '.2rem .2rem 0', border: '.2rem solid #ececec' }}
+				style={{
+					borderWidth: '.2rem .2rem 0',
+					border: '.2rem solid #ececec',
+				}}
 				className="mt-3 rounded-top p-3"
 			>
 				<Tabs defaultActiveKey="ajax">
 					<Tab eventKey="ajax" title={__('Ajax Widget')}>
-						<TabCard>
-							<FormField
-								name="widget_height"
-								label={getFieldLabel('widget_height')}
-								controlProps={{
-									placeholder: '600',
-									id: 'widget_height',
-									size: 'sm',
-									onBlur: () => null, // avoid validation on blur
-									style: { maxWidth: '100px' },
-								}}
-							/>
-							<AjaxWidgetInfoCard />
-						</TabCard>
+						<AjaxWidgetTab />
 					</Tab>
 					<Tab eventKey="legacy" title={__('Legacy Widget')}>
-						<TabCard>
-							<Instructions />
-							<FormField
-								name="bot_token"
-								label={getFieldLabel('bot_token')}
-								desc={__('Please read the instructions above')}
-								after={<BotTestResult result={botTokenTestResult} type={botTokenTestResultType} />}
-								controlProps={{
-									id: 'bot_token',
-									type: 'text',
-								}}
-								inputGroupProps={{
-									append: () => (
-										<Button
-											variant="outline-secondary"
-											size="sm"
-											disabled={!values.bot_token || testingBotToken || errors.bot_token}
-											onClick={(e) =>
-												testBotToken(
-													{
-														bot_token: values.bot_token,
-														setInProgress: setTestingBotToken,
-														setResult: setBotTokenTestResult,
-														setResultType: setBotTokenTestResultType,
-													},
-													e
-												)
-											}
-										>
-											{testingBotToken ? __('Please wait...') : __('Test Token')}
-										</Button>
-									),
-									style: { maxWidth: '400px' },
-								}}
-							/>
-							<FormField
-								name="author_photo"
-								label={getFieldLabel('author_photo')}
-								options={{
-									auto: __('Auto'),
-									always_show: __('Always show'),
-									always_hide: __('Always hide'),
-								}}
-								controlProps={{
-									id: 'author_photo',
-									type: 'select',
-									style: { width: 'auto' },
-								}}
-							/>
-							<FormField
-								name="num_messages"
-								label={getFieldLabel('num_messages')}
-								desc={__('Number of messages to display in the widget')}
-								controlProps={{
-									id: 'num_messages',
-									type: 'number',
-									placeholder: 5,
-									min: 1,
-									max: 50,
-									size: 'sm',
-									onBlur: () => null, // avoid validation on blur
-									style: { maxWidth: '100px' },
-								}}
-							/>
-							<LegacyWidgetInfoCard />
-						</TabCard>
+						<LegacyWidgetTab />
+					</Tab>
+					<Tab eventKey="join-link" title={__('Join Link')}>
+						<JoinLinkTab />
 					</Tab>
 				</Tabs>
 			</div>
@@ -232,7 +173,9 @@ const FormRenderer = ({
 					<FormField
 						name="google_script_url"
 						label={getFieldLabel('google_script_url')}
-						desc={__('The requests to Telegram will be sent via your Google Script.')}
+						desc={__(
+							'The requests to Telegram will be sent via your Google Script.'
+						)}
 						after={
 							<small>
 								<a
@@ -257,9 +200,13 @@ const FormRenderer = ({
 				<Button type="submit" disabled={submitting}>
 					{__('Save Changes')}
 				</Button>
-				{submitFailed ? <span className="ml-2 text-danger">{submitError}</span> : null}
+				{submitFailed ? (
+					<span className="ml-2 text-danger">{submitError}</span>
+				) : null}
 				{pristine && submitSucceeded ? (
-					<span className="ml-2 text-success">{__('Changes saved successfully.')}</span>
+					<span className="ml-2 text-success">
+						{__('Changes saved successfully.')}
+					</span>
 				) : null}
 			</div>
 		</Form>

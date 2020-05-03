@@ -20,32 +20,53 @@ const LegacyWidgetInfoCard = () => {
 					className="text-justify"
 					dangerouslySetInnerHTML={{
 						__html: sprintf(
-							__('Goto %1$s and click/drag %2$s and place it where you want it to be.'),
-							`<b>${__('Appearance')}</b> &gt; <a href="${admin_url}/widgets.php">${__('Widgets')}</a>`,
+							/* translators: 1, 2 Menu names */
+							__(
+								'Goto %1$s and click/drag %2$s and place it where you want it to be.'
+							),
+							`<b>${__(
+								'Appearance'
+							)}</b> &gt; <a href="${admin_url}/widgets.php">${__(
+								'Widgets'
+							)}</a>`,
 							`<b>${__('WP Telegram Legacy Widget')}</b>`
 						),
 					}}
 				></ListGroup.Item>
 				<ListGroup.Item className="text-justify">
-					{__('Alternately, you can use the below shortCode or the block available in block editor.')}
+					{__(
+						'Alternately, you can use the below shortCode or the block available in block editor.'
+					)}
 				</ListGroup.Item>
 				<ListGroup.Item className="font-weight-bold text-secondary">
 					{__('Inside page or post content:')}
 				</ListGroup.Item>
-				<ListGroup.Item variant="light" className="text-monospace text-left">
-					<Code>{'[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_hide"]'}</Code>
+				<ListGroup.Item
+					variant="light"
+					className="text-monospace text-left"
+				>
+					<Code>
+						{
+							'[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_hide"]'
+						}
+					</Code>
 				</ListGroup.Item>
 				<ListGroup.Item className="font-weight-bold text-secondary">
 					{__('Inside the theme templates')}
 				</ListGroup.Item>
-				<ListGroup.Item variant="light" className="text-monospace text-left">
+				<ListGroup.Item
+					variant="light"
+					className="text-monospace text-left"
+				>
 					<Code>
 						{
 							"<?php\nif ( function_exists( 'wptelegram_widget' ) ) {\n    $args = array(\n        // 'num_messages'    => 5,\n        // 'widget_width'    => 100,\n        // 'author_photo'    => 'auto',\n    );\n\n    wptelegram_widget( $args );\n}\n?>"
 						}
 					</Code>
 					<br />
-					<span className="font-weight-bold text-secondary">{__('or')}</span>
+					<span className="font-weight-bold text-secondary">
+						{__('or')}
+					</span>
 					<br />
 					<Code>
 						{
