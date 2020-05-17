@@ -1,12 +1,12 @@
 # WP Telegram Widget and Join Link
 
-**Contributors:**      [manzoorwanijk](https://github.com/manzoorwanijk)  
-**Tags:**              telegram, feed, widget, channel, group  
+**Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
+**Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.0  
-**Tested up to:**      5.4  
-**Stable tag:**        1.9.0  
-**License:**           GPLv2 or later  
-**License URI:**       [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
+**Tested up to:** 5.4.1  
+**Stable tag:** 1.9.1  
+**License:** GPLv2 or later  
+**License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
 [![Wordpress plugin](https://img.shields.io/wordpress/plugin/v/wptelegram-widget.svg)](https://wordpress.org/plugins/wptelegram-widget/)
 [![Wordpress](https://img.shields.io/wordpress/plugin/dt/wptelegram-widget.svg)](https://wordpress.org/plugins/wptelegram-widget/)
@@ -22,22 +22,23 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 
 ## Features:
 
-* Provides an ajax widget to display channel feed
-* Ajax widget contains a Join Channel link
-* A separate Join Channel Link/Button
-* Pulls updates automatically from Telegram
-* Uses a responsive widget to display the feed
-* Fits anywhere you want it to be
-* The received messages can be seen from `/wp-admin`
-* Automatically removes deleted messages
-* Can be displayed using a shortcode
-* Available as a Gutengerg block
-* Allows embeding of Telegram public channel messages
-* Can be extended with custom code
+-   Provides an ajax widget to display channel feed
+-   Ajax widget contains a Join Channel link
+-   A separate Join Channel Link/Button
+-   Pulls updates automatically from Telegram
+-   Uses a responsive widget to display the feed
+-   Fits anywhere you want it to be
+-   The received messages can be seen from `/wp-admin`
+-   Automatically removes deleted messages
+-   Can be displayed using a shortcode
+-   Available as a Gutengerg block
+-   Allows embeding of Telegram public channel messages
+-   Can be extended with custom code
 
 ## Widget Info
 
 ### Ajax Widget
+
 Goto **Appearance** > **Widgets** and click/drag **WP Telegram Ajax Widget** and place it where you want it to be.
 
 Alternately, you can use the below shortcode.
@@ -47,6 +48,7 @@ Inside page or post content:
 `[wptelegram-ajax-widget widget_width="100%" widget_height="500"]`
 
 Inside the theme templates
+
 ```php
 <?php
 if ( function_exists( 'wptelegram_ajax_widget' ) ) {
@@ -54,12 +56,15 @@ if ( function_exists( 'wptelegram_ajax_widget' ) ) {
 }
 ?>
 ```
+
 or
+
 ```php
 <?php echo do_shortcode( '[wptelegram-ajax-widget widget_width="98%" widget_height="700"]' ); ?>
 ```
 
 ### Legacy Widget
+
 Goto **Appearance** > **Widgets** and click/drag **WP Telegram Legacy Widget** and place it where you want it to be.
 
 Alternately, you can use the below shortcode.
@@ -69,6 +74,7 @@ Inside page or post content:
 `[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
 
 Inside the theme templates
+
 ```php
 <?php
 if ( function_exists( 'wptelegram_widget' ) ) {
@@ -82,12 +88,15 @@ if ( function_exists( 'wptelegram_widget' ) ) {
 }
 ?>
 ```
+
 or
+
 ```php
 <?php echo do_shortcode( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_show"]' ); ?>
 ```
 
 ### Join Link
+
 Goto **Appearance** > **Widgets** and click/drag **WP Telegram Join Channel** and place it where you want it to be.
 
 Alternately, you can use the below shortcode.
@@ -97,6 +106,7 @@ Inside page or post content:
 `[wptelegram-join-channel link="https://t.me/WPTelegram" text="Join @WPTelegram on Telegram"]`
 
 Inside the theme templates
+
 ```php
 <?php
 if ( function_exists( 'wptelegram_join_channel' ) ) {
@@ -108,15 +118,19 @@ if ( function_exists( 'wptelegram_join_channel' ) ) {
 }
 ?>
 ```
+
 or
+
 ```php
 <?php echo do_shortcode( '[wptelegram-join-channel link="https://t.me/WPTelegram" text="Join us on Telegram"]' ); ?>
 ```
 
 ### Contribution
+
 Development occurs on Github, and all contributions welcome.
 
 ## Translation
+
 If you are looking to provide language translation files, Please do so via [WordPress Plugin Translations](https://translate.wordpress.org/projects/wp-plugins/wptelegram-widget).
 
 ## Installation
@@ -124,4 +138,3 @@ If you are looking to provide language translation files, Please do so via [Word
 1. Upload the `wptelegram-widget` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the Plugins menu in WordPress. After activation, you should see the menu of this plugin the the admin
 3. Configure the plugin.
-

@@ -4,6 +4,16 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [1.9.1 - 2020-05-17](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.1)
+
+### Enhancements
+
+-   Added priority option for join link
+
+### Bug Fixes
+
+-   Fixed adding of join link if no post type selected
+
 ## [1.9.0 - 2020-05-4](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.0)
 
 ### Enhancements
