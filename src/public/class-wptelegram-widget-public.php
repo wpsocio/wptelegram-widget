@@ -450,7 +450,7 @@ class WPTelegram_Widget_Public {
 		$link       = WPTG_Widget()->options()->get( 'join_link_url', '' );
 		$text       = WPTG_Widget()->options()->get( 'join_link_text', '' );
 
-		if ( ! is_singular( $post_types ) || ! $link || ! $text ) {
+		if ( empty( $post_types ) || ! is_singular( $post_types ) || ! $link || ! $text ) {
 			return $content;
 		}
 		$position = WPTG_Widget()->options()->get( 'join_link_position', 'after_content' );

@@ -82,6 +82,7 @@ const fieldLabels = {
 	join_link_text: () => __('Button text'),
 	join_link_post_types: () => __('Add to post types'),
 	join_link_position: () => __('Position'),
+	join_link_priority: () => __('Priority'),
 };
 
 export const getFieldLabel = (name) => fieldLabels[name]();
