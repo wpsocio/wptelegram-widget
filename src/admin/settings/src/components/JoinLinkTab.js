@@ -59,6 +59,22 @@ const JoinLinkTab = () => {
 					type: 'radio',
 				}}
 			/>
+			<FormField
+				name="join_link_priority"
+				label={getFieldLabel('join_link_priority')}
+				desc={__('Priority with respect to adjacent items.')}
+				defaultValue={'10'}
+				controlProps={{
+					id: 'join_link_priority',
+					type: 'number',
+					placeholder: 10,
+					min: 1,
+					max: 1000,
+					size: 'sm',
+					onBlur: () => null, // avoid validation on blur
+					style: { maxWidth: '100px' },
+				}}
+			/>
 			<AjaxWidgetInfoCard />
 		</TabCard>
 	);

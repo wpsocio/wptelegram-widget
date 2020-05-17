@@ -213,6 +213,12 @@ class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Contr
 				'default' => 'after_content',
 				'enum'    => array( 'before_content', 'after_content' ),
 			),
+			'join_link_priority'   => array(
+				'type'              => 'string',
+				'default'           => '10',
+				'sanitize_callback' => 'sanitize_text_field',
+				'validate_callback' => 'rest_validate_request_arg',
+			),
 		);
 	}
 
