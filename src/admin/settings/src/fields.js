@@ -44,9 +44,14 @@ const validationSchema = yup.object({
 	google_script_url: yup.string().url(),
 	join_link_url: yup
 		.string()
+		.nullable()
 		.url(() => getErrorMessage('join_link_url', 'invalid')),
 	join_link_post_types: yup.array().of(yup.string()),
 	join_link_position: yup.mixed().oneOf(['before_content', 'after_content']),
+	join_link_priority: yup.string().matches(/^[0-9]*$/, {
+		message: () => getErrorMessage('join_link_priority', 'invalid'),
+		excludeEmptyString: true,
+	}),
 });
 
 export const getErrorMessage = (fieldName, errorType = 'invalid') => {
