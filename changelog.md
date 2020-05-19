@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug Fixes
+
+-   Fixed error for empty join link
+
 ## [1.9.1 - 2020-05-17](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.1)
 
 ### Enhancements
