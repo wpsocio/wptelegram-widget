@@ -139,7 +139,10 @@ class WPTelegram_Widget_Public {
 		global $wp_query;
 		$qvs = $wp_query->query_vars;
 
-		if ( isset( $qvs['core'], $qvs['module'], $qvs['action'], $qvs['username'] ) && 'wptelegram' === $qvs['core'] && 'widget' === $qvs['module'] ) {
+		if (
+			isset( $qvs['core'], $qvs['module'], $qvs['action'], $qvs['username'] )
+			&& 'wptelegram' === $qvs['core'] && 'widget' === $qvs['module']
+			) {
 
 			if ( 'view' === $qvs['action'] ) {
 
@@ -165,6 +168,25 @@ class WPTelegram_Widget_Public {
 					exit;
 				}
 			}
+		}
+
+		return $template;
+	}
+
+	/**
+	 * Set the Template for /v request by Telegram JS.
+	 *
+	 * @since x.y.z
+	 * @param string $template The page template to be used.
+	 */
+	public function intercept_v_template( $template ) {
+
+		global $wp_query;
+		$qvs = $wp_query->query_vars;
+
+		if ( is_404() && ! empty( $qvs['name'] ) && 'v' === $qvs['name'] ) {
+			status_header( 200 );
+			$template = dirname( __FILE__ ) . '/partials/v.php';
 		}
 
 		return $template;

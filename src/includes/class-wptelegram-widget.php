@@ -302,6 +302,8 @@ class WPTelegram_Widget {
 
 		$this->loader->add_filter( 'template_include', $plugin_public, 'set_embed_template', 99 );
 
+		$this->loader->add_filter( 'template_include', $plugin_public, 'intercept_v_template', 999 );
+
 		$this->loader->add_action( 'init', $plugin_public, 'may_be_fire_pull_updates' );
 
 		$this->loader->add_action( 'init', $plugin_public, 'register_blocks' );

@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug Fixes
+
+-   Fixed 404 on /v
+
 ## [1.9.2 - 2020-05-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.2)
 
 ### Bug Fixes
