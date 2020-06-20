@@ -176,7 +176,7 @@ class WPTelegram_Widget_Public {
 	/**
 	 * Set the Template for /v request by Telegram JS.
 	 *
-	 * @since x.y.z
+	 * @since 1.9.3
 	 * @param string $template The page template to be used.
 	 */
 	public function intercept_v_template( $template ) {
