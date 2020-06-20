@@ -3,9 +3,9 @@ Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.0
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 5.6
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -169,6 +169,9 @@ Many thanks to the translators for the great job!
 
 == Changelog ==
 
+= 1.9.3 =
+-   Fixed 404 on /v
+
 = 1.9.2 =
 -   Fixed error for empty join link
 
@@ -183,11 +186,5 @@ Many thanks to the translators for the great job!
 -   Improved blocks
 -   Fixed JS bundle path for blocks
 -   Fixed single post iframe height
-
-= 1.8.1 =
-* Fix admin .min.js.
-
-= 1.8.0 =
-* Added Join Channel widget/block/shortcode
 
 == Upgrade Notice ==

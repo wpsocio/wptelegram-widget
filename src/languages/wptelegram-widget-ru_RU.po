@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2020-05-03 19:41:35+00:00\n"
+"POT-Creation-Date: 2020-06-20 14:21:54+00:00\n"
 "PO-Revision-Date: 2020-04-20 02:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -344,7 +344,7 @@ msgstr ""
 msgid "Could not connect"
 msgstr "Не удалось подключиться"
 
-#: public/class-wptelegram-widget-public.php:929
+#: public/class-wptelegram-widget-public.php:951
 msgid "Every 5 Minutes"
 msgstr "Каждые 5 минут"
 

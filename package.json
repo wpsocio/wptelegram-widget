@@ -1,7 +1,7 @@
 {
 	"name": "wptelegram-widget",
 	"title": "WP Telegram Widget",
-	"version": "1.9.2",
+	"version": "1.9.3",
 	"description": "Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.",
 	"main": "Gruntfile.js",
 	"repository": {
@@ -21,7 +21,7 @@
 		"build": "gulp build",
 		"dev": "concurrently -n \"gulp,webpack\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run gulp:dev\" \"npm run webpack:dev\"",
 		"gulp:dev": "gulp dev",
-		"precommit": "gulp precommit",
+		"precommit": "gulp precommit --to",
 		"webpack:dev": "webpack --mode development --watch",
 		"webpack:build": "webpack --mode production"
 	},
