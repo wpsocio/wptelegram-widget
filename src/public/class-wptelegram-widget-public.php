@@ -490,11 +490,18 @@ class WPTelegram_Widget_Public {
 	 * @param array $atts The shortcode attributes.
 	 */
 	public static function join_channel_shortcode( $atts ) {
-
 		$defaults = array(
-			'link' => 'https://t.me/WPTelegram',
-			'text' => 'Join @WPTelegram on Telegram',
+			'link' => WPTG_Widget()->options()->get( 'join_link_url', '' ),
+			'text' => WPTG_Widget()->options()->get( 'join_link_text', '' ),
 		);
+
+		$username = WPTG_Widget()->options()->get( 'username', 'WPTelegram' );
+		if ( empty( $defaults['link'] ) ) {
+			$defaults['link'] = sprintf( 'https://t.me/%s', $username );
+		}
+		if ( empty( $defaults['text'] ) ) {
+			$defaults['text'] = sprintf( 'Join @%s on Telegram', $username );
+		}
 
 		$args = shortcode_atts( $defaults, $atts, 'wptelegram-join-channel' );
 

@@ -3,7 +3,7 @@ import { settings } from 'plugin-data';
 
 import TabCard from './TabCard';
 import FormField from './FormField';
-import AjaxWidgetInfoCard from './AjaxWidgetInfoCard';
+import JoinLinkInfoCard from './JoinLinkInfoCard';
 import { getFieldLabel } from '../fields';
 import { __ } from '../i18n';
 
@@ -75,7 +75,7 @@ const JoinLinkTab = () => {
 					style: { maxWidth: '100px' },
 				}}
 			/>
-			<AjaxWidgetInfoCard />
+			<JoinLinkInfoCard />
 		</TabCard>
 	);
 };

@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.0
 Tested up to: 5.4.2
 Requires PHP: 5.6
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,10 @@ Many thanks to the translators for the great job!
 5. Widget Messages List
 
 == Changelog ==
+
+= 1.9.4 =
+-   Added usage guide to join link
+-   Fixed join link defaults
 
 = 1.9.3 =
 -   Fixed 404 on /v
