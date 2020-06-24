@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2020-06-20 14:21:54+00:00\n"
+"POT-Creation-Date: 2020-06-24 20:11:55+00:00\n"
 "PO-Revision-Date: 2020-04-20 02:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -344,7 +344,7 @@ msgstr ""
 msgid "Could not connect"
 msgstr "Не удалось подключиться"
 
-#: public/class-wptelegram-widget-public.php:951
+#: public/class-wptelegram-widget-public.php:958
 msgid "Every 5 Minutes"
 msgstr "Каждые 5 минут"
 
@@ -355,7 +355,7 @@ msgid ""
 msgstr ""
 
 #: public/widgets/class-wptelegram-widget-ajax-widget.php:120
-#: public/widgets/class-wptelegram-widget-join-channel.php:118
+#: public/widgets/class-wptelegram-widget-join-channel.php:124
 #: public/widgets/class-wptelegram-widget-widget.php:127
 msgid "Title"
 msgstr "Название"
@@ -368,11 +368,11 @@ msgstr ""
 msgid "Invite users to join your Telegram channel or group by using a button."
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:122
+#: public/widgets/class-wptelegram-widget-join-channel.php:128
 msgid "Channel Link"
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:127
+#: public/widgets/class-wptelegram-widget-join-channel.php:133
 msgid "Button text"
 msgstr ""
 

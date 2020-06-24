@@ -4,9 +4,11 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [1.9.4 - 2020-06-25](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.4)
+
 ### Enhancements
 
--   Add usage guide to join link
+-   Added usage guide to join link
 
 ### Bug Fixes
 
