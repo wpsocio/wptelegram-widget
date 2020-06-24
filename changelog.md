@@ -8,6 +8,10 @@ All notable changes to this project are documented in this file.
 
 -   Add usage guide to join link
 
+### Bug Fixes
+
+-   Fixed join link defaults
+
 ## [1.9.3 - 2020-06-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.3)
 
 ### Bug Fixes

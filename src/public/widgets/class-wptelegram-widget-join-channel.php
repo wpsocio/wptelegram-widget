@@ -104,13 +104,19 @@ class WPTelegram_Widget_Join_Channel extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$username = WPTG_Widget()->options()->get( 'username' );
-
 		$defaults = array(
 			'title' => '',
-			'link'  => sprintf( 'https://t.me/%s', $username ),
-			'text'  => sprintf( 'Join @%s on Telegram', $username ),
+			'link'  => WPTG_Widget()->options()->get( 'join_link_url', '' ),
+			'text'  => WPTG_Widget()->options()->get( 'join_link_text', '' ),
 		);
+
+		$username = WPTG_Widget()->options()->get( 'username', 'WPTelegram' );
+		if ( empty( $defaults['link'] ) ) {
+			$defaults['link'] = sprintf( 'https://t.me/%s', $username );
+		}
+		if ( empty( $defaults['text'] ) ) {
+			$defaults['text'] = sprintf( 'Join @%s on Telegram', $username );
+		}
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
