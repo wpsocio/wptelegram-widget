@@ -52,7 +52,7 @@ class WPTelegram_Widget_Admin {
 		if ( ! defined( 'WPTELEGRAM_LOADED' ) ) {
 			wp_enqueue_style(
 				$this->plugin->name(),
-				$this->plugin->url( '/admin/css/admin-menu' ) . $this->plugin->suffix() . '.css',
+				$this->plugin->url( '/admin/css/admin' ) . $this->plugin->suffix() . '.css',
 				array(),
 				$this->plugin->version(),
 				'all'
@@ -124,7 +124,7 @@ class WPTelegram_Widget_Admin {
 					'assets'      => array(
 						'pull_updates_url' => add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() ),
 						'admin_url'        => untrailingslashit( admin_url() ),
-						'logo_url'         => $this->plugin->url( '/admin/icons/icon-100x100.svg' ),
+						'logo_url'         => $this->plugin->url( '/admin/icons/icon-128x128.png' ),
 						'tg_icon'          => $this->plugin->url( '/admin/icons/tg-icon.svg' ),
 					),
 					'select_opts' => array(
