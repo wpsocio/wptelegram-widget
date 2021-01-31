@@ -1,0 +1,27 @@
+#adminmenu #toplevel_page_wptelegram_widget div.wp-menu-image::before {
+	content: ' ';
+	background-image: url('../icons/icon-20x20.png');
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 100% 0;
+	padding: 0px;
+	position: absolute;
+	right: 8px;
+	top: 7px;
+	-webkit-transition: none;
+	transition: none;
+}
+#adminmenu #toplevel_page_wptelegram_widget:not(.current):hover div.wp-menu-image::before {
+	background-position: 100% -40px;
+}
+#adminmenu #toplevel_page_wptelegram_widget.current div.wp-menu-image::before {
+	background-position: 100% -20px;
+}
+
+@media (min-width: 768px) {
+	#wptelegram-widget-settings > .wrapper {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+}

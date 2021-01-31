@@ -3,8 +3,8 @@
 **Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.0  
-**Tested up to:** 5.4.2  
-**Stable tag:** 1.9.4  
+**Tested up to:** 5.6  
+**Stable tag:** 1.9.5  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 

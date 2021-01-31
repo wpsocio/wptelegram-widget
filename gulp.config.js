@@ -15,7 +15,11 @@ const config = {
 	vendorBin: './vendor/bin',
 	PhpStandard: 'WordPress',
 	ESNextJS: srcDir + '/**/*.esnext.js',
-	styleSRC: 'public/css/*.css',
+	styleSRC: [
+		srcDir + '/**/css/*.css',
+		'!' + srcDir + '/**/*-rtl.css',
+		'!' + srcDir + '/**/*.min.css',
+	],
 	styleDest: srcDir,
 
 	// Translation options.

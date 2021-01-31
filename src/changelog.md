@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [1.9.5 - 2021-01-31](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.5)
+
+## [1.9.5 - 2021-01-31](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.5)
+
+### Enhancements
+
+-   Added compatibility with WP 5.6
+
 ## [1.9.4 - 2020-06-25](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.4)
 
 ### Enhancements

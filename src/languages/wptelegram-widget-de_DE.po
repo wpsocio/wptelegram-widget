@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2020-06-24 20:11:55+00:00\n"
+"POT-Creation-Date: 2021-01-31 12:19:11+00:00\n"
 "PO-Revision-Date: 2020-04-20 02:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -20,12 +20,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: blocks\n"
 "X-Poedit-SearchPathExcluded-1: admin/settings\n"
 
-#: admin/class-wptelegram-widget-admin.php:264
+#: admin/class-wptelegram-widget-admin.php:274
 #, fuzzy
 msgid "WP Telegram"
 msgstr "WP Telegram Widget"
 
-#: admin/class-wptelegram-widget-admin.php:294
+#: admin/class-wptelegram-widget-admin.php:304
 msgid "Telegram Widget"
 msgstr "Telegram Widget"
 

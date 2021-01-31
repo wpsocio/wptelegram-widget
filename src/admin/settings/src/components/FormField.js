@@ -20,14 +20,18 @@ const FormField = (props) => {
 			})
 		);
 	} else if ('multicheck' === controlProps.type) {
-		field = Object.entries(options).map(([value, _label]) =>
+		field = Object.entries(options).map(([value, _label], i) =>
 			controlledField({
 				...props,
 				name: props.name + '[]',
 				type: 'checkbox',
 				value,
 				_label,
-				controlProps: { ...controlProps, type: 'checkbox' },
+				controlProps: {
+					...controlProps,
+					type: 'checkbox',
+					id: value + i,
+				},
 			})
 		);
 	} else if ('checkbox' === controlProps.type) {
@@ -72,15 +76,15 @@ const fieldComponent = (props) => {
 		field = (
 			<Form.Check
 				{...input}
-				{...controlProps}
-				inline
-				// checked={input.value === key}
-				label={_label}
 				id={
 					['radio', 'multicheck'].includes(controlProps.type)
 						? `${input.name}_${input.value}`
 						: input.name
 				}
+				{...controlProps}
+				inline
+				// checked={input.value === key}
+				label={_label}
 				value={input.value}
 			/>
 		);
