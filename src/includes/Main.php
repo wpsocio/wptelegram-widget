@@ -166,9 +166,9 @@ class Main {
 		require_once $this->dir( '/includes/helper-functions.php' );
 
 		/**
-		* The class responsible for loading WPTelegram_Bot_API library
-		*/
-		require_once $this->dir( '/includes/wptelegram-bot-api/class-wptelegram-bot-api-loader.php' );
+		 * The class responsible for loading WPTelegram_Bot_API library
+		 */
+		require_once $this->dir( '/includes/wptelegram-bot-api/src/index.php' );
 
 		$this->loader = new Loader();
 
