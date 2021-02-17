@@ -9,6 +9,8 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes;
+
 /**
  * Fired during plugin activation.
  *
@@ -19,7 +21,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_Activator {
+class Activator {
 
 	/**
 	 * Do the activation stuff

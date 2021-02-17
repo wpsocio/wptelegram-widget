@@ -9,6 +9,8 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes\restApi;
+
 /**
  * Base class for all the endpoints.
  *
@@ -18,7 +20,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani <@manzoorwanijk>
  */
-abstract class WPTelegram_Widget_REST_Controller extends WP_REST_Controller {
+abstract class RESTController extends \WP_REST_Controller {
 
 	/**
 	 * The namespace of this controller's route.

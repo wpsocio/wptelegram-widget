@@ -12,6 +12,8 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes;
+
 /**
  * Define the internationalization functionality.
  *
@@ -23,7 +25,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_I18n {
+class I18n {
 
 
 	/**

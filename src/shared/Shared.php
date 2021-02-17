@@ -9,6 +9,12 @@
  * @subpackage WPTelegram_Widget/public
  */
 
+namespace WPTelegram\Widget\shared;
+
+use WPTelegram\Widget\includes\BaseClass;
+use DOMDocument;
+use DOMXPath;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -19,16 +25,7 @@
  * @subpackage WPTelegram_Widget/public
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_Public {
-
-	/**
-	 * The plugin class instance.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      WPTelegram_Widget $plugin The plugin class instance.
-	 */
-	private $plugin;
+class Shared extends BaseClass {
 
 	/**
 	 * The Telegram API
@@ -56,7 +53,7 @@ class WPTelegram_Widget_Public {
 	 */
 	public function __construct( $plugin ) {
 
-		$this->plugin = $plugin;
+		parent::__construct( $plugin );
 
 		self::$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false );
 	}

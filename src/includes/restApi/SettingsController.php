@@ -9,6 +9,11 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes\restApi;
+
+use WP_REST_Request;
+use WP_REST_Server;
+
 /**
  * Class to handle the settings endpoint.
  *
@@ -18,7 +23,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani <@manzoorwanijk>
  */
-class WPTelegram_Widget_Settings_Controller extends WPTelegram_Widget_REST_Controller {
+class SettingsController extends RESTController {
 
 	/**
 	 * The plugin settings/options.

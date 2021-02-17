@@ -1,6 +1,6 @@
 <?php
 /**
- * The ajax widget.
+ * The join channel widget.
  *
  * @link       https://t.me/manzoorwanijk
  * @since      1.6.0
@@ -9,11 +9,14 @@
  * @subpackage WPTelegram_Widget/public
  */
 
+namespace WPTelegram\Widget\shared\widgets;
+
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+
 /**
  * Adds WP Telegram Widget widget.
  */
-class WPTelegram_Widget_Join_Channel extends WP_Widget {
+class JoinChannel extends \WP_Widget {
 
 	/**
 	 * Register widget with WordPress.

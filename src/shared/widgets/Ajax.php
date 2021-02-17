@@ -1,6 +1,6 @@
 <?php
 /**
- * The legacy widget.
+ * The ajax widget.
  *
  * @link       https://t.me/manzoorwanijk
  * @since      1.6.0
@@ -9,21 +9,24 @@
  * @subpackage WPTelegram_Widget/public
  */
 
+namespace WPTelegram\Widget\shared\widgets;
+
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+
 /**
- * Adds WP Telegram Widget widget
+ * Adds WP Telegram Widget widget.
  */
-class WPTelegram_Widget_Widget extends WP_Widget {
+class Ajax extends \WP_Widget {
 
 	/**
-	 * Register widget with WordPress
+	 * Register widget with WordPress.
 	 */
 	public function __construct() {
 		parent::__construct(
-			'wptelegram_widget_widget',
-			esc_html__( 'WP Telegram Legacy Widget', 'wptelegram-widget' ),
+			'wptelegram_widget_ajax_widget',
+			esc_html__( 'WP Telegram Ajax Widget', 'wptelegram-widget' ),
 			array(
-				'description' => esc_html__( 'Display the Telegram Public Channel or Group Feed in a widget', 'wptelegram-widget' ),
+				'description' => esc_html__( 'Display the Telegram Public Channel Feed in an ajax widget with infinite scroll.', 'wptelegram-widget' ),
 			)
 		);
 	}
@@ -31,7 +34,7 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 	/**
 	 * Outputs the content for the widget.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $args     Display arguments including 'before_title', 'after_title', 'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Pages widget instance.
@@ -42,7 +45,7 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 		/**
 		 * Filters the widget title.
 		 *
-		 * @since 1.0.0
+		 * @since 1.6.0
 		 *
 		 * @param string $title    The widget title. Default 'Pages'.
 		 * @param array  $instance Array of settings for the current widget.
@@ -52,7 +55,7 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 
 		unset( $instance['title'] );
 
-		$content = wptelegram_widget( $instance, false );
+		$content = wptelegram_ajax_widget( $instance, false );
 
 		if ( ! empty( $content ) ) {
 			echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -70,7 +73,7 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 	/**
 	 * Handles updating settings for the widget instance.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $new_instance New settings for this instance as input by the user via WP_Widget::form().
 	 * @param array $old_instance Old settings for this instance.
@@ -82,20 +85,14 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 
-		if ( in_array( $new_instance['author_photo'], array( 'auto', 'always_show', 'always_hide' ), true ) ) {
-			$instance['author_photo'] = $new_instance['author_photo'];
-		} else {
-			$instance['author_photo'] = 'auto';
-		}
-
 		$instance['widget_width'] = sanitize_text_field( $new_instance['widget_width'] );
 		if ( ! empty( $instance['widget_width'] ) ) {
-			$instance['widget_width'] = absint( $instance['widget_width'] );
+			$instance['widget_width'] = $instance['widget_width'];
 		}
 
-		$instance['num_messages'] = sanitize_text_field( $new_instance['num_messages'] );
-		if ( ! empty( $instance['num_messages'] ) ) {
-			$instance['num_messages'] = absint( $instance['num_messages'] );
+		$instance['widget_height'] = sanitize_text_field( $new_instance['widget_height'] );
+		if ( ! empty( $instance['widget_height'] ) ) {
+			$instance['widget_height'] = absint( $instance['widget_height'] );
 		}
 
 		return $instance;
@@ -104,22 +101,21 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 	/**
 	 * Outputs the settings form for the widget.
 	 *
-	 * @since 1.0.0
+	 * @since 1.6.0
 	 *
 	 * @param array $instance Current settings.
 	 */
 	public function form( $instance ) {
 
 		$defaults = array(
-			'title'        => '',
-			'num_messages' => 5,
-			'widget_width' => 100,
-			'author_photo' => 'auto',
+			'title'         => '',
+			'widget_width'  => '100%',
+			'widget_height' => 600,
 		);
 
-		// Use global options.
+		// use global options.
 		foreach ( $defaults as $key => $value ) {
-			$defaults[ $key ] = WPTG_Widget()->options()->get( $key );
+			$defaults[ $key ] = WPTG_Widget()->options()->get( $key, $value );
 		}
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
@@ -129,22 +125,13 @@ class WPTelegram_Widget_Widget extends WP_Widget {
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>
-			<input type="text" value="<?php echo esc_attr( $instance['widget_width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>" class="widefat" placeholder="100" />
+			<input type="text" value="<?php echo esc_attr( $instance['widget_width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>" class="widefat" placeholder="300 <?php esc_html_e( 'or', 'wptelegram-widget' ); ?> 100%" />
 			<br />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'author_photo' ) ); ?>"><?php esc_html_e( 'Author Photo', 'wptelegram-widget' ); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name( 'author_photo' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'author_photo' ) ); ?>" class="widefat">
-				<option value="auto"<?php selected( $instance['author_photo'], 'auto' ); ?>><?php esc_html_e( 'Auto', 'wptelegram-widget' ); ?></option>
-				<option value="always_show"<?php selected( $instance['author_photo'], 'always_show' ); ?>><?php esc_html_e( 'Always show', 'wptelegram-widget' ); ?></option>
-				<option value="always_hide"<?php selected( $instance['author_photo'], 'always_hide' ); ?>><?php esc_html_e( 'Always hide', 'wptelegram-widget' ); ?></option>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'num_messages' ) ); ?>"><?php esc_html_e( 'Number of Messages', 'wptelegram-widget' ); ?></label>
-			<input type="number" value="<?php echo esc_attr( $instance['num_messages'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'num_messages' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'num_messages' ) ); ?>" class="widefat" placeholder="5" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_height' ) ); ?>"><?php esc_html_e( 'Widget Height', 'wptelegram-widget' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['widget_height'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_height' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_height' ) ); ?>" class="widefat" placeholder="600" />
 			<br />
-			<span class="description"><?php esc_html_e( 'Number of messages to display in the widget', 'wptelegram-widget' ); ?></span>
 		</p>
 		<?php
 	}

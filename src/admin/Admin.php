@@ -5,9 +5,13 @@
  * @link       https://t.me/manzoorwanijk
  * @since      1.0.0
  *
- * @package    WPTelegram_Widget
- * @subpackage WPTelegram_Widget/admin
+ * @package    WPTelegram\Widget
+ * @subpackage WPTelegram\Widget\admin
  */
+
+namespace WPTelegram\Widget\admin;
+
+use WPTelegram\Widget\includes\BaseClass;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -15,31 +19,11 @@
  * Defines the plugin name, version, and two hooks to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    WPTelegram_Widget
- * @subpackage WPTelegram_Widget/admin
+ * @package    WPTelegram\Widget
+ * @subpackage WPTelegram\Widget\admin
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_Admin {
-
-	/**
-	 * The plugin class instance.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      WPTelegram_Widget $plugin The plugin class instance.
-	 */
-	private $plugin;
-
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since 1.0.0
-	 * @param WPTelegram_Widget $plugin The plugin class instance.
-	 */
-	public function __construct( $plugin ) {
-
-		$this->plugin = $plugin;
-	}
+class Admin extends BaseClass {
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -120,7 +104,7 @@ class WPTelegram_Widget_Admin {
 						// phpcs:ignore Squiz.PHP.CommentedOutCode
 						'use' => 'server', // or 'browser'.
 					),
-					'saved_opts'  => current_user_can( 'manage_options' ) ? WPTelegram_Widget_Settings_Controller::get_default_settings() : array(), // Not to expose bot token to non-admins.
+					'saved_opts'  => current_user_can( 'manage_options' ) ? \WPTelegram\Widget\includes\restApi\SettingsController::get_default_settings() : array(), // Not to expose bot token to non-admins.
 					'assets'      => array(
 						'pull_updates_url' => add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() ),
 						'admin_url'        => untrailingslashit( admin_url() ),
@@ -162,7 +146,7 @@ class WPTelegram_Widget_Admin {
 			$data = array(
 				'blocks' => array(
 					'assets'         => array(
-						'message_view_url' => WPTelegram_Widget_Public::get_message_view_url( '%username%', '%message_id%', '%userpic%' ),
+						'message_view_url' => \WPTelegram\Widget\shared\Shared::get_message_view_url( '%username%', '%message_id%', '%userpic%' ),
 					),
 					'join_link_url'  => $this->plugin->options()->get( 'join_link_url' ),
 					'join_link_text' => $this->plugin->options()->get( 'join_link_text' ),
@@ -284,9 +268,7 @@ class WPTelegram_Widget_Admin {
 	 * @since 1.7.0
 	 */
 	public function register_rest_routes() {
-		$controller = new WPTelegram_Widget_Settings_Controller();
-		$controller->register_routes();
-		$controller = new WPTelegram_Widget_Bot_API_Controller();
+		$controller = new \WPTelegram\Widget\includes\restApi\SettingsController();
 		$controller->register_routes();
 	}
 
@@ -297,7 +279,7 @@ class WPTelegram_Widget_Admin {
 	 */
 	public function add_plugin_admin_menu() {
 
-		if ( defined( 'WPTELEGRAM_LOADED' ) && WPTELEGRAM_LOADED ) {
+		if ( defined( 'WPTELEGRAM_LOADED' ) ) {
 			add_submenu_page(
 				'wptelegram',
 				esc_html( $this->plugin->title() ),
@@ -336,11 +318,11 @@ class WPTelegram_Widget_Admin {
 	 */
 	public function register_widgets() {
 
-		register_widget( 'WPTelegram_Widget_Widget' );
+		register_widget( '\WPTelegram\Widget\shared\widgets\Legacy' );
 
-		register_widget( 'WPTelegram_Widget_Ajax_Widget' );
+		register_widget( '\WPTelegram\Widget\shared\widgets\Ajax' );
 
-		register_widget( 'WPTelegram_Widget_Join_Channel' );
+		register_widget( '\WPTelegram\Widget\shared\widgets\JoinChannel' );
 	}
 
 	/**
@@ -373,7 +355,7 @@ class WPTelegram_Widget_Admin {
 
 		$params = $this->get_update_params();
 
-		$bot_api = new WPTelegram_Bot_API( $bot_token );
+		$bot_api = new \WPTelegram_Bot_API( $bot_token );
 
 		$res = $bot_api->getUpdates( $params );
 

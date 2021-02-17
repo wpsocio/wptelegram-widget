@@ -9,6 +9,11 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes;
+
+use Iterator;
+use ArrayAccess;
+
 /**
  * Allows an easy access to plugin options/settings
  * which are in the form of an array
@@ -17,7 +22,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
+class Options implements Iterator, ArrayAccess {
 
 	/**
 	 * Plugin option key saved in the database
@@ -132,7 +137,7 @@ class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
 	 */
 	public function remove( $key ) {
 
-		unset( $this->data[ $offset ] );
+		unset( $this->data[ $key ] );
 
 		return $this->update_data();
 	}
@@ -251,7 +256,7 @@ class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
 	 * @param string $key Options array key.
 	 */
 	public function __unset( $key ) {
-		return $this->_unset( $key );
+		return $this->remove( $key );
 	}
 
 	/**
@@ -342,7 +347,7 @@ class WPTelegram_Widget_Options implements Iterator, ArrayAccess {
 	 * @param mixed $offset The offset to unset.
 	 */
 	public function offsetUnset( $offset ) {
-		return $this->_unset( $offset );
+		return $this->remove( $offset );
 	}
 
 	/**

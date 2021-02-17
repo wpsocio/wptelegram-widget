@@ -36,12 +36,16 @@ define( 'WPTELEGRAM_WIDGET_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) 
 defined( 'WPTELEGRAM_WIDGET_URL' ) || define( 'WPTELEGRAM_WIDGET_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
 
 /**
+ * Include autoloader.
+ */
+require WPTELEGRAM_WIDGET_DIR . '/autoload.php';
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wptelegram-widget-activator.php
  */
 function activate_wptelegram_widget() {
-	require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-activator.php';
-	WPTelegram_Widget_Activator::activate();
+	\WPTelegram\Widget\includes\Activator::activate();
 }
 
 /**
@@ -49,33 +53,28 @@ function activate_wptelegram_widget() {
  * This action is documented in includes/class-wptelegram-widget-deactivator.php
  */
 function deactivate_wptelegram_widget() {
-	require_once WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget-deactivator.php';
-	WPTelegram_Widget_Deactivator::deactivate();
+	\WPTelegram\Widget\includes\Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_wptelegram_widget' );
 register_deactivation_hook( __FILE__, 'deactivate_wptelegram_widget' );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require WPTELEGRAM_WIDGET_DIR . '/includes/class-wptelegram-widget.php';
-
-/**
  * Begins execution of the plugin and acts as the main instance of WPTelegram_Widget.
  *
- * Returns the main instance of WPTelegram_Login to prevent the need to use globals.
+ * Returns the main instance of WPTelegram_Widget to prevent the need to use globals.
  *
  * Since everything within the plugin is registered via hooks,
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
  * @since    1.0.0
+ *
+ * @return \WPTelegram\Widget\includes\Main
  */
 function WPTG_Widget() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName -- Ignore  snake_case
 
-	return WPTelegram_Widget::instance();
+	return \WPTelegram\Widget\includes\Main::instance();
 }
 
 // Fire.

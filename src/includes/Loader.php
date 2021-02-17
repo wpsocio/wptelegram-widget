@@ -9,6 +9,8 @@
  * @subpackage WPTelegram_Widget/includes
  */
 
+namespace WPTelegram\Widget\includes;
+
 /**
  * Register all actions and filters for the plugin.
  *
@@ -20,7 +22,7 @@
  * @subpackage WPTelegram_Widget/includes
  * @author     Manzoor Wani
  */
-class WPTelegram_Widget_Loader {
+class Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
