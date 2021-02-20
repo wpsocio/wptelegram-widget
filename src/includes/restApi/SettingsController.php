@@ -11,6 +11,8 @@
 
 namespace WPTelegram\Widget\includes\restApi;
 
+use WPTelegram\Widget\includes\Utils;
+use WPTelegram\BotAPI\API;
 use WP_REST_Request;
 use WP_REST_Server;
 
@@ -26,6 +28,21 @@ use WP_REST_Server;
 class SettingsController extends RESTController {
 
 	/**
+	 * Pattern to match Telegram username.
+	 *
+	 * @var string Patern.
+	 * @since x.y.x
+	 */
+	const TG_USERNAME_PATTERN = '[a-zA-Z][a-zA-Z0-9_]{3,30}[a-zA-Z0-9]';
+
+	/**
+	 * The base of this controller's route.
+	 *
+	 * @var string
+	 */
+	const REST_BASE = '/settings';
+
+	/**
 	 * The plugin settings/options.
 	 *
 	 * @var string
@@ -38,8 +55,7 @@ class SettingsController extends RESTController {
 	 * @since 1.7.0
 	 */
 	public function __construct() {
-		$this->rest_base = 'settings';
-		$this->settings  = WPTG_Widget()->options();
+		$this->settings = WPTG_Widget()->options();
 	}
 
 	/**
@@ -50,8 +66,8 @@ class SettingsController extends RESTController {
 	public function register_routes() {
 
 		register_rest_route(
-			$this->namespace,
-			'/' . $this->rest_base,
+			self::NAMESPACE,
+			self::REST_BASE,
 			array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
@@ -91,6 +107,8 @@ class SettingsController extends RESTController {
 
 		// If we have somethings saved.
 		if ( ! empty( $settings ) ) {
+			unset( $settings['messages'] );
+			unset( $settings['last_update_id'] );
 			return $settings;
 		}
 
@@ -122,7 +140,7 @@ class SettingsController extends RESTController {
 	 */
 	public function update_settings( WP_REST_Request $request ) {
 
-		$settings = array();
+		$settings = WPTG_Widget()->options()->get_data();
 
 		foreach ( self::get_settings_params() as $key => $args ) {
 			$value = $request->get_param( $key );
@@ -134,6 +152,9 @@ class SettingsController extends RESTController {
 		}
 
 		WPTG_Widget()->options()->set_data( $settings )->update_data();
+
+		unset( $settings['messages'] );
+		unset( $settings['last_update_id'] );
 
 		return rest_ensure_response( $settings );
 	}
@@ -147,108 +168,99 @@ class SettingsController extends RESTController {
 	 * @return array Query parameters for the settings.
 	 */
 	public static function get_settings_params( $context = 'edit' ) {
-		return array(
-			'username'             => array(
-				'type'              => 'string',
-				'required'          => ( 'edit' === $context ),
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => array( __CLASS__, 'validate_param' ),
-			),
-			'widget_width'         => array(
-				'type'              => 'string',
-				'default'           => '100%',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'widget_height'        => array(
-				'type'              => 'string',
-				'default'           => '600',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'bot_token'            => array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => array( __CLASS__, 'validate_param' ),
-			),
-			'author_photo'         => array(
-				'type'              => 'string',
-				'default'           => 'auto',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-				'enum'              => array( 'auto', 'always_show', 'always_hide' ),
-			),
-			'num_messages'         => array(
-				'type'              => 'string',
-				'default'           => '5',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'telegram_blocked'     => array(
-				'type'              => 'string',
-				'default'           => 'no',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-				'enum'              => array( 'yes', 'no' ),
-			),
-			'google_script_url'    => array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'join_link_url'        => array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'join_link_text'       => array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
-			),
-			'join_link_post_types' => array(
-				'type'    => 'array',
-				'default' => array( 'post' ),
-				'items'   => array(
-					'type' => 'string',
+		$ajax_widget_props = array(
+			'username' => array(
+				'type'     => 'string',
+				'required' => ( 'edit' === $context ),
+				'pattern'  => Utils::enhance_regex(
+					self::TG_USERNAME_PATTERN,
+					true
 				),
 			),
-			'join_link_position'   => array(
+			'width'    => array(
 				'type'    => 'string',
-				'default' => 'after_content',
-				'enum'    => array( 'before_content', 'after_content' ),
+				'default' => '100%',
 			),
-			'join_link_priority'   => array(
-				'type'              => 'string',
-				'default'           => '10',
-				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => 'rest_validate_request_arg',
+			'height'   => array(
+				'type'    => 'string',
+				'default' => '600',
 			),
 		);
-	}
 
-	/**
-	 * Update settings.
-	 *
-	 * @since 1.7.0
-	 *
-	 * @param mixed           $value   Value of the param.
-	 * @param WP_REST_Request $request WP REST API request.
-	 * @param string          $key     Param key.
-	 */
-	public static function validate_param( $value, WP_REST_Request $request, $key ) {
-		switch ( $key ) {
-			case 'bot_token':
-				if ( ! $value ) {
-					return true;
-				}
-				$pattern = '/\A\d{9,11}:[\w-]{35}\Z/';
-				break;
-			case 'username':
-				$pattern = '/\A[a-z]\w{3,30}[^\W_]\Z/i';
-				break;
-		}
-
-		return (bool) preg_match( $pattern, $value );
+		return array(
+			'ajax_widget'   => array(
+				'type'       => 'object',
+				'properties' => $ajax_widget_props,
+			),
+			'legacy_widget' => array(
+				'type'       => 'object',
+				'properties' => array_merge(
+					$ajax_widget_props,
+					array(
+						'username'     => array_merge(
+							$ajax_widget_props['username'],
+							array( 'required' => false )
+						),
+						'bot_token'    => array(
+							'type'    => 'string',
+							'pattern' => Utils::enhance_regex(
+								API::BOT_TOKEN_PATTERN,
+								true
+							),
+						),
+						'author_photo' => array(
+							'type'    => 'string',
+							'default' => 'auto',
+							'enum'    => array( 'auto', 'always_show', 'always_hide' ),
+						),
+						'num_messages' => array(
+							'type'    => 'string',
+							'default' => '5',
+						),
+					)
+				),
+			),
+			'join_link'     => array(
+				'type'       => 'object',
+				'properties' => array(
+					'url'        => array(
+						'type'   => 'string',
+						'format' => 'uri',
+					),
+					'text'       => array(
+						'type' => 'string',
+					),
+					'post_types' => array(
+						'type'    => 'array',
+						'default' => array( 'post' ),
+						'items'   => array(
+							'type' => 'string',
+						),
+					),
+					'position'   => array(
+						'type'    => 'string',
+						'default' => 'after_content',
+						'enum'    => array( 'before_content', 'after_content' ),
+					),
+					'priority'   => array(
+						'type'    => 'string',
+						'default' => '10',
+					),
+				),
+			),
+			'advanced'      => array(
+				'type'       => 'object',
+				'properties' => array(
+					'telegram_blocked'  => array(
+						'type'    => 'boolean',
+						'default' => false,
+					),
+					'google_script_url' => array(
+						'type'   => 'string',
+						'format' => 'uri',
+					),
+				),
+			),
+		);
 	}
 }

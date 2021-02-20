@@ -25,15 +25,15 @@ abstract class RESTController extends \WP_REST_Controller {
 	/**
 	 * The namespace of this controller's route.
 	 *
-	 * @since 1.7.0
 	 * @var string
+	 * @since x.y.x
 	 */
-	protected $namespace = 'wptelegram-widget/v1';
+	const NAMESPACE = 'wptelegram-widget/v1';
 
 	/**
 	 * The base of this controller's route.
 	 *
 	 * @var string
 	 */
-	protected $rest_base;
+	const REST_BASE = '';
 }

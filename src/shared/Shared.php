@@ -12,29 +12,20 @@
 namespace WPTelegram\Widget\shared;
 
 use WPTelegram\Widget\includes\BaseClass;
+use WPTelegram\Widget\includes\AssetManager;
 use DOMDocument;
 use DOMXPath;
 
 /**
  * The public-facing functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
+ * The public-facing functionality of the plugin.
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/public
  * @author     Manzoor Wani
  */
 class Shared extends BaseClass {
-
-	/**
-	 * The Telegram API
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @var WPTelegram_Bot_API $tg_api Telegram API Object.
-	 */
-	private $tg_api;
 
 	/**
 	 * Use ugly URLs
@@ -59,16 +50,6 @@ class Shared extends BaseClass {
 	}
 
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
-
-		wp_enqueue_style( $this->plugin->name(), $this->plugin->url( '/public/css/wptelegram-widget-public' ) . $this->plugin->suffix() . '.css', array(), $this->plugin->version(), 'all' );
-	}
-
-	/**
 	 * Register the stylesheets for blocks.
 	 *
 	 * @since 1.8.0
@@ -79,30 +60,12 @@ class Shared extends BaseClass {
 			return;
 		}
 
-		wp_register_style(
-			$this->plugin->name() . '-blocks',
-			$this->plugin->url( '/blocks/dist/blocks-build.css' ),
-			array( 'wp-components' ),
-			$this->plugin->version()
-		);
-
 		register_block_type(
 			'wptelegram/widget-join-channel',
 			array(
-				'style' => $this->plugin->name() . '-blocks',
+				'style' => AssetManager::BLOCKS_JS_HANDLE,
 			)
 		);
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		wp_enqueue_script( $this->plugin->name(), $this->plugin->url( '/public/js/wptelegram-widget-public' ) . $this->plugin->suffix() . '.js', array( 'jquery' ), $this->plugin->version(), false );
-
 	}
 
 	/**
@@ -955,175 +918,5 @@ class Shared extends BaseClass {
 			'display'  => __( 'Every 5 Minutes', 'wptelegram-widget' ),
 		);
 		return $schedules;
-	}
-
-	/**
-	 * Do the necessary db upgrade, if needed
-	 *
-	 * @since    2.0.0
-	 */
-	public function do_upgrade() {
-
-		$current_version = get_option( 'wptelegram_widget_ver', '1.2.0' );
-
-		if ( ! version_compare( $current_version, $this->plugin->version(), '<' ) ) {
-			return;
-		}
-
-		do_action( 'wptelegram_widget_before_do_upgrade', $current_version );
-
-		// the sequential upgrades
-		// subsequent upgrade depends upon the previous one.
-		$version_upgrades = array(
-			'1.3.0', // first upgrade.
-			'1.4.0',
-			'1.5.0',
-			'1.6.1',
-			'1.7.0',
-			'1.9.0',
-		);
-
-		// always.
-		if ( ! in_array( $this->plugin->version(), $version_upgrades, true ) ) {
-			$version_upgrades[] = $this->plugin->version();
-		}
-
-		foreach ( $version_upgrades as $target_version ) {
-
-			if ( version_compare( $current_version, $target_version, '<' ) ) {
-
-				$this->upgrade_to( $target_version );
-
-				$current_version = $target_version;
-			}
-		}
-
-		do_action( 'wptelegram_widget_after_do_upgrade', $current_version );
-	}
-
-	/**
-	 * Upgrade to a specific version
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param string $version The plugin verion to upgrade to.
-	 */
-	private function upgrade_to( $version ) {
-
-		// 2.0.1 becomes 201
-		$_version = str_replace( '.', '', $version );
-
-		$method = array( $this, "upgrade_to_{$_version}" );
-
-		if ( is_callable( $method ) ) {
-
-			call_user_func( $method );
-		}
-
-		update_option( 'wptelegram_widget_ver', $version );
-	}
-
-	/**
-	 * Upgrade to version 1.3.0
-	 *
-	 * @since    1.4.0
-	 */
-	private function upgrade_to_130() {
-
-		$option   = 'wptelegram_widget_messages';
-		$messages = get_option( $option, array() );
-
-		if ( ! empty( $messages ) ) {
-
-			WPTG_Widget()->options()->set( 'messages', $messages );
-		}
-
-		delete_option( $option );
-
-		$transient = 'wptelegram_widget_last_update_id';
-		$update_id = (int) get_site_transient( $transient );
-		if ( $update_id ) {
-			WPTG_Widget()->options()->set( 'last_update_id', $update_id );
-			delete_site_transient( $transient );
-		}
-
-		// set cron event in case of active plugin update.
-		if ( ! wp_next_scheduled( 'wptelegram_widget_pull_updates' ) ) {
-			wp_schedule_event( time(), 'wptelegram_five_minutely', 'wptelegram_widget_pull_updates' );
-		}
-	}
-
-	/**
-	 * Upgrade to version 1.4.0
-	 *
-	 * @since    1.4.0
-	 */
-	private function upgrade_to_140() {
-		flush_rewrite_rules();
-	}
-
-	/**
-	 * Upgrade to version 1.5.0
-	 *
-	 * @since    1.5.0
-	 */
-	private function upgrade_to_150() {
-		wp_clear_scheduled_hook( 'wptelegram_widget_pull_updates' );
-
-		// set cron event in case of active plugin update.
-		if ( ! wp_next_scheduled( 'wptelegram_widget_cron_pull_updates' ) ) {
-			wp_schedule_event( time(), 'wptelegram_five_minutely', 'wptelegram_widget_cron_pull_updates' );
-		}
-	}
-
-	/**
-	 * Upgrade to version 1.6.1
-	 *
-	 * @since    1.6.1
-	 */
-	private function upgrade_to_161() {
-		flush_rewrite_rules();
-	}
-
-	/**
-	 * Upgrade to version 1.7.0
-	 *
-	 * @since    1.7.0
-	 */
-	private function upgrade_to_170() {
-
-		$google_script_url = WPTG_Widget()->options()->get( 'google_script_url' );
-
-		if ( ! empty( $google_script_url ) ) {
-			$telegram_blocked = 'yes';
-		} else {
-			$telegram_blocked = 'no';
-		}
-
-		WPTG_Widget()->options()->set( 'telegram_blocked', $telegram_blocked );
-	}
-
-	/**
-	 * Upgrade to version 1.9.0
-	 *
-	 * @since    1.9.0
-	 */
-	private function upgrade_to_190() {
-
-		$username = WPTG_Widget()->options()->get( 'username' );
-
-		$field_values = array(
-			'join_link_post_types' => array( 'post' ),
-			'join_link_position'   => 'after_content',
-		);
-
-		if ( $username ) {
-			$field_values['join_link_url']  = sprintf( 'https://t.me/%s', $username );
-			$field_values['join_link_text'] = sprintf( 'Join @%s on Telegram', $username );
-		}
-
-		foreach ( $field_values as $field => $value ) {
-			WPTG_Widget()->options()->set( $field, $value );
-		}
 	}
 }

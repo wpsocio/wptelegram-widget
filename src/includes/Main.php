@@ -85,6 +85,15 @@ class Main {
 	protected $options;
 
 	/**
+	 * The assets handler.
+	 *
+	 * @since    x.y.z
+	 * @access   protected
+	 * @var      string    $assets    The assets handler.
+	 */
+	protected $assets;
+
+	/**
 	 * Main class Instance.
 	 *
 	 * Ensures only one instance of the class is loaded or can be loaded.
@@ -133,6 +142,7 @@ class Main {
 
 		$this->load_dependencies();
 		$this->set_options();
+		$this->set_assets();
 
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -166,7 +176,7 @@ class Main {
 		require_once $this->dir( '/includes/helper-functions.php' );
 
 		/**
-		 * The class responsible for loading WPTelegram_Bot_API library
+		 * The class responsible for loading \WPTelegram\BotAPI library
 		 */
 		require_once $this->dir( '/includes/wptelegram-bot-api/src/index.php' );
 
@@ -204,6 +214,30 @@ class Main {
 	}
 
 	/**
+	 * Set the assets handler.
+	 *
+	 * @since    x.y.z
+	 * @access   private
+	 */
+	private function set_assets() {
+		$this->assets = new Assets( $this->dir( '/assets' ), $this->url( '/assets' ) );
+	}
+
+
+	/**
+	 * Get the plugin assets handler.
+	 *
+	 * @since    x.y.z
+	 * @access   public
+	 *
+	 * @return Assets The assets instance.
+	 */
+	public function assets() {
+
+		return $this->assets;
+	}
+
+	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
@@ -213,13 +247,6 @@ class Main {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Admin( $this );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'enqueue_block_editor_assets' );
-
-		$this->loader->add_filter( 'script_loader_tag', $plugin_admin, 'format_twitter_script_tag', 10, 3 );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu', 11 );
 
@@ -241,6 +268,10 @@ class Main {
 
 		$this->loader->add_filter( 'block_categories', $plugin_admin, 'register_block_category', 10, 1 );
 
+		$utils = new Utils();
+
+		$this->loader->add_filter( 'rest_request_before_callbacks', __NAMESPACE__ . '\Utils', 'fitler_rest_errors', 10, 3 );
+
 	}
 
 	/**
@@ -252,12 +283,11 @@ class Main {
 	 */
 	private function define_public_hooks() {
 
+		$upgrade = new Upgrade( $this );
+
+		$this->loader->add_action( 'after_setup_theme', $upgrade, 'do_upgrade' );
+
 		$plugin_public = new Shared( $this );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
-		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'do_upgrade' );
 
 		$this->loader->add_action( 'init', $plugin_public, 'add_rewrite_rules' );
 
@@ -287,8 +317,22 @@ class Main {
 		// some dumb people don't remove your schedule.
 		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
 
-		$proprity = $this->options()->get( 'join_link_priority', 10 );
+		$join_link = $this->options()->get( 'join_link' );
+		$proprity  = empty( $join_link['priority'] ) ? 10 : absint( $join_link['priority'] );
+
 		$this->loader->add_filter( 'the_content', $plugin_public, 'add_join_link_to_post_content', $proprity, 1 );
+
+		$asset_manager = new AssetManager( $this );
+
+		$this->loader->add_action( 'init', $asset_manager, 'register_assets' );
+
+		$this->loader->add_action( 'wp_enqueue_scripts', $asset_manager, 'enqueue_public_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $asset_manager, 'enqueue_public_scripts' );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $asset_manager, 'enqueue_admin_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $asset_manager, 'enqueue_admin_scripts' );
+
+		$this->loader->add_action( 'enqueue_block_editor_assets', $asset_manager, 'enqueue_block_editor_assets' );
 
 	}
 
