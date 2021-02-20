@@ -4,6 +4,5 @@
 	"[php]": {
 		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "persoderlind.vscode-phpcbf"
-	},
-	"intelephense.stubs": ["Core", "date", "dom", "json", "pcre", "SPL", "standard", "wordpress"]
+	}
 }

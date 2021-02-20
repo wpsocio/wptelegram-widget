@@ -12,6 +12,7 @@
 namespace WPTelegram\Widget\admin;
 
 use WPTelegram\Widget\includes\BaseClass;
+use WPTelegram\BotAPI\API as BotAPI;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -26,184 +27,6 @@ use WPTelegram\Widget\includes\BaseClass;
 class Admin extends BaseClass {
 
 	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 * @param string $hook_suffix The current admin page.
-	 */
-	public function enqueue_styles( $hook_suffix ) {
-
-		if ( ! defined( 'WPTELEGRAM_LOADED' ) ) {
-			wp_enqueue_style(
-				$this->plugin->name(),
-				$this->plugin->url( '/admin/css/admin' ) . $this->plugin->suffix() . '.css',
-				array(),
-				$this->plugin->version(),
-				'all'
-			);
-		}
-
-		// Load only on settings page.
-		if ( $this->is_settings_page( $hook_suffix ) ) {
-			wp_enqueue_style( $this->plugin->name() . '-bootstrap', $this->plugin->url( '/admin/css/bootstrap/bootstrap' ) . $this->plugin->suffix() . '.css', array(), $this->plugin->version(), 'all' );
-		}
-	}
-
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since 1.0.0
-	 * @param string $hook_suffix The current admin page.
-	 */
-	public function enqueue_scripts( $hook_suffix ) {
-
-		wp_enqueue_script(
-			$this->plugin->name(),
-			$this->plugin->url( '/admin/js/wptelegram-widget-admin' ) . $this->plugin->suffix() . '.js',
-			array( 'jquery' ),
-			$this->plugin->version(),
-			false
-		);
-
-		// script localization.
-		$translation_array = array(
-			'title'   => $this->plugin->title(),
-			'name'    => $this->plugin->name(),
-			'version' => $this->plugin->version(),
-			'api'     => array(
-				'ajax' => array(
-					'nonce' => wp_create_nonce( 'wptelegram-widget' ),
-					'use'   => 'server', // or may be 'browser'?
-					'url'   => admin_url( 'admin-ajax.php' ),
-				),
-				'rest' => array(
-					'nonce' => wp_create_nonce( 'wp_rest' ),
-					'url'   => esc_url_raw( rest_url( 'wptelegram-widget/v1' ) ),
-				),
-			),
-		);
-
-		wp_localize_script(
-			$this->plugin->name(),
-			'wptelegram_widget',
-			$translation_array
-		);
-
-		// Load only on settings page.
-		if ( $this->is_settings_page( $hook_suffix ) ) {
-
-			// Avoid caching for development.
-			$version = defined( 'WPTELEGRAM_DEV' ) && WPTELEGRAM_DEV ? gmdate( 'y.m.d-is', filemtime( $this->plugin->dir( '/admin/settings/dist/settings-dist.js' ) ) ) : $this->plugin->version();
-
-			wp_enqueue_script( $this->plugin->name() . '-settings', $this->plugin->url( '/admin/settings/dist/settings-dist.js' ), array( 'jquery' ), $version, true );
-
-			// Pass data to JS.
-			$data = array(
-				'settings' => array(
-					'info'        => array(
-						// phpcs:ignore Squiz.PHP.CommentedOutCode
-						'use' => 'server', // or 'browser'.
-					),
-					'saved_opts'  => current_user_can( 'manage_options' ) ? \WPTelegram\Widget\includes\restApi\SettingsController::get_default_settings() : array(), // Not to expose bot token to non-admins.
-					'assets'      => array(
-						'pull_updates_url' => add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() ),
-						'admin_url'        => untrailingslashit( admin_url() ),
-						'logo_url'         => $this->plugin->url( '/admin/icons/icon-128x128.png' ),
-						'tg_icon'          => $this->plugin->url( '/admin/icons/tg-icon.svg' ),
-					),
-					'select_opts' => array(
-						'post_types' => $this->get_post_type_options(),
-					),
-					'i18n'        => wptelegram_get_jed_locale_data( 'wptelegram-widget' ),
-				),
-			);
-
-			wp_add_inline_script(
-				$this->plugin->name(),
-				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
-				'before'
-			);
-
-			// For Facebook like button.
-			wp_add_inline_script(
-				$this->plugin->name() . '-settings',
-				'(function(d, s, id) {'
-				. '  var js, fjs = d.getElementsByTagName(s)[0];'
-				. '  if (d.getElementById(id)) return;'
-				. '  js = d.createElement(s); js.id = id;'
-				. '  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";'
-				. '  fjs.parentNode.insertBefore(js, fjs);'
-				. '}(document, "script", "facebook-jssdk"));',
-				'after'
-			);
-
-			// For Twitter Follow button.
-			wp_enqueue_script( $this->plugin->name() . '-twitter', 'https://platform.twitter.com/widgets.js', array(), $this->plugin->version(), true );
-		}
-
-		// If the block editor assets are loaded.
-		if ( did_action( 'enqueue_block_editor_assets' ) ) {
-			$data = array(
-				'blocks' => array(
-					'assets'         => array(
-						'message_view_url' => \WPTelegram\Widget\shared\Shared::get_message_view_url( '%username%', '%message_id%', '%userpic%' ),
-					),
-					'join_link_url'  => $this->plugin->options()->get( 'join_link_url' ),
-					'join_link_text' => $this->plugin->options()->get( 'join_link_text' ),
-				),
-			);
-
-			wp_add_inline_script(
-				$this->plugin->name(),
-				sprintf( 'Object.assign(wptelegram_widget, %s);', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
-				'before'
-			);
-		}
-	}
-
-	/**
-	 * Get the registered post types.
-	 *
-	 * @since  1.9.0
-	 * @return array
-	 */
-	public function get_post_type_options() {
-
-		$options = array();
-
-		$post_types = get_post_types( array( 'public' => true ), 'objects' );
-
-		foreach ( $post_types  as $post_type ) {
-
-			if ( 'attachment' !== $post_type->name ) {
-
-				$options[ $post_type->name ] = "{$post_type->labels->singular_name} ({$post_type->name})";
-			}
-		}
-
-		return apply_filters( 'wptelegram_widget_post_type_options', $options, $post_types );
-	}
-
-	/**
-	 * Format the Twitter script.
-	 *
-	 * @since 1.7.0
-	 *
-	 * @param string $tag    The `<script>` tag for the enqueued script.
-	 * @param string $handle The script's registered handle.
-	 * @param string $src    The script's source URL.
-	 *
-	 * @return string
-	 */
-	public function format_twitter_script_tag( $tag, $handle, $src ) {
-		if ( $this->plugin->name() . '-twitter' !== $handle ) {
-			return $tag;
-		}
-		// phpcs:ignore WordPress.WP.EnqueuedResources
-		return '<script async src="' . $src . '" charset="utf-8"></script>' . PHP_EOL;
-	}
-
-	/**
 	 * Enqueue assets for the Gutenberg block
 	 *
 	 * @since 1.7.0
@@ -211,29 +34,6 @@ class Admin extends BaseClass {
 	 */
 	public function is_settings_page( $hook_suffix ) {
 		return ( current_user_can( 'manage_options' ) && false !== strpos( $hook_suffix, '_page_' . $this->plugin->name() ) );
-	}
-
-	/**
-	 * Enqueue assets for the Gutenberg block.
-	 *
-	 * @since 1.5.0
-	 */
-	public function enqueue_block_editor_assets() {
-
-		wp_enqueue_script(
-			$this->plugin->name() . '-block',
-			$this->plugin->url( '/blocks/dist/blocks-build.js' ),
-			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-			$this->plugin->version(),
-			true
-		);
-
-		wp_enqueue_style(
-			$this->plugin->name() . '-block',
-			$this->plugin->url( '/blocks/dist/blocks-build.css' ),
-			array( 'wp-edit-blocks' ),
-			$this->plugin->version()
-		);
 	}
 
 	/**
@@ -305,10 +105,9 @@ class Admin extends BaseClass {
 	 * @since 1.7.0
 	 */
 	public function display_plugin_admin_page() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		include $this->plugin->dir( '/admin/partials/admin-display.php' );
+		?>
+			<div id="wptelegram-widget-settings"></div>
+		<?php
 	}
 
 	/**
@@ -355,7 +154,7 @@ class Admin extends BaseClass {
 
 		$params = $this->get_update_params();
 
-		$bot_api = new \WPTelegram_Bot_API( $bot_token );
+		$bot_api = new BotAPI( $bot_token );
 
 		$res = $bot_api->getUpdates( $params );
 
