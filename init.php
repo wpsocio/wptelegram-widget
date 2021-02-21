@@ -29,3 +29,6 @@ if ( ! defined( 'WPTELEGRAM_DEV' ) ) {
 }
 
 require plugin_dir_path( __FILE__ ) . 'src/wptelegram-widget.php';
+
+register_activation_hook( __FILE__, 'activate_wptelegram_widget' );
+register_deactivation_hook( __FILE__, 'deactivate_wptelegram_widget' );

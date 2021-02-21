@@ -121,7 +121,7 @@ class AssetManager extends BaseClass {
 			}
 			$data['uiData']['post_types'] = $this->get_post_type_options();
 
-			$data['assets']['pull_updates_url'] = add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() );
+			$data['assets']['pullUpdatesUrl'] = add_query_arg( array( 'action' => 'wptelegram_widget_pull_updates' ), site_url() );
 
 			wp_add_inline_script(
 				$entrypoint,

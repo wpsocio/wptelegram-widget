@@ -284,8 +284,9 @@ class Upgrade extends BaseClass {
 		$last_update_id   = $options->get( 'last_update_id' );
 		$telegram_blocked = $options->get( 'telegram_blocked' );
 
-		$new_settings['messages'][ $username ] = $messages;
-		$new_settings['last_update_id']        = $last_update_id;
+		$new_settings['messages'][ strtolower( $username ) ] = $messages;
+
+		$new_settings['last_update_id'] = $last_update_id;
 
 		$new_settings['advanced']['telegram_blocked'] = 'yes' === $telegram_blocked;
 

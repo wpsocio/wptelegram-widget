@@ -145,8 +145,8 @@ class Admin extends BaseClass {
 		 */
 		do_action( 'wptelegram_widget_pull_updates_init' );
 
-		$bot_token = $this->plugin->options()->get( 'bot_token' );
-		$username  = $this->plugin->options()->get( 'username' );
+		$bot_token = $this->plugin->options()->get_path( 'legacy_widget.bot_token' );
+		$username  = $this->plugin->options()->get_path( 'legacy_widget.username' );
 
 		if ( ! $bot_token || ! $username ) {
 			return;
@@ -162,8 +162,9 @@ class Admin extends BaseClass {
 
 			do_action( 'wptelegram_widget_getupdates_failed', $res, $bot_token );
 
+			$delete_webhook = (bool) apply_filters( 'wptelegram_widget_delete_webhook', true, $bot_token );
 			// Conflict: when webhook is active.
-			if ( ! is_wp_error( $res ) && 409 === $res->get_response_code() ) {
+			if ( $delete_webhook && ! is_wp_error( $res ) && 409 === $res->get_response_code() ) {
 				$bot_api->deleteWebhook();
 			}
 			return;
@@ -197,6 +198,8 @@ class Admin extends BaseClass {
 	private function get_update_params() {
 
 		$update_id = (int) $this->plugin->options()->get( 'last_update_id' );
+
+		$offset = null;
 
 		if ( $update_id ) {
 			$offset = ++$update_id;
@@ -240,49 +243,41 @@ class Admin extends BaseClass {
 		 */
 		do_action( 'wptelegram_widget_handle_updates_init', $updates );
 
-		$new_messages    = array();
-		$edited_messages = array();
-		$messages        = $this->plugin->options()->get( 'messages', array() );
+		$new_messages = array();
 
 		foreach ( (array) $updates as $update ) {
 
-			// $is_edited passed by reference
-			$message_id = $this->process_update( $update, $is_edited );
+			$message_id = $this->process_update( $update );
 
 			if ( $message_id ) {
-
-				// if it exists in the existing message IDs.
-				if ( $is_edited && in_array( $message_id, $messages, true ) ) {
-					$edited_messages[] = $message_id;
-				} else {
-					$new_messages[] = $message_id;
-				}
+				$new_messages[] = $message_id;
 			}
 		}
 
 		$update_id = $update['update_id'];
+
 		$this->plugin->options()->set( 'last_update_id', $update_id );
 
 		if ( ! empty( $new_messages ) ) {
+			$username = $this->plugin->options()->get_path( 'legacy_widget.username', '' );
 
-			$this->save_messages( $new_messages );
+			$this->save_messages( $new_messages, $username );
 		}
 
 		/**
 		 * Fires after doing everything
 		 */
-		do_action( 'wptelegram_widget_handle_updates_finish', $updates, $new_messages, $edited_messages );
+		do_action( 'wptelegram_widget_handle_updates_finish', $updates, $new_messages );
 	}
 
 	/**
 	 * Process an update.
 	 *
 	 * @param array $update    Update object.
-	 * @param bool  $is_edited If the update is an edit.
 	 *
 	 * @since    1.3.0
 	 */
-	private function process_update( $update, &$is_edited ) {
+	private function process_update( $update ) {
 
 		/**
 		 * Fires before doing anything
@@ -303,12 +298,10 @@ class Admin extends BaseClass {
 			return false;
 		}
 
-		$is_edited = ( 0 === strpos( $update_type, 'edited_' ) ) ? true : false;
-
 		/**
 		 * Fires after doing everything
 		 */
-		do_action( 'wptelegram_widget_process_update_finish', $update, $message, $verified, $is_edited );
+		do_action( 'wptelegram_widget_process_update_finish', $update, $message, $verified );
 
 		return $message['message_id'];
 
@@ -351,12 +344,12 @@ class Admin extends BaseClass {
 
 		$username = false;
 
-		if ( isset( $message['chat']['username'] ) ) {
+		if ( ! empty( $message['chat']['username'] ) ) {
 
 			$username = $message['chat']['username'];
 		}
 
-		$saved_username = $this->plugin->options()->get( 'username' );
+		$saved_username = $this->plugin->options()->get_path( 'legacy_widget.username' );
 
 		if ( ! empty( $saved_username ) && strtolower( $saved_username ) === strtolower( $username ) ) {
 			$verified = true;
@@ -370,16 +363,19 @@ class Admin extends BaseClass {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param array  $messages The mesage IDs.
-	 * @param string $type     Edited or new.
+	 * @param array  $new_messages The mesage IDs.
+	 * @param string $username     The username to save the messages for.
 	 * @return void
 	 */
-	private function save_messages( array $messages, $type = '' ) {
+	public function save_messages( array $new_messages, $username ) {
 
-		$type           = $type ? "{$type}_" : $type;
-		$saved_messages = $this->plugin->options()->get( "{$type}messages", array() );
-		$messages       = array_unique( array_merge( $saved_messages, $messages ) );
-		$messages       = array_filter( $messages );
+		$username = strtolower( $username );
+
+		$saved_messages = $this->plugin->options()->get( 'messages', array() );
+
+		$saved_username_messages = ! empty( $saved_messages[ $username ] ) ? $saved_messages[ $username ] : array();
+
+		$messages = array_filter( array_unique( array_merge( $saved_username_messages, $new_messages ) ) );
 
 		// Allow maximum 50 messages.
 		$limit = (int) apply_filters( 'wptelegram_widget_saved_messages_limit', 50 );
@@ -392,7 +388,9 @@ class Admin extends BaseClass {
 			$count = count( $messages );
 		}
 
-		$this->plugin->options()->set( "{$type}messages", $messages );
+		$saved_messages[ $username ] = $messages;
+
+		$this->plugin->options()->set( 'messages', $saved_messages );
 	}
 
 	/**
@@ -414,7 +412,7 @@ class Admin extends BaseClass {
 		}
 
 		// if the same bot token was not used.
-		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get( 'bot_token' ) ) {
+		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get( 'legacy_widget.bot_token' ) ) {
 			return;
 		}
 
@@ -425,14 +423,14 @@ class Admin extends BaseClass {
 		}
 
 		$used_username  = strtolower( $result['chat']['username'] );
-		$saved_username = strtolower( $this->plugin->options()->get( 'username' ) );
+		$saved_username = strtolower( $this->plugin->options()->get_path( 'legacy_widget.username' ) );
 
 		if ( $used_username !== $saved_username ) {
 			return;
 		}
 
-		$messages[] = $result['message_id'];
+		$messages = array( $result['message_id'] );
 
-		$this->save_messages( $messages );
+		$this->save_messages( $messages, $saved_username );
 	}
 }

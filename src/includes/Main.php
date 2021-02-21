@@ -287,40 +287,39 @@ class Main {
 
 		$this->loader->add_action( 'after_setup_theme', $upgrade, 'do_upgrade' );
 
-		$plugin_public = new Shared( $this );
+		$shared = new Shared( $this );
 
-		$this->loader->add_action( 'init', $plugin_public, 'add_rewrite_rules' );
+		$this->loader->add_action( 'init', $shared, 'add_rewrite_rules' );
 
-		$this->loader->add_filter( 'template_include', $plugin_public, 'set_embed_template', 99 );
+		$this->loader->add_filter( 'template_include', $shared, 'set_embed_template', 99 );
 
-		$this->loader->add_filter( 'template_include', $plugin_public, 'intercept_v_template', 999 );
+		$this->loader->add_filter( 'template_include', $shared, 'intercept_v_template', 999 );
 
-		$this->loader->add_action( 'init', $plugin_public, 'may_be_fire_pull_updates' );
+		$this->loader->add_action( 'init', $shared, 'may_be_fire_pull_updates' );
 
-		$this->loader->add_action( 'init', $plugin_public, 'register_blocks' );
+		$this->loader->add_action( 'init', $shared, 'register_blocks' );
 
-		$this->loader->add_action( 'wptelegram_widget_render_embedded_widget', $plugin_public, 'render_embedded_widget', 10, 1 );
+		$this->loader->add_action( 'wptelegram_widget_render_embedded_widget', $shared, 'render_embedded_widget', 10, 1 );
 
-		$this->loader->add_action( 'wptelegram_widget_render_embedded_post', $plugin_public, 'render_embedded_post', 10, 2 );
+		$this->loader->add_action( 'wptelegram_widget_render_embedded_post', $shared, 'render_embedded_post', 10, 2 );
 
-		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $plugin_public, 'cron_pull_updates' );
+		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $shared, 'cron_pull_updates' );
 
-		$this->loader->add_shortcode( 'wptelegram-ajax-widget', get_class( $plugin_public ), 'ajax_widget_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram-ajax-widget', get_class( $shared ), 'ajax_widget_shortcode' );
 
-		$this->loader->add_shortcode( 'wptelegram-join-channel', get_class( $plugin_public ), 'join_channel_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram-join-channel', get_class( $shared ), 'join_channel_shortcode' );
 
-		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $plugin_public ), 'post_embed_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $shared ), 'post_embed_shortcode' );
 
-		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $plugin_public ), 'post_embed_shortcode' );
+		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $shared ), 'post_embed_shortcode' );
 
 		// better be safe by using PHP_INT_MAX to make sure
 		// some dumb people don't remove your schedule.
-		$this->loader->add_filter( 'cron_schedules', $plugin_public, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
+		$this->loader->add_filter( 'cron_schedules', $shared, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
 
-		$join_link = $this->options()->get( 'join_link' );
-		$proprity  = empty( $join_link['priority'] ) ? 10 : absint( $join_link['priority'] );
+		$proprity = $this->options()->get_path( 'join_link.priority', 10 );
 
-		$this->loader->add_filter( 'the_content', $plugin_public, 'add_join_link_to_post_content', $proprity, 1 );
+		$this->loader->add_filter( 'the_content', $shared, 'add_join_link_to_post_content', $proprity, 1 );
 
 		$asset_manager = new AssetManager( $this );
 
