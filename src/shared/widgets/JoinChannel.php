@@ -86,14 +86,8 @@ class JoinChannel extends \WP_Widget {
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 
 		$instance['link'] = sanitize_text_field( $new_instance['link'] );
-		if ( ! empty( $instance['link'] ) ) {
-			$instance['link'] = $instance['link'];
-		}
 
 		$instance['text'] = sanitize_text_field( $new_instance['text'] );
-		if ( ! empty( $instance['text'] ) ) {
-			$instance['text'] = $instance['text'];
-		}
 
 		return $instance;
 	}
@@ -109,17 +103,9 @@ class JoinChannel extends \WP_Widget {
 
 		$defaults = array(
 			'title' => '',
-			'link'  => WPTG_Widget()->options()->get( 'join_link_url', '' ),
-			'text'  => WPTG_Widget()->options()->get( 'join_link_text', '' ),
+			'link'  => WPTG_Widget()->options()->get_path( 'join_link.url', '' ),
+			'text'  => WPTG_Widget()->options()->get_path( 'join_link.text', '' ),
 		);
-
-		$username = WPTG_Widget()->options()->get( 'username', 'WPTelegram' );
-		if ( empty( $defaults['link'] ) ) {
-			$defaults['link'] = sprintf( 'https://t.me/%s', $username );
-		}
-		if ( empty( $defaults['text'] ) ) {
-			$defaults['text'] = sprintf( 'Join @%s on Telegram', $username );
-		}
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>

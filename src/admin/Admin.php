@@ -398,11 +398,11 @@ class Admin extends BaseClass {
 	 *
 	 * @since  1.5.0
 	 *
-	 * @param Object  $res       The response from API call.
-	 * @param array   $responses The responses sent via P2TG.
-	 * @param WP_Post $post      The post being sent.
-	 * @param Object  $options   P2TG options object.
-	 * @param Object  $bot_api   Bot API object.
+	 * @param \Object  $res       The response from API call.
+	 * @param array    $responses The responses sent via P2TG.
+	 * @param \WP_Post $post      The post being sent.
+	 * @param \Object  $options   P2TG options object.
+	 * @param \Object  $bot_api   Bot API object.
 	 */
 	public function save_messages_sent_by_p2tg( $res, $responses, $post, $options, $bot_api ) {
 
@@ -412,7 +412,7 @@ class Admin extends BaseClass {
 		}
 
 		// if the same bot token was not used.
-		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get( 'legacy_widget.bot_token' ) ) {
+		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get_path( 'legacy_widget.bot_token' ) ) {
 			return;
 		}
 

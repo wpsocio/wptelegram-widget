@@ -86,4 +86,66 @@ class Utils {
 		}
 		return $pattern;
 	}
+
+	/**
+	 * Check whether the template path is valid.
+	 *
+	 * @since x.y.z
+	 * @param string $template The template path.
+	 *
+	 * @return bool
+	 */
+	public static function is_valid_template( $template ) {
+		/**
+		 * Only allow templates that are in the active theme directory,
+		 * parent theme directory, or the /wp-includes/theme-compat/ directory
+		 * (prevent directory traversal attacks)
+		 */
+		$valid_paths = array_map(
+			'realpath',
+			array(
+				get_stylesheet_directory(),
+				get_template_directory(),
+				ABSPATH . WPINC . '/theme-compat/',
+			)
+		);
+
+		$path = realpath( $template );
+
+		foreach ( $valid_paths as $valid_path ) {
+			if ( preg_match( '#\A' . preg_quote( $valid_path, '#' ) . '#', $path ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Send request to t.me/...
+	 *
+	 * @since  1.6.0
+	 *
+	 * @param string $url  The t.me URL.
+	 * @param array  $args The request args.
+	 */
+	public static function send_request_to_t_dot_me( $url, $args = array() ) {
+
+		$telegram_blocked  = WPTG_Widget()->options()->get_path( 'advanced.telegram_blocked' );
+		$google_script_url = WPTG_Widget()->options()->get_path( 'advanced.google_script_url' );
+
+		if ( $telegram_blocked && ! empty( $google_script_url ) ) {
+			$url = $google_script_url . '?url=' . rawurlencode( $url );
+		}
+
+		$response = wp_remote_request( $url, $args );
+		$code     = wp_remote_retrieve_response_code( $response );
+
+		if ( 200 !== $code ) {
+			return false;
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+
+		return $body;
+	}
 }

@@ -5,8 +5,8 @@
  * @link       https://t.me/manzoorwanijk
  * @since      1.9.3
  *
- * @package    WPTelegram_Widget
- * @subpackage WPTelegram_Widget/public/partials
+ * @package    WPTelegram\Widget
+ * @subpackage WPTelegram\Widget\shared\partials
  */
 
 header( 'Content-Type: application/json; charset=utf-8' );

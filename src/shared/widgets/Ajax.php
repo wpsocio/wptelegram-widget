@@ -85,15 +85,9 @@ class Ajax extends \WP_Widget {
 
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 
-		$instance['widget_width'] = sanitize_text_field( $new_instance['widget_width'] );
-		if ( ! empty( $instance['widget_width'] ) ) {
-			$instance['widget_width'] = $instance['widget_width'];
-		}
+		$instance['width'] = sanitize_text_field( $new_instance['width'] );
 
-		$instance['widget_height'] = sanitize_text_field( $new_instance['widget_height'] );
-		if ( ! empty( $instance['widget_height'] ) ) {
-			$instance['widget_height'] = absint( $instance['widget_height'] );
-		}
+		$instance['height'] = sanitize_text_field( $new_instance['height'] );
 
 		return $instance;
 	}
@@ -108,14 +102,14 @@ class Ajax extends \WP_Widget {
 	public function form( $instance ) {
 
 		$defaults = array(
-			'title'         => '',
-			'widget_width'  => '100%',
-			'widget_height' => 600,
+			'title'  => '',
+			'width'  => '100%',
+			'height' => 600,
 		);
 
 		// use global options.
 		foreach ( $defaults as $key => $value ) {
-			$defaults[ $key ] = WPTG_Widget()->options()->get( $key, $value );
+			$defaults[ $key ] = WPTG_Widget()->options()->get_path( "ajax_widget.{$key}", $value );
 		}
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
@@ -124,13 +118,13 @@ class Ajax extends \WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>
-			<input type="text" value="<?php echo esc_attr( $instance['widget_width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>" class="widefat" placeholder="300 <?php esc_html_e( 'or', 'wptelegram-widget' ); ?> 100%" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'width' ) ); ?>" class="widefat" placeholder="300 <?php esc_html_e( 'or', 'wptelegram-widget' ); ?> 100%" />
 			<br />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_height' ) ); ?>"><?php esc_html_e( 'Widget Height', 'wptelegram-widget' ); ?></label>
-			<input type="text" value="<?php echo esc_attr( $instance['widget_height'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_height' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_height' ) ); ?>" class="widefat" placeholder="600" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'height' ) ); ?>"><?php esc_html_e( 'Widget Height', 'wptelegram-widget' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['height'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'height' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'height' ) ); ?>" class="widefat" placeholder="600" />
 			<br />
 		</p>
 		<?php

@@ -91,10 +91,7 @@ class Legacy extends \WP_Widget {
 			$instance['author_photo'] = 'auto';
 		}
 
-		$instance['widget_width'] = sanitize_text_field( $new_instance['widget_width'] );
-		if ( ! empty( $instance['widget_width'] ) ) {
-			$instance['widget_width'] = absint( $instance['widget_width'] );
-		}
+		$instance['width'] = sanitize_text_field( $new_instance['width'] );
 
 		$instance['num_messages'] = sanitize_text_field( $new_instance['num_messages'] );
 		if ( ! empty( $instance['num_messages'] ) ) {
@@ -116,13 +113,13 @@ class Legacy extends \WP_Widget {
 		$defaults = array(
 			'title'        => '',
 			'num_messages' => 5,
-			'widget_width' => 100,
+			'width'        => 100,
 			'author_photo' => 'auto',
 		);
 
 		// Use global options.
 		foreach ( $defaults as $key => $value ) {
-			$defaults[ $key ] = WPTG_Widget()->options()->get( $key );
+			$defaults[ $key ] = WPTG_Widget()->options()->get_path( "legacy_widget.{$key}", $value );
 		}
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
@@ -131,8 +128,8 @@ class Legacy extends \WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>
-			<input type="text" value="<?php echo esc_attr( $instance['widget_width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'widget_width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'widget_width' ) ); ?>" class="widefat" placeholder="100" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['width'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'width' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'width' ) ); ?>" class="widefat" placeholder="100" />
 			<br />
 		</p>
 		<p>

@@ -11,8 +11,8 @@
  * @link       https://t.me/manzoorwanijk
  * @since      1.0.0
  *
- * @package    WPTelegram_Widget
- * @subpackage WPTelegram_Widget/public/partials
+ * @package    WPTelegram\Widget
+ * @subpackage WPTelegram\Widget\shared\partials
  */
 
 // This file should primarily consist of HTML with a little bit of PHP.

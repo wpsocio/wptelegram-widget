@@ -11,8 +11,8 @@
 
 namespace WPTelegram\Widget\includes;
 
-use \WPTelegram\Widget\admin\Admin;
-use \WPTelegram\Widget\shared\Shared;
+use WPTelegram\Widget\admin\Admin;
+use WPTelegram\Widget\shared\Shared;
 
 /**
  * The core plugin class.
@@ -299,19 +299,7 @@ class Main {
 
 		$this->loader->add_action( 'init', $shared, 'register_blocks' );
 
-		$this->loader->add_action( 'wptelegram_widget_render_embedded_widget', $shared, 'render_embedded_widget', 10, 1 );
-
-		$this->loader->add_action( 'wptelegram_widget_render_embedded_post', $shared, 'render_embedded_post', 10, 2 );
-
 		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $shared, 'cron_pull_updates' );
-
-		$this->loader->add_shortcode( 'wptelegram-ajax-widget', get_class( $shared ), 'ajax_widget_shortcode' );
-
-		$this->loader->add_shortcode( 'wptelegram-join-channel', get_class( $shared ), 'join_channel_shortcode' );
-
-		$this->loader->add_shortcode( 'wptelegram-widget', get_class( $shared ), 'post_embed_shortcode' );
-
-		$this->loader->add_shortcode( 'wptelegram_feed_widget', get_class( $shared ), 'post_embed_shortcode' );
 
 		// better be safe by using PHP_INT_MAX to make sure
 		// some dumb people don't remove your schedule.
@@ -333,6 +321,21 @@ class Main {
 
 		$this->loader->add_action( 'enqueue_block_editor_assets', $asset_manager, 'enqueue_block_editor_assets' );
 
+		// Register shortcodes.
+		$shortcodes = array(
+			'wptelegram-ajax-widget'  => 'AjaxWidget',
+			'wptelegram-join-channel' => 'JoinChannel',
+			'wptelegram-widget'       => 'LegacyWidget',
+		);
+
+		foreach ( $shortcodes as $shortcode => $class ) {
+			$this->loader->add_shortcode( $shortcode, '\WPTelegram\Widget\shared\shortcodes\\' . $class, 'render' );
+		}
+
+		// Register embeds.
+		$this->loader->add_action( 'wptelegram_widget_ajax_widget_embed', '\WPTelegram\Widget\shared\embed\AjaxWidget', 'render', 10, 1 );
+
+		$this->loader->add_action( 'wptelegram_widget_single_message_embed', '\WPTelegram\Widget\shared\embed\SingleMessage', 'render', 10, 2 );
 	}
 
 	/**

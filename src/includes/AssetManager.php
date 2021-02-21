@@ -11,6 +11,8 @@
 
 namespace WPTelegram\Widget\includes;
 
+use WPTelegram\Widget\shared\shortcodes\LegacyWidget;
+
 /**
  * The assets manager of the plugin.
  *
@@ -233,13 +235,13 @@ class AssetManager extends BaseClass {
 
 		$data = $this->get_dom_data();
 
-		$data['assets']['message_view_url'] = \WPTelegram\Widget\shared\Shared::get_message_view_url( '%username%', '%message_id%', '%userpic%' );
+		$data['assets']['message_view_url'] = LegacyWidget::get_single_message_embed_url( '%username%', '%message_id%', '%userpic%' );
 
 		$data['uiData'] = array_merge(
 			$data['uiData'],
 			array(
-				'join_link_url'  => $this->plugin->options()->get( 'join_link' )['url'],
-				'join_link_text' => $this->plugin->options()->get( 'join_link' )['text'],
+				'join_link_url'  => $this->plugin->options()->get_path( 'join_link.url' ),
+				'join_link_text' => $this->plugin->options()->get_path( 'join_link.text' ),
 			)
 		);
 
