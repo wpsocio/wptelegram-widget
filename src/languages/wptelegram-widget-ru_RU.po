@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2021-01-31 12:19:11+00:00\n"
+"POT-Creation-Date: 2021-02-22 06:48:00+00:00\n"
 "PO-Revision-Date: 2020-04-20 02:11+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -20,16 +20,22 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: blocks\n"
 "X-Poedit-SearchPathExcluded-1: admin/settings\n"
 
-#: admin/class-wptelegram-widget-admin.php:274
+#: admin/Admin.php:58
 #, fuzzy
 msgid "WP Telegram"
 msgstr "Telegram виджет"
 
-#: admin/class-wptelegram-widget-admin.php:304
+#: admin/Admin.php:86
 msgid "Telegram Widget"
 msgstr "Telegram виджет"
 
-#: includes/class-wptelegram-widget.php:125
+#: includes/AssetManager.php:147
+msgid ""
+"With this plugin, you can let the users widget to your website with their "
+"Telegram and make it simple for them to get connected."
+msgstr ""
+
+#: includes/Main.php:139
 msgid "WP Telegram Widget"
 msgstr ""
 
@@ -38,13 +44,12 @@ msgid "Widget Options"
 msgstr "Опции виджета"
 
 #: languages/wptelegram-widget-js-translations.php:11
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:124
-#: public/widgets/class-wptelegram-widget-widget.php:131
+#: shared/widgets/Ajax.php:121 shared/widgets/Legacy.php:131
 msgid "Widget Width"
 msgstr "Ширина виджета"
 
 #: languages/wptelegram-widget-js-translations.php:15
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:129
+#: shared/widgets/Ajax.php:126
 msgid "Widget Height"
 msgstr ""
 
@@ -53,12 +58,12 @@ msgid "Telegram Channel Ajax Feed"
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:23
-#: public/widgets/class-wptelegram-widget-widget.php:136
+#: shared/widgets/Legacy.php:136
 msgid "Author Photo"
 msgstr "Фото автора"
 
 #: languages/wptelegram-widget-js-translations.php:27
-#: public/widgets/class-wptelegram-widget-widget.php:144
+#: shared/widgets/Legacy.php:144
 msgid "Number of Messages"
 msgstr "Номер сообщения"
 
@@ -108,7 +113,7 @@ msgid "Widgets"
 msgstr "Виджет"
 
 #: languages/wptelegram-widget-js-translations.php:67
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:24
+#: shared/widgets/Ajax.php:27
 msgid "WP Telegram Ajax Widget"
 msgstr ""
 
@@ -127,7 +132,7 @@ msgid "Inside the theme templates"
 msgstr "В теме шаблона"
 
 #: languages/wptelegram-widget-js-translations.php:84
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:125
+#: shared/widgets/Ajax.php:122
 msgid "or"
 msgstr "или"
 
@@ -184,7 +189,7 @@ msgstr ""
 "cron на сервере используя ссылку ниже каждые 5 минут."
 
 #: languages/wptelegram-widget-js-translations.php:121
-#: public/widgets/class-wptelegram-widget-widget.php:24
+#: shared/widgets/Legacy.php:27
 msgid "WP Telegram Legacy Widget"
 msgstr ""
 
@@ -231,22 +236,22 @@ msgid "Test Token"
 msgstr "Проверить токен"
 
 #: languages/wptelegram-widget-js-translations.php:154
-#: public/widgets/class-wptelegram-widget-widget.php:138
+#: shared/widgets/Legacy.php:138
 msgid "Auto"
 msgstr "Автоматически"
 
 #: languages/wptelegram-widget-js-translations.php:157
-#: public/widgets/class-wptelegram-widget-widget.php:139
+#: shared/widgets/Legacy.php:139
 msgid "Always show"
 msgstr "Всегда показывать"
 
 #: languages/wptelegram-widget-js-translations.php:160
-#: public/widgets/class-wptelegram-widget-widget.php:140
+#: shared/widgets/Legacy.php:140
 msgid "Always hide"
 msgstr "Всегда скрывать"
 
 #: languages/wptelegram-widget-js-translations.php:163
-#: public/widgets/class-wptelegram-widget-widget.php:147
+#: shared/widgets/Legacy.php:147
 msgid "Number of messages to display in the widget"
 msgstr "Количество сообщений в виджете"
 
@@ -344,38 +349,37 @@ msgstr ""
 msgid "Could not connect"
 msgstr "Не удалось подключиться"
 
-#: public/class-wptelegram-widget-public.php:958
+#: shared/Shared.php:211
 msgid "Every 5 Minutes"
 msgstr "Каждые 5 минут"
 
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:26
+#: shared/widgets/Ajax.php:29
 msgid ""
 "Display the Telegram Public Channel Feed in an ajax widget with infinite "
 "scroll."
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-ajax-widget.php:120
-#: public/widgets/class-wptelegram-widget-join-channel.php:124
-#: public/widgets/class-wptelegram-widget-widget.php:127
+#: shared/widgets/Ajax.php:117 shared/widgets/JoinChannel.php:113
+#: shared/widgets/Legacy.php:127
 msgid "Title"
 msgstr "Название"
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:24
+#: shared/widgets/JoinChannel.php:27
 msgid "WP Telegram Join Channel"
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:26
+#: shared/widgets/JoinChannel.php:29
 msgid "Invite users to join your Telegram channel or group by using a button."
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:128
+#: shared/widgets/JoinChannel.php:117
 msgid "Channel Link"
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-join-channel.php:133
+#: shared/widgets/JoinChannel.php:122
 msgid "Button text"
 msgstr ""
 
-#: public/widgets/class-wptelegram-widget-widget.php:26
+#: shared/widgets/Legacy.php:29
 msgid "Display the Telegram Public Channel or Group Feed in a widget"
 msgstr "Отображать Telegram канал или Чат в виджете."

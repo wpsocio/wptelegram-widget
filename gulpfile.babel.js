@@ -1,26 +1,19 @@
 import gulp from 'gulp';
 import fs from 'fs';
 import { exec } from 'child_process';
-import autoprefixer from 'gulp-autoprefixer';
 import path from 'path';
-import babel from 'gulp-babel';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import beep from 'beepbeep';
-import uglify from 'gulp-uglify';
 import rename from 'gulp-rename';
 import lineec from 'gulp-line-ending-corrector';
-import eslint from 'gulp-eslint';
 import wpi18n from 'node-wp-i18n';
 import { sprintf } from '@wordpress/i18n';
 import potomo from 'gulp-potomo';
 import through2 from 'through2';
 import gulpIgnore from 'gulp-ignore';
-import webpackStream from 'webpack-stream';
 import minifycss from 'gulp-uglifycss';
-import rtlcss from 'gulp-rtlcss';
 
-import webpackConfig from './webpack.config.babel';
 import config from './gulp.config';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
@@ -171,50 +164,6 @@ export const updateMoFiles = () => {
 };
 
 export const i18n = gulp.series(jsPotToPhp, generatePotFile, updateMoFiles);
-
-export const esNextJS = () => {
-	return gulp
-		.src(config.ESNextJS, { since: gulp.lastRun('esNextJS') })
-		.pipe(plumber(errorHandler))
-		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env',
-						{
-							targets: { browsers: config.BROWSERS_LIST },
-						},
-					],
-				],
-			})
-		)
-		.pipe(eslint({ fix: true })) // Fix lints
-		.pipe(eslint.format())
-		.pipe(lineec()) // Fix EOL
-		.pipe(
-			rename(
-				{
-					extname: '.js',
-				},
-				{ multiExt: true }
-			)
-		)
-		.pipe(gulp.dest(config.srcDir))
-		.pipe(
-			rename({
-				suffix: '.min',
-			})
-		)
-		.pipe(uglify()) // minify
-		.pipe(lineec()) // Fix EOL
-		.pipe(gulp.dest(config.srcDir))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> ESNextJS — completed!\n',
-				onLast: true,
-			})
-		);
-};
 
 export const phpFixLints = (pathToFiles) => {
 	const pathToPhpCbf = path.resolve(`${config.vendorBin}/phpcbf`);
@@ -414,26 +363,6 @@ export const styles = () => {
 		);
 };
 
-export const stylesRTL = () => {
-	return gulp
-		.src(config.styleSRC, { allowEmpty: true })
-		.pipe(plumber(errorHandler))
-		.pipe(autoprefixer(config.BROWSERS_LIST))
-		.pipe(rename({ suffix: '-rtl' })) // Append "-rtl" to the filename.
-		.pipe(rtlcss()) // Convert to RTL.
-		.pipe(gulp.dest(config.srcDir))
-		.pipe(rename({ suffix: '.min' }))
-		.pipe(minifycss({ maxLineLen: 10 }))
-		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
-		.pipe(gulp.dest(config.srcDir))
-		.pipe(
-			notify({
-				message: '\n\n✅  ===> STYLES RTL — completed!\n',
-				onLast: true,
-			})
-		);
-};
-
 const copyChangelog = () => {
 	return gulp
 		.src('./changelog.md', { base: './' })
@@ -452,18 +381,7 @@ export const watchPhp = () => {
 	});
 };
 
-export const webpack = () => {
-	return gulp
-		.src('./', { allowEmpty: true, read: false })
-		.pipe(
-			webpackStream({
-				config: webpackConfig(),
-			})
-		)
-		.pipe(gulp.dest((file) => file.base));
-};
-
-export const build = gulp.series(webpack, esNextJS, i18n, stylesRTL, styles);
+export const build = gulp.series(i18n, styles);
 
 export const prerelease = gulp.parallel(build, copyChangelog);
 
@@ -473,9 +391,6 @@ export const precommit = gulp.series(
 	prerelease
 );
 
-export const dev = gulp.parallel(() => {
-	watchPhp();
-	gulp.watch(config.ESNextJS, esNextJS);
-});
+export const dev = gulp.parallel(watchPhp);
 
 export default dev;
