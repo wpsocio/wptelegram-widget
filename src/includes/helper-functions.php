@@ -21,7 +21,7 @@ if ( ! function_exists( 'wptelegram_widget' ) ) {
 	 * @return NULL|string        The html output
 	 */
 	function wptelegram_widget( $args = array(), $echo = true ) {
-		$output = WPTelegram_Widget_Public::post_embed_shortcode( $args );
+		$output = \WPTelegram\Widget\shared\shortcodes\LegacyWidget::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
 		} else {
@@ -42,7 +42,7 @@ if ( ! function_exists( 'wptelegram_ajax_widget' ) ) {
 	 * @return NULL|string        The html output
 	 */
 	function wptelegram_ajax_widget( $args = array(), $echo = true ) {
-		$output = WPTelegram_Widget_Public::ajax_widget_shortcode( $args );
+		$output = \WPTelegram\Widget\shared\shortcodes\AjaxWidget::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
 		} else {
@@ -63,7 +63,7 @@ if ( ! function_exists( 'wptelegram_join_channel' ) ) {
 	 * @return NULL|string        The html output
 	 */
 	function wptelegram_join_channel( $args = array(), $echo = true ) {
-		$output = WPTelegram_Widget_Public::join_channel_shortcode( $args );
+		$output = \WPTelegram\Widget\shared\shortcodes\JoinChannel::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
 		} else {

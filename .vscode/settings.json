@@ -3,6 +3,6 @@
 	"phpcs.standard": "WordPress",
 	"[php]": {
 		"editor.formatOnSave": false,
-		"editor.defaultFormatter": "persoderlind.vscode-phpcbf",
-	},
+		"editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+	}
 }

@@ -2,10 +2,10 @@
 Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
-Requires at least: 5.0
-Tested up to: 5.6
-Requires PHP: 5.6
-Stable tag: 1.9.5
+Requires at least: 5.3
+Tested up to: 5.6.1
+Requires PHP: 7.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,7 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-ajax-widget widget_width="100%" widget_height="500"]`
+`[wptelegram-ajax-widget width="100%" height="500px"]`
 
 Inside the theme templates
 ~~~
@@ -59,7 +59,7 @@ or
 
 ~~~
 <?php
-    echo do_shortcode( '[wptelegram-ajax-widget widget_width="98%" widget_height="700"]' );
+    echo do_shortcode( '[wptelegram-ajax-widget width="98%" height="700px"]' );
 ?>
 ~~~
 
@@ -70,16 +70,16 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
+`[wptelegram-widget num_messages="5" width="100%" author_photo="auto"]`
 
 Inside the theme templates
 ~~~
 <?php
 if ( function_exists( 'wptelegram_widget' ) ) {
     $args = array(
-        // 'num_messages'    => 5,
-        // 'widget_width'    => 100,
-        // 'author_photo'    => 'auto',
+        // 'author_photo' => 'auto',
+        // 'num_messages' => 5,
+        // 'width'        => 100,
     );
 
     wptelegram_widget( $args );
@@ -90,7 +90,7 @@ or
 
 ~~~
 <?php
-    echo do_shortcode( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_show"]' );
+    echo do_shortcode( '[wptelegram-widget num_messages="5" width="100%" author_photo="always_show"]' );
 ?>
 ~~~
 
@@ -161,13 +161,23 @@ Many thanks to the translators for the great job!
 
 == Screenshots ==
 
-1. Settings Page
-2. Settings Page (Cont...)
-3. Widget Settings (back-end)
-4. Widget View (front-end)
-5. Widget Messages List
+1. Ajax Widget Settings
+2. Legacy Widget Settings
+3. Legacy Widget Settings (Cont.)
+4. Join Link Settings
+5. Advancced Settings
+6. Widget Settings (back-end)
+7. Widget View (front-end)
+8. Blocks
+9. Join Link View
 
 == Changelog ==
+
+= 2.0.0 =
+-   Switched to PHP namespaces
+-   Added support for separate ajax and legacy widgets
+-   Refreshed and improved the UI
+-   Improved names for hooks and shortcodes
 
 = 1.9.5 =
 
