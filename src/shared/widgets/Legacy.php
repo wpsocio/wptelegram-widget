@@ -144,7 +144,7 @@ class Legacy extends \WP_Widget {
 			<label for="<?php echo esc_attr( $this->get_field_id( 'num_messages' ) ); ?>"><?php esc_html_e( 'Number of Messages', 'wptelegram-widget' ); ?></label>
 			<input type="number" value="<?php echo esc_attr( $instance['num_messages'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'num_messages' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'num_messages' ) ); ?>" class="widefat" placeholder="5" />
 			<br />
-			<span class="description"><?php esc_html_e( 'Number of messages to display in the widget', 'wptelegram-widget' ); ?></span>
+			<span class="description"><?php esc_html_e( 'Number of messages to display in the widget.', 'wptelegram-widget' ); ?></span>
 		</p>
 		<?php
 	}
