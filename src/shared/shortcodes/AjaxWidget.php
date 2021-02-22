@@ -3,7 +3,7 @@
  * The ajax widget shortcode handler.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\shared\shortcodes
@@ -93,7 +93,7 @@ class AjaxWidget {
 	/**
 	 * Get the embedd URL for widget view.
 	 *
-	 * @since x.y.z
+	 * @since 2.0.0
 	 *
 	 * @param string $username   The Telegram channel/group username.
 	 *

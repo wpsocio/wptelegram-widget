@@ -3,7 +3,7 @@
  * The assets manager of the plugin.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
@@ -31,7 +31,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Register the stylesheets for the public area.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	public function enqueue_public_styles() {
 
@@ -49,7 +49,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Register the stylesheets for the public area.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	public function enqueue_public_scripts() {
 
@@ -67,7 +67,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function enqueue_admin_styles( $hook_suffix ) {
@@ -99,7 +99,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function enqueue_admin_scripts( $hook_suffix ) {
@@ -191,7 +191,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Enqueue assets for the Gutenberg block
 	 *
-	 * @since x.y.z
+	 * @since 2.0.0
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function is_settings_page( $hook_suffix ) {
@@ -201,7 +201,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Register assets.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	public function register_assets() {
 		$entrypoint = self::BLOCKS_JS_HANDLE;
@@ -220,7 +220,7 @@ class AssetManager extends BaseClass {
 	/**
 	 * Enqueue assets for the Gutenberg block
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	public function enqueue_block_editor_assets() {
 		$entrypoint = self::BLOCKS_JS_HANDLE;

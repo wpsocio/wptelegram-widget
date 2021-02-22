@@ -3,7 +3,7 @@
  * Do the necessary db upgrade
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
@@ -203,7 +203,7 @@ class Upgrade extends BaseClass {
 	/**
 	 * Upgrade to version x.y.z
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	private function upgrade_to_2_0_0() {
 

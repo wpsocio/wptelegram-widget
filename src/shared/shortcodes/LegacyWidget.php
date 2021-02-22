@@ -3,7 +3,7 @@
  * The Legacy widget shortcode handler.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\shared\shortcodes
@@ -24,7 +24,7 @@ class LegacyWidget {
 	/**
 	 * Registers shortcode to display legacy widget.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 *
 	 * @param array $atts The shortcode attributes.
 	 */

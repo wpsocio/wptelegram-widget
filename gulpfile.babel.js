@@ -215,11 +215,11 @@ const createVersionUpdateCB = (forFile, version) => {
 };
 
 export const updateVersion = (done) => {
-	const { to: version } = getCommandArgs();
+	const { ver: version } = getCommandArgs();
 	if (!version) {
 		done(
 			new Error(
-				'No version number supplied! usage: gulp updateVersion --to "x.y.z"'
+				'No version number supplied! usage: gulp updateVersion --ver "x.y.z"'
 			)
 		);
 	}
@@ -264,11 +264,11 @@ export const updateVersion = (done) => {
 };
 
 export const updateChangelog = (done) => {
-	const { to: version } = getCommandArgs();
+	const { ver: version } = getCommandArgs();
 	if (!version) {
 		done(
 			new Error(
-				'No version number supplied! usage: gulp updateChangelog --to "x.y.z"'
+				'No version number supplied! usage: gulp updateChangelog --ver "x.y.z"'
 			)
 		);
 	}
@@ -385,7 +385,7 @@ export const build = gulp.series(i18n, styles);
 
 export const prerelease = gulp.parallel(build, copyChangelog);
 
-export const precommit = gulp.series(
+export const release = gulp.series(
 	updateVersion,
 	updateChangelog,
 	prerelease

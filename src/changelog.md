@@ -4,7 +4,14 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
-## [1.9.5 - 2021-01-31](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.5)
+## [2.0.0 - 2021-02-22](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.0)
+
+### Enhancements
+
+-   Switched to PHP namespaces
+-   Added support for separate ajax and legacy widgets
+-   Refreshed and improved the UI
+-   Improved names for hooks and shortcodes
 
 ## [1.9.5 - 2021-01-31](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.5)
 

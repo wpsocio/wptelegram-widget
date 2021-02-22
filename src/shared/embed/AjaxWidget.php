@@ -3,7 +3,7 @@
  * The ajax widget embed handler.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\shared\embed
@@ -25,7 +25,7 @@ class AjaxWidget {
 	/**
 	 * Render the HTML of the embedded ajax widget.
 	 *
-	 * @since  x.y.z
+	 * @since  2.0.0
 	 *
 	 * @param string $username The Telegram channel username.
 	 */

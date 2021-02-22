@@ -3,7 +3,7 @@
  * Utility methods.
  *
  * @link       https://t.me/manzoorwanijk
- * @since      x.y.z
+ * @since      2.0.0
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
@@ -32,7 +32,7 @@ class Utils {
 	 * @param array            $handler  Route handler used for the request.
 	 * @param \WP_REST_Request $request  Request used to generate the response.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 */
 	public static function fitler_rest_errors( $response, $handler, $request ) {
 
@@ -65,7 +65,7 @@ class Utils {
 	/**
 	 * Create a regex from the given pattern.
 	 *
-	 * @since    x.y.z
+	 * @since    2.0.0
 	 *
 	 * @param string  $pattern     The pattern to match.
 	 * @param boolean $allow_empty Whether to allow an ampty string.
@@ -90,7 +90,7 @@ class Utils {
 	/**
 	 * Check whether the template path is valid.
 	 *
-	 * @since x.y.z
+	 * @since 2.0.0
 	 * @param string $template The template path.
 	 *
 	 * @return bool
