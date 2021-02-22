@@ -183,7 +183,7 @@ class SettingsController extends RESTController {
 			),
 			'height'   => array(
 				'type'    => 'string',
-				'default' => '600',
+				'default' => '600px',
 			),
 		);
 

@@ -2,8 +2,8 @@
 
 **Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:** telegram, feed, widget, channel, group  
-**Requires at least:** 5.0  
-**Tested up to:** 5.6  
+**Requires at least:** 5.3  
+**Tested up to:** 5.6.1  
 **Stable tag:** 1.9.5  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
@@ -45,7 +45,7 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-ajax-widget widget_width="100%" widget_height="500"]`
+`[wptelegram-ajax-widget width="100%" height="500px"]`
 
 Inside the theme templates
 
@@ -60,7 +60,7 @@ if ( function_exists( 'wptelegram_ajax_widget' ) ) {
 or
 
 ```php
-<?php echo do_shortcode( '[wptelegram-ajax-widget widget_width="98%" widget_height="700"]' ); ?>
+<?php echo do_shortcode( '[wptelegram-ajax-widget width="98%" height="700px"]' ); ?>
 ```
 
 ### Legacy Widget
@@ -71,7 +71,7 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-widget num_messages="5" widget_width="100" author_photo="auto"]`
+`[wptelegram-widget num_messages="5" width="100%" author_photo="auto"]`
 
 Inside the theme templates
 
@@ -79,9 +79,9 @@ Inside the theme templates
 <?php
 if ( function_exists( 'wptelegram_widget' ) ) {
     $args = array(
-        // 'num_messages'    => 5,
-        // 'widget_width'    => 100,
-        // 'author_photo'    => 'auto',
+        // 'author_photo' => 'auto',
+        // 'num_messages' => 5,
+        // 'width'        => 100,
     );
 
     wptelegram_widget( $args );
@@ -92,7 +92,7 @@ if ( function_exists( 'wptelegram_widget' ) ) {
 or
 
 ```php
-<?php echo do_shortcode( '[wptelegram-widget num_messages="5" widget_width="100" author_photo="always_show"]' ); ?>
+<?php echo do_shortcode( '[wptelegram-widget num_messages="5" width="100%" author_photo="always_show"]' ); ?>
 ```
 
 ### Join Link
