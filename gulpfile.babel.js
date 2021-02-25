@@ -91,8 +91,7 @@ export const generatePotFile = (done) => {
 			'X-Poedit-KeywordsList':
 				'__;_e;_x;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n',
 			'X-Poedit-SearchPath-0': '.\n',
-			'X-Poedit-SearchPathExcluded-0': 'blocks\n',
-			'X-Poedit-SearchPathExcluded-1': 'admin/settings\n',
+			'X-Poedit-SearchPathExcluded-0': 'assets\n',
 		},
 		processPot(pot) {
 			let translation;

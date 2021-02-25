@@ -136,8 +136,6 @@ class Main {
 
 		$this->version = WPTELEGRAM_WIDGET_VER;
 
-		$this->title = __( 'WP Telegram Widget', 'wptelegram-widget' );
-
 		$this->plugin_name = 'wptelegram_widget';
 
 		$this->load_dependencies();
@@ -367,6 +365,11 @@ class Main {
 	 * @return    string    The title of the plugin.
 	 */
 	public function title() {
+		// Set here instead of constructor
+		// to be able to translate it.
+		if ( ! $this->title ) {
+			$this->title = __( 'WP Telegram Widget', 'wptelegram-widget' );
+		}
 		return $this->title;
 	}
 
