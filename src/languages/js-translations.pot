@@ -121,7 +121,7 @@ msgid "Get LIVE support on Telegram"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
-msgid "Submit"
+msgid "Save Changes"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:16
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Success"
 msgstr ""
 
-#: packages/services/src/useDisplayFeedback.ts:65
+#: packages/services/src/useDisplayFeedback.ts:64
 msgid "Lets fix these errors first."
 msgstr ""
 
