@@ -36,7 +36,7 @@ class LegacyWidget {
 		}
 
 		// fetch messages.
-		$messages = array_reverse( WPTG_Widget()->options()->get( 'messages', array() ) );
+		$messages = WPTG_Widget()->options()->get( 'messages', array() );
 		$username = strtolower( WPTG_Widget()->options()->get_path( 'legacy_widget.username', '' ) );
 
 		if ( empty( $messages[ $username ] ) ) {
@@ -64,7 +64,7 @@ class LegacyWidget {
 			$num_messages = 5;
 		}
 
-		$messages = array_slice( $messages[ $username ], 0, $num_messages );
+		$messages = array_slice( array_reverse( $messages[ $username ] ), 0, $num_messages );
 
 		$author_photo = $args['author_photo'];
 

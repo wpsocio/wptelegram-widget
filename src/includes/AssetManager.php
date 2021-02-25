@@ -147,7 +147,7 @@ class AssetManager extends BaseClass {
 				'description' => __( 'With this plugin, you can let the users widget to your website with their Telegram and make it simple for them to get connected.', 'wptelegram-widget' ),
 			),
 			'api'        => array(
-				'admin_url'      => admin_url( 'admin-ajax.php' ),
+				'admin_url'      => admin_url(),
 				'nonce'          => wp_create_nonce( 'wptelegram-widget' ),
 				'use'            => 'SERVER', // or may be 'BROWSER'?
 				'rest_namespace' => 'wptelegram-widget/v1',

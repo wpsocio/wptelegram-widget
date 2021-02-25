@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug Fixes
+
+-   Fixed the issue with message order in legacy widget
+
 ## [2.0.0 - 2021-02-22](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.0)
 
 ### Enhancements
