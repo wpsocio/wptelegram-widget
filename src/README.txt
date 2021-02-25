@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.3
 Tested up to: 5.6.1
 Requires PHP: 7.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,35 +173,13 @@ Many thanks to the translators for the great job!
 
 == Changelog ==
 
+= 2.0.1 =
+-   Fixed the issue with message order in legacy widget
+
 = 2.0.0 =
 -   Switched to PHP namespaces
 -   Added support for separate ajax and legacy widgets
 -   Refreshed and improved the UI
 -   Improved names for hooks and shortcodes
-
-= 1.9.5 =
-
-
-= 1.9.4 =
--   Added usage guide to join link
--   Fixed join link defaults
-
-= 1.9.3 =
--   Fixed 404 on /v
-
-= 1.9.2 =
--   Fixed error for empty join link
-
-= 1.9.1 =
--   Added priority option for join link
--   Fixed adding of join link if no post type selected
-
-= 1.9.0 =
--   Added join link automatically to posts
--   Added options to customize join link for posts
--   Added WP Telegram Block category
--   Improved blocks
--   Fixed JS bundle path for blocks
--   Fixed single post iframe height
 
 == Upgrade Notice ==

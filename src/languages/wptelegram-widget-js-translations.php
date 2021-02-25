@@ -91,7 +91,7 @@ $generated_i18n_strings = array(
 	__( 'Get LIVE support on Telegram', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
-	__( 'Submit', 'wptelegram-widget' ),
+	__( 'Save Changes', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:16
 	__( 'Ajax Widget', 'wptelegram-widget' ),
@@ -286,7 +286,7 @@ $generated_i18n_strings = array(
 	// Reference: packages/services/src/telegram/TelegramUtils.ts:124
 	__( 'Success', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/useDisplayFeedback.ts:65
+	// Reference: packages/services/src/useDisplayFeedback.ts:64
 	__( 'Lets fix these errors first.', 'wptelegram-widget' ),
 
 	// Reference: packages/services/src/useSubmitForm.ts:42

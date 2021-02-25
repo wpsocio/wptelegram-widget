@@ -3,18 +3,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wptelegram-widget\n"
-"POT-Creation-Date: 2021-02-22 14:32+0530\n"
+"POT-Creation-Date: 2021-02-25 05:55:18+00:00\n"
 "PO-Revision-Date: 2021-02-22 14:33+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Poedit-KeywordsList: __;_e;_x;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: blocks\n"
@@ -28,29 +28,13 @@ msgstr ""
 msgid "Telegram Widget"
 msgstr "Telegram виджет"
 
-#: assets/static/js/wptelegram-widget--main.a33724df.js:2
-msgid "xs"
-msgstr ""
-
-#: assets/static/js/wptelegram-widget--main.a33724df.js:2
-msgid "sm"
-msgstr ""
-
-#: assets/static/js/wptelegram-widget--main.a33724df.js:2
-msgid "md"
-msgstr ""
-
-#: assets/static/js/wptelegram-widget--main.a33724df.js:2
-msgid "lg"
-msgstr ""
-
 #: includes/AssetManager.php:147
 msgid ""
 "With this plugin, you can let the users widget to your website with their "
 "Telegram and make it simple for them to get connected."
 msgstr ""
 
-#: includes/Main.php:139
+#: includes/Main.php:371
 msgid "WP Telegram Widget"
 msgstr ""
 
@@ -167,7 +151,7 @@ msgid "Get LIVE support on Telegram"
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:94
-msgid "Submit"
+msgid "Save Changes"
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:97
@@ -250,13 +234,12 @@ msgstr ""
 "Для уверенности, что обновление пройдёт вовремя, рекомендуется настроить "
 "cron на сервере используя ссылку ниже каждые 5 минут."
 
+#. translators: 1 command name, 2 bot name
 #: languages/wptelegram-widget-js-translations.php:154
-#, php-format
 msgid "Create a Bot by sending %1$s command to %2$s."
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:157
-#, php-format
 msgid "After completing the steps %s will provide you the Bot Token."
 msgstr "После завершения шага c %s Вы получите токен бота."
 
@@ -264,8 +247,8 @@ msgstr "После завершения шага c %s Вы получите то
 msgid "Copy the token and paste into the Bot Token field below."
 msgstr "Скопируйте и вставьте в поле Токен бота ниже"
 
+#. translators: %s application name
 #: languages/wptelegram-widget-js-translations.php:164
-#, php-format
 msgid "For ease, use %s"
 msgstr "Для удобства используйте %s"
 
@@ -285,8 +268,8 @@ msgstr ""
 msgid "For groups, disable group privacy for the bot."
 msgstr ""
 
+#. translators: 1 command name, 2 bot name, 3 site url
 #: languages/wptelegram-widget-js-translations.php:180
-#, php-format
 msgid "Send %1$s command to %2$s."
 msgstr ""
 
@@ -346,7 +329,6 @@ msgid "INSTRUCTIONS!"
 msgstr "ИНСТРУКЦИЯ!"
 
 #: languages/wptelegram-widget-js-translations.php:219
-#, php-format
 msgid "Do you like %s?"
 msgstr ""
 
@@ -367,17 +349,15 @@ msgid "Test Result:"
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:234
-#, php-format
 msgid "Follow %s"
 msgstr "Подписаться %s"
 
 #: languages/wptelegram-widget-js-translations.php:237
-#, php-format
 msgid "Join %s"
 msgstr "присоединиться %s"
 
+#. translators: 1, 2 Menu names
 #: languages/wptelegram-widget-js-translations.php:241
-#, php-format
 msgid "Goto %1$s and click/drag %2$s and place it where you want it to be."
 msgstr ""
 "Перейдите в %1$s и добавьте или перетащите %2$s в необходимое для Вас место."
@@ -456,12 +436,10 @@ msgid "Changes saved successfully."
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:296
-#, php-format
 msgid "Invalid %s"
 msgstr "Недопустимый %s"
 
 #: languages/wptelegram-widget-js-translations.php:299
-#, php-format
 msgid "%s required."
 msgstr ""
 
