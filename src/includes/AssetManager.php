@@ -158,7 +158,7 @@ class AssetManager extends BaseClass {
 				'tgIconUrl' => $this->plugin->assets()->url( '/icons/tg-icon.svg' ),
 			),
 			'uiData'     => array(),
-			'i18n'       => wptelegram_get_jed_locale_data( 'wptelegram-widget' ),
+			'i18n'       => Utils::get_jed_locale_data( 'wptelegram-widget' ),
 		);
 
 		return $data;

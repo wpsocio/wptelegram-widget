@@ -33,7 +33,7 @@ define( 'WPTELEGRAM_WIDGET_BASENAME', plugin_basename( __FILE__ ) );
 
 define( 'WPTELEGRAM_WIDGET_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-defined( 'WPTELEGRAM_WIDGET_URL' ) || define( 'WPTELEGRAM_WIDGET_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+define( 'WPTELEGRAM_WIDGET_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
 
 /**
  * Include autoloader.
