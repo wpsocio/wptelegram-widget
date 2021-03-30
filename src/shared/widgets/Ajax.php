@@ -2,7 +2,7 @@
 /**
  * The ajax widget.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.6.0
  *
  * @package    WPTelegram_Widget
@@ -25,9 +25,9 @@ class Ajax extends \WP_Widget {
 		parent::__construct(
 			'wptelegram_widget_ajax_widget',
 			esc_html__( 'WP Telegram Ajax Widget', 'wptelegram-widget' ),
-			array(
+			[
 				'description' => esc_html__( 'Display the Telegram Public Channel Feed in an ajax widget with infinite scroll.', 'wptelegram-widget' ),
-			)
+			]
 		);
 	}
 
@@ -101,11 +101,11 @@ class Ajax extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$defaults = array(
+		$defaults = [
 			'title'  => '',
 			'width'  => '100%',
 			'height' => 600,
-		);
+		];
 
 		// use global options.
 		foreach ( $defaults as $key => $value ) {

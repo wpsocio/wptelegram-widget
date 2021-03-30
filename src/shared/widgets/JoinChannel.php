@@ -2,7 +2,7 @@
 /**
  * The join channel widget.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.6.0
  *
  * @package    WPTelegram_Widget
@@ -25,9 +25,9 @@ class JoinChannel extends \WP_Widget {
 		parent::__construct(
 			'wptelegram_widget_join_channel',
 			esc_html__( 'WP Telegram Join Channel', 'wptelegram-widget' ),
-			array(
+			[
 				'description' => esc_html__( 'Invite users to join your Telegram channel or group by using a button.', 'wptelegram-widget' ),
-			)
+			]
 		);
 	}
 
@@ -101,11 +101,11 @@ class JoinChannel extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$defaults = array(
+		$defaults = [
 			'title' => '',
 			'link'  => WPTG_Widget()->options()->get_path( 'join_link.url', '' ),
 			'text'  => WPTG_Widget()->options()->get_path( 'join_link.text', '' ),
-		);
+		];
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>

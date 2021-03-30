@@ -2,7 +2,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -61,9 +61,9 @@ class Shared extends BaseClass {
 
 		register_block_type(
 			'wptelegram/widget-join-channel',
-			array(
+			[
 				'style' => AssetManager::BLOCKS_JS_HANDLE,
-			)
+			]
 		);
 	}
 
@@ -105,10 +105,10 @@ class Shared extends BaseClass {
 
 			if ( 'view' === $qvs['action'] ) {
 
-				$saved_usernames = array(
+				$saved_usernames = [
 					strtolower( WPTG_Widget()->options()->get_path( 'ajax_widget.username' ) ),
 					strtolower( WPTG_Widget()->options()->get_path( 'legacy_widget.username' ) ),
-				);
+				];
 				// Whether to allow embeds for all channels.
 				$allow_all_embeds = apply_filters( 'wptelegram_widget_allow_embeds_for_all', true, $qvs['username'] );
 				// Dynamic filter based on the username.
@@ -206,10 +206,10 @@ class Shared extends BaseClass {
 	 * @param array $schedules The WP Cron shedules.
 	 */
 	public function custom_cron_schedules( $schedules ) {
-		$schedules['wptelegram_five_minutely'] = array(
+		$schedules['wptelegram_five_minutely'] = [
 			'interval' => 5 * MINUTE_IN_SECONDS, // Intervals in seconds.
 			'display'  => __( 'Every 5 Minutes', 'wptelegram-widget' ),
-		);
+		];
 		return $schedules;
 	}
 }

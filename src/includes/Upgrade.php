@@ -2,7 +2,7 @@
 /**
  * Do the necessary db upgrade
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -31,21 +31,21 @@ class Upgrade extends BaseClass {
 
 		$current_version = get_option( 'wptelegram_widget_ver', '1.2.0' );
 
-		if ( ! version_compare( $current_version, $this->plugin->version(), '<' ) ) {
+		if ( ! version_compare( $current_version, $this->plugin()->version(), '<' ) ) {
 			return;
 		}
 
-		$plugin_settings = WPTG_Widget()->options()->get_data();
+		$plugin_settings = $this->plugin()->options()->get_data();
 		$is_new_install  = empty( $plugin_settings );
 
 		do_action( 'wptelegram_widget_before_do_upgrade', $current_version );
 
-		$version_upgrades = array();
+		$version_upgrades = [];
 
 		if ( ! $is_new_install ) {
 			// the sequential upgrades
 			// subsequent upgrade depends upon the previous one.
-			$version_upgrades = array(
+			$version_upgrades = [
 				'1.3.0', // first upgrade.
 				'1.4.0',
 				'1.5.0',
@@ -53,19 +53,20 @@ class Upgrade extends BaseClass {
 				'1.7.0',
 				'1.9.0',
 				'2.0.0',
-			);
+				'2.0.2',
+			];
 		}
 
 		// always.
-		if ( ! in_array( $this->plugin->version(), $version_upgrades, true ) ) {
-			$version_upgrades[] = $this->plugin->version();
+		if ( ! in_array( $this->plugin()->version(), $version_upgrades, true ) ) {
+			$version_upgrades[] = $this->plugin()->version();
 		}
 
 		foreach ( $version_upgrades as $target_version ) {
 
 			if ( version_compare( $current_version, $target_version, '<' ) ) {
 
-				$this->upgrade_to( $target_version );
+				$this->upgrade_to( $target_version, $is_new_install );
 
 				$current_version = $target_version;
 			}
@@ -79,16 +80,18 @@ class Upgrade extends BaseClass {
 	 *
 	 * @since 1.3.0
 	 *
-	 * @param string $version The plugin verion to upgrade to.
+	 * @param string  $version        The plugin verion to upgrade to.
+	 * @param boolean $is_new_install Whether it's a fresh install of the plugin.
 	 */
-	private function upgrade_to( $version ) {
+	private function upgrade_to( $version, $is_new_install ) {
 
 		// 2.0.1 becomes 2_0_1
 		$_version = str_replace( '.', '_', $version );
 
-		$method = array( $this, "upgrade_to_{$_version}" );
+		$method = [ $this, "upgrade_to_{$_version}" ];
 
-		if ( is_callable( $method ) ) {
+		// No upgrades for fresh installations.
+		if ( ! $is_new_install && is_callable( $method ) ) {
 
 			call_user_func( $method );
 		}
@@ -104,7 +107,7 @@ class Upgrade extends BaseClass {
 	private function upgrade_to_1_3_0() {
 
 		$option   = 'wptelegram_widget_messages';
-		$messages = get_option( $option, array() );
+		$messages = get_option( $option, [] );
 
 		if ( ! empty( $messages ) ) {
 
@@ -185,10 +188,10 @@ class Upgrade extends BaseClass {
 
 		$username = WPTG_Widget()->options()->get( 'username' );
 
-		$field_values = array(
-			'join_link_post_types' => array( 'post' ),
+		$field_values = [
+			'join_link_post_types' => [ 'post' ],
 			'join_link_position'   => 'after_content',
-		);
+		];
 
 		if ( $username ) {
 			$field_values['join_link_url']  = sprintf( 'https://t.me/%s', $username );
@@ -201,72 +204,72 @@ class Upgrade extends BaseClass {
 	}
 
 	/**
-	 * Upgrade to version x.y.z
+	 * Upgrade to version 2.0.0
 	 *
 	 * @since    2.0.0
 	 */
 	private function upgrade_to_2_0_0() {
 
-		$ajax_widget = array(
+		$ajax_widget = [
 			'username'      => '',
-			'widget_width'  => array(
+			'widget_width'  => [
 				'field'   => 'width',
 				'default' => '100%',
-			),
-			'widget_height' => array(
+			],
+			'widget_height' => [
 				'field'   => 'height',
 				'default' => '600',
-			),
-		);
+			],
+		];
 
-		$old_fields = array(
+		$old_fields = [
 			'ajax_widget'   => $ajax_widget,
 			'legacy_widget' => array_merge(
 				$ajax_widget,
-				array(
+				[
 					'bot_token'    => '',
-					'author_photo' => array(
+					'author_photo' => [
 						'field'   => 'author_photo',
 						'default' => 'auto',
-					),
-					'num_messages' => array(
+					],
+					'num_messages' => [
 						'field'   => 'num_messages',
 						'default' => '5',
-					),
-				)
+					],
+				]
 			),
-			'join_link'     => array(
-				'join_link_text'       => array(
+			'join_link'     => [
+				'join_link_text'       => [
 					'field' => 'text',
-				),
-				'join_link_url'        => array(
+				],
+				'join_link_url'        => [
 					'field' => 'url',
-				),
-				'join_link_post_types' => array(
+				],
+				'join_link_post_types' => [
 					'field'   => 'post_types',
-					'default' => array( 'post' ),
-				),
-				'join_link_position'   => array(
+					'default' => [ 'post' ],
+				],
+				'join_link_position'   => [
 					'field'   => 'position',
 					'default' => 'after_content',
-				),
-				'join_link_priority'   => array(
+				],
+				'join_link_priority'   => [
 					'field'   => 'priority',
 					'default' => '10',
-				),
-			),
-			'advanced'      => array(
-				'telegram_blocked'  => array(
+				],
+			],
+			'advanced'      => [
+				'telegram_blocked'  => [
 					'field'   => 'telegram_blocked',
 					'default' => false,
-				),
+				],
 				'google_script_url' => '',
-			),
-		);
+			],
+		];
 
 		$options = WPTG_Widget()->options();
 
-		$new_settings = array();
+		$new_settings = [];
 
 		foreach ( $old_fields as $section => $fields ) {
 			foreach ( $fields as $field => $data ) {
@@ -280,7 +283,7 @@ class Upgrade extends BaseClass {
 		}
 
 		$username         = $options->get( 'username' );
-		$messages         = $options->get( 'messages', array() );
+		$messages         = $options->get( 'messages', [] );
 		$last_update_id   = $options->get( 'last_update_id' );
 		$telegram_blocked = $options->get( 'telegram_blocked' );
 
@@ -291,5 +294,20 @@ class Upgrade extends BaseClass {
 		$new_settings['advanced']['telegram_blocked'] = 'yes' === $telegram_blocked;
 
 		$options->set_data( $new_settings )->update_data();
+	}
+
+	/**
+	 * Upgrade to version 2.0.2
+	 *
+	 * @since x.y.z
+	 */
+	private function upgrade_to_2_0_2() {
+
+		$options = $this->plugin()->options()->get_data();
+
+		$options['join_link']['bgcolor']    = '#389ce9';
+		$options['join_link']['text_color'] = '#fff';
+
+		$this->plugin()->options()->set_data( $options )->update_data();
 	}
 }

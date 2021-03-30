@@ -2,7 +2,7 @@
 /**
  * Provide a public-facing view for the whole channel
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.6.0
  *
  * @package    WPTelegram\Widget

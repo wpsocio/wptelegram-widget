@@ -2,7 +2,7 @@
 /**
  * The legacy widget.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.6.0
  *
  * @package    WPTelegram_Widget
@@ -25,9 +25,9 @@ class Legacy extends \WP_Widget {
 		parent::__construct(
 			'wptelegram_widget_widget',
 			esc_html__( 'WP Telegram Legacy Widget', 'wptelegram-widget' ),
-			array(
+			[
 				'description' => esc_html__( 'Display the Telegram Public Channel or Group Feed in a widget', 'wptelegram-widget' ),
-			)
+			]
 		);
 	}
 
@@ -85,7 +85,7 @@ class Legacy extends \WP_Widget {
 
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 
-		if ( in_array( $new_instance['author_photo'], array( 'auto', 'always_show', 'always_hide' ), true ) ) {
+		if ( in_array( $new_instance['author_photo'], [ 'auto', 'always_show', 'always_hide' ], true ) ) {
 			$instance['author_photo'] = $new_instance['author_photo'];
 		} else {
 			$instance['author_photo'] = 'auto';
@@ -110,12 +110,12 @@ class Legacy extends \WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$defaults = array(
+		$defaults = [
 			'title'        => '',
 			'num_messages' => 5,
 			'width'        => 100,
 			'author_photo' => 'auto',
-		);
+		];
 
 		// Use global options.
 		foreach ( $defaults as $key => $value ) {

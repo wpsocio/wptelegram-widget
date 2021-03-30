@@ -2,7 +2,7 @@
 /**
  * The ajax widget embed handler.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -43,12 +43,12 @@ class AjaxWidget {
 
 			$json = Utils::send_request_to_t_dot_me(
 				$url,
-				array(
+				[
 					'method'  => 'POST',
-					'headers' => array(
+					'headers' => [
 						'X-Requested-With' => 'XMLHttpRequest',
-					),
-				)
+					],
+				]
 			);
 
 			if ( empty( $json ) ) {
@@ -194,12 +194,12 @@ class AjaxWidget {
 
 		if ( Shared::$use_ugly_urls ) {
 
-			$fields = array(
+			$fields = [
 				'core'     => 'wptelegram',
 				'module'   => 'widget',
 				'action'   => 'view',
 				'username' => $username,
-			);
+			];
 
 			foreach ( $fields as $name => $value ) {
 

@@ -2,7 +2,7 @@
 /**
  * The Legacy widget shortcode handler.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -28,10 +28,10 @@ class JoinChannel {
 	 * @param array $atts The shortcode attributes.
 	 */
 	public static function render( $atts ) {
-		$defaults = array(
+		$defaults = [
 			'link' => WPTG_Widget()->options()->get_path( 'join_link.url', '' ),
 			'text' => WPTG_Widget()->options()->get_path( 'join_link.text', '' ),
-		);
+		];
 
 		$args = shortcode_atts( $defaults, $atts, 'wptelegram-join-channel' );
 

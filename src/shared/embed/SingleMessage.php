@@ -2,7 +2,7 @@
 /**
  * The single message embed handler.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -79,8 +79,8 @@ class SingleMessage {
 	 */
 	public static function delete_message( $message_id, $username ) {
 
-		$saved_messages    = WPTG_Widget()->options()->get( 'messages', array() );
-		$username_messages = WPTG_Widget()->options()->get_path( "messages.{$username}", array() );
+		$saved_messages    = WPTG_Widget()->options()->get( 'messages', [] );
+		$username_messages = WPTG_Widget()->options()->get_path( "messages.{$username}", [] );
 
 		// use array_keys() instead of array_search().
 		$keys = array_keys( $username_messages, $message_id, true );
@@ -173,9 +173,9 @@ class SingleMessage {
 	public static function get_single_message_url( $username, $message_id ) {
 
 		$url  = "https://t.me/{$username}/{$message_id}";
-		$args = array(
+		$args = [
 			'embed' => true,
-		);
+		];
 		if ( isset( $_GET['userpic'] ) ) { // phpcs:ignore
 			$args['userpic'] = sanitize_text_field( wp_unslash( $_GET['userpic'] ) ); // phpcs:ignore
 		}

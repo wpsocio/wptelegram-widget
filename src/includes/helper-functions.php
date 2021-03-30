@@ -2,7 +2,7 @@
 /**
  * Contains the helper functions.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -20,7 +20,7 @@ if ( ! function_exists( 'wptelegram_widget' ) ) {
 	 *
 	 * @return NULL|string        The html output
 	 */
-	function wptelegram_widget( $args = array(), $echo = true ) {
+	function wptelegram_widget( $args = [], $echo = true ) {
 		$output = \WPTelegram\Widget\shared\shortcodes\LegacyWidget::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -41,7 +41,7 @@ if ( ! function_exists( 'wptelegram_ajax_widget' ) ) {
 	 *
 	 * @return NULL|string        The html output
 	 */
-	function wptelegram_ajax_widget( $args = array(), $echo = true ) {
+	function wptelegram_ajax_widget( $args = [], $echo = true ) {
 		$output = \WPTelegram\Widget\shared\shortcodes\AjaxWidget::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -62,7 +62,7 @@ if ( ! function_exists( 'wptelegram_join_channel' ) ) {
 	 *
 	 * @return NULL|string        The html output
 	 */
-	function wptelegram_join_channel( $args = array(), $echo = true ) {
+	function wptelegram_join_channel( $args = [], $echo = true ) {
 		$output = \WPTelegram\Widget\shared\shortcodes\JoinChannel::render( $args );
 		if ( $echo ) {
 			echo $output; // phpcs:ignore WordPress.Security.EscapeOutput
