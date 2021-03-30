@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.3
 Tested up to: 5.7
 Requires PHP: 7.0
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,9 @@ Many thanks to the translators for the great job!
 9. Join Link View
 
 == Changelog ==
+
+= 2.0.2 =
+- Added color options to Join Link settings
 
 = 2.0.1 =
 -   Fixed the issue with message order in legacy widget

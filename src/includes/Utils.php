@@ -31,7 +31,7 @@ class Utils {
 	 *
 	 * @param  mixed $input  The input.
 	 * @param  bool  $typefy Whether to convert strings to the appropriate data type.
-	 * @since  x.y.z
+	 * @since  2.0.2
 	 *
 	 * @return mixed
 	 */
@@ -66,7 +66,7 @@ class Utils {
 	 * Convert the input into the proper data type
 	 *
 	 * @param  mixed $input The input.
-	 * @since  x.y.z
+	 * @since  2.0.2
 	 *
 	 * @return mixed
 	 */
@@ -213,7 +213,7 @@ class Utils {
 	 *
 	 * @source gutenberg_get_jed_locale_data()
 	 *
-	 * @since x.y.z
+	 * @since 2.0.2
 	 *
 	 * @param  string $domain Translation domain.
 	 *
