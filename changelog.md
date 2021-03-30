@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.0.2 - 2021-03-30](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.2)
+
 ### Enhancements
 
 - Added color options to Join Link settings

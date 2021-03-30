@@ -299,7 +299,7 @@ class Upgrade extends BaseClass {
 	/**
 	 * Upgrade to version 2.0.2
 	 *
-	 * @since x.y.z
+	 * @since 2.0.2
 	 */
 	private function upgrade_to_2_0_2() {
 

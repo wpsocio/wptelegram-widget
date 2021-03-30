@@ -7,11 +7,11 @@ $generated_i18n_strings = array(
 
 	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:21
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:10
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:12
 	__( 'Widget Width', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:23
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:11
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:13
 	__( 'Widget Height', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
@@ -20,11 +20,11 @@ $generated_i18n_strings = array(
 
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:37
 	// Reference: domains/wptelegram/widget/blocks/src/single-post/Controls.tsx:15
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:12
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:14
 	__( 'Author Photo', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:43
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:13
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:15
 	__( 'Number of Messages', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:55
@@ -35,11 +35,11 @@ $generated_i18n_strings = array(
 	__( 'Button details', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/join-channel/Controls.tsx:34
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:16
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:18
 	__( 'Channel Link', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/join-channel/Controls.tsx:39
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:17
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:19
 	__( 'Button text', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/join-channel/index.tsx:14
@@ -63,26 +63,32 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/blocks/src/single-post/index.tsx:11
 	__( 'Telegram Single Post', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:14
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:10
+	__( 'Text color', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:11
+	__( 'Username', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:16
 	__( 'Host blocks Telegram', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:15
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:17
 	__( 'Google Script URL', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:18
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:20
 	__( 'Add to post types', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:19
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:21
 	__( 'Position', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:20
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:22
 	__( 'Priority', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:8
 	__( 'Bot Token', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:9
-	__( 'Username', 'wptelegram-widget' ),
+	__( 'Background color', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/Sidebar.tsx:16
 	__( 'Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.', 'wptelegram-widget' ),
@@ -93,16 +99,16 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
 	__( 'Save Changes', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:16
+	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:17
 	__( 'Ajax Widget', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:21
+	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:22
 	__( 'Legacy Widget', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:26
+	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:27
 	__( 'Join Link', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:31
+	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:32
 	__( 'Advanced', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/advanced/Advanced.tsx:24
@@ -128,23 +134,20 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidgetInfo.tsx:12
 	__( 'WP Telegram Ajax Widget', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:10
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:11
 	__( 'Before content', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:11
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:12
 	__( 'After content', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:18
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:19
 	__( 'Join link can be automatically added to posts.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:47
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:49
 	__( 'Priority with respect to adjacent items.', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
 	__( 'WP Telegram Join Channel', 'wptelegram-widget' ),
-
-	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/BotToken.tsx:34
-	__( 'Please read the instructions above.', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/Instructions.tsx:101
 	__( 'To make sure the updates are pulled in time, it is recommended to set up a cron on your hosting server that hits the below URL every five minutes or so.', 'wptelegram-widget' ),
@@ -209,24 +212,31 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/LegacyWidgetInfo.tsx:12
 	__( 'WP Telegram Legacy Widget', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:27
+	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:24
 	__( 'Channel or group username.', 'wptelegram-widget' ),
+
+	// Reference: packages/components/src/BotTokenField.tsx:38
+	__( 'Please read the instructions above.', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/Instructions/Instructions.tsx:15
 	__( 'INSTRUCTIONS!', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:42
+	// Reference: packages/components/src/InstructionsLink.tsx:12
+	__( 'Click here for instructions.', 'wptelegram-widget' ),
+
+	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:44
 	__( 'Do you like %s?', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:61
+	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:54
+	__( 'Write a review', 'wptelegram-widget' ),
+
+	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:64
 	__( 'Need help?', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/TestResult/MemberCountResult.tsx:15
 	__( 'Members Count:', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/TestResult/TestMessageResult.tsx:15
-	__( 'Test result:', 'wptelegram-widget' ),
-
 	// Reference: packages/components/src/TestResult/TestResult.tsx:14
 	__( 'Test Result:', 'wptelegram-widget' ),
 
@@ -258,23 +268,26 @@ $generated_i18n_strings = array(
 	// Reference: packages/components/src/WidgetInfo/WidgetInfoCard.tsx:14
 	__( 'Widget Info', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useBotTokenTest.tsx:39
-	// Reference: packages/components/src/useChatWithTest.tsx:89
+	// Reference: packages/components/src/useBotTokenTest.tsx:88
+	// Reference: packages/components/src/useChatWithTest.tsx:94
 	__( 'Please wait…', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useBotTokenTest.tsx:39
+	// Reference: packages/components/src/useBotTokenTest.tsx:88
 	__( 'Test Token', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useChatWithTest.tsx:89
+	// Reference: packages/components/src/useChatWithTest.tsx:94
 	__( 'Send Test', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:31
+	// Reference: packages/form/src/render/RenderRepeatable.tsx:103
+	__( 'Add', 'wptelegram-widget' ),
+
+	// Reference: packages/services/src/apiFetch/index.ts:34
 	__( 'Something went wrong', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:33
+	// Reference: packages/services/src/apiFetch/index.ts:36
 	__( 'Could not connect', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:36
+	// Reference: packages/services/src/apiFetch/index.ts:39
 	__( 'Error:', 'wptelegram-widget' ),
 
 	// Reference: packages/services/src/telegram/TelegramUtils.ts:105
@@ -289,7 +302,7 @@ $generated_i18n_strings = array(
 	// Reference: packages/services/src/useDisplayFeedback.ts:64
 	__( 'Lets fix these errors first.', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/useSubmitForm.ts:42
+	// Reference: packages/services/src/useSubmitForm.ts:50
 	__( 'Changes saved successfully.', 'wptelegram-widget' ),
 
 	// Reference: packages/utilities/src/fields.ts:29
