@@ -3,7 +3,7 @@
 **Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.3  
-**Tested up to:** 5.6.1  
+**Tested up to:** 5.7  
 **Stable tag:** 2.0.1  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
@@ -22,18 +22,18 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 
 ## Features:
 
--   Provides an ajax widget to display channel feed
--   Ajax widget contains a Join Channel link
--   A separate Join Channel Link/Button
--   Pulls updates automatically from Telegram
--   Uses a responsive widget to display the feed
--   Fits anywhere you want it to be
--   The received messages can be seen from `/wp-admin`
--   Automatically removes deleted messages
--   Can be displayed using a shortcode
--   Available as a Gutengerg block
--   Allows embeding of Telegram public channel messages
--   Can be extended with custom code
+- Provides an ajax widget to display channel feed
+- Ajax widget contains a Join Channel link
+- A separate Join Channel Link/Button
+- Pulls updates automatically from Telegram
+- Uses a responsive widget to display the feed
+- Fits anywhere you want it to be
+- The received messages can be seen from `/wp-admin`
+- Automatically removes deleted messages
+- Can be displayed using a shortcode
+- Available as a Gutengerg block
+- Allows embeding of Telegram public channel messages
+- Can be extended with custom code
 
 ## Widget Info
 

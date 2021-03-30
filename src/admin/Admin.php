@@ -2,7 +2,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.0.0
  *
  * @package    WPTelegram\Widget
@@ -33,7 +33,7 @@ class Admin extends BaseClass {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function is_settings_page( $hook_suffix ) {
-		return ( current_user_can( 'manage_options' ) && false !== strpos( $hook_suffix, '_page_' . $this->plugin->name() ) );
+		return ( current_user_can( 'manage_options' ) && false !== strpos( $hook_suffix, '_page_' . $this->plugin()->name() ) );
 	}
 
 	/**
@@ -52,13 +52,13 @@ class Admin extends BaseClass {
 		}
 		return array_merge(
 			$categories,
-			array(
-				array(
+			[
+				[
 					'slug'  => $slug,
 					'title' => __( 'WP Telegram', 'wptelegram-widget' ),
 					'icon'  => null,
-				),
-			)
+				],
+			]
 		);
 	}
 
@@ -82,19 +82,19 @@ class Admin extends BaseClass {
 		if ( defined( 'WPTELEGRAM_LOADED' ) ) {
 			add_submenu_page(
 				'wptelegram',
-				esc_html( $this->plugin->title() ),
+				esc_html( $this->plugin()->title() ),
 				esc_html__( 'Telegram Widget', 'wptelegram-widget' ),
 				'manage_options',
-				$this->plugin->name(),
-				array( $this, 'display_plugin_admin_page' )
+				$this->plugin()->name(),
+				[ $this, 'display_plugin_admin_page' ]
 			);
 		} else {
 			add_menu_page(
-				esc_html( $this->plugin->title() ),
-				esc_html( $this->plugin->title() ),
+				esc_html( $this->plugin()->title() ),
+				esc_html( $this->plugin()->title() ),
 				'manage_options',
-				$this->plugin->name(),
-				array( $this, 'display_plugin_admin_page' )
+				$this->plugin()->name(),
+				[ $this, 'display_plugin_admin_page' ]
 			);
 		}
 	}
@@ -145,8 +145,8 @@ class Admin extends BaseClass {
 		 */
 		do_action( 'wptelegram_widget_pull_updates_init' );
 
-		$bot_token = $this->plugin->options()->get_path( 'legacy_widget.bot_token' );
-		$username  = $this->plugin->options()->get_path( 'legacy_widget.username' );
+		$bot_token = $this->plugin()->options()->get_path( 'legacy_widget.bot_token' );
+		$username  = $this->plugin()->options()->get_path( 'legacy_widget.username' );
 
 		if ( ! $bot_token || ! $username ) {
 			return;
@@ -197,7 +197,7 @@ class Admin extends BaseClass {
 	 */
 	private function get_update_params() {
 
-		$update_id = (int) $this->plugin->options()->get( 'last_update_id' );
+		$update_id = (int) $this->plugin()->options()->get( 'last_update_id' );
 
 		$offset = null;
 
@@ -219,12 +219,12 @@ class Admin extends BaseClass {
 	 */
 	private function get_allowed_updates() {
 
-		$allowed_updates = array(
+		$allowed_updates = [
 			'channel_post',
 			// 'edited_channel_post',
 			'message',
 			// 'edited_message',
-		);
+		];
 
 		return (array) apply_filters( 'wptelegram_widget_allowed_updates', $allowed_updates );
 	}
@@ -243,7 +243,7 @@ class Admin extends BaseClass {
 		 */
 		do_action( 'wptelegram_widget_handle_updates_init', $updates );
 
-		$new_messages = array();
+		$new_messages = [];
 
 		foreach ( (array) $updates as $update ) {
 
@@ -256,10 +256,10 @@ class Admin extends BaseClass {
 
 		$update_id = $update['update_id'];
 
-		$this->plugin->options()->set( 'last_update_id', $update_id );
+		$this->plugin()->options()->set( 'last_update_id', $update_id );
 
 		if ( ! empty( $new_messages ) ) {
-			$username = $this->plugin->options()->get_path( 'legacy_widget.username', '' );
+			$username = $this->plugin()->options()->get_path( 'legacy_widget.username', '' );
 
 			$this->save_messages( $new_messages, $username );
 		}
@@ -349,7 +349,7 @@ class Admin extends BaseClass {
 			$username = $message['chat']['username'];
 		}
 
-		$saved_username = $this->plugin->options()->get_path( 'legacy_widget.username' );
+		$saved_username = $this->plugin()->options()->get_path( 'legacy_widget.username' );
 
 		if ( ! empty( $saved_username ) && strtolower( $saved_username ) === strtolower( $username ) ) {
 			$verified = true;
@@ -371,9 +371,9 @@ class Admin extends BaseClass {
 
 		$username = strtolower( $username );
 
-		$saved_messages = $this->plugin->options()->get( 'messages', array() );
+		$saved_messages = $this->plugin()->options()->get( 'messages', [] );
 
-		$saved_username_messages = ! empty( $saved_messages[ $username ] ) ? $saved_messages[ $username ] : array();
+		$saved_username_messages = ! empty( $saved_messages[ $username ] ) ? $saved_messages[ $username ] : [];
 
 		$messages = array_filter( array_unique( array_merge( $saved_username_messages, $new_messages ) ) );
 
@@ -390,7 +390,7 @@ class Admin extends BaseClass {
 
 		$saved_messages[ $username ] = $messages;
 
-		$this->plugin->options()->set( 'messages', $saved_messages );
+		$this->plugin()->options()->set( 'messages', $saved_messages );
 	}
 
 	/**
@@ -412,7 +412,7 @@ class Admin extends BaseClass {
 		}
 
 		// if the same bot token was not used.
-		if ( $bot_api->get_bot_token() !== $this->plugin->options()->get_path( 'legacy_widget.bot_token' ) ) {
+		if ( $bot_api->get_bot_token() !== $this->plugin()->options()->get_path( 'legacy_widget.bot_token' ) ) {
 			return;
 		}
 
@@ -423,13 +423,13 @@ class Admin extends BaseClass {
 		}
 
 		$used_username  = strtolower( $result['chat']['username'] );
-		$saved_username = strtolower( $this->plugin->options()->get_path( 'legacy_widget.username' ) );
+		$saved_username = strtolower( $this->plugin()->options()->get_path( 'legacy_widget.username' ) );
 
 		if ( $used_username !== $saved_username ) {
 			return;
 		}
 
-		$messages = array( $result['message_id'] );
+		$messages = [ $result['message_id'] ];
 
 		$this->save_messages( $messages, $saved_username );
 	}

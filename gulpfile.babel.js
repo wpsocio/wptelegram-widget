@@ -13,10 +13,12 @@ import potomo from 'gulp-potomo';
 import through2 from 'through2';
 import gulpIgnore from 'gulp-ignore';
 import minifycss from 'gulp-uglifycss';
-
+import semverInc from 'semver/functions/inc';
 import config from './gulp.config';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+
+const RELEASES = ['major', 'minor', 'patch'];
 
 /**
  * Gets CLI args as object.
@@ -50,6 +52,29 @@ const errorHandler = (r) => {
 	beep();
 };
 
+const calculateVersion = () => {
+	const { type, ver } = getCommandArgs();
+
+	// if the version is passed explicitly, then use that.
+	if (ver) {
+		return ver;
+	}
+
+	// default release.
+	let release = 'patch';
+
+	if (type) {
+		if (!RELEASES.includes(type)) {
+			throw new Error('Unknown release type: ' + type + '\n Usage: gulp release --type minor');
+		}
+		release = type;
+	}
+	const currentVersion = pkg.version;
+
+	const newVersion = semverInc(currentVersion, release);
+	return newVersion;
+}
+
 /**
  * Converts JS POT file to PHP using @wordpress/i18n
  *
@@ -57,11 +82,9 @@ const errorHandler = (r) => {
  * @return {void}
  */
 export const jsPotToPhp = (cb) => {
-	const cmd = `npx pot-to-php ${
-		config.domainPath + '/' + config.JSPotFilename
-	} ${config.domainPath}/${config.textDomain}-js-translations.php ${
-		pkg.name
-	}`;
+	const cmd = `npx pot-to-php ${config.domainPath + '/' + config.JSPotFilename} ${config.domainPath}/${
+		config.textDomain
+	}-js-translations.php ${pkg.name}`;
 
 	exec(cmd, (err) => {
 		if (err && 1 !== err.code) {
@@ -85,11 +108,9 @@ export const generatePotFile = (done) => {
 			poedit: true,
 			language: 'en_US',
 			'X-Poedit-Basepath': '..\n',
-			'Plural-Forms':
-				'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n',
+			'Plural-Forms': 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n',
 			'x-generator': 'node-wp-i18n',
-			'X-Poedit-KeywordsList':
-				'__;_e;_x;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n',
+			'X-Poedit-KeywordsList': '__;_e;_x;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n',
 			'X-Poedit-SearchPath-0': '.\n',
 			'X-Poedit-SearchPathExcluded-0': 'assets\n',
 		},
@@ -104,22 +125,15 @@ export const generatePotFile = (done) => {
 			];
 
 			for (translation in pot.translations['']) {
-				if (
-					'undefined' !==
-					typeof pot.translations[''][translation].comments.extracted
-				) {
-					if (
-						0 <=
-						excluded_meta.indexOf(
-							pot.translations[''][translation].comments.extracted
-						)
-					) {
+				if (undefined !== pot.translations[''][translation].comments.extracted) {
+					if (0 <= excluded_meta.indexOf(pot.translations[''][translation].comments.extracted)) {
 						// console.log( 'Excluded meta: ' + pot.translations[''][ translation ].comments.extracted );
 						delete pot.translations[''][translation];
 					}
 				}
 			}
 
+			// pot.headers['project-id-version'] = sprintf('%s - %s', pkg.title, calculateVersion());
 			pot.headers['report-msgid-bugs-to'] = config.bugReport;
 			pot.headers['last-translator'] = pkg.title;
 			pot.headers['language-team'] = pkg.title;
@@ -141,13 +155,7 @@ export const generatePotFile = (done) => {
 	wpi18n
 		.makepot(options)
 		.then(function (wpPackage) {
-			console.log(
-				'POT file saved to ' +
-					path.relative(
-						wpPackage.getPath(),
-						wpPackage.getPotFilename()
-					)
-			);
+			console.log('POT file saved to ' + path.relative(wpPackage.getPath(), wpPackage.getPotFilename()));
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -192,10 +200,7 @@ const createVersionUpdateCB = (forFile, version) => {
 		case 'mainfile':
 			// convert "plugin-name" to "PLUGIN_NAME_VER"
 			versionConst = pkg.name.replace('-', '_').toUpperCase() + '_VER';
-			patterns = [
-				/Version:\s*(\d+\.\d+\.\d+)/i,
-				new RegExp("'" + versionConst + "',\\s*'(\\d+\\.\\d+\\.\\d+)'"),
-			];
+			patterns = [/Version:\s*(\d+\.\d+\.\d+)/i, new RegExp("'" + versionConst + "',\\s*'(\\d+\\.\\d+\\.\\d+)'")];
 			break;
 		case 'since-xyz':
 			patterns = [/@since[\s\t]*(x\.y\.z)/gi];
@@ -213,21 +218,14 @@ const createVersionUpdateCB = (forFile, version) => {
 	});
 };
 
-export const updateVersion = (done) => {
-	const { ver: version } = getCommandArgs();
-	if (!version) {
-		done(
-			new Error(
-				'No version number supplied! usage: gulp updateVersion --ver "x.y.z"'
-			)
-		);
-	}
+export const updateVersion = () => {
+	const version = calculateVersion();
 
 	const srcOptions = { base: './' };
 
 	return (
 		gulp
-			.src(['./package.json'], srcOptions)
+			.src(['./package.json', './composer.json'], srcOptions)
 			.pipe(createVersionUpdateCB('package', version))
 			.pipe(gulp.dest('./'))
 
@@ -235,12 +233,7 @@ export const updateVersion = (done) => {
 			.pipe(gulpIgnore.exclude('**/*'))
 
 			// add readme files
-			.pipe(
-				gulp.src(
-					['./README.md', config.srcDir + '/README.txt'],
-					srcOptions
-				)
-			)
+			.pipe(gulp.src(['./README.md', config.srcDir + '/README.txt'], srcOptions))
 			.pipe(createVersionUpdateCB('readme', version))
 			.pipe(gulp.dest('./'))
 
@@ -262,15 +255,8 @@ export const updateVersion = (done) => {
 	);
 };
 
-export const updateChangelog = (done) => {
-	const { ver: version } = getCommandArgs();
-	if (!version) {
-		done(
-			new Error(
-				'No version number supplied! usage: gulp updateChangelog --ver "x.y.z"'
-			)
-		);
-	}
+export const updateChangelog = () => {
+	const version = calculateVersion();
 
 	const srcOptions = { cwd: './', base: './' };
 
@@ -281,21 +267,17 @@ export const updateChangelog = (done) => {
 				through2.obj(function (file, _, cb) {
 					if (file.isBuffer()) {
 						const regex = /== Changelog ==([\s\S])/i;
-						const contents = file.contents
-							.toString()
-							.replace(regex, (match, p1) => {
-								const changes = fs
-									.readFileSync('./changelog.md', 'utf8') // get contents of changelog file
-									.match(
-										/(?<=##\sUnreleased)[\s\S]+?(?=##\s?\[\d+\.\d+\.\d+)/i
-									)[0] // match the changes in Unreleased section
-									.replace(/(^|\n)(##.+)/g, '') // remove headings like Enhancements, Bug fixes
-									.replace(/\n[\s\t]*\n/g, '\n') // replace empty lines
-									.trim(); // cleanup
+						const contents = file.contents.toString().replace(regex, (match, p1) => {
+							const changes = fs
+								.readFileSync('./changelog.md', 'utf8') // get contents of changelog file
+								.match(/(?<=##\sUnreleased)[\s\S]+?(?=##\s?\[\d+\.\d+\.\d+)/i)[0] // match the changes in Unreleased section
+								.replace(/(^|\n)(##.+)/g, '') // remove headings like Enhancements, Bug fixes
+								.replace(/\n[\s\t]*\n/g, '\n') // replace empty lines
+								.trim(); // cleanup
 
-								const replace = `\n\n= ${version} =\n${changes}\n`;
-								return match.replace(p1, replace);
-							});
+							const replace = `\n\n= ${version} =\n${changes}\n`;
+							return match.replace(p1, replace);
+						});
 						file.contents = Buffer.from(contents);
 					}
 					cb(null, file);
@@ -312,29 +294,24 @@ export const updateChangelog = (done) => {
 				through2.obj(function (file, _, cb) {
 					if (file.isBuffer()) {
 						const regex = /## (Unreleased)/i;
-						const contents = file.contents
-							.toString()
-							.replace(regex, (match, p1) => {
-								const today = new Date();
-								const url = sprintf(
-									'https://github.com/manzoorwanijk/%1$s/releases/tag/v%2$s',
-									pkg.name,
-									version
-								);
-								const replace = sprintf(
-									'[%1$s - %2$s-%3$s-%4$s](%5$s)',
-									version,
-									today.getFullYear(),
-									('0' + (today.getMonth() + 1)).slice(-2),
-									today.getDate(),
-									url
-								);
+						const contents = file.contents.toString().replace(regex, (match, p1) => {
+							const today = new Date();
+							const url = sprintf(
+								'https://github.com/manzoorwanijk/%1$s/releases/tag/v%2$s',
+								pkg.name,
+								version
+							);
+							const replace = sprintf(
+								'[%1$s - %2$s-%3$s-%4$s](%5$s)',
+								version,
+								today.getFullYear(),
+								('0' + (today.getMonth() + 1)).slice(-2),
+								today.getDate(),
+								url
+							);
 
-								return match.replace(
-									p1,
-									`Unreleased\n\n## ${replace}`
-								);
-							});
+							return match.replace(p1, `Unreleased\n\n## ${replace}`);
+						});
 						file.contents = Buffer.from(contents);
 					}
 					cb(null, file);
@@ -363,14 +340,11 @@ export const styles = () => {
 };
 
 const copyChangelog = () => {
-	return gulp
-		.src('./changelog.md', { base: './' })
-		.pipe(lineec())
-		.pipe(gulp.dest(config.srcDir));
+	return gulp.src('./changelog.md', { base: './' }).pipe(lineec()).pipe(gulp.dest(config.srcDir));
 };
 
 export const watchPhp = () => {
-	const watcher = gulp.watch([config.watchPhp], {
+	const watcher = gulp.watch(config.watchPhp, {
 		events: ['change'],
 	});
 
@@ -384,11 +358,7 @@ export const build = gulp.series(i18n, styles);
 
 export const prerelease = gulp.parallel(build, copyChangelog);
 
-export const release = gulp.series(
-	updateVersion,
-	updateChangelog,
-	prerelease
-);
+export const release = gulp.series(updateVersion, updateChangelog, prerelease);
 
 export const dev = gulp.parallel(watchPhp);
 

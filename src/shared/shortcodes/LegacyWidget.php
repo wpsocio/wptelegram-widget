@@ -2,7 +2,7 @@
 /**
  * The Legacy widget shortcode handler.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -36,18 +36,18 @@ class LegacyWidget {
 		}
 
 		// fetch messages.
-		$messages = WPTG_Widget()->options()->get( 'messages', array() );
+		$messages = WPTG_Widget()->options()->get( 'messages', [] );
 		$username = strtolower( WPTG_Widget()->options()->get_path( 'legacy_widget.username', '' ) );
 
 		if ( empty( $messages[ $username ] ) ) {
 			return;
 		}
 
-		$defaults = array(
+		$defaults = [
 			'num_messages' => 5,
 			'width'        => 100,
 			'author_photo' => 'auto',
-		);
+		];
 
 		// use global options.
 		foreach ( $defaults as $key => $default ) {
@@ -85,7 +85,7 @@ class LegacyWidget {
 				break;
 		}
 
-		$embed_urls = array();
+		$embed_urls = [];
 
 		foreach ( $messages as $message_id ) {
 
@@ -134,13 +134,13 @@ class LegacyWidget {
 
 		if ( empty( $structure ) || Shared::$use_ugly_urls ) {
 
-			$args = array(
+			$args = [
 				'core'       => 'wptelegram',
 				'module'     => 'widget',
 				'action'     => 'view',
 				'username'   => $username,
 				'message_id' => $message_id,
-			);
+			];
 
 			$url = add_query_arg( $args, site_url() );
 

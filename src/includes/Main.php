@@ -2,7 +2,7 @@
 /**
  * The file that defines the core plugin class
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -80,7 +80,7 @@ class Main {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $options    The plugin options
+	 * @var      Options    $options    The plugin options
 	 */
 	protected $options;
 
@@ -221,7 +221,6 @@ class Main {
 		$this->assets = new Assets( $this->dir( '/assets' ), $this->url( '/assets' ) );
 	}
 
-
 	/**
 	 * Get the plugin assets handler.
 	 *
@@ -266,9 +265,7 @@ class Main {
 
 		$this->loader->add_filter( 'block_categories', $plugin_admin, 'register_block_category', 10, 1 );
 
-		$utils = new Utils();
-
-		$this->loader->add_filter( 'rest_request_before_callbacks', __NAMESPACE__ . '\Utils', 'fitler_rest_errors', 10, 3 );
+		$this->loader->add_filter( 'rest_request_before_callbacks', Utils::class, 'fitler_rest_errors', 10, 3 );
 
 	}
 
@@ -320,11 +317,11 @@ class Main {
 		$this->loader->add_action( 'enqueue_block_editor_assets', $asset_manager, 'enqueue_block_editor_assets' );
 
 		// Register shortcodes.
-		$shortcodes = array(
+		$shortcodes = [
 			'wptelegram-ajax-widget'  => 'AjaxWidget',
 			'wptelegram-join-channel' => 'JoinChannel',
 			'wptelegram-widget'       => 'LegacyWidget',
-		);
+		];
 
 		foreach ( $shortcodes as $shortcode => $class ) {
 			$this->loader->add_shortcode( $shortcode, '\WPTelegram\Widget\shared\shortcodes\\' . $class, 'render' );
@@ -414,17 +411,6 @@ class Main {
 	 */
 	public function url( $path = '' ) {
 		return WPTELEGRAM_WIDGET_URL . $path;
-	}
-
-	/**
-	 * The suffix to use for plugin assets.
-	 *
-	 * @since 1.7.1
-	 *
-	 * @return string The suffix to use.
-	 */
-	public function suffix() {
-		return ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 	}
 
 	/**

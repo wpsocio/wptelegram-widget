@@ -2,7 +2,7 @@
 /**
  * Utility methods.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -12,6 +12,7 @@
 namespace WPTelegram\Widget\includes;
 
 use WPTelegram\Widget\includes\restApi\RESTController;
+use WP_REST_Request;
 use WP_Error;
 
 /**
@@ -26,11 +27,69 @@ use WP_Error;
 class Utils {
 
 	/**
+	 * Sanitize the input.
+	 *
+	 * @param  mixed $input  The input.
+	 * @param  bool  $typefy Whether to convert strings to the appropriate data type.
+	 * @since  x.y.z
+	 *
+	 * @return mixed
+	 */
+	public static function sanitize( $input, $typefy = false ) {
+
+		if ( is_array( $input ) ) {
+
+			foreach ( $input as $key => $value ) {
+
+				$input[ sanitize_text_field( $key ) ] = self::sanitize( $value, $typefy );
+			}
+			return $input;
+		}
+
+		// These are safe types.
+		if ( is_bool( $input ) || is_int( $input ) || is_float( $input ) ) {
+			return $input;
+		}
+
+		// Now we will treat it as string.
+		$input = sanitize_text_field( $input );
+
+		// avoid numeric or boolean values as strings.
+		if ( $typefy ) {
+			return self::typefy( $input );
+		}
+
+		return $input;
+	}
+
+	/**
+	 * Convert the input into the proper data type
+	 *
+	 * @param  mixed $input The input.
+	 * @since  x.y.z
+	 *
+	 * @return mixed
+	 */
+	public static function typefy( $input ) {
+
+		if ( is_numeric( $input ) ) {
+
+			return floatval( $input );
+
+		} elseif ( is_string( $input ) && preg_match( '/^(?:true|false)$/i', $input ) ) {
+
+			return ( 'true' === strtolower( $input ) ) ? true : false;
+		}
+
+		return $input;
+	}
+
+	/**
 	 * Filter WP REST API errors.
 	 *
-	 * @param mixed            $response Result to send to the client. Usually a WP_REST_Response or WP_Error.
-	 * @param array            $handler  Route handler used for the request.
-	 * @param \WP_REST_Request $request  Request used to generate the response.
+	 * @param mixed           $response Result to send to the client. Usually a WP_REST_Response or WP_Error.
+	 * @param array           $handler  Route handler used for the request.
+	 * @param WP_REST_Request $request  Request used to generate the response.
 	 *
 	 * @since    2.0.0
 	 */
@@ -45,7 +104,7 @@ class Utils {
 
 		$data = $response->get_error_data();
 
-		$invalid_params = array();
+		$invalid_params = [];
 		if ( ! empty( $data['params'] ) ) {
 			foreach ( $data['params'] as $error ) {
 				preg_match( '/\A\S+/', $error, $match );
@@ -103,11 +162,11 @@ class Utils {
 		 */
 		$valid_paths = array_map(
 			'realpath',
-			array(
+			[
 				get_stylesheet_directory(),
 				get_template_directory(),
 				ABSPATH . WPINC . '/theme-compat/',
-			)
+			]
 		);
 
 		$path = realpath( $template );
@@ -128,7 +187,7 @@ class Utils {
 	 * @param string $url  The t.me URL.
 	 * @param array  $args The request args.
 	 */
-	public static function send_request_to_t_dot_me( $url, $args = array() ) {
+	public static function send_request_to_t_dot_me( $url, $args = [] ) {
 
 		$telegram_blocked  = WPTG_Widget()->options()->get_path( 'advanced.telegram_blocked' );
 		$google_script_url = WPTG_Widget()->options()->get_path( 'advanced.google_script_url' );
@@ -147,5 +206,37 @@ class Utils {
 		$body = wp_remote_retrieve_body( $response );
 
 		return $body;
+	}
+
+	/**
+	 * Returns Jed-formatted localization data.
+	 *
+	 * @source gutenberg_get_jed_locale_data()
+	 *
+	 * @since x.y.z
+	 *
+	 * @param  string $domain Translation domain.
+	 *
+	 * @return array
+	 */
+	public static function get_jed_locale_data( $domain ) {
+		$translations = get_translations_for_domain( $domain );
+
+		$locale = [
+			'' => [
+				'domain' => $domain,
+				'lang'   => is_admin() ? get_user_locale() : get_locale(),
+			],
+		];
+
+		if ( ! empty( $translations->headers['Plural-Forms'] ) ) {
+			$locale['']['plural_forms'] = $translations->headers['Plural-Forms'];
+		}
+
+		foreach ( $translations->entries as $msgid => $entry ) {
+			$locale[ $msgid ] = $entry->translations;
+		}
+
+		return $locale;
 	}
 }

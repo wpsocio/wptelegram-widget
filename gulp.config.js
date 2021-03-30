@@ -11,13 +11,8 @@ const config = {
 	srcDir,
 	watchPhp: srcDir + '/**/*.php',
 	vendorBin: './vendor/bin',
-	PhpStandard: 'WordPress',
-	ESNextJS: srcDir + '/**/*.esnext.js',
-	styleSRC: [
-		srcDir + '/**/css/*.css',
-		'!' + srcDir + '/assets/static/**',
-		'!' + srcDir + '/**/*.min.css',
-	],
+	PhpStandard: 'phpcs.xml',
+	styleSRC: [srcDir + '/**/css/*.css', '!' + srcDir + '/assets/static/**', '!' + srcDir + '/**/*.min.css'],
 	styleDest: srcDir,
 	styleDest: srcDir,
 

@@ -10,12 +10,12 @@ msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:21
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
-#: domains/wptelegram/widget/main/src/services/fields.ts:10
+#: domains/wptelegram/widget/main/src/services/fields.ts:12
 msgid "Widget Width"
 msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:23
-#: domains/wptelegram/widget/main/src/services/fields.ts:11
+#: domains/wptelegram/widget/main/src/services/fields.ts:13
 msgid "Widget Height"
 msgstr ""
 
@@ -26,12 +26,12 @@ msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:37
 #: domains/wptelegram/widget/blocks/src/single-post/Controls.tsx:15
-#: domains/wptelegram/widget/main/src/services/fields.ts:12
+#: domains/wptelegram/widget/main/src/services/fields.ts:14
 msgid "Author Photo"
 msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:43
-#: domains/wptelegram/widget/main/src/services/fields.ts:13
+#: domains/wptelegram/widget/main/src/services/fields.ts:15
 msgid "Number of Messages"
 msgstr ""
 
@@ -45,12 +45,12 @@ msgid "Button details"
 msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/join-channel/Controls.tsx:34
-#: domains/wptelegram/widget/main/src/services/fields.ts:16
+#: domains/wptelegram/widget/main/src/services/fields.ts:18
 msgid "Channel Link"
 msgstr ""
 
 #: domains/wptelegram/widget/blocks/src/join-channel/Controls.tsx:39
-#: domains/wptelegram/widget/main/src/services/fields.ts:17
+#: domains/wptelegram/widget/main/src/services/fields.ts:19
 msgid "Button text"
 msgstr ""
 
@@ -82,23 +82,31 @@ msgstr ""
 msgid "Telegram Single Post"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/services/fields.ts:14
+#: domains/wptelegram/widget/main/src/services/fields.ts:10
+msgid "Text color"
+msgstr ""
+
+#: domains/wptelegram/widget/main/src/services/fields.ts:11
+msgid "Username"
+msgstr ""
+
+#: domains/wptelegram/widget/main/src/services/fields.ts:16
 msgid "Host blocks Telegram"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/services/fields.ts:15
+#: domains/wptelegram/widget/main/src/services/fields.ts:17
 msgid "Google Script URL"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/services/fields.ts:18
+#: domains/wptelegram/widget/main/src/services/fields.ts:20
 msgid "Add to post types"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/services/fields.ts:19
+#: domains/wptelegram/widget/main/src/services/fields.ts:21
 msgid "Position"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/services/fields.ts:20
+#: domains/wptelegram/widget/main/src/services/fields.ts:22
 msgid "Priority"
 msgstr ""
 
@@ -107,7 +115,7 @@ msgid "Bot Token"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/services/fields.ts:9
-msgid "Username"
+msgid "Background color"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/Sidebar.tsx:16
@@ -124,19 +132,19 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:16
+#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:17
 msgid "Ajax Widget"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:21
+#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:22
 msgid "Legacy Widget"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:26
+#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:27
 msgid "Join Link"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:31
+#: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:32
 msgid "Advanced"
 msgstr ""
 
@@ -170,28 +178,24 @@ msgstr ""
 msgid "WP Telegram Ajax Widget"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:10
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:11
 msgid "Before content"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:11
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:12
 msgid "After content"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:18
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:19
 msgid "Join link can be automatically added to posts."
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:47
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:49
 msgid "Priority with respect to adjacent items."
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
 msgid "WP Telegram Join Channel"
-msgstr ""
-
-#: domains/wptelegram/widget/main/src/ui/legacyWidget/BotToken.tsx:34
-msgid "Please read the instructions above."
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/legacyWidget/Instructions.tsx:101
@@ -282,19 +286,31 @@ msgstr ""
 msgid "WP Telegram Legacy Widget"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:27
+#: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:24
 msgid "Channel or group username."
+msgstr ""
+
+#: packages/components/src/BotTokenField.tsx:38
+msgid "Please read the instructions above."
 msgstr ""
 
 #: packages/components/src/Instructions/Instructions.tsx:15
 msgid "INSTRUCTIONS!"
 msgstr ""
 
-#: packages/components/src/PluginInfo/PluginInfoCard.tsx:42
+#: packages/components/src/InstructionsLink.tsx:12
+msgid "Click here for instructions."
+msgstr ""
+
+#: packages/components/src/PluginInfo/PluginInfoCard.tsx:44
 msgid "Do you like %s?"
 msgstr ""
 
-#: packages/components/src/PluginInfo/PluginInfoCard.tsx:61
+#: packages/components/src/PluginInfo/PluginInfoCard.tsx:54
+msgid "Write a review"
+msgstr ""
+
+#: packages/components/src/PluginInfo/PluginInfoCard.tsx:64
 msgid "Need help?"
 msgstr ""
 
@@ -303,9 +319,6 @@ msgid "Members Count:"
 msgstr ""
 
 #: packages/components/src/TestResult/TestMessageResult.tsx:15
-msgid "Test result:"
-msgstr ""
-
 #: packages/components/src/TestResult/TestResult.tsx:14
 msgid "Test Result:"
 msgstr ""
@@ -349,28 +362,32 @@ msgstr ""
 msgid "Widget Info"
 msgstr ""
 
-#: packages/components/src/useBotTokenTest.tsx:39
-#: packages/components/src/useChatWithTest.tsx:89
+#: packages/components/src/useBotTokenTest.tsx:88
+#: packages/components/src/useChatWithTest.tsx:94
 msgid "Please wait…"
 msgstr ""
 
-#: packages/components/src/useBotTokenTest.tsx:39
+#: packages/components/src/useBotTokenTest.tsx:88
 msgid "Test Token"
 msgstr ""
 
-#: packages/components/src/useChatWithTest.tsx:89
+#: packages/components/src/useChatWithTest.tsx:94
 msgid "Send Test"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:31
+#: packages/form/src/render/RenderRepeatable.tsx:103
+msgid "Add"
+msgstr ""
+
+#: packages/services/src/apiFetch/index.ts:34
 msgid "Something went wrong"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:33
+#: packages/services/src/apiFetch/index.ts:36
 msgid "Could not connect"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:36
+#: packages/services/src/apiFetch/index.ts:39
 msgid "Error:"
 msgstr ""
 
@@ -392,7 +409,7 @@ msgstr ""
 msgid "Lets fix these errors first."
 msgstr ""
 
-#: packages/services/src/useSubmitForm.ts:42
+#: packages/services/src/useSubmitForm.ts:50
 msgid "Changes saved successfully."
 msgstr ""
 

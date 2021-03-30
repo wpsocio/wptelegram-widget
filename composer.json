@@ -1,15 +1,18 @@
 {
-	"name": "wptelegram-login",
-	"version": "1.5.4",
-	"description": "Let the users login to your website with their Telegram and make it simple for them to get connected and let them receive their email notifications on Telegram.",
+	"name": "wptelegram/widget",
+	"version": "2.0.1",
+	"description": "Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.",
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "*",
-        "object-calisthenics/phpcs-calisthenics-rules": "*",
-        "phpcompatibility/php-compatibility": "*",
+		"object-calisthenics/phpcs-calisthenics-rules": "*",
+		"phpcompatibility/php-compatibility": "*",
 		"wp-coding-standards/wpcs": "*",
 		"wp-cli/wp-cli-bundle": "*"
 	},
 	"scripts": {
+		"post-install-cmd": [
+			"composer run set-config"
+		],
 		"set-config": [
 			"\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs",
 			"\"vendor/bin/phpcs\" --config-set default_standard WordPress"

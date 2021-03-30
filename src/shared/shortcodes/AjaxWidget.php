@@ -2,7 +2,7 @@
 /**
  * The ajax widget shortcode handler.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -38,10 +38,10 @@ class AjaxWidget {
 			$atts['height'] = $atts['widget_height'];
 		}
 
-		$defaults = array(
+		$defaults = [
 			'width'  => '100%',
 			'height' => 600,
-		);
+		];
 
 		// use global options.
 		foreach ( $defaults as $key => $default ) {
@@ -106,12 +106,12 @@ class AjaxWidget {
 
 		if ( empty( $structure ) || Shared::$use_ugly_urls ) {
 
-			$args = array(
+			$args = [
 				'core'     => 'wptelegram',
 				'module'   => 'widget',
 				'action'   => 'view',
 				'username' => $username,
-			);
+			];
 
 			$url = add_query_arg( $args, site_url() );
 

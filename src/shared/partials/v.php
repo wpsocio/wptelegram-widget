@@ -2,7 +2,7 @@
 /**
  * The template to interept request to /v by Telegram scrip.
  *
- * @link       https://t.me/manzoorwanijk
+ * @link       https://manzoorwani.dev
  * @since      1.9.3
  *
  * @package    WPTelegram\Widget
