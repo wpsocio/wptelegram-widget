@@ -143,7 +143,7 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:19
 	__( 'Join link can be automatically added to posts.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:49
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:48
 	__( 'Priority with respect to adjacent items.', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
@@ -212,7 +212,7 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/LegacyWidgetInfo.tsx:12
 	__( 'WP Telegram Legacy Widget', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:24
+	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:23
 	__( 'Channel or group username.', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/BotTokenField.tsx:38
@@ -268,26 +268,26 @@ $generated_i18n_strings = array(
 	// Reference: packages/components/src/WidgetInfo/WidgetInfoCard.tsx:14
 	__( 'Widget Info', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useBotTokenTest.tsx:88
+	// Reference: packages/components/src/useBotTokenTest.tsx:96
 	// Reference: packages/components/src/useChatWithTest.tsx:94
 	__( 'Please wait…', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useBotTokenTest.tsx:88
+	// Reference: packages/components/src/useBotTokenTest.tsx:96
 	__( 'Test Token', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/useChatWithTest.tsx:94
 	__( 'Send Test', 'wptelegram-widget' ),
 
-	// Reference: packages/form/src/render/RenderRepeatable.tsx:103
+	// Reference: packages/form/src/render/RenderRepeatable.tsx:101
 	__( 'Add', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:34
+	// Reference: packages/services/src/apiFetch/index.ts:35
 	__( 'Something went wrong', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:36
+	// Reference: packages/services/src/apiFetch/index.ts:37
 	__( 'Could not connect', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/apiFetch/index.ts:39
+	// Reference: packages/services/src/apiFetch/index.ts:40
 	__( 'Error:', 'wptelegram-widget' ),
 
 	// Reference: packages/services/src/telegram/TelegramUtils.ts:105

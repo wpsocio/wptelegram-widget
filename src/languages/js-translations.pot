@@ -190,7 +190,7 @@ msgstr ""
 msgid "Join link can be automatically added to posts."
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:49
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:48
 msgid "Priority with respect to adjacent items."
 msgstr ""
 
@@ -286,7 +286,7 @@ msgstr ""
 msgid "WP Telegram Legacy Widget"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:24
+#: domains/wptelegram/widget/main/src/ui/legacyWidget/Username.tsx:23
 msgid "Channel or group username."
 msgstr ""
 
@@ -362,12 +362,12 @@ msgstr ""
 msgid "Widget Info"
 msgstr ""
 
-#: packages/components/src/useBotTokenTest.tsx:88
+#: packages/components/src/useBotTokenTest.tsx:96
 #: packages/components/src/useChatWithTest.tsx:94
 msgid "Please wait…"
 msgstr ""
 
-#: packages/components/src/useBotTokenTest.tsx:88
+#: packages/components/src/useBotTokenTest.tsx:96
 msgid "Test Token"
 msgstr ""
 
@@ -375,19 +375,19 @@ msgstr ""
 msgid "Send Test"
 msgstr ""
 
-#: packages/form/src/render/RenderRepeatable.tsx:103
+#: packages/form/src/render/RenderRepeatable.tsx:101
 msgid "Add"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:34
+#: packages/services/src/apiFetch/index.ts:35
 msgid "Something went wrong"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:36
+#: packages/services/src/apiFetch/index.ts:37
 msgid "Could not connect"
 msgstr ""
 
-#: packages/services/src/apiFetch/index.ts:39
+#: packages/services/src/apiFetch/index.ts:40
 msgid "Error:"
 msgstr ""
 
