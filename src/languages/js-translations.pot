@@ -129,6 +129,7 @@ msgid "Get LIVE support on Telegram"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
+#: packages/components/src/Submit/SubmitButton.tsx:15
 msgid "Save Changes"
 msgstr ""
 
@@ -312,6 +313,10 @@ msgstr ""
 
 #: packages/components/src/PluginInfo/PluginInfoCard.tsx:64
 msgid "Need help?"
+msgstr ""
+
+#: packages/components/src/Submit/ResetButton.tsx:7
+msgid "Reset"
 msgstr ""
 
 #: packages/components/src/TestResult/MemberCountResult.tsx:15
