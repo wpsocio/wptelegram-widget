@@ -97,6 +97,7 @@ $generated_i18n_strings = array(
 	__( 'Get LIVE support on Telegram', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
+	// Reference: packages/components/src/Submit/SubmitButton.tsx:15
 	__( 'Save Changes', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:17
@@ -218,6 +219,12 @@ $generated_i18n_strings = array(
 	// Reference: packages/components/src/BotTokenField.tsx:38
 	__( 'Please read the instructions above.', 'wptelegram-widget' ),
 
+	// Reference: packages/components/src/ConfirmDialog.tsx:53
+	__( 'No', 'wptelegram-widget' ),
+
+	// Reference: packages/components/src/ConfirmDialog.tsx:56
+	__( 'Yes', 'wptelegram-widget' ),
+
 	// Reference: packages/components/src/Instructions/Instructions.tsx:15
 	__( 'INSTRUCTIONS!', 'wptelegram-widget' ),
 
@@ -236,7 +243,9 @@ $generated_i18n_strings = array(
 	// Reference: packages/components/src/TestResult/MemberCountResult.tsx:15
 	__( 'Members Count:', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/TestResult/TestMessageResult.tsx:15
+	// Reference: packages/components/src/TestResult/MessageResult.tsx:15
+	__( 'Result:', 'wptelegram-widget' ),
+
 	// Reference: packages/components/src/TestResult/TestResult.tsx:14
 	__( 'Test Result:', 'wptelegram-widget' ),
 
@@ -299,7 +308,7 @@ $generated_i18n_strings = array(
 	// Reference: packages/services/src/telegram/TelegramUtils.ts:124
 	__( 'Success', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/useDisplayFeedback.ts:64
+	// Reference: packages/services/src/useDisplayFeedback.ts:62
 	__( 'Lets fix these errors first.', 'wptelegram-widget' ),
 
 	// Reference: packages/services/src/useSubmitForm.ts:50
