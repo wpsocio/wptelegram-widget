@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug Fixes
+
+- Fixed the admin menu and settings page icon
+
 ## [2.0.4 - 2021-04-9](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.4)
 
 ### Bug Fixes
