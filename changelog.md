@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug Fixes
+
+- Fixed the ugly URLs filter for widgets
+
 ## [2.0.5 - 2021-04-14](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.5)
 
 ### Bug Fixes

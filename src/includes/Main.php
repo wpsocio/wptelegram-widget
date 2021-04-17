@@ -286,6 +286,8 @@ class Main {
 
 		$this->loader->add_action( 'init', $shared, 'add_rewrite_rules' );
 
+		$this->loader->add_filter( 'init', $shared, 'set_use_ugly_urls' );
+
 		$this->loader->add_filter( 'template_include', $shared, 'set_embed_template', 99 );
 
 		$this->loader->add_filter( 'template_include', $shared, 'intercept_v_template', 999 );
