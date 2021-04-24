@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Enhancements
+
+- Added multi-channel support for Ajax Widget
+
 ### Bug Fixes
 
 - Fixed the ugly URLs filter for widgets

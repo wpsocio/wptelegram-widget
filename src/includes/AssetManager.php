@@ -13,6 +13,8 @@ namespace WPTelegram\Widget\includes;
 
 use WPTelegram\Widget\shared\shortcodes\LegacyWidget;
 use WPTelegram\Widget\includes\restApi\RESTController;
+use WPTelegram\Widget\includes\restApi\SettingsController;
+use ReflectionClass;
 
 /**
  * The assets manager of the plugin.
@@ -30,6 +32,69 @@ class AssetManager extends BaseClass {
 	const PUBLIC_JS_HANDLE     = 'wptelegram-widget--public';
 
 	/**
+	 * Register the assets.
+	 *
+	 * @since    x.y.z
+	 */
+	public function register_assets() {
+
+		$request_check = new ReflectionClass( self::class );
+
+		$constants = $request_check->getConstants();
+
+		$assets = $this->plugin()->assets();
+
+		$style_deps = [
+			self::BLOCKS_JS_HANDLE     => [ 'wp-components' ],
+			self::ADMIN_MAIN_JS_HANDLE => [ self::BLOCKS_JS_HANDLE ],
+		];
+
+		foreach ( $constants as $handle ) {
+			wp_register_script(
+				$handle,
+				$assets->get_asset_url( $handle ),
+				$assets->get_asset_dependencies( $handle ),
+				$assets->get_asset_version( $handle ),
+				true
+			);
+
+			// Register styles only if they exist.
+			if ( $assets->has_asset( $handle, Assets::ASSET_EXT_CSS ) ) {
+				$deps = ! empty( $style_deps[ $handle ] ) ? $style_deps[ $handle ] : [];
+				wp_register_style(
+					$handle,
+					$assets->get_asset_url( $handle, Assets::ASSET_EXT_CSS ),
+					$deps,
+					$assets->get_asset_version( $handle, Assets::ASSET_EXT_CSS ),
+					'all'
+				);
+			}
+		}
+
+		wp_register_style(
+			$this->plugin()->name() . '-menu',
+			$assets->url( sprintf( '/css/admin-menu%s.css', wp_scripts_get_suffix() ) ),
+			[],
+			$this->plugin()->version(),
+			'all'
+		);
+
+		$handle = self::BLOCKS_JS_HANDLE;
+
+		if ( wp_style_is( $handle, 'registered' ) ) {
+			$style = sprintf(
+				':root {%1$s: %2$s;%3$s: %4$s}',
+				'--wptelegram-widget-join-link-bg-color',
+				$this->plugin()->options()->get_path( 'join_link.bgcolor', '#389ce9' ),
+				'--wptelegram-widget-join-link-color',
+				$this->plugin()->options()->get_path( 'join_link.text_color', '#fff' )
+			);
+
+			wp_add_inline_style( $handle, $style );
+		}
+	}
+
+	/**
 	 * Register the stylesheets for the public area.
 	 *
 	 * @since    2.0.0
@@ -38,13 +103,7 @@ class AssetManager extends BaseClass {
 
 		$entrypoint = self::PUBLIC_JS_HANDLE;
 
-		wp_enqueue_style(
-			$entrypoint,
-			$this->plugin()->assets()->get_asset_url( $entrypoint, Assets::ASSET_EXT_CSS ),
-			[],
-			$this->plugin()->assets()->get_asset_version( $entrypoint, Assets::ASSET_EXT_CSS ),
-			'all'
-		);
+		wp_enqueue_style( $entrypoint );
 	}
 
 	/**
@@ -56,13 +115,7 @@ class AssetManager extends BaseClass {
 
 		$entrypoint = self::PUBLIC_JS_HANDLE;
 
-		wp_enqueue_script(
-			$entrypoint,
-			$this->plugin()->assets()->get_asset_url( $entrypoint ),
-			$this->plugin()->assets()->get_asset_dependencies( $entrypoint ),
-			$this->plugin()->assets()->get_asset_version( $entrypoint ),
-			true
-		);
+		wp_enqueue_script( $entrypoint );
 	}
 
 	/**
@@ -74,27 +127,14 @@ class AssetManager extends BaseClass {
 	public function enqueue_admin_styles( $hook_suffix ) {
 
 		if ( ! defined( 'WPTELEGRAM_LOADED' ) ) {
-			wp_enqueue_style(
-				$this->plugin()->name() . '-menu',
-				$this->plugin()->assets()->url( sprintf( '/css/admin-menu%s.css', wp_scripts_get_suffix() ) ),
-				[],
-				$this->plugin()->version(),
-				'all'
-			);
+			wp_enqueue_style( $this->plugin()->name() . '-menu' );
 		}
 
-		$entrypoint = self::ADMIN_MAIN_JS_HANDLE;
+		$handle = self::ADMIN_MAIN_JS_HANDLE;
 
 		// Load only on settings page.
-		if ( $this->is_settings_page( $hook_suffix ) && $this->plugin()->assets()->has_asset( $entrypoint, Assets::ASSET_EXT_CSS ) ) {
-			wp_enqueue_style(
-				$entrypoint,
-				$this->plugin()->assets()->get_asset_url( $entrypoint, Assets::ASSET_EXT_CSS ),
-				// For join link preview.
-				[ self::BLOCKS_JS_HANDLE ],
-				$this->plugin()->assets()->get_asset_version( $entrypoint, Assets::ASSET_EXT_CSS ),
-				'all'
-			);
+		if ( $this->is_settings_page( $hook_suffix ) && wp_style_is( $handle, 'registered' ) ) {
+			wp_enqueue_style( $handle );
 		}
 	}
 
@@ -107,40 +147,45 @@ class AssetManager extends BaseClass {
 	public function enqueue_admin_scripts( $hook_suffix ) {
 		// Load only on settings page.
 		if ( $this->is_settings_page( $hook_suffix ) ) {
-			$entrypoint = self::ADMIN_MAIN_JS_HANDLE;
+			$handle = self::ADMIN_MAIN_JS_HANDLE;
 
-			wp_enqueue_script(
-				$entrypoint,
-				$this->plugin()->assets()->get_asset_url( $entrypoint ),
-				$this->plugin()->assets()->get_asset_dependencies( $entrypoint ),
-				$this->plugin()->assets()->get_asset_version( $entrypoint ),
-				true
-			);
+			wp_enqueue_script( $handle );
 
 			// Pass data to JS.
 			$data = $this->get_dom_data();
-			// Not to expose bot token to non-admins.
-			if ( current_user_can( 'manage_options' ) ) {
-				$data['savedSettings'] = \WPTelegram\Widget\includes\restApi\SettingsController::get_default_settings();
-			}
-			$data['uiData']['post_types'] = $this->get_post_type_options();
 
-			$data['assets']['pullUpdatesUrl'] = add_query_arg( [ 'action' => 'wptelegram_widget_pull_updates' ], site_url() );
-
-			wp_add_inline_script(
-				$entrypoint,
-				sprintf( 'var wptelegram_widget = %s;', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
-				'before'
-			);
+			self::add_dom_data( $handle, $data );
 		}
+	}
+
+	/**
+	 * Add the data to DOM.
+	 *
+	 * @since x.y.z
+	 *
+	 * @param string $handle The script handle to attach the data to.
+	 * @param mixed  $data   The data to add.
+	 * @param string $var    The JavaScript variable name to use.
+	 *
+	 * @return void
+	 */
+	public static function add_dom_data( $handle, $data, $var = 'wptelegram_widget' ) {
+		wp_add_inline_script(
+			$handle,
+			sprintf( 'var %s = %s;', $var, wp_json_encode( $data ) ),
+			'before'
+		);
 	}
 
 	/**
 	 * Get the common DOM data.
 	 *
+	 * @param string $for The domain for which the DOM data is to be rendered.
+	 * possible values: 'SETTINGS_PAGE' | 'BLOCKS'.
+	 *
 	 * @return array
 	 */
-	private function get_dom_data() {
+	public function get_dom_data( $for = 'SETTINGS_PAGE' ) {
 		$data = [
 			'pluginInfo' => [
 				'title'       => $this->plugin()->title(),
@@ -163,7 +208,31 @@ class AssetManager extends BaseClass {
 			'i18n'       => Utils::get_jed_locale_data( 'wptelegram-widget' ),
 		];
 
-		return $data;
+		$settings = SettingsController::get_default_settings();
+
+		// Not to expose bot token to non-admins.
+		if ( 'SETTINGS_PAGE' === $for && current_user_can( 'manage_options' ) ) {
+			$data['savedSettings'] = $settings;
+
+			$data['uiData']['post_types'] = $this->get_post_type_options();
+
+			$data['assets']['pullUpdatesUrl'] = add_query_arg( [ 'action' => 'wptelegram_widget_pull_updates' ], site_url() );
+		}
+
+		if ( 'BLOCKS' === $for ) {
+
+			$data['assets']['message_view_url'] = LegacyWidget::get_single_message_embed_url( '%username%', '%message_id%', '%userpic%' );
+
+			$data['uiData'] = array_merge(
+				$data['uiData'],
+				[
+					'join_link_url'  => $this->plugin()->options()->get_path( 'join_link.url' ),
+					'join_link_text' => $this->plugin()->options()->get_path( 'join_link.text' ),
+				]
+			);
+		}
+
+		return apply_filters( 'wptelegram_widget_assets_dom_data', $data, $for, $this->plugin() );
 	}
 
 	/**
@@ -201,74 +270,21 @@ class AssetManager extends BaseClass {
 	}
 
 	/**
-	 * Register assets.
-	 *
-	 * @since    2.0.0
-	 */
-	public function register_assets() {
-		$entrypoint = self::BLOCKS_JS_HANDLE;
-
-		if ( $this->plugin()->assets()->has_asset( $entrypoint, Assets::ASSET_EXT_CSS ) ) {
-			wp_register_style(
-				$entrypoint,
-				$this->plugin()->assets()->get_asset_url( $entrypoint, Assets::ASSET_EXT_CSS ),
-				[ 'wp-components' ],
-				$this->plugin()->assets()->get_asset_version( $entrypoint, Assets::ASSET_EXT_CSS ),
-				'all'
-			);
-			$style = sprintf(
-				':root {%1$s: %2$s;%3$s: %4$s}',
-				'--wptelegram-widget-join-link-bg-color',
-				$this->plugin()->options()->get_path( 'join_link.bgcolor', '#389ce9' ),
-				'--wptelegram-widget-join-link-color',
-				$this->plugin()->options()->get_path( 'join_link.text_color', '#fff' )
-			);
-
-			wp_add_inline_style( $entrypoint, $style );
-		}
-	}
-
-	/**
 	 * Enqueue assets for the Gutenberg block
 	 *
 	 * @since    2.0.0
 	 */
 	public function enqueue_block_editor_assets() {
-		$entrypoint = self::BLOCKS_JS_HANDLE;
+		$handle = self::BLOCKS_JS_HANDLE;
 
-		wp_enqueue_script(
-			$entrypoint,
-			$this->plugin()->assets()->get_asset_url( $entrypoint ),
-			$this->plugin()->assets()->get_asset_dependencies( $entrypoint ),
-			$this->plugin()->assets()->get_asset_version( $entrypoint ),
-			true
-		);
+		wp_enqueue_script( $handle );
 
-		$data = $this->get_dom_data();
+		$data = $this->get_dom_data( 'BLOCKS' );
 
-		$data['assets']['message_view_url'] = LegacyWidget::get_single_message_embed_url( '%username%', '%message_id%', '%userpic%' );
+		self::add_dom_data( $handle, $data );
 
-		$data['uiData'] = array_merge(
-			$data['uiData'],
-			[
-				'join_link_url'  => $this->plugin()->options()->get_path( 'join_link.url' ),
-				'join_link_text' => $this->plugin()->options()->get_path( 'join_link.text' ),
-			]
-		);
-
-		wp_add_inline_script(
-			$entrypoint,
-			sprintf( 'var wptelegram_widget = %s;', json_encode( $data ) ), // phpcs:ignore WordPress.WP.AlternativeFunctions
-			'before'
-		);
-
-		// don't load styles for dev env.
-		if ( defined( 'WP_PLUGINS_DEV_LOADED' ) ) {
-			return;
-		}
-
-		if ( $this->plugin()->assets()->has_asset( $entrypoint, Assets::ASSET_EXT_CSS ) ) {
-			wp_enqueue_style( $entrypoint );
+		if ( wp_style_is( $handle, 'registered' ) ) {
+			wp_enqueue_style( $handle );
 		}
 	}
 }

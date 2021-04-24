@@ -13,6 +13,11 @@ namespace WPTelegram\Widget\includes;
 
 use WPTelegram\Widget\admin\Admin;
 use WPTelegram\Widget\shared\Shared;
+use WPTelegram\Widget\shared\embed\AjaxWidget as EmbedAjaxWidget;
+use WPTelegram\Widget\shared\embed\SingleMessage as EmbedSingleMessage;
+use WPTelegram\Widget\shared\shortcodes\AjaxWidget as AjaxWidgetShortcode;
+use WPTelegram\Widget\shared\shortcodes\JoinChannel as JoinChannelShortcode;
+use WPTelegram\Widget\shared\shortcodes\LegacyWidget as LegacyWidgetShortcode;
 
 /**
  * The core plugin class.
@@ -37,16 +42,6 @@ class Main {
 	 * @var   Main $instance The instance.
 	 */
 	protected static $instance = null;
-
-	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Loader    $loader    Maintains and registers all hooks for the plugin.
-	 */
-	protected $loader;
 
 	/**
 	 * Title of the plugin.
@@ -94,6 +89,15 @@ class Main {
 	protected $assets;
 
 	/**
+	 * The asset manager.
+	 *
+	 * @since    x.y.z
+	 * @access   protected
+	 * @var      AssetManager $asset_manager The asset manager.
+	 */
+	protected $asset_manager;
+
+	/**
 	 * Main class Instance.
 	 *
 	 * Ensures only one instance of the class is loaded or can be loaded.
@@ -132,36 +136,53 @@ class Main {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	private function __construct() {
 
 		$this->version = WPTELEGRAM_WIDGET_VER;
 
 		$this->plugin_name = 'wptelegram_widget';
 
 		$this->load_dependencies();
-		$this->set_options();
-		$this->set_assets();
 
 		$this->set_locale();
+
+		$this->init();
+	}
+
+	/**
+	 * Registers the initial hooks.
+	 *
+	 * @since   x.y.z
+	 * @access   private
+	 */
+	private function init() {
+
+		$plugin_upgrade = new Upgrade( $this );
+
+		// First lets do the upgrades, if needed.
+		add_action( 'plugins_loaded', [ $plugin_upgrade, 'do_upgrade' ], 10 );
+
+		// Then lets hook everything up.
+		add_action( 'plugins_loaded', [ $this, 'hookup' ], 20 );
+	}
+
+	/**
+	 * Registers the initial hooks.
+	 *
+	 * @since    x.y.z
+	 * @access   public
+	 */
+	public function hookup() {
+		// If an upgrade is going on.
+		if ( defined( 'WPTELEGRAM_WIDGET_DOING_UPGRADE' ) && WPTELEGRAM_WIDGET_DOING_UPGRADE ) {
+			return;
+		}
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
-
-		$this->run();
-
+		$this->define_shared_hooks();
 	}
 
 	/**
 	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - WPTelegram_Widget_Loader. Orchestrates the hooks of the plugin.
-	 * - WPTelegram_Widget_i18n. Defines internationalization functionality.
-	 * - WPTelegram_Widget_Admin. Defines all hooks for the admin area.
-	 * - WPTelegram_Widget_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -177,9 +198,6 @@ class Main {
 		 * The class responsible for loading \WPTelegram\BotAPI library
 		 */
 		require_once $this->dir( '/includes/wptelegram-bot-api/src/index.php' );
-
-		$this->loader = new Loader();
-
 	}
 
 	/**
@@ -191,24 +209,21 @@ class Main {
 	private function set_options() {
 
 		$this->options = new Options( $this->plugin_name );
-
 	}
 
 	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the WPTelegram_Widget_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
+	 * Get the plugin options
 	 *
 	 * @since    1.0.0
-	 * @access   private
+	 * @access   public
+	 *
+	 * @return Options The options instance.
 	 */
-	private function set_locale() {
-
-		$plugin_i18n = new I18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+	public function options() {
+		if ( ! $this->options ) {
+			$this->set_options();
+		}
+		return $this->options;
 	}
 
 	/**
@@ -230,8 +245,53 @@ class Main {
 	 * @return Assets The assets instance.
 	 */
 	public function assets() {
+		if ( ! $this->assets ) {
+			$this->set_assets();
+		}
 
 		return $this->assets;
+	}
+
+	/**
+	 * Set the asset manager.
+	 *
+	 * @since    x.y.z
+	 * @access   private
+	 */
+	private function set_asset_manager() {
+		$this->asset_manager = new AssetManager( $this );
+	}
+
+	/**
+	 * Get the plugin assets manager.
+	 *
+	 * @since    x.y.z
+	 * @access   public
+	 *
+	 * @return AssetManager The asset manager.
+	 */
+	public function asset_manager() {
+		if ( ! $this->asset_manager ) {
+			$this->set_asset_manager();
+		}
+
+		return $this->asset_manager;
+	}
+
+	/**
+	 * Define the locale for this plugin for internationalization.
+	 *
+	 * Uses the WPTelegram_Widget_i18n class in order to set the domain and to register the hook
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function set_locale() {
+
+		$plugin_i18n = new I18n();
+
+		add_action( 'plugins_loaded', [ $plugin_i18n, 'load_plugin_textdomain' ] );
 	}
 
 	/**
@@ -245,27 +305,27 @@ class Main {
 
 		$plugin_admin = new Admin( $this );
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu', 11 );
+		add_action( 'admin_menu', [ $plugin_admin, 'add_plugin_admin_menu' ], 11 );
 
-		$this->loader->add_action( 'rest_api_init', $plugin_admin, 'register_rest_routes' );
+		add_action( 'rest_api_init', [ $plugin_admin, 'register_rest_routes' ] );
 
-		$this->loader->add_action( 'widgets_init', $plugin_admin, 'register_widgets' );
+		add_action( 'widgets_init', [ $plugin_admin, 'register_widgets' ] );
 
 		// To be used for long polling.
-		$this->loader->add_action( 'admin_post_nopriv_wptelegram_widget_pull_updates', $plugin_admin, 'fire_pull_updates' );
-		$this->loader->add_action( 'admin_post_wptelegram_widget_pull_updates', $plugin_admin, 'fire_pull_updates' );
+		add_action( 'admin_post_nopriv_wptelegram_widget_pull_updates', [ $plugin_admin, 'fire_pull_updates' ] );
+		add_action( 'admin_post_wptelegram_widget_pull_updates', [ $plugin_admin, 'fire_pull_updates' ] );
 
-		$this->loader->add_action( 'wptelegram_widget_pull_the_updates', $plugin_admin, 'pull_the_updates' );
+		add_action( 'wptelegram_widget_pull_the_updates', [ $plugin_admin, 'pull_the_updates' ] );
 
 		// To be used for displaying the widget messages.
-		$this->loader->add_action( 'admin_post_nopriv_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
-		$this->loader->add_action( 'admin_post_wptelegram_widget_view', $plugin_admin, 'render_widget_view' );
+		add_action( 'admin_post_nopriv_wptelegram_widget_view', [ $plugin_admin, 'render_widget_view' ] );
+		add_action( 'admin_post_wptelegram_widget_view', [ $plugin_admin, 'render_widget_view' ] );
 
-		$this->loader->add_action( 'wptelegram_p2tg_api_response', $plugin_admin, 'save_messages_sent_by_p2tg', 10, 5 );
+		add_action( 'wptelegram_p2tg_api_response', [ $plugin_admin, 'save_messages_sent_by_p2tg' ], 10, 5 );
 
-		$this->loader->add_filter( 'block_categories', $plugin_admin, 'register_block_category', 10, 1 );
+		add_filter( 'block_categories', [ $plugin_admin, 'register_block_category' ], 10, 1 );
 
-		$this->loader->add_filter( 'rest_request_before_callbacks', Utils::class, 'fitler_rest_errors', 10, 3 );
+		add_filter( 'rest_request_before_callbacks', [ Utils::class, 'fitler_rest_errors' ], 10, 3 );
 
 	}
 
@@ -276,85 +336,50 @@ class Main {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
-
-		$upgrade = new Upgrade( $this );
-
-		$this->loader->add_action( 'after_setup_theme', $upgrade, 'do_upgrade' );
+	private function define_shared_hooks() {
 
 		$shared = new Shared( $this );
 
-		$this->loader->add_action( 'init', $shared, 'add_rewrite_rules' );
+		add_action( 'init', [ $shared, 'add_rewrite_rules' ] );
 
-		$this->loader->add_filter( 'init', $shared, 'set_use_ugly_urls' );
+		add_filter( 'init', [ $shared, 'set_use_ugly_urls' ] );
 
-		$this->loader->add_filter( 'template_include', $shared, 'set_embed_template', 99 );
+		add_filter( 'template_include', [ $shared, 'set_embed_template' ], 99 );
 
-		$this->loader->add_filter( 'template_include', $shared, 'intercept_v_template', 999 );
+		add_filter( 'template_include', [ $shared, 'intercept_v_template' ], 999 );
 
-		$this->loader->add_action( 'init', $shared, 'may_be_fire_pull_updates' );
+		add_action( 'init', [ $shared, 'may_be_fire_pull_updates' ] );
 
-		$this->loader->add_action( 'init', $shared, 'register_blocks' );
+		add_action( 'init', [ $shared, 'register_blocks' ] );
 
-		$this->loader->add_action( 'wptelegram_widget_cron_pull_updates', $shared, 'cron_pull_updates' );
+		add_action( 'wptelegram_widget_cron_pull_updates', [ $shared, 'cron_pull_updates' ] );
 
 		// better be safe by using PHP_INT_MAX to make sure
 		// some dumb people don't remove your schedule.
-		$this->loader->add_filter( 'cron_schedules', $shared, 'custom_cron_schedules', PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
+		add_filter( 'cron_schedules', [ $shared, 'custom_cron_schedules' ], PHP_INT_MAX, 1 ); //phpcs:ignore WordPress.WP.CronInterval
 
 		$proprity = $this->options()->get_path( 'join_link.priority', 10 );
 
-		$this->loader->add_filter( 'the_content', $shared, 'add_join_link_to_post_content', $proprity, 1 );
+		add_filter( 'the_content', [ $shared, 'add_join_link_to_post_content' ], $proprity, 1 );
 
-		$asset_manager = new AssetManager( $this );
+		add_action( 'init', [ $this->asset_manager(), 'register_assets' ] );
 
-		$this->loader->add_action( 'init', $asset_manager, 'register_assets' );
+		add_action( 'wp_enqueue_scripts', [ $this->asset_manager(), 'enqueue_public_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this->asset_manager(), 'enqueue_public_scripts' ] );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $asset_manager, 'enqueue_public_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $asset_manager, 'enqueue_public_scripts' );
+		add_action( 'admin_enqueue_scripts', [ $this->asset_manager(), 'enqueue_admin_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $this->asset_manager(), 'enqueue_admin_scripts' ] );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $asset_manager, 'enqueue_admin_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $asset_manager, 'enqueue_admin_scripts' );
+		add_action( 'enqueue_block_editor_assets', [ $this->asset_manager(), 'enqueue_block_editor_assets' ] );
 
-		$this->loader->add_action( 'enqueue_block_editor_assets', $asset_manager, 'enqueue_block_editor_assets' );
-
-		// Register shortcodes.
-		$shortcodes = [
-			'wptelegram-ajax-widget'  => 'AjaxWidget',
-			'wptelegram-join-channel' => 'JoinChannel',
-			'wptelegram-widget'       => 'LegacyWidget',
-		];
-
-		foreach ( $shortcodes as $shortcode => $class ) {
-			$this->loader->add_shortcode( $shortcode, '\WPTelegram\Widget\shared\shortcodes\\' . $class, 'render' );
-		}
+		add_shortcode( 'wptelegram-ajax-widget', [ AjaxWidgetShortcode::class, 'render' ] );
+		add_shortcode( 'wptelegram-join-channel', [ JoinChannelShortcode::class, 'render' ] );
+		add_shortcode( 'wptelegram-widget', [ LegacyWidgetShortcode::class, 'render' ] );
 
 		// Register embeds.
-		$this->loader->add_action( 'wptelegram_widget_ajax_widget_embed', '\WPTelegram\Widget\shared\embed\AjaxWidget', 'render', 10, 1 );
+		add_action( 'wptelegram_widget_ajax_widget_embed', [ EmbedAjaxWidget::class, 'render' ], 10, 1 );
 
-		$this->loader->add_action( 'wptelegram_widget_single_message_embed', '\WPTelegram\Widget\shared\embed\SingleMessage', 'render', 10, 2 );
-	}
-
-	/**
-	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    1.0.0
-	 */
-	private function run() {
-		$this->loader->run();
-	}
-
-	/**
-	 * Get the plugin options
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 *
-	 * @return Options The options instance.
-	 */
-	public function options() {
-
-		return $this->options;
+		add_action( 'wptelegram_widget_single_message_embed', [ EmbedSingleMessage::class, 'render' ], 10, 2 );
 	}
 
 	/**
@@ -413,15 +438,5 @@ class Main {
 	 */
 	public function url( $path = '' ) {
 		return WPTELEGRAM_WIDGET_URL . $path;
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    Loader    Orchestrates the hooks of the plugin.
-	 */
-	public function get_loader() {
-		return $this->loader;
 	}
 }
