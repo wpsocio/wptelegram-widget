@@ -128,11 +128,6 @@ msgstr ""
 msgid "Get LIVE support on Telegram"
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
-#: packages/components/src/Submit/SubmitButton.tsx:15
-msgid "Save Changes"
-msgstr ""
-
 #: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:17
 msgid "Ajax Widget"
 msgstr ""
@@ -323,6 +318,10 @@ msgstr ""
 msgid "Need help?"
 msgstr ""
 
+#: packages/components/src/Submit/SubmitButton.tsx:15
+msgid "Save Changes"
+msgstr ""
+
 #: packages/components/src/TestResult/MemberCountResult.tsx:15
 msgid "Members Count:"
 msgstr ""
@@ -421,7 +420,7 @@ msgstr ""
 msgid "Lets fix these errors first."
 msgstr ""
 
-#: packages/services/src/useSubmitForm.ts:50
+#: packages/services/src/useSubmitForm.ts:54
 msgid "Changes saved successfully."
 msgstr ""
 
