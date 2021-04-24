@@ -3,24 +3,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:20
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:28
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:27
 msgid "Widget Options"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:21
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:30
+#: domains/wptelegram/widget/main/src/services/fields.ts:11
+msgid "Username"
+msgstr ""
+
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+#: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
+msgid "Channel username."
+msgstr ""
+
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+msgid "Leave empty for default."
+msgstr ""
+
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:36
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
 #: domains/wptelegram/widget/main/src/services/fields.ts:12
 msgid "Widget Width"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:23
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:38
 #: domains/wptelegram/widget/main/src/services/fields.ts:13
 msgid "Widget Height"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:12
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:48
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:13
 msgid "Telegram Channel Ajax Feed"
 msgstr ""
 
@@ -84,10 +98,6 @@ msgstr ""
 
 #: domains/wptelegram/widget/main/src/services/fields.ts:10
 msgid "Text color"
-msgstr ""
-
-#: domains/wptelegram/widget/main/src/services/fields.ts:11
-msgid "Username"
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/services/fields.ts:16
@@ -160,11 +170,11 @@ msgstr ""
 msgid "Ajax widget is a beautiful scrollable widget which only supports channels."
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
-msgid "Channel username."
+#: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:18
+msgid "This is the default username, you can override it in widgets and shortcodes."
 msgstr ""
 
-#: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:29
+#: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:30
 #: domains/wptelegram/widget/main/src/ui/legacyWidget/LegacyWidget.tsx:32
 #: packages/components/src/WidgetInfo/WidgetInfo.tsx:51
 msgid "or"
