@@ -38,7 +38,7 @@ class Shared extends BaseClass {
 	/**
 	 * Sets the value for ugly URLs flag.
 	 *
-	 * @since x.y.z
+	 * @since 2.1.0
 	 */
 	public function set_use_ugly_urls() {
 		self::$use_ugly_urls = apply_filters( 'wptelegram_widget_view_use_ugly_urls', false );

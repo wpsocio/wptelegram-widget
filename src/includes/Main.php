@@ -91,7 +91,7 @@ class Main {
 	/**
 	 * The asset manager.
 	 *
-	 * @since    x.y.z
+	 * @since    2.1.0
 	 * @access   protected
 	 * @var      AssetManager $asset_manager The asset manager.
 	 */
@@ -152,7 +152,7 @@ class Main {
 	/**
 	 * Registers the initial hooks.
 	 *
-	 * @since   x.y.z
+	 * @since   2.1.0
 	 * @access   private
 	 */
 	private function init() {
@@ -169,7 +169,7 @@ class Main {
 	/**
 	 * Registers the initial hooks.
 	 *
-	 * @since    x.y.z
+	 * @since    2.1.0
 	 * @access   public
 	 */
 	public function hookup() {
@@ -255,7 +255,7 @@ class Main {
 	/**
 	 * Set the asset manager.
 	 *
-	 * @since    x.y.z
+	 * @since    2.1.0
 	 * @access   private
 	 */
 	private function set_asset_manager() {
@@ -265,7 +265,7 @@ class Main {
 	/**
 	 * Get the plugin assets manager.
 	 *
-	 * @since    x.y.z
+	 * @since    2.1.0
 	 * @access   public
 	 *
 	 * @return AssetManager The asset manager.

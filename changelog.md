@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.0 - 2021-04-26](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.0)
+
 ### Enhancements
 
 - Added multi-channel support for Ajax Widget
