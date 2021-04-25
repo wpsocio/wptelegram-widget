@@ -39,8 +39,9 @@ class AjaxWidget {
 		}
 
 		$defaults = [
-			'width'  => '100%',
-			'height' => 600,
+			'username' => '',
+			'width'    => '100%',
+			'height'   => 600,
 		];
 
 		// use global options.
@@ -52,6 +53,10 @@ class AjaxWidget {
 
 		$args = array_map( 'sanitize_text_field', $args );
 
+		if ( empty( $args['username'] ) ) {
+			$args['username'] = $defaults['username'];
+		}
+
 		if ( empty( $args['width'] ) ) {
 			$args['width'] = $defaults['width'];
 		}
@@ -60,16 +65,14 @@ class AjaxWidget {
 			$args['height'] = $defaults['height'];
 		}
 
-		$username = WPTG_Widget()->options()->get_path( 'ajax_widget.username' );
-
-		$embed_url = self::get_ajax_widget_embed_url( $username );
+		$embed_url = self::get_ajax_widget_embed_url( $args['username'] );
 
 		set_query_var( 'embed_url', $embed_url );
 		set_query_var( 'width', $args['width'] );
 		set_query_var( 'height', $args['height'] );
 
-		ob_start();
 		$overridden_template = locate_template( 'wptelegram-widget/ajax-widget.php' );
+		ob_start();
 		if ( $overridden_template ) {
 			/**
 			 * The value returned by locate_template() is a path to file.
@@ -77,14 +80,14 @@ class AjaxWidget {
 			 */
 
 			if ( Utils::is_valid_template( $overridden_template ) ) {
-				load_template( $overridden_template );
+				load_template( $overridden_template, false );
 			}
 		} else {
 			/*
 			 * If neither the child nor parent theme have overridden the template,
 			 * we load the template from the 'partials' sub-directory of the directory this file is in.
 			 */
-			load_template( dirname( __FILE__ ) . '/../partials/ajax-widget.php' );
+			load_template( dirname( __FILE__ ) . '/../partials/ajax-widget.php', false );
 		}
 		$html = ob_get_clean();
 		return $html;

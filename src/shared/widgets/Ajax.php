@@ -5,18 +5,20 @@
  * @link       https://manzoorwani.dev
  * @since      1.6.0
  *
- * @package    WPTelegram_Widget
- * @subpackage WPTelegram_Widget/public
+ * @package    WPTelegram\Widget
+ * @subpackage WPTelegram\Widget\shared\widgets
  */
 
 namespace WPTelegram\Widget\shared\widgets;
+
+use WP_Widget;
 
 defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
 /**
  * Adds WP Telegram Widget widget.
  */
-class Ajax extends \WP_Widget {
+class Ajax extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -85,6 +87,8 @@ class Ajax extends \WP_Widget {
 
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 
+		$instance['username'] = str_replace( '@', '', sanitize_text_field( $new_instance['username'] ) );
+
 		$instance['width'] = sanitize_text_field( $new_instance['width'] );
 
 		$instance['height'] = sanitize_text_field( $new_instance['height'] );
@@ -111,11 +115,19 @@ class Ajax extends \WP_Widget {
 		foreach ( $defaults as $key => $value ) {
 			$defaults[ $key ] = WPTG_Widget()->options()->get_path( "ajax_widget.{$key}", $value );
 		}
+		$defaults['username'] = ''; // Avoid enforcing the usename.
+
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wptelegram-widget' ); ?>:</label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'username' ) ); ?>"><?php esc_html_e( 'Username', 'wptelegram-widget' ); ?></label>
+			<input type="text" value="<?php echo esc_attr( $instance['username'] ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'username' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'username' ) ); ?>" class="widefat" placeholder="WPTelegram" />
+			<span class="description"><?php esc_html_e( 'Channel username.', 'wptelegram-widget' ); ?>&nbsp;<?php esc_html_e( 'Leave empty for default.', 'wptelegram-widget' ); ?></span>
+			<br />
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'width' ) ); ?>"><?php esc_html_e( 'Widget Width', 'wptelegram-widget' ); ?></label>

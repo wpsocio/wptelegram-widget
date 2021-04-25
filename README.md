@@ -3,8 +3,8 @@
 **Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.3  
-**Tested up to:** 5.7  
-**Stable tag:** 2.0.5  
+**Tested up to:** 5.7.1  
+**Stable tag:** 2.1.0  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -45,7 +45,7 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-ajax-widget width="100%" height="500px"]`
+`[wptelegram-ajax-widget username="WPTelegram" width="100%" height="500px"]`
 
 Inside the theme templates
 

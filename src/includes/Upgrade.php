@@ -35,6 +35,10 @@ class Upgrade extends BaseClass {
 			return;
 		}
 
+		if ( ! defined( 'WPTELEGRAM_WIDGET_DOING_UPGRADE' ) ) {
+			define( 'WPTELEGRAM_WIDGET_DOING_UPGRADE', true );
+		}
+
 		$plugin_settings = $this->plugin()->options()->get_data();
 		$is_new_install  = empty( $plugin_settings );
 

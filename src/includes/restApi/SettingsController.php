@@ -169,22 +169,17 @@ class SettingsController extends RESTController {
 	 * @param WP_REST_Request $request WP REST API request.
 	 */
 	public function update_settings( WP_REST_Request $request ) {
+		$params = array_keys( self::get_default_values() );
 
 		$settings = WPTG_Widget()->options()->get_data();
 
-		foreach ( self::get_settings_params() as $key => $args ) {
-			$value = $request->get_param( $key );
-
-			if ( null !== $value || isset( $args['default'] ) ) {
-
-				$settings[ $key ] = null === $value ? $args['default'] : $value;
-			}
+		foreach ( $params as $key ) {
+			$settings[ $key ] = $request->get_param( $key );
 		}
 
 		WPTG_Widget()->options()->set_data( $settings )->update_data();
 
-		unset( $settings['messages'] );
-		unset( $settings['last_update_id'] );
+		unset( $settings['messages'], $settings['last_update_id'] );
 
 		return rest_ensure_response( $settings );
 	}

@@ -1,21 +1,32 @@
 <?php
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $generated_i18n_strings = array(
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:20
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:28
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:27
 	__( 'Widget Options', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:21
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:30
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:11
+	__( 'Username', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
+	__( 'Channel username.', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+	__( 'Leave empty for default.', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:36
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:12
 	__( 'Widget Width', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:23
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:38
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:13
 	__( 'Widget Height', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:12
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:48
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:13
 	__( 'Telegram Channel Ajax Feed', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:37
@@ -66,9 +77,6 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:10
 	__( 'Text color', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:11
-	__( 'Username', 'wptelegram-widget' ),
-
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:16
 	__( 'Host blocks Telegram', 'wptelegram-widget' ),
 
@@ -96,10 +104,6 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/Sidebar.tsx:19
 	__( 'Get LIVE support on Telegram', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/SubmitInfo.tsx:11
-	// Reference: packages/components/src/Submit/SubmitButton.tsx:15
-	__( 'Save Changes', 'wptelegram-widget' ),
-
 	// Reference: domains/wptelegram/widget/main/src/ui/TabbedSections.tsx:17
 	__( 'Ajax Widget', 'wptelegram-widget' ),
 
@@ -124,10 +128,10 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:13
 	__( 'Ajax widget is a beautiful scrollable widget which only supports channels.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
-	__( 'Channel username.', 'wptelegram-widget' ),
+	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:18
+	__( 'This is the default username, you can override it in widgets and shortcodes.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:29
+	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:30
 	// Reference: domains/wptelegram/widget/main/src/ui/legacyWidget/LegacyWidget.tsx:32
 	// Reference: packages/components/src/WidgetInfo/WidgetInfo.tsx:51
 	__( 'or', 'wptelegram-widget' ),
@@ -240,6 +244,9 @@ $generated_i18n_strings = array(
 	// Reference: packages/components/src/PluginInfo/PluginInfoCard.tsx:64
 	__( 'Need help?', 'wptelegram-widget' ),
 
+	// Reference: packages/components/src/Submit/SubmitButton.tsx:15
+	__( 'Save Changes', 'wptelegram-widget' ),
+
 	// Reference: packages/components/src/TestResult/MemberCountResult.tsx:15
 	__( 'Members Count:', 'wptelegram-widget' ),
 
@@ -311,7 +318,7 @@ $generated_i18n_strings = array(
 	// Reference: packages/services/src/useDisplayFeedback.ts:62
 	__( 'Lets fix these errors first.', 'wptelegram-widget' ),
 
-	// Reference: packages/services/src/useSubmitForm.ts:50
+	// Reference: packages/services/src/useSubmitForm.ts:54
 	__( 'Changes saved successfully.', 'wptelegram-widget' ),
 
 	// Reference: packages/utilities/src/fields.ts:29

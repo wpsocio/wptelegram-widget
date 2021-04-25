@@ -3,9 +3,9 @@ Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.3
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 7.0
-Stable tag: 2.0.5
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,7 @@ Alternately, you can use the below shortcode.
 
 Inside page or post content:
 
-`[wptelegram-ajax-widget width="100%" height="500px"]`
+`[wptelegram-ajax-widget username="WPTelegram" width="100%" height="500px"]`
 
 Inside the theme templates
 ~~~
@@ -172,6 +172,10 @@ Many thanks to the translators for the great job!
 9. Join Link View
 
 == Changelog ==
+
+= 2.1.0 =
+- Added multi-channel support for Ajax Widget
+- Fixed the ugly URLs filter for widgets
 
 = 2.0.5 =
 - Fixed the admin menu and settings page icon
