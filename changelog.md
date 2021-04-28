@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.1 - 2021-04-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.1)
+
 ### Bug fixes
 
 - Fixed the issue of settings not saved due to trailing slash redirects
