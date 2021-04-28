@@ -5,9 +5,9 @@
     "wptelegram-widget--blocks.js.map": "/static/js/wptelegram-widget--blocks.1749dca5.js.map",
     "wptelegram-widget--blocks.php": "/static/js/wptelegram-widget--blocks.ad1870e4.asset.php",
     "wptelegram-widget--main.css": "/static/css/wptelegram-widget--main.ebd25449.css",
-    "wptelegram-widget--main.js": "/static/js/wptelegram-widget--main.39c90cc7.js",
-    "wptelegram-widget--main.js.map": "/static/js/wptelegram-widget--main.39c90cc7.js.map",
-    "wptelegram-widget--main.php": "/static/js/wptelegram-widget--main.27168ff2.asset.php",
+    "wptelegram-widget--main.js": "/static/js/wptelegram-widget--main.85c41d6d.js",
+    "wptelegram-widget--main.js.map": "/static/js/wptelegram-widget--main.85c41d6d.js.map",
+    "wptelegram-widget--main.php": "/static/js/wptelegram-widget--main.224ab327.asset.php",
     "wptelegram-widget--public.css": "/static/css/wptelegram-widget--public.3d0c567f.css",
     "wptelegram-widget--public.js": "/static/js/wptelegram-widget--public.216d6db0.js",
     "wptelegram-widget--public.js.map": "/static/js/wptelegram-widget--public.216d6db0.js.map",
@@ -16,7 +16,7 @@
     "static/css/wptelegram-widget--main.ebd25449.css.map": "/static/css/wptelegram-widget--main.ebd25449.css.map",
     "static/css/wptelegram-widget--public.3d0c567f.css.map": "/static/css/wptelegram-widget--public.3d0c567f.css.map",
     "static/js/wptelegram-widget--blocks.1749dca5.js.LICENSE.txt": "/static/js/wptelegram-widget--blocks.1749dca5.js.LICENSE.txt",
-    "static/js/wptelegram-widget--main.39c90cc7.js.LICENSE.txt": "/static/js/wptelegram-widget--main.39c90cc7.js.LICENSE.txt"
+    "static/js/wptelegram-widget--main.85c41d6d.js.LICENSE.txt": "/static/js/wptelegram-widget--main.85c41d6d.js.LICENSE.txt"
   },
   "entrypoints": {
     "wptelegram-widget--blocks": [
@@ -26,8 +26,8 @@
     ],
     "wptelegram-widget--main": [
       "static/css/wptelegram-widget--main.ebd25449.css",
-      "static/js/wptelegram-widget--main.39c90cc7.js",
-      "static/js/wptelegram-widget--main.27168ff2.asset.php"
+      "static/js/wptelegram-widget--main.85c41d6d.js",
+      "static/js/wptelegram-widget--main.224ab327.asset.php"
     ],
     "wptelegram-widget--public": [
       "static/css/wptelegram-widget--public.3d0c567f.css",
