@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Improvements
+
+- Cleaned up the admin menu for single entry for WP Telegram
+
 ## [2.1.1 - 2021-04-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.1)
 
 ### Bug fixes
