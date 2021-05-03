@@ -305,7 +305,8 @@ class Main {
 
 		$plugin_admin = new Admin( $this );
 
-		add_action( 'admin_menu', [ $plugin_admin, 'add_plugin_admin_menu' ], 11 );
+		add_action( 'admin_menu', [ $plugin_admin, 'add_plugin_admin_menu' ] );
+		add_action( 'admin_menu', [ Utils::class, 'update_menu_structure' ], 5 );
 
 		add_action( 'rest_api_init', [ $plugin_admin, 'register_rest_routes' ] );
 
@@ -362,15 +363,17 @@ class Main {
 
 		add_filter( 'the_content', [ $shared, 'add_join_link_to_post_content' ], $proprity, 1 );
 
-		add_action( 'init', [ $this->asset_manager(), 'register_assets' ] );
+		$asset_manager = $this->asset_manager();
 
-		add_action( 'wp_enqueue_scripts', [ $this->asset_manager(), 'enqueue_public_styles' ] );
-		add_action( 'wp_enqueue_scripts', [ $this->asset_manager(), 'enqueue_public_scripts' ] );
+		add_action( 'init', [ $asset_manager, 'register_assets' ] );
 
-		add_action( 'admin_enqueue_scripts', [ $this->asset_manager(), 'enqueue_admin_styles' ] );
-		add_action( 'admin_enqueue_scripts', [ $this->asset_manager(), 'enqueue_admin_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $asset_manager, 'enqueue_public_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $asset_manager, 'enqueue_public_scripts' ] );
 
-		add_action( 'enqueue_block_editor_assets', [ $this->asset_manager(), 'enqueue_block_editor_assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $asset_manager, 'enqueue_admin_styles' ] );
+		add_action( 'admin_enqueue_scripts', [ $asset_manager, 'enqueue_admin_scripts' ] );
+
+		add_action( 'enqueue_block_editor_assets', [ $asset_manager, 'enqueue_block_editor_assets' ] );
 
 		add_shortcode( 'wptelegram-ajax-widget', [ AjaxWidgetShortcode::class, 'render' ] );
 		add_shortcode( 'wptelegram-join-channel', [ JoinChannelShortcode::class, 'render' ] );
