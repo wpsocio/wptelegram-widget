@@ -158,6 +158,10 @@ Many thanks to the translators for the great job!
 
 [How do I create a bot?](https://core.telegram.org/bots/faq#how-do-i-create-a-bot).
 
+= Why Legacy Widget shows nothing? =
+
+Legacy Widget does not show the old messages. you need to post something new into the group/channel and wait for 5 minutes for the messages to appear. If you are too impatient to wait for the results 😄, then open the URL given under **Tip!** (below the instructions) in your browser.
+
 
 == Screenshots ==
 
