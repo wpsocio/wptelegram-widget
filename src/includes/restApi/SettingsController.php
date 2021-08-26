@@ -137,13 +137,14 @@ class SettingsController extends RESTController {
 				'num_messages' => '5',
 			],
 			'join_link'     => [
-				'url'        => '',
-				'text'       => '',
-				'bgcolor'    => '#389ce9',
-				'text_color' => '#fff',
-				'post_types' => [ 'post' ],
-				'position'   => 'after_content',
-				'priority'   => '10',
+				'url'             => '',
+				'text'            => '',
+				'bgcolor'         => '#389ce9',
+				'text_color'      => '#fff',
+				'post_types'      => [ 'post' ],
+				'position'        => 'after_content',
+				'priority'        => '10',
+				'open_in_new_tab' => false,
 			],
 			'advanced'      => [
 				'telegram_blocked'  => false,
@@ -239,31 +240,34 @@ class SettingsController extends RESTController {
 				'sanitize_callback' => [ __CLASS__, 'sanitize_param' ],
 				'validate_callback' => 'rest_validate_request_arg',
 				'properties'        => [
-					'url'        => [
+					'url'             => [
 						'type'   => 'string',
 						'format' => 'uri',
 					],
-					'text'       => [
+					'text'            => [
 						'type' => 'string',
 					],
-					'bgcolor'    => [
+					'bgcolor'         => [
 						'type' => 'string',
 					],
-					'text_color' => [
+					'text_color'      => [
 						'type' => 'string',
 					],
-					'post_types' => [
+					'post_types'      => [
 						'type'  => 'array',
 						'items' => [
 							'type' => 'string',
 						],
 					],
-					'position'   => [
+					'position'        => [
 						'type' => 'string',
 						'enum' => [ 'before_content', 'after_content' ],
 					],
-					'priority'   => [
+					'priority'        => [
 						'type' => 'string',
+					],
+					'open_in_new_tab' => [
+						'type' => 'boolean',
 					],
 				],
 			],
