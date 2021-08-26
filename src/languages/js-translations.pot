@@ -120,6 +120,10 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: domains/wptelegram/widget/main/src/services/fields.ts:23
+msgid "Open in new tab"
+msgstr ""
+
 #: domains/wptelegram/widget/main/src/services/fields.ts:8
 msgid "Bot Token"
 msgstr ""
@@ -198,6 +202,10 @@ msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:48
 msgid "Priority with respect to adjacent items."
+msgstr ""
+
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:58
+msgid "Whether to open the join link in new tab."
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
