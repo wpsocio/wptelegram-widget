@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.3 - 2021-08-26](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.3)
+
 ### Enhancements
 
 - Added new tab option for join link

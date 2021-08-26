@@ -4,7 +4,7 @@
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.3  
 **Tested up to:** 5.8  
-**Stable tag:** 2.1.2  
+**Stable tag:** 2.1.3  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)
 

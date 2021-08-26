@@ -73,7 +73,7 @@ class JoinChannel {
 	/**
 	 * Retrieve the join link attributes
 	 *
-	 * @since x.y.z
+	 * @since 2.1.3
 	 *
 	 * @return string
 	 */
