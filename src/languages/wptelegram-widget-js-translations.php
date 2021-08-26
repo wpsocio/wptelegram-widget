@@ -1,31 +1,31 @@
 <?php
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $generated_i18n_strings = array(
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:28
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:29
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:27
 	__( 'Widget Options', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:30
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:31
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:11
 	__( 'Username', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:34
 	// Reference: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
 	__( 'Channel username.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:34
 	__( 'Leave empty for default.', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:36
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:37
 	// Reference: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:12
 	__( 'Widget Width', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:38
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:39
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:13
 	__( 'Widget Height', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:48
+	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:49
 	// Reference: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:13
 	__( 'Telegram Channel Ajax Feed', 'wptelegram-widget' ),
 
@@ -92,6 +92,9 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:22
 	__( 'Priority', 'wptelegram-widget' ),
 
+	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:23
+	__( 'Open in new tab', 'wptelegram-widget' ),
+
 	// Reference: domains/wptelegram/widget/main/src/services/fields.ts:8
 	__( 'Bot Token', 'wptelegram-widget' ),
 
@@ -150,6 +153,9 @@ $generated_i18n_strings = array(
 
 	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:48
 	__( 'Priority with respect to adjacent items.', 'wptelegram-widget' ),
+
+	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:58
+	__( 'Whether to open the join link in new tab.', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
 	__( 'WP Telegram Join Channel', 'wptelegram-widget' ),
@@ -285,13 +291,13 @@ $generated_i18n_strings = array(
 	__( 'Widget Info', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/useBotTokenTest.tsx:96
-	// Reference: packages/components/src/useChatWithTest.tsx:94
+	// Reference: packages/components/src/useChatWithTest.tsx:95
 	__( 'Please wait…', 'wptelegram-widget' ),
 
 	// Reference: packages/components/src/useBotTokenTest.tsx:96
 	__( 'Test Token', 'wptelegram-widget' ),
 
-	// Reference: packages/components/src/useChatWithTest.tsx:94
+	// Reference: packages/components/src/useChatWithTest.tsx:95
 	__( 'Send Test', 'wptelegram-widget' ),
 
 	// Reference: packages/form/src/render/RenderRepeatable.tsx:101
@@ -321,13 +327,13 @@ $generated_i18n_strings = array(
 	// Reference: packages/services/src/useSubmitForm.ts:54
 	__( 'Changes saved successfully.', 'wptelegram-widget' ),
 
-	// Reference: packages/utilities/src/fields.ts:29
+	// Reference: packages/utilities/src/fields.ts:31
 	__( 'Invalid %s', 'wptelegram-widget' ),
 
-	// Reference: packages/utilities/src/fields.ts:32
+	// Reference: packages/utilities/src/fields.ts:34
 	__( '%s required.', 'wptelegram-widget' ),
 
-	// Reference: packages/utilities/src/fields.ts:35
+	// Reference: packages/utilities/src/fields.ts:37
 	__( 'Changes could not be saved.', 'wptelegram-widget' )
 );
 /* THIS IS THE END OF THE GENERATED FILE */

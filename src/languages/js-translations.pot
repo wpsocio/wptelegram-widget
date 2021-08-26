@@ -3,37 +3,37 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:28
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:29
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:27
 msgid "Widget Options"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:30
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:31
 #: domains/wptelegram/widget/main/src/services/fields.ts:11
 msgid "Username"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:34
 #: domains/wptelegram/widget/main/src/ui/ajaxWidget/AjaxWidget.tsx:17
 msgid "Channel username."
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:33
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:34
 msgid "Leave empty for default."
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:36
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:37
 #: domains/wptelegram/widget/blocks/src/channel-feed/Edit.tsx:29
 #: domains/wptelegram/widget/main/src/services/fields.ts:12
 msgid "Widget Width"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:38
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:39
 #: domains/wptelegram/widget/main/src/services/fields.ts:13
 msgid "Widget Height"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:48
+#: domains/wptelegram/widget/blocks/src/ajax-channel-feed/Edit.tsx:49
 #: domains/wptelegram/widget/blocks/src/ajax-channel-feed/index.tsx:13
 msgid "Telegram Channel Ajax Feed"
 msgstr ""
@@ -120,6 +120,10 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+#: domains/wptelegram/widget/main/src/services/fields.ts:23
+msgid "Open in new tab"
+msgstr ""
+
 #: domains/wptelegram/widget/main/src/services/fields.ts:8
 msgid "Bot Token"
 msgstr ""
@@ -198,6 +202,10 @@ msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:48
 msgid "Priority with respect to adjacent items."
+msgstr ""
+
+#: domains/wptelegram/widget/main/src/ui/joinLink/JoinLink.tsx:58
+msgid "Whether to open the join link in new tab."
 msgstr ""
 
 #: domains/wptelegram/widget/main/src/ui/joinLink/JoinLinkInfo.tsx:12
@@ -384,7 +392,7 @@ msgid "Widget Info"
 msgstr ""
 
 #: packages/components/src/useBotTokenTest.tsx:96
-#: packages/components/src/useChatWithTest.tsx:94
+#: packages/components/src/useChatWithTest.tsx:95
 msgid "Please wait…"
 msgstr ""
 
@@ -392,7 +400,7 @@ msgstr ""
 msgid "Test Token"
 msgstr ""
 
-#: packages/components/src/useChatWithTest.tsx:94
+#: packages/components/src/useChatWithTest.tsx:95
 msgid "Send Test"
 msgstr ""
 
@@ -434,14 +442,14 @@ msgstr ""
 msgid "Changes saved successfully."
 msgstr ""
 
-#: packages/utilities/src/fields.ts:29
+#: packages/utilities/src/fields.ts:31
 msgid "Invalid %s"
 msgstr ""
 
-#: packages/utilities/src/fields.ts:32
+#: packages/utilities/src/fields.ts:34
 msgid "%s required."
 msgstr ""
 
-#: packages/utilities/src/fields.ts:35
+#: packages/utilities/src/fields.ts:37
 msgid "Changes could not be saved."
 msgstr ""

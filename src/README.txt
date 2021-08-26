@@ -3,9 +3,9 @@ Contributors: manzoorwanijk
 Donate link: https://paypal.me/manzoorwanijk
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.3
-Tested up to: 5.7.1
+Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,10 @@ Many thanks to the translators for the great job!
 
 [How do I create a bot?](https://core.telegram.org/bots/faq#how-do-i-create-a-bot).
 
+= Why Legacy Widget shows nothing? =
+
+Legacy Widget does not show the old messages. you need to post something new into the group/channel and wait for 5 minutes for the messages to appear. If you are too impatient to wait for the results 😄, then open the URL given under **Tip!** (below the instructions) in your browser.
+
 
 == Screenshots ==
 
@@ -172,6 +176,9 @@ Many thanks to the translators for the great job!
 9. Join Link View
 
 == Changelog ==
+
+= 2.1.3 =
+- Added new tab option for join link
 
 = 2.1.2 =
 - Cleaned up the admin menu for single entry for WP Telegram

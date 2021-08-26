@@ -47,6 +47,7 @@ class JoinChannel {
 
 		set_query_var( 'link', $args['link'] );
 		set_query_var( 'text', $args['text'] );
+		set_query_var( 'attributes', self::get_link_attributes() );
 
 		ob_start();
 		$overridden_template = locate_template( 'wptelegram-widget/join-channel.php' );
@@ -67,5 +68,31 @@ class JoinChannel {
 		}
 		$html = ob_get_clean();
 		return $html;
+	}
+
+	/**
+	 * Retrieve the join link attributes
+	 *
+	 * @since 2.1.3
+	 *
+	 * @return string
+	 */
+	public static function get_link_attributes() {
+		$open_in_new_tab = WPTG_Widget()->options()->get_path( 'join_link.open_in_new_tab' );
+
+		$attributes = [
+			'target' => $open_in_new_tab ? '_blank' : '_self',
+			'rel'    => 'noopener noreferrer',
+		];
+
+		$attributes = (array) apply_filters( 'wptelegram_widget_join_link_attributes', $attributes );
+
+		$attr_str = '';
+
+		foreach ( $attributes as $key => $value ) {
+			$attr_str .= sprintf( '%1$s="%2$s" ', sanitize_text_field( $key ), esc_attr( $value ) );
+		}
+
+		return trim( $attr_str );
 	}
 }
