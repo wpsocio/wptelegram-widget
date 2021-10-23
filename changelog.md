@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.4 - 2021-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.4)
+
+### Enhancements
+
+- Added lazy loading to iframes
+
 ## [2.1.3 - 2021-08-26](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.3)
 
 ### Enhancements
