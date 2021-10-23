@@ -5,7 +5,7 @@ Tags: telegram, feed, widget, channel, group
 Requires at least: 5.4
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -176,6 +176,9 @@ Legacy Widget does not show the old messages. you need to post something new int
 9. Join Link View
 
 == Changelog ==
+
+= 2.1.4 =
+- Added lazy loading to iframes
 
 = 2.1.3 =
 - Added new tab option for join link
