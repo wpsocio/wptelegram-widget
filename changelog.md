@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug fixes
+
+- Fixed PHP warning for `block_categories` deprecation
+
 ## [2.1.4 - 2021-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.4)
 
 ### Enhancements
