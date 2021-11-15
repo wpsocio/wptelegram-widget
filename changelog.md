@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.5 - 2021-11-15](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.5)
+
 ### Bug fixes
 
 - Fixed PHP warning for `block_categories` deprecation
