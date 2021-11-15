@@ -2,7 +2,7 @@
 /**
  * Plugin settings endpoint for WordPress REST API.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.7.0
  *
  * @package    WPTelegram_Widget
@@ -23,7 +23,7 @@ use WP_REST_Server;
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani <@manzoorwanijk>
+ * @author     WP Socio
  */
 class SettingsController extends RESTController {
 

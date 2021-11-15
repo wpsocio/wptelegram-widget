@@ -2,7 +2,7 @@
 /**
  * The file that defines the core plugin class
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -31,7 +31,7 @@ use WPTelegram\Widget\shared\shortcodes\LegacyWidget as LegacyWidgetShortcode;
  * @since      1.0.0
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Main {
 

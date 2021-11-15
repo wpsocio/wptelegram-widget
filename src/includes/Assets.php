@@ -4,7 +4,7 @@
  *
  * Parts of this code are copied from https://github.com/eventespresso/event-espresso-core
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -19,7 +19,7 @@ namespace WPTelegram\Widget\includes;
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Assets {
 

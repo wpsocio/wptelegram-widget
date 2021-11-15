@@ -2,7 +2,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -22,7 +22,7 @@ use WPTelegram\Widget\shared\shortcodes\JoinChannel;
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/public
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Shared extends BaseClass {
 

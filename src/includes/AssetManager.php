@@ -2,7 +2,7 @@
 /**
  * The assets manager of the plugin.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -23,7 +23,7 @@ use ReflectionClass;
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
- * @author     Manzoor Wani <@manzoorwanijk>
+ * @author     WP Socio
  */
 class AssetManager extends BaseClass {
 

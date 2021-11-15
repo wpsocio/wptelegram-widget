@@ -2,7 +2,7 @@
 /**
  * The single message embed handler.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget

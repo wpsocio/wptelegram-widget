@@ -1,6 +1,6 @@
 === WP Telegram Widget and Join Link ===
-Contributors: manzoorwanijk
-Donate link: https://paypal.me/manzoorwanijk
+Contributors: wpsocio, irshadahmad21
+Donate link: https://paypal.me/wpsocio
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.4
 Tested up to: 5.8.1
@@ -131,7 +131,7 @@ or
 *	Twitter [@WPTelegram](https://twitter.com/WPTelegram)
 
 **Contribution**
-Development occurs on [Github](https://github.com/manzoorwanijk/wptelegram-widget), and all contributions welcome.
+Development occurs on [Github](https://github.com/wpsocio/wptelegram-widget), and all contributions welcome.
 
 **Translations**
 

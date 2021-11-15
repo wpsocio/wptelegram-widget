@@ -1,6 +1,6 @@
 # WP Telegram Widget and Join Link
 
-**Contributors:** [manzoorwanijk](https://github.com/manzoorwanijk)  
+**Contributors:** [wpsocio](https://github.com/wpsocio), [irshadahmad21](https://github.com/irshadahmad21)  
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 5.4  
 **Tested up to:** 5.8.1  
@@ -12,7 +12,7 @@
 [![Wordpress](https://img.shields.io/wordpress/plugin/dt/wptelegram-widget.svg)](https://wordpress.org/plugins/wptelegram-widget/)
 [![Wordpress rating](https://img.shields.io/wordpress/plugin/r/wptelegram-widget.svg)](https://wordpress.org/plugins/wptelegram-widget/)
 
-Complete contributors list found here: [github.com/manzoorwanijk/wptelegram-widget/graphs/contributors](https://github.com/manzoorwanijk/wptelegram-widget/graphs/contributors)
+Complete contributors list found here: [github.com/wpsocio/wptelegram-widget/graphs/contributors](https://github.com/wpsocio/wptelegram-widget/graphs/contributors)
 
 **[Download plugin on wordpress.org](https://wordpress.org/plugins/wptelegram-widget/)**
 

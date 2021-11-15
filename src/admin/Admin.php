@@ -2,7 +2,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram\Widget
@@ -22,7 +22,7 @@ use WPTelegram\BotAPI\API as BotAPI;
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\admin
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Admin extends BaseClass {
 

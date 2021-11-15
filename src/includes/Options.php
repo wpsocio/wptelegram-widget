@@ -2,7 +2,7 @@
 /**
  * Handles the options access of the plugin
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.3.0
  *
  * @package    WPTelegram_Widget
@@ -20,7 +20,7 @@ use ArrayAccess;
  *
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Options implements Iterator, ArrayAccess {
 

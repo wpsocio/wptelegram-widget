@@ -2,7 +2,7 @@
 /**
  * Utility methods.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -22,7 +22,7 @@ use WP_Error;
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
- * @author     Manzoor Wani <@manzoorwanijk>
+ * @author     WP Socio
  */
 class Utils {
 
