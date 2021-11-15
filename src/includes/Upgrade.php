@@ -2,7 +2,7 @@
 /**
  * Do the necessary db upgrade
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      2.0.0
  *
  * @package    WPTelegram\Widget
@@ -18,7 +18,7 @@ namespace WPTelegram\Widget\includes;
  *
  * @package    WPTelegram\Widget
  * @subpackage WPTelegram\Widget\includes
- * @author     Manzoor Wani <@manzoorwanijk>
+ * @author     WP Socio
  */
 class Upgrade extends BaseClass {
 

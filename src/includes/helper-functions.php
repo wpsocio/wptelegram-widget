@@ -2,7 +2,7 @@
 /**
  * Contains the helper functions.
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget

@@ -8,7 +8,7 @@
  *
  * $link, $text, $attributes
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram\Widget

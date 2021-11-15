@@ -1,11 +1,11 @@
 === WP Telegram Widget and Join Link ===
-Contributors: manzoorwanijk
-Donate link: https://paypal.me/manzoorwanijk
+Contributors: wpsocio, irshadahmad21
+Donate link: https://paypal.me/wpsocio
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.4
 Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,7 +131,7 @@ or
 *	Twitter [@WPTelegram](https://twitter.com/WPTelegram)
 
 **Contribution**
-Development occurs on [Github](https://github.com/manzoorwanijk/wptelegram-widget), and all contributions welcome.
+Development occurs on [Github](https://github.com/wpsocio/wptelegram-widget), and all contributions welcome.
 
 **Translations**
 
@@ -176,6 +176,9 @@ Legacy Widget does not show the old messages. you need to post something new int
 9. Join Link View
 
 == Changelog ==
+
+= 2.1.5 =
+- Fixed PHP warning for `block_categories` deprecation
 
 = 2.1.4 =
 - Added lazy loading to iframes

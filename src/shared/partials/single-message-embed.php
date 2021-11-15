@@ -2,7 +2,7 @@
 /**
  * Provide a public-facing view for a single post
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.4.0
  *
  * @package    WPTelegram\Widget

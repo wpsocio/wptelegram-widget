@@ -4,31 +4,37 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
-## [2.1.4 - 2021-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.4)
+## [2.1.5 - 2021-11-15](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.5)
+
+### Bug fixes
+
+- Fixed PHP warning for `block_categories` deprecation
+
+## [2.1.4 - 2021-10-23](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.4)
 
 ### Enhancements
 
 - Added lazy loading to iframes
 
-## [2.1.3 - 2021-08-26](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.3)
+## [2.1.3 - 2021-08-26](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.3)
 
 ### Enhancements
 
 - Added new tab option for join link
 
-## [2.1.2 - 2021-05-3](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.2)
+## [2.1.2 - 2021-05-3](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.2)
 
 ### Improvements
 
 - Cleaned up the admin menu for single entry for WP Telegram
 
-## [2.1.1 - 2021-04-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.1)
+## [2.1.1 - 2021-04-28](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.1)
 
 ### Bug fixes
 
 - Fixed the issue of settings not saved due to trailing slash redirects
 
-## [2.1.0 - 2021-04-26](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.1.0)
+## [2.1.0 - 2021-04-26](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.0)
 
 ### Enhancements
 
@@ -38,37 +44,37 @@ All notable changes to this project are documented in this file.
 
 - Fixed the ugly URLs filter for widgets
 
-## [2.0.5 - 2021-04-14](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.5)
+## [2.0.5 - 2021-04-14](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.5)
 
 ### Bug Fixes
 
 - Fixed the admin menu and settings page icon
 
-## [2.0.4 - 2021-04-9](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.4)
+## [2.0.4 - 2021-04-9](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.4)
 
 ### Bug Fixes
 
 - Minor UI fixes for Join Link color picker
 
-## [2.0.3 - 2021-03-30](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.3)
+## [2.0.3 - 2021-03-30](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.3)
 
 ### Bug Fixes
 
 - Fixed the last messed up update
 
-## [2.0.2 - 2021-03-30](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.2)
+## [2.0.2 - 2021-03-30](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.2)
 
 ### Enhancements
 
 - Added color options to Join Link settings
 
-## [2.0.1 - 2021-02-25](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.1)
+## [2.0.1 - 2021-02-25](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.1)
 
 ### Bug Fixes
 
 - Fixed the issue with message order in legacy widget
 
-## [2.0.0 - 2021-02-22](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v2.0.0)
+## [2.0.0 - 2021-02-22](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.0.0)
 
 ### Enhancements
 
@@ -77,13 +83,13 @@ All notable changes to this project are documented in this file.
 - Refreshed and improved the UI
 - Improved names for hooks and shortcodes
 
-## [1.9.5 - 2021-01-31](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.5)
+## [1.9.5 - 2021-01-31](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.5)
 
 ### Enhancements
 
 - Added compatibility with WP 5.6
 
-## [1.9.4 - 2020-06-25](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.4)
+## [1.9.4 - 2020-06-25](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.4)
 
 ### Enhancements
 
@@ -93,19 +99,19 @@ All notable changes to this project are documented in this file.
 
 - Fixed join link defaults
 
-## [1.9.3 - 2020-06-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.3)
+## [1.9.3 - 2020-06-20](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.3)
 
 ### Bug Fixes
 
 - Fixed 404 on /v
 
-## [1.9.2 - 2020-05-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.2)
+## [1.9.2 - 2020-05-20](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.2)
 
 ### Bug Fixes
 
 - Fixed error for empty join link
 
-## [1.9.1 - 2020-05-17](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.1)
+## [1.9.1 - 2020-05-17](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.1)
 
 ### Enhancements
 
@@ -115,7 +121,7 @@ All notable changes to this project are documented in this file.
 
 - Fixed adding of join link if no post type selected
 
-## [1.9.0 - 2020-05-4](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.9.0)
+## [1.9.0 - 2020-05-4](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.9.0)
 
 ### Enhancements
 
@@ -129,37 +135,37 @@ All notable changes to this project are documented in this file.
 - Fixed JS bundle path for blocks
 - Fixed single post iframe height
 
-## [1.8.1 - 2020-04-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.8.1)
+## [1.8.1 - 2020-04-20](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.8.1)
 
 ### Bug Fixes
 
 - Fix admin .min.js.
 
-## [1.8.0 - 2020-04-20](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.8.0)
+## [1.8.0 - 2020-04-20](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.8.0)
 
 ### Enhancements
 
 - Added Join Channel widget/block/shortcode
 
-## [1.7.4 - 2019-11-2](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.4)
+## [1.7.4 - 2019-11-2](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.7.4)
 
 ### Bug Fixes
 
 - Updated bot token pattern for test token.
 
-## [1.7.3 - 2019-10-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.3)
+## [1.7.3 - 2019-10-23](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.7.3)
 
 ### Enhancements
 
 - Updated bot token pattern.
 
-## [1.7.2 - 2019-08-12](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.2)
+## [1.7.2 - 2019-08-12](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.7.2)
 
 ### Bug Fixes
 
 - Fixed the issue of settings not being saved without Bot Token.
 
-## [1.7.1 - 2019-08-11](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.1)
+## [1.7.1 - 2019-08-11](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.7.1)
 
 ### Enhancements
 
@@ -170,7 +176,7 @@ All notable changes to this project are documented in this file.
 
 - Fixed the issue of settings not being saved without Bot Token.
 
-## [1.7.0 - 2019-07-23](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.7.0)
+## [1.7.0 - 2019-07-23](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.7.0)
 
 ### Enhancements
 
@@ -185,7 +191,7 @@ All notable changes to this project are documented in this file.
 
 - Fixed the Google Script URL not being used.
 
-## [1.6.2 - 2019-07-6](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.2)
+## [1.6.2 - 2019-07-6](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.6.2)
 
 ### Enhancements
 
@@ -195,13 +201,13 @@ All notable changes to this project are documented in this file.
 
 - Fixed the issue with click on links
 
-## [1.6.1 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.1)
+## [1.6.1 - 2019-06-28](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.6.1)
 
 ### Enhancements
 
 - Fix the upgrade to new rewrite rules
 
-## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.1)
+## [1.6.0 - 2019-06-28](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.6.1)
 
 ### Enhancements
 
@@ -209,7 +215,7 @@ All notable changes to this project are documented in this file.
 - Added Added support for Google Script to bypass the ban on t.me.
 - Added filters to inject custom widget styles.
 
-## [1.6.0 - 2019-06-28](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.6.0)
+## [1.6.0 - 2019-06-28](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.6.0)
 
 ### Enhancements
 
@@ -217,7 +223,7 @@ All notable changes to this project are documented in this file.
 - Added Added support for Google Script to bypass the ban on t.me.
 - Added filters to inject custom widget styles.
 
-## [1.5.0 - 2019-04-2](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.5.0)
+## [1.5.0 - 2019-04-2](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.5.0)
 
 ### Enhancements
 
@@ -226,7 +232,7 @@ All notable changes to this project are documented in this file.
 - Moved update trigger URL out of wp-admin.
 - Added WP Telegram integration to avoid the need for separate bot
 
-## [1.4.0 - 2019-01-12](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/v1.4.0)
+## [1.4.0 - 2019-01-12](https://github.com/wpsocio/wptelegram-widget/releases/tag/v1.4.0)
 
 ### Bug Fixes
 
@@ -234,11 +240,11 @@ All notable changes to this project are documented in this file.
 - Added Russian translation
 - Fixed the issue with Cyrillic characters in the widget
 
-## [1.3.4 - 2018-11-11](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/1.3.4)
+## [1.3.4 - 2018-11-11](https://github.com/wpsocio/wptelegram-widget/releases/tag/1.3.4)
 
 - Bundled CMB2 to handle the dependency
 
-## [1.3.3 - 2018-11-11](https://github.com/manzoorwanijk/wptelegram-widget/releases/tag/1.3.3)
+## [1.3.3 - 2018-11-11](https://github.com/wpsocio/wptelegram-widget/releases/tag/1.3.3)
 
 - Prepare for WP Telegram 2.0.0
 

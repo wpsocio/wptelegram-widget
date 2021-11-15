@@ -2,7 +2,7 @@
 /**
  * The main plugin file.
  *
- * @link              https://manzoorwani.dev
+ * @link              https://wpsocio.com
  * @since             1.0.0
  * @package           WPTelegram_Widget
  *
@@ -10,9 +10,9 @@
  * Plugin Name:       WP Telegram Widget
  * Plugin URI:        https://t.me/WPTelegram
  * Description:       Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.
- * Version:           2.1.4
- * Author:            Manzoor Wani
- * Author URI:        https://manzoorwani.dev
+ * Version:           2.1.5
+ * Author:            WP Socio
+ * Author URI:        https://wpsocio.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wptelegram-widget
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'WPTELEGRAM_WIDGET_VER', '2.1.4' );
+define( 'WPTELEGRAM_WIDGET_VER', '2.1.5' );
 
 define( 'WPTELEGRAM_WIDGET_BASENAME', plugin_basename( __FILE__ ) );
 

@@ -2,7 +2,7 @@
 /**
  * The file that defines the core plugin class
  *
- * @link       https://manzoorwani.dev
+ * @link       https://wpsocio.com
  * @since      1.0.0
  *
  * @package    WPTelegram_Widget
@@ -31,7 +31,7 @@ use WPTelegram\Widget\shared\shortcodes\LegacyWidget as LegacyWidgetShortcode;
  * @since      1.0.0
  * @package    WPTelegram_Widget
  * @subpackage WPTelegram_Widget/includes
- * @author     Manzoor Wani
+ * @author     WP Socio
  */
 class Main {
 
@@ -324,7 +324,7 @@ class Main {
 
 		add_action( 'wptelegram_p2tg_api_response', [ $plugin_admin, 'save_messages_sent_by_p2tg' ], 10, 5 );
 
-		add_filter( 'block_categories', [ $plugin_admin, 'register_block_category' ], 10, 1 );
+		add_filter( 'block_categories_all', [ $plugin_admin, 'register_block_category' ], 10, 1 );
 
 		add_filter( 'rest_request_before_callbacks', [ Utils::class, 'fitler_rest_errors' ], 10, 3 );
 
