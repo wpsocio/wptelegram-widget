@@ -88,7 +88,7 @@ msgstr ""
 msgid "Loading…"
 msgstr ""
 
-#: domains/wptelegram/widget/blocks/src/single-post/Placeholder.tsx:23
+#: domains/wptelegram/widget/blocks/src/single-post/Placeholder.tsx:22
 msgid "Embed"
 msgstr ""
 
