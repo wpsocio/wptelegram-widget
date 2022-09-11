@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/wptelegram-widget--public.f7e72fcf.css","mappings":"AAAA,2BACC,YAED,sCACC,0BACA","sources":["../domains/wptelegram/widget/public/src/style.scss"],"sourcesContent":[".wptelegram-widget-message {\n\tpadding: 2px;\n}\n.wptelegram-widget-ajax-widget iframe {\n\tborder: 0.5px solid #b5c0c8;\n\tborder-radius: 10px;\n}\n"],"names":[],"sourceRoot":""}
