@@ -68,7 +68,7 @@ $generated_i18n_strings = array(
 	// Reference: domains/wptelegram/widget/blocks/src/single-post/Edit.tsx:158
 	__( 'Loading…', 'wptelegram-widget' ),
 
-	// Reference: domains/wptelegram/widget/blocks/src/single-post/Placeholder.tsx:23
+	// Reference: domains/wptelegram/widget/blocks/src/single-post/Placeholder.tsx:22
 	__( 'Embed', 'wptelegram-widget' ),
 
 	// Reference: domains/wptelegram/widget/blocks/src/single-post/index.tsx:11
