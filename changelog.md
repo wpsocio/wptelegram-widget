@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Bug fixes
+
+- Fixed warnings in PHP 8.x
+
 ## [2.1.7 - 2022-09-11](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.7)
 
 - Maintenance release
