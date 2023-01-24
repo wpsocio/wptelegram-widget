@@ -3,8 +3,6 @@
 	"version": "2.1.8",
 	"description": "Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.",
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "*",
-		"phpcompatibility/php-compatibility": "*",
 		"wp-coding-standards/wpcs": "*"
 	},
 	"scripts": {
