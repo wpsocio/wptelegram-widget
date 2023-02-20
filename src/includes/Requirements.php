@@ -118,9 +118,9 @@ class Requirements {
 			<td colspan="5" class="plugin-update colspanchange">
 				<div class="update-message notice inline notice-error notice-alt" style="padding-block-end: 1rem;">
 					<p>
-						<?php esc_html_e( 'This plugin is not compatible with your website configuration.', 'wptelegram' ); ?>
+						<?php esc_html_e( 'This plugin is not compatible with your website configuration.', 'wptelegram-widget' ); ?>
 					</p>
-					<span><?php esc_html_e( 'Missing requirements', 'wptelegram' ); ?>&nbsp;👇</span>
+					<span><?php esc_html_e( 'Missing requirements', 'wptelegram-widget' ); ?>&nbsp;👇</span>
 					<ul style="list-style-type: disc; margin-inline-start: 2rem;">
 						<?php
 						foreach ( $env_details['data'] as $name => $requirement ) :
@@ -133,7 +133,7 @@ class Requirements {
 									echo esc_html(
 										sprintf(
 										/* translators: %s: Version number */
-											__( 'Current version: %s', 'wptelegram' ),
+											__( 'Current version: %s', 'wptelegram-widget' ),
 											$requirement['version']
 										)
 									);
@@ -141,7 +141,7 @@ class Requirements {
 									echo esc_html(
 										sprintf(
 										/* translators: %s: Version number */
-											__( 'Minimum required version: %s', 'wptelegram' ),
+											__( 'Minimum required version: %s', 'wptelegram-widget' ),
 											$requirement['min']
 										)
 									);
@@ -159,7 +159,7 @@ class Requirements {
 								echo esc_html(
 									sprintf(
 									/* translators: %s: comma separated list of missing extensions */
-										__( 'Missing PHP extensions: %s', 'wptelegram' ),
+										__( 'Missing PHP extensions: %s', 'wptelegram-widget' ),
 										implode( ', ', $missing_extensions )
 									)
 								);
@@ -170,7 +170,7 @@ class Requirements {
 						?>
 					</ul>
 					<span>
-						<?php esc_html_e( 'Please contact your hosting provider to ensure the above requirements are met.', 'wptelegram' ); ?>
+						<?php esc_html_e( 'Please contact your hosting provider to ensure the above requirements are met.', 'wptelegram-widget' ); ?>
 					</span>
 				</div>
 			</td>
