@@ -44,6 +44,14 @@ class Main {
 	protected static $instance = null;
 
 	/**
+	 * Whether the dependencies have been initiated.
+	 *
+	 * @since x.y.z
+	 * @var   bool $initiated Whether the dependencies have been initiated.
+	 */
+	private static $initiated = false;
+
+	/**
 	 * Title of the plugin.
 	 *
 	 * @since    1.0.0
@@ -145,8 +153,6 @@ class Main {
 		$this->load_dependencies();
 
 		$this->set_locale();
-
-		$this->init();
 	}
 
 	/**
@@ -155,7 +161,10 @@ class Main {
 	 * @since   2.1.0
 	 * @access   private
 	 */
-	private function init() {
+	public function init() {
+		if ( self::$initiated ) {
+			return;
+		}
 
 		$plugin_upgrade = new Upgrade( $this );
 

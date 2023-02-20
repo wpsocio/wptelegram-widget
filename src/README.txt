@@ -3,8 +3,8 @@ Contributors: wpsocio, irshadahmad21
 Donate link: https://wpsocio.com
 Tags: telegram, feed, widget, channel, group
 Requires at least: 5.8
-Tested up to: 6.1.1
 Requires PHP: 7.0
+Tested up to: 6.1.1
 Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
