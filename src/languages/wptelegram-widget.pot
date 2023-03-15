@@ -1,14 +1,14 @@
-# Copyright (C) 2022
+# Copyright (C) 2023 
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/wpsocio/wptelegram-widget\n"
-"POT-Creation-Date: 2022-11-01 05:41:16+00:00\n"
+"POT-Creation-Date: 2023-03-15 10:27:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-11-1 5:410\n"
+"PO-Revision-Date: 2023-03-15 10:270\n"
 "Last-Translator: WP Telegram Widget\n"
 "Language-Team: WP Telegram Widget\n"
 "Language: en_US\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: node-wp-i18n\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
 
-#: admin/Admin.php:58 includes/Utils.php:251 includes/Utils.php:252
+#: admin/Admin.php:58 includes/Utils.php:279 includes/Utils.php:280
 msgid "WP Telegram"
 msgstr ""
 
@@ -37,8 +37,37 @@ msgid ""
 "Telegram and make it simple for them to get connected."
 msgstr ""
 
-#: includes/Main.php:398
+#: includes/Main.php:407
 msgid "WP Telegram Widget"
+msgstr ""
+
+#: includes/Requirements.php:121
+msgid "This plugin is not compatible with your website configuration."
+msgstr ""
+
+#: includes/Requirements.php:123
+msgid "Missing requirements"
+msgstr ""
+
+#: includes/Requirements.php:136
+#. translators: %s: Version number
+msgid "Current version: %s"
+msgstr ""
+
+#: includes/Requirements.php:144
+#. translators: %s: Version number
+msgid "Minimum required version: %s"
+msgstr ""
+
+#: includes/Requirements.php:162
+#. translators: %s: comma separated list of missing extensions
+msgid "Missing PHP extensions: %s"
+msgstr ""
+
+#: includes/Requirements.php:173
+msgid ""
+"Please contact your hosting provider to ensure the above requirements are "
+"met."
 msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:6

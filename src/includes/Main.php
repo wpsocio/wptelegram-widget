@@ -46,7 +46,7 @@ class Main {
 	/**
 	 * Whether the dependencies have been initiated.
 	 *
-	 * @since x.y.z
+	 * @since 2.1.9
 	 * @var   bool $initiated Whether the dependencies have been initiated.
 	 */
 	private static $initiated = false;

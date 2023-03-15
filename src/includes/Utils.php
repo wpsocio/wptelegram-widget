@@ -182,7 +182,7 @@ class Utils {
 	/**
 	 * Send request to t.me/... and cache the result.
 	 *
-	 * @since  x.y.z
+	 * @since  2.1.9
 	 *
 	 * @param string $url  The t.me URL.
 	 * @param array  $args The request args.
