@@ -28,7 +28,7 @@ abstract class RESTController extends \WP_REST_Controller {
 	 * @var string
 	 * @since 2.0.0
 	 */
-	const NAMESPACE = 'wptelegram-widget/v1';
+	const REST_NAMESPACE = 'wptelegram-widget/v1';
 
 	/**
 	 * The base of this controller's route.

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/wpsocio/wptelegram-widget\n"
-"POT-Creation-Date: 2021-08-26 06:37:36+00:00\n"
+"POT-Creation-Date: 2023-03-15 10:27:27+00:00\n"
 "PO-Revision-Date: 2021-02-22 14:31+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Poedit-KeywordsList: __;_e;_x;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
 
-#: admin/Admin.php:58 includes/Utils.php:251 includes/Utils.php:252
+#: admin/Admin.php:58 includes/Utils.php:279 includes/Utils.php:280
 msgid "WP Telegram"
 msgstr ""
 
@@ -33,9 +33,38 @@ msgid ""
 "Telegram and make it simple for them to get connected."
 msgstr ""
 
-#: includes/Main.php:398
+#: includes/Main.php:407
 msgid "WP Telegram Widget"
 msgstr "WP Telegram Widget"
+
+#: includes/Requirements.php:121
+msgid "This plugin is not compatible with your website configuration."
+msgstr ""
+
+#: includes/Requirements.php:123
+msgid "Missing requirements"
+msgstr ""
+
+#. translators: %s: Version number
+#: includes/Requirements.php:136
+msgid "Current version: %s"
+msgstr ""
+
+#. translators: %s: Version number
+#: includes/Requirements.php:144
+msgid "Minimum required version: %s"
+msgstr ""
+
+#. translators: %s: comma separated list of missing extensions
+#: includes/Requirements.php:162
+msgid "Missing PHP extensions: %s"
+msgstr ""
+
+#: includes/Requirements.php:173
+msgid ""
+"Please contact your hosting provider to ensure the above requirements are "
+"met."
+msgstr ""
 
 #: languages/wptelegram-widget-js-translations.php:6
 msgid "Widget Options"
@@ -270,8 +299,8 @@ msgstr ""
 #: languages/wptelegram-widget-js-translations.php:174
 msgid "Copy the token and paste into the Bot Token field below."
 msgstr ""
-"Das API-Token des Bot kopieren und in das unten stehende Feld \"Bot API-Token"
-"\" einfügen."
+"Das API-Token des Bot kopieren und in das unten stehende Feld \"Bot API-"
+"Token\" einfügen."
 
 #. translators: %s application name
 #: languages/wptelegram-widget-js-translations.php:178

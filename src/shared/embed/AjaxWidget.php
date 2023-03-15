@@ -41,7 +41,7 @@ class AjaxWidget {
 				exit;
 			}
 
-			$json = Utils::send_request_to_t_dot_me(
+			$json = Utils::send_request_to_t_dot_me_cached(
 				$url,
 				[
 					'method'  => 'POST',
@@ -63,7 +63,7 @@ class AjaxWidget {
 
 			$url = self::get_channel_cors_url( $username );
 
-			$output = Utils::send_request_to_t_dot_me( $url );
+			$output = Utils::send_request_to_t_dot_me_cached( $url );
 
 			if ( empty( $output ) ) {
 				exit;

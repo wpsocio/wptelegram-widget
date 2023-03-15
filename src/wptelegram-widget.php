@@ -10,7 +10,9 @@
  * Plugin Name:       WP Telegram Widget
  * Plugin URI:        https://t.me/WPTelegram
  * Description:       Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.
- * Version:           2.1.8
+ * Version:           2.1.9
+ * Requires at least: 5.8
+ * Requires PHP:      7.0
  * Author:            WP Socio
  * Author URI:        https://wpsocio.com
  * License:           GPL-2.0+
@@ -27,9 +29,11 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Current plugin version.
  */
-define( 'WPTELEGRAM_WIDGET_VER', '2.1.8' );
+define( 'WPTELEGRAM_WIDGET_VER', '2.1.9' );
 
-define( 'WPTELEGRAM_WIDGET_BASENAME', plugin_basename( __FILE__ ) );
+defined( 'WPTELEGRAM_WIDGET_MAIN_FILE' ) || define( 'WPTELEGRAM_WIDGET_MAIN_FILE', __FILE__ );
+
+defined( 'WPTELEGRAM_WIDGET_BASENAME' ) || define( 'WPTELEGRAM_WIDGET_BASENAME', plugin_basename( WPTELEGRAM_WIDGET_MAIN_FILE ) );
 
 define( 'WPTELEGRAM_WIDGET_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
@@ -77,7 +81,13 @@ function WPTG_Widget() { // phpcs:ignore WordPress.NamingConventions.ValidFuncti
 	return \WPTelegram\Widget\includes\Main::instance();
 }
 
-// Fire.
-WPTG_Widget();
+use \WPTelegram\Widget\includes\Requirements;
 
-define( 'WPTELEGRAM_WIDGET_LOADED', true );
+if ( Requirements::satisfied() ) {
+	// Fire.
+	WPTG_Widget()->init();
+
+	define( 'WPTELEGRAM_WIDGET_LOADED', true );
+} else {
+	add_filter( 'after_plugin_row_' . WPTELEGRAM_WIDGET_BASENAME, [ Requirements::class, 'display_requirements' ] );
+}

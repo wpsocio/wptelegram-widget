@@ -64,7 +64,11 @@ class LegacyWidget {
 			$num_messages = 5;
 		}
 
-		$messages = array_slice( array_reverse( $messages[ $username ] ), 0, $num_messages );
+		$messages = array_reverse( $messages[ $username ] );
+
+		$messages = apply_filters( 'wptelegram_widget_legacy_widget_messages', $messages, $username, $args );
+
+		$messages = array_slice( $messages, 0, $num_messages );
 
 		$author_photo = $args['author_photo'];
 
