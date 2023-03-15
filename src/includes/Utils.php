@@ -180,14 +180,14 @@ class Utils {
 	}
 
 	/**
-	 * Send request to t.me/...
+	 * Send request to t.me/... and cache the result.
 	 *
-	 * @since  1.6.0
+	 * @since  x.y.z
 	 *
 	 * @param string $url  The t.me URL.
 	 * @param array  $args The request args.
 	 */
-	public static function send_request_to_t_dot_me( $url, $args = [] ) {
+	public static function send_request_to_t_dot_me_cached( $url, $args = [] ) {
 
 		$telegram_blocked  = WPTG_Widget()->options()->get_path( 'advanced.telegram_blocked' );
 		$google_script_url = WPTG_Widget()->options()->get_path( 'advanced.google_script_url' );
@@ -196,6 +196,34 @@ class Utils {
 			$url = $google_script_url . '?url=' . rawurlencode( $url );
 		}
 
+		$cache_duration = (int) apply_filters( 'wptelegram_widget_cache_duration', HOUR_IN_SECONDS, $url, $args );
+
+		if ( ! $cache_duration ) {
+			return self::send_request_to_t_dot_me( $url, $args );
+		}
+
+		$transient = 'wptelegram_widget_output_for_' . $url;
+
+		$output = get_transient( $transient );
+
+		if ( false === $output ) {
+			$output = self::send_request_to_t_dot_me( $url, $args );
+
+			set_transient( $transient, $output, $cache_duration );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Send request to t.me/...
+	 *
+	 * @since  1.6.0
+	 *
+	 * @param string $url  The t.me URL.
+	 * @param array  $args The request args.
+	 */
+	public static function send_request_to_t_dot_me( $url, $args = [] ) {
 		$response = wp_remote_request( $url, $args );
 		$code     = wp_remote_retrieve_response_code( $response );
 

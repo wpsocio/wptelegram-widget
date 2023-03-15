@@ -36,7 +36,7 @@ class SingleMessage {
 
 		$url = self::get_single_message_url( $username, $message_id );
 
-		$html = Utils::send_request_to_t_dot_me( $url );
+		$html = Utils::send_request_to_t_dot_me_cached( $url );
 
 		if ( empty( $html ) ) {
 			return;
