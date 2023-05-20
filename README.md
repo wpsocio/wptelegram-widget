@@ -2,10 +2,10 @@
 
 **Contributors:** [wpsocio](https://github.com/wpsocio), [irshadahmad21](https://github.com/irshadahmad21)  
 **Tags:** telegram, feed, widget, channel, group  
-**Requires at least:** 5.8  
+**Requires at least:** 5.9  
 **Requires PHP:** 7.0  
-**Tested up to:** 6.1.1  
-**Stable tag:** 2.1.9  
+**Tested up to:** 6.2.2  
+**Stable tag:** 2.1.10  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 **Donate link:** [wpsocio.com/donate](https://wpsocio.com/donate)

@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+## [2.1.10 - 2023-05-20](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.10)
+
+### Bug fixes
+
+- Fixed translations not loaded for some strings
+
 ## [2.1.9 - 2023-03-15](https://github.com/wpsocio/wptelegram-widget/releases/tag/v2.1.9)
 
 ### Enhancements
