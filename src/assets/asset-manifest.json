@@ -3,7 +3,7 @@
     "wptelegram-widget--blocks.php": "/static/js/wptelegram-widget--blocks.1b59d84a.asset.php",
     "wptelegram-widget--blocks.css": "/static/css/wptelegram-widget--blocks.dba99b9d.css",
     "wptelegram-widget--blocks.js": "/static/js/wptelegram-widget--blocks.a055bba4.js",
-    "wptelegram-widget--main.php": "/static/js/wptelegram-widget--main.33ee566e.asset.php",
+    "wptelegram-widget--main.php": "/static/js/wptelegram-widget--main.6399963f.asset.php",
     "wptelegram-widget--main.css": "/static/css/wptelegram-widget--main.257f8b24.css",
     "wptelegram-widget--main.js": "/static/js/wptelegram-widget--main.b1c36aa1.js",
     "wptelegram-widget--public.php": "/static/js/wptelegram-widget--public.a7fb5847.asset.php",
@@ -23,7 +23,7 @@
       "static/js/wptelegram-widget--blocks.a055bba4.js"
     ],
     "wptelegram-widget--main": [
-      "static/js/wptelegram-widget--main.33ee566e.asset.php",
+      "static/js/wptelegram-widget--main.6399963f.asset.php",
       "static/css/wptelegram-widget--main.257f8b24.css",
       "static/js/wptelegram-widget--main.b1c36aa1.js"
     ],
