@@ -41,5 +41,4 @@ class Deactivator {
 		 */
 		delete_option( 'rewrite_rules' );
 	}
-
 }

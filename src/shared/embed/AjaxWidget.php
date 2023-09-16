@@ -161,7 +161,6 @@ class AjaxWidget {
 
 				// Append the fields to the <form> tag if needed.
 				return str_replace( $matches[1], AjaxWidgetShortcode::get_ajax_widget_embed_url( $username ), $matches[0] ) . self::get_injected_form_fields( $username );
-
 			},
 			$content
 		);

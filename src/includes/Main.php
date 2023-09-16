@@ -336,7 +336,6 @@ class Main {
 		add_filter( 'block_categories_all', [ $plugin_admin, 'register_block_category' ], 10, 1 );
 
 		add_filter( 'rest_request_before_callbacks', [ Utils::class, 'fitler_rest_errors' ], 10, 3 );
-
 	}
 
 	/**

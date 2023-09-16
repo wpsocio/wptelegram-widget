@@ -40,5 +40,4 @@ class Activator {
 		 */
 		delete_option( 'rewrite_rules' );
 	}
-
 }

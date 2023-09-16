@@ -115,11 +115,11 @@ class Shared extends BaseClass {
 					// if it's for single post.
 					if ( isset( $qvs['message_id'] ) ) {
 
-						$template = dirname( __FILE__ ) . '/partials/single-message-embed.php';
+						$template = __DIR__ . '/partials/single-message-embed.php';
 
 					} else {
 
-						$template = dirname( __FILE__ ) . '/partials/ajax-widget-embed.php';
+						$template = __DIR__ . '/partials/ajax-widget-embed.php';
 					}
 				} else {
 					status_header( 401 );
@@ -144,7 +144,7 @@ class Shared extends BaseClass {
 
 		if ( is_404() && ! empty( $qvs['name'] ) && 'v' === $qvs['name'] ) {
 			status_header( 200 );
-			$template = dirname( __FILE__ ) . '/partials/v.php';
+			$template = __DIR__ . '/partials/v.php';
 		}
 
 		return $template;
