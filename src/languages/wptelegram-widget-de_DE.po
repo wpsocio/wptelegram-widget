@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPTelegram Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/wpsocio/wptelegram-widget\n"
-"POT-Creation-Date: 2023-03-15 10:27:27+00:00\n"
+"POT-Creation-Date: 2023-12-07 11:54:14+00:00\n"
 "PO-Revision-Date: 2021-02-22 14:31+0530\n"
 "Last-Translator: \n"
 "Language-Team: WPTelegram\n"
@@ -32,10 +32,6 @@ msgid ""
 "With this plugin, you can let the users widget to your website with their "
 "Telegram and make it simple for them to get connected."
 msgstr ""
-
-#: includes/Main.php:407
-msgid "WP Telegram Widget"
-msgstr "WP Telegram Widget"
 
 #: includes/Requirements.php:121
 msgid "This plugin is not compatible with your website configuration."
@@ -190,14 +186,6 @@ msgstr "Bot Token"
 #: languages/wptelegram-widget-js-translations.php:102
 msgid "Background color"
 msgstr ""
-
-#: languages/wptelegram-widget-js-translations.php:105
-msgid ""
-"Display the Telegram Public Channel or Group Feed in a WordPress widget or "
-"anywhere you want using a shortcode."
-msgstr ""
-"Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Widget "
-"oder per Shortcode an beliebiger Stelle an."
 
 #: languages/wptelegram-widget-js-translations.php:108
 msgid "Get LIVE support on Telegram"
@@ -566,6 +554,16 @@ msgid "Display the Telegram Public Channel or Group Feed in a widget"
 msgstr ""
 "Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Widget "
 "an"
+
+#~ msgid "WP Telegram Widget"
+#~ msgstr "WP Telegram Widget"
+
+#~ msgid ""
+#~ "Display the Telegram Public Channel or Group Feed in a WordPress widget "
+#~ "or anywhere you want using a shortcode."
+#~ msgstr ""
+#~ "Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem "
+#~ "Widget oder per Shortcode an beliebiger Stelle an."
 
 #~ msgid "Test result:"
 #~ msgstr "Testresultat:"

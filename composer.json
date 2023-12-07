@@ -1,6 +1,6 @@
 {
 	"name": "wptelegram/widget",
-	"version": "2.1.10",
+	"version": "2.1.11",
 	"description": "Display the Telegram Public Channel or Group Feed in a WordPress widget or anywhere you want using a shortcode.",
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^3.0"
