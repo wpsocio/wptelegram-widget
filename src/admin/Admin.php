@@ -296,7 +296,6 @@ class Admin extends BaseClass {
 		do_action( 'wptelegram_widget_process_update_finish', $update, $message, $verified );
 
 		return $message['message_id'];
-
 	}
 
 	/**

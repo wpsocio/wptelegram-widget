@@ -64,7 +64,7 @@ class JoinChannel {
 			 * If neither the child nor parent theme have overridden the template,
 			 * we load the template from the 'partials' sub-directory of the directory this file is in.
 			 */
-			load_template( dirname( __FILE__ ) . '/../partials/join-channel.php' );
+			load_template( __DIR__ . '/../partials/join-channel.php' );
 		}
 		$html = ob_get_clean();
 		return $html;
