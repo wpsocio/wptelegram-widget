@@ -1,0 +1,35 @@
+{
+  "_usePluginData-9VFBHapt.js": {
+    "file": "dist/usePluginData-9VFBHapt.js"
+  },
+  "js/blocks/index.ts": {
+    "css": [
+      "dist/blocks--uWJb-5D.css"
+    ],
+    "file": "dist/blocks-CfzeN5JX.js",
+    "imports": [
+      "_usePluginData-9VFBHapt.js"
+    ],
+    "isEntry": true,
+    "src": "js/blocks/index.ts"
+  },
+  "js/public/index.ts": {
+    "css": [
+      "dist/public-LUckVTK8.css"
+    ],
+    "file": "dist/public-NyUhTfyD.js",
+    "isEntry": true,
+    "src": "js/public/index.ts"
+  },
+  "js/settings/index.ts": {
+    "css": [
+      "dist/settings-T1BGW3Dl.css"
+    ],
+    "file": "dist/settings-3KGrbMhJ.js",
+    "imports": [
+      "_usePluginData-9VFBHapt.js"
+    ],
+    "isEntry": true,
+    "src": "js/settings/index.ts"
+  }
+}
