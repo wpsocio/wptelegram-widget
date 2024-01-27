@@ -4,11 +4,11 @@
     "wp-block-editor",
     "wp-i18n",
     "wp-components",
-    "wp-url",
     "wp-element",
+    "wp-url",
+    "jquery",
     "react",
     "wp-api-fetch",
-    "jquery",
     "react-dom"
   ],
   "js/public/index.ts": [
