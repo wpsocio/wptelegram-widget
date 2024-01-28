@@ -3,8 +3,8 @@
     "wp-blocks",
     "wp-i18n",
     "wp-block-editor",
-    "wp-components",
     "wp-element",
+    "wp-components",
     "wp-url",
     "react",
     "jquery",
@@ -16,9 +16,9 @@
   ],
   "js/settings/index.ts": [
     "react",
-    "wp-api-fetch",
     "react-dom",
     "jquery",
-    "wp-i18n"
+    "wp-i18n",
+    "wp-api-fetch"
   ]
 }
