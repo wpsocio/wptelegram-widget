@@ -7,8 +7,8 @@
     "wp-element",
     "wp-url",
     "react",
-    "wp-api-fetch",
     "jquery",
+    "wp-api-fetch",
     "react-dom"
   ],
   "js/public/index.ts": [
@@ -16,9 +16,9 @@
   ],
   "js/settings/index.ts": [
     "react",
-    "react-dom",
     "wp-api-fetch",
-    "wp-i18n",
-    "jquery"
+    "react-dom",
+    "jquery",
+    "wp-i18n"
   ]
 }
