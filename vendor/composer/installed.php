@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wptelegram/widget',
-        'pretty_version' => '2.1.17',
-        'version' => '2.1.17.0',
-        'reference' => NULL,
+        'pretty_version' => '2.1.18',
+        'version' => '2.1.18.0',
+        'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'wpsocio/wp-utils' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5b5a69c7e81db920f6ee6dcac2281c721029d59e',
+            'reference' => 'f7768dcc7d44830a0c58b7f6e0696bdc846781b8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpsocio/wp-utils',
             'aliases' => array(),
@@ -22,16 +22,16 @@
         'wpsocio/wptelegram-bot-api' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b3047579dc08a8635e6c3469f85cc13df2a035c0',
+            'reference' => '97410f5a4695b6eccea70e769a7aae2536ba42f2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpsocio/wptelegram-bot-api',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'wptelegram/widget' => array(
-            'pretty_version' => '2.1.17',
-            'version' => '2.1.17.0',
-            'reference' => NULL,
+            'pretty_version' => '2.1.18',
+            'version' => '2.1.18.0',
+            'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),

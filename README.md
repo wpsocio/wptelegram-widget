@@ -4,8 +4,8 @@
 **Tags:** telegram, feed, widget, channel, group  
 **Requires at least:** 6.2  
 **Requires PHP:** 7.4  
-**Tested up to:** 6.4.1  
-**Stable tag:** 2.1.17  
+**Tested up to:** 6.4.3  
+**Stable tag:** 2.1.18  
 **License:** GPL-3.0-or-later  
 **License URI:** [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)  
 **Donate link:** [wpsocio.com/donate](https://wpsocio.com/donate)
@@ -34,7 +34,7 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 - Automatically removes deleted messages
 - Can be displayed using a shortcode
 - Available as a Gutengerg block
-- Allows embeding of Telegram public channel messages
+- Allows embedding of Telegram public channel messages
 - Can be extended with custom code
 
 ## Widget Info
@@ -129,7 +129,7 @@ or
 
 ### Contribution
 
-Development occurs in our [Github monorepo](https://github.com/wpsocio/wp-projects), and all contributions welcome.
+Development takes place in our [Github monorepo](https://github.com/wpsocio/wp-projects), and all contributions welcome.
 
 ## Translation
 

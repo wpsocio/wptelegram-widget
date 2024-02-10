@@ -4,8 +4,8 @@ Donate link: https://wpsocio.com/donate
 Tags: telegram, feed, widget, channel, group
 Requires at least: 6.2
 Requires PHP: 7.4
-Tested up to: 6.4.1
-Stable tag: 2.1.17
+Tested up to: 6.4.3
+Stable tag: 2.1.18
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,7 +26,7 @@ Display the Telegram Public Channel or Group Feed in a WordPress widget or anywh
 *	Automatically removes deleted messages
 *	Can be displayed using a shortcode
 *	Available as a Gutengerg block
-*	Allows embeding of Telegram public channel messages
+*	Allows embedding of Telegram public channel messages
 *	Can be extended with custom code
 
 ## Widget Info
@@ -132,7 +132,7 @@ For rules, see the pinned message. No spam please.
 
 == Contribution ==
 
-Development occurs in our [Github monorepo](https://github.com/wpsocio/wp-projects), and all contributions welcome.
+Development takes place in our [Github monorepo](https://github.com/wpsocio/wp-projects), and all contributions welcome.
 
 == Frequently Asked Questions ==
 
@@ -193,7 +193,7 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 
 == Changelog ==
 
-= 2.1.17 =
-- Fix "Bot Token required." error
+= 2.1.18 =
+- Updated bundled bot api library
 
 [See full changelog](https://github.com/wpsocio/wptelegram-widget/blob/main/CHANGELOG.md)
