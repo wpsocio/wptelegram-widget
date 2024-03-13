@@ -162,13 +162,13 @@ msgstr ""
 msgid "Edit URL"
 msgstr ""
 
-#: js/blocks/single-post/Edit.tsx:136
-#: languages/wptelegram-widget-js-translations.php:186
+#: js/blocks/single-post/Edit.tsx:27
+#: languages/wptelegram-widget-js-translations.php:193
 msgid "Telegram post URL"
 msgstr ""
 
-#: js/blocks/single-post/Edit.tsx:165
-#: languages/wptelegram-widget-js-translations.php:189
+#: js/blocks/single-post/Edit.tsx:135
+#: languages/wptelegram-widget-js-translations.php:186
 msgid "Loading…"
 msgstr ""
 
@@ -656,9 +656,9 @@ msgstr ""
 msgid "Display the Telegram Public Channel or Group Feed in a widget"
 msgstr "Отображать Telegram канал или Чат в виджете."
 
-#: js/blocks/single-post/Edit.tsx:176
+#: js/blocks/single-post/Edit.tsx:149
 #: js/blocks/single-post/index.tsx:46
-#: languages/wptelegram-widget-js-translations.php:193
+#: languages/wptelegram-widget-js-translations.php:190
 msgid "Telegram post"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: wptelegram-widget.php
-#: includes/Main.php:420
+#: includes/Main.php:421
 msgid "WP Telegram Widget"
 msgstr ""
 
