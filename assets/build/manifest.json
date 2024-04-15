@@ -1,14 +1,14 @@
 {
-  "_usePluginData-9VFBHapt.js": {
-    "file": "dist/usePluginData-9VFBHapt.js"
+  "_usePluginData-Kd50lcIp.js": {
+    "file": "dist/usePluginData-Kd50lcIp.js"
   },
   "js/blocks/index.ts": {
     "css": [
       "dist/blocks-nken5soC.css"
     ],
-    "file": "dist/blocks-p-Oc4NB3.js",
+    "file": "dist/blocks-WaLIJfHt.js",
     "imports": [
-      "_usePluginData-9VFBHapt.js"
+      "_usePluginData-Kd50lcIp.js"
     ],
     "isEntry": true,
     "src": "js/blocks/index.ts"
@@ -25,9 +25,9 @@
     "css": [
       "dist/settings-T1BGW3Dl.css"
     ],
-    "file": "dist/settings-00ReRckz.js",
+    "file": "dist/settings-cPxvnN9s.js",
     "imports": [
-      "_usePluginData-9VFBHapt.js"
+      "_usePluginData-Kd50lcIp.js"
     ],
     "isEntry": true,
     "src": "js/settings/index.ts"
