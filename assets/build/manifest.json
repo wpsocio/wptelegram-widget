@@ -1,35 +1,39 @@
 {
-  "_usePluginData-Kd50lcIp.js": {
-    "file": "dist/usePluginData-Kd50lcIp.js"
+  "_usePluginData-BTmlva0s.js": {
+    "file": "dist/usePluginData-BTmlva0s.js",
+    "name": "usePluginData"
   },
   "js/blocks/index.ts": {
-    "css": [
-      "dist/blocks-nken5soC.css"
-    ],
-    "file": "dist/blocks-WaLIJfHt.js",
-    "imports": [
-      "_usePluginData-Kd50lcIp.js"
-    ],
+    "file": "dist/blocks-BqkY2cvN.js",
+    "name": "blocks",
+    "src": "js/blocks/index.ts",
     "isEntry": true,
-    "src": "js/blocks/index.ts"
+    "imports": [
+      "_usePluginData-BTmlva0s.js"
+    ],
+    "css": [
+      "dist/blocks-CeR6fmyg.css"
+    ]
   },
   "js/public/index.ts": {
-    "css": [
-      "dist/public-LUckVTK8.css"
-    ],
-    "file": "dist/public-NyUhTfyD.js",
+    "file": "dist/public-Cd7BXEnN.js",
+    "name": "public",
+    "src": "js/public/index.ts",
     "isEntry": true,
-    "src": "js/public/index.ts"
+    "css": [
+      "dist/public-tRyRVMrx.css"
+    ]
   },
   "js/settings/index.ts": {
-    "css": [
-      "dist/settings-T1BGW3Dl.css"
-    ],
-    "file": "dist/settings-cPxvnN9s.js",
-    "imports": [
-      "_usePluginData-Kd50lcIp.js"
-    ],
+    "file": "dist/settings-tD7DsOTc.js",
+    "name": "settings",
+    "src": "js/settings/index.ts",
     "isEntry": true,
-    "src": "js/settings/index.ts"
+    "imports": [
+      "_usePluginData-BTmlva0s.js"
+    ],
+    "css": [
+      "dist/settings-BPUEZbcO.css"
+    ]
   }
 }
