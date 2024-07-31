@@ -1,8 +1,8 @@
 {
   "js/blocks/index.ts": [
     "wp-blocks",
-    "wp-i18n",
     "wp-block-editor",
+    "wp-i18n",
     "wp-components",
     "wp-element",
     "wp-compose",
@@ -21,7 +21,7 @@
     "react-dom",
     "wp-i18n",
     "react-jsx-runtime",
-    "jquery",
-    "wp-api-fetch"
+    "wp-api-fetch",
+    "jquery"
   ]
 }
