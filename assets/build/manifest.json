@@ -1,15 +1,15 @@
 {
-  "_usePluginData-BTmlva0s.js": {
-    "file": "dist/usePluginData-BTmlva0s.js",
+  "_usePluginData-CBVYBKtd.js": {
+    "file": "dist/usePluginData-CBVYBKtd.js",
     "name": "usePluginData"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-BqkY2cvN.js",
+    "file": "dist/blocks-CxZ69pGr.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
     "imports": [
-      "_usePluginData-BTmlva0s.js"
+      "_usePluginData-CBVYBKtd.js"
     ],
     "css": [
       "dist/blocks-CeR6fmyg.css"
@@ -25,12 +25,12 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-tD7DsOTc.js",
+    "file": "dist/settings-408K4RgR.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
     "imports": [
-      "_usePluginData-BTmlva0s.js"
+      "_usePluginData-CBVYBKtd.js"
     ],
     "css": [
       "dist/settings-BPUEZbcO.css"
