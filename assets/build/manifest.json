@@ -1,15 +1,15 @@
 {
-  "_usePluginData-CBVYBKtd.js": {
-    "file": "dist/usePluginData-CBVYBKtd.js",
-    "name": "usePluginData"
+  "_use-plugin-data-CEVveJse.js": {
+    "file": "dist/use-plugin-data-CEVveJse.js",
+    "name": "use-plugin-data"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-CxZ69pGr.js",
+    "file": "dist/blocks-npxzp4cM.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
     "imports": [
-      "_usePluginData-CBVYBKtd.js"
+      "_use-plugin-data-CEVveJse.js"
     ],
     "css": [
       "dist/blocks-CeR6fmyg.css"
@@ -25,15 +25,15 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-408K4RgR.js",
+    "file": "dist/settings-BRcbenmo.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
     "imports": [
-      "_usePluginData-CBVYBKtd.js"
+      "_use-plugin-data-CEVveJse.js"
     ],
     "css": [
-      "dist/settings-BPUEZbcO.css"
+      "dist/settings-CygN4Kkv.css"
     ]
   }
 }

@@ -7,7 +7,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php/wp-utils",
-                "reference": "f7768dcc7d44830a0c58b7f6e0696bdc846781b8"
+                "reference": "b071b3faa1787b0a761ff5808467ef6967d189d9"
             },
             "require-dev": {
                 "pestphp/pest": "^1.22",
@@ -44,6 +44,7 @@
             ],
             "description": "Utilities for WordPress plugins and themes",
             "transport-options": {
+                "symlink": false,
                 "relative": true
             },
             "install-path": "../wpsocio/wp-utils"
@@ -55,7 +56,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php/wptelegram-bot-api",
-                "reference": "97410f5a4695b6eccea70e769a7aae2536ba42f2"
+                "reference": "35133b65f6c41d62e9641e42cf428e766f2d8a1d"
             },
             "require-dev": {
                 "pestphp/pest": "^1.22",
@@ -108,6 +109,7 @@
             ],
             "description": "Telegram Bot API library for WordPress.",
             "transport-options": {
+                "symlink": false,
                 "relative": true
             },
             "install-path": "../wpsocio/wptelegram-bot-api"

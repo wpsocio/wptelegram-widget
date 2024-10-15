@@ -5,12 +5,8 @@
     "wp-i18n",
     "wp-components",
     "wp-element",
-    "wp-compose",
     "wp-url",
-    "react",
-    "wp-api-fetch",
-    "jquery",
-    "react-dom"
+    "wp-compose"
   ],
   "js/public/index.ts": [
     "jquery"
