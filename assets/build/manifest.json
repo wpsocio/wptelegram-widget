@@ -25,7 +25,7 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-BRcbenmo.js",
+    "file": "dist/settings-sDIC1aIz.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
@@ -33,7 +33,7 @@
       "_use-plugin-data-CEVveJse.js"
     ],
     "css": [
-      "dist/settings-CygN4Kkv.css"
+      "dist/settings-CB1c4E27.css"
     ]
   }
 }

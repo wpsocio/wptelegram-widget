@@ -1,12 +1,12 @@
 {
   "js/blocks/index.ts": [
     "wp-blocks",
-    "wp-block-editor",
     "wp-i18n",
+    "wp-block-editor",
     "wp-components",
     "wp-element",
-    "wp-url",
-    "wp-compose"
+    "wp-compose",
+    "wp-url"
   ],
   "js/public/index.ts": [
     "jquery"
@@ -14,8 +14,8 @@
   "js/settings/index.ts": [
     "react",
     "react-dom",
-    "wp-i18n",
     "jquery",
+    "wp-i18n",
     "wp-api-fetch"
   ]
 }
