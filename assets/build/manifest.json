@@ -1,18 +1,18 @@
 {
-  "_use-plugin-data-CEVveJse.js": {
-    "file": "dist/use-plugin-data-CEVveJse.js",
-    "name": "use-plugin-data"
+  "_get-plugin-data-CUiZS_nG.js": {
+    "file": "dist/get-plugin-data-CUiZS_nG.js",
+    "name": "get-plugin-data"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-npxzp4cM.js",
+    "file": "dist/blocks-CAl2HjJG.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
     "imports": [
-      "_use-plugin-data-CEVveJse.js"
+      "_get-plugin-data-CUiZS_nG.js"
     ],
     "css": [
-      "dist/blocks-CeR6fmyg.css"
+      "dist/blocks-CVwpmCEK.css"
     ]
   },
   "js/public/index.ts": {
@@ -25,15 +25,15 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-sDIC1aIz.js",
+    "file": "dist/settings-Cjw26hH6.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
     "imports": [
-      "_use-plugin-data-CEVveJse.js"
+      "_get-plugin-data-CUiZS_nG.js"
     ],
     "css": [
-      "dist/settings-CB1c4E27.css"
+      "dist/settings-Cin4W2Xk.css"
     ]
   }
 }
