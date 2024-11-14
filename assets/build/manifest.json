@@ -4,7 +4,7 @@
     "name": "get-plugin-data"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-CAl2HjJG.js",
+    "file": "dist/blocks-C-qa4kDQ.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
@@ -12,20 +12,20 @@
       "_get-plugin-data-CUiZS_nG.js"
     ],
     "css": [
-      "dist/blocks-CVwpmCEK.css"
+      "dist/blocks-C9ogPNk6.css"
     ]
   },
   "js/public/index.ts": {
-    "file": "dist/public-Cd7BXEnN.js",
+    "file": "dist/public-yOo62lnS.js",
     "name": "public",
     "src": "js/public/index.ts",
     "isEntry": true,
     "css": [
-      "dist/public-tRyRVMrx.css"
+      "dist/public-DEib7km8.css"
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-Cjw26hH6.js",
+    "file": "dist/settings-BvieD7Mj.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
@@ -33,7 +33,7 @@
       "_get-plugin-data-CUiZS_nG.js"
     ],
     "css": [
-      "dist/settings-Cin4W2Xk.css"
+      "dist/settings-qWH1_AJj.css"
     ]
   }
 }
