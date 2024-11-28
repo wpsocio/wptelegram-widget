@@ -5,8 +5,8 @@
     "wp-i18n",
     "wp-components",
     "wp-element",
-    "wp-url",
-    "wp-compose"
+    "wp-compose",
+    "wp-url"
   ],
   "js/public/index.ts": [
     "jquery"

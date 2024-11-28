@@ -632,7 +632,7 @@ msgstr "Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Wi
 #~ msgstr "Zeigt einen öffentlichen Telegram Channel oder Gruppen-Feed in einem Widget oder per Shortcode an beliebiger Stelle an."
 
 #: js/blocks/single-post/Edit.tsx:148
-#: js/blocks/single-post/index.tsx:48
+#: js/blocks/single-post/index.tsx:47
 #: languages/wptelegram-widget-js-translations.php:180
 msgid "Telegram post"
 msgstr ""

@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'wptelegram/widget',
-        'pretty_version' => '2.2.4',
-        'version' => '2.2.4.0',
+        'pretty_version' => '2.2.5',
+        'version' => '2.2.5.0',
         'reference' => null,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../../',
@@ -29,8 +29,8 @@
             'dev_requirement' => false,
         ),
         'wptelegram/widget' => array(
-            'pretty_version' => '2.2.4',
-            'version' => '2.2.4.0',
+            'pretty_version' => '2.2.5',
+            'version' => '2.2.5.0',
             'reference' => null,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../../',

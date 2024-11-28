@@ -1,15 +1,15 @@
 {
-  "_get-plugin-data-CUiZS_nG.js": {
-    "file": "dist/get-plugin-data-CUiZS_nG.js",
+  "_get-plugin-data-CnqUp-qg.js": {
+    "file": "dist/get-plugin-data-CnqUp-qg.js",
     "name": "get-plugin-data"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-C-qa4kDQ.js",
+    "file": "dist/blocks-B8KlwzZr.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
     "imports": [
-      "_get-plugin-data-CUiZS_nG.js"
+      "_get-plugin-data-CnqUp-qg.js"
     ],
     "css": [
       "dist/blocks-C9ogPNk6.css"
@@ -25,15 +25,15 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-BvieD7Mj.js",
+    "file": "dist/settings-qS787Vpq.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
     "imports": [
-      "_get-plugin-data-CUiZS_nG.js"
+      "_get-plugin-data-CnqUp-qg.js"
     ],
     "css": [
-      "dist/settings-qWH1_AJj.css"
+      "dist/settings-BO8nlc6j.css"
     ]
   }
 }
