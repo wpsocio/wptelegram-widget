@@ -1,15 +1,15 @@
 {
-  "_get-plugin-data-CnqUp-qg.js": {
-    "file": "dist/get-plugin-data-CnqUp-qg.js",
+  "_get-plugin-data-C3t3oqxd.js": {
+    "file": "dist/get-plugin-data-C3t3oqxd.js",
     "name": "get-plugin-data"
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-B8KlwzZr.js",
+    "file": "dist/blocks-nW7QnZgF.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
     "imports": [
-      "_get-plugin-data-CnqUp-qg.js"
+      "_get-plugin-data-C3t3oqxd.js"
     ],
     "css": [
       "dist/blocks-C9ogPNk6.css"
@@ -25,15 +25,15 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-qS787Vpq.js",
+    "file": "dist/settings-BlVpg0aB.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
     "imports": [
-      "_get-plugin-data-CnqUp-qg.js"
+      "_get-plugin-data-C3t3oqxd.js"
     ],
     "css": [
-      "dist/settings-BO8nlc6j.css"
+      "dist/settings-Brh01qYn.css"
     ]
   }
 }
