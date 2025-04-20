@@ -12,10 +12,11 @@
     "jquery"
   ],
   "js/settings/index.ts": [
-    "react",
     "react-dom",
-    "wp-i18n",
+    "react",
     "jquery",
+    "wp-i18n",
+    "react-dom",
     "wp-api-fetch"
   ]
 }

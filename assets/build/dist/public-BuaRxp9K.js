@@ -1,0 +1,2 @@
+import{$ as i}from"./jquery-BNSPwlrv.js";import"./_commonjsHelpers-CqkleIqs.js";i(()=>{const t=i(".wptelegram-widget-message iframe");t.on("resize_iframe",function(){const e=i(this),n=e.contents().find("body").height();n&&e.height((n+2).toString())}),t.on("load",function(){const e=i(this);e.contents().find("body").is(":empty")?e.parent().remove():e.trigger("resize_iframe")}),i(window).on("resize",()=>{t.trigger("resize_iframe")})});
+//# sourceMappingURL=public-BuaRxp9K.js.map

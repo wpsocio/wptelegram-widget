@@ -1,2 +1,0 @@
-jQuery(()=>{const i=jQuery(".wptelegram-widget-message iframe");i.on("resize_iframe",function(){const e=jQuery(this),t=e.contents().find("body").height();t&&e.height((t+2).toString())}),i.on("load",function(){const e=jQuery(this);e.contents().find("body").is(":empty")?e.parent().remove():e.trigger("resize_iframe")}),jQuery(window).on("resize",()=>{i.trigger("resize_iframe")})});
-//# sourceMappingURL=public-yOo62lnS.js.map
