@@ -11,7 +11,7 @@ class ComposerStaticInit15316c6c5adc55413e03d08be65e3476
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
+        'W' =>
         array (
             'WPTelegram\\BotAPI\\' => 18,
             'WPSocio\\WPUtils\\' => 16,
@@ -19,11 +19,11 @@ class ComposerStaticInit15316c6c5adc55413e03d08be65e3476
     );
 
     public static $prefixDirsPsr4 = array (
-        'WPTelegram\\BotAPI\\' => 
+        'WPTelegram\\BotAPI\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpsocio/wptelegram-bot-api/src',
         ),
-        'WPSocio\\WPUtils\\' => 
+        'WPSocio\\WPUtils\\' =>
         array (
             0 => __DIR__ . '/..' . '/wpsocio/wp-utils/src',
         ),

@@ -18,7 +18,7 @@
     ]
   },
   "js/blocks/index.ts": {
-    "file": "dist/blocks-julc0XBh.js",
+    "file": "dist/blocks-DxNmjeEb.js",
     "name": "blocks",
     "src": "js/blocks/index.ts",
     "isEntry": true,
@@ -44,7 +44,7 @@
     ]
   },
   "js/settings/index.ts": {
-    "file": "dist/settings-B5IJdPi7.js",
+    "file": "dist/settings-CT5DEr5F.js",
     "name": "settings",
     "src": "js/settings/index.ts",
     "isEntry": true,
@@ -54,7 +54,7 @@
       "__commonjsHelpers-CqkleIqs.js"
     ],
     "css": [
-      "dist/settings-DY72p-iH.css"
+      "dist/settings-DZ7dr73A.css"
     ]
   }
 }

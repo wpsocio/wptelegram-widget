@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wptelegram/widget',
-        'pretty_version' => 'dev-6979a312813f94a46aa5b21c8068324fb6cd28de',
-        'version' => 'dev-6979a312813f94a46aa5b21c8068324fb6cd28de',
-        'reference' => '6979a312813f94a46aa5b21c8068324fb6cd28de',
+        'pretty_version' => 'dev-c28b2bb734aab2b72cab7428bb41bb5d90eca072',
+        'version' => 'dev-c28b2bb734aab2b72cab7428bb41bb5d90eca072',
+        'reference' => 'c28b2bb734aab2b72cab7428bb41bb5d90eca072',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'wptelegram/widget' => array(
-            'pretty_version' => 'dev-6979a312813f94a46aa5b21c8068324fb6cd28de',
-            'version' => 'dev-6979a312813f94a46aa5b21c8068324fb6cd28de',
-            'reference' => '6979a312813f94a46aa5b21c8068324fb6cd28de',
+            'pretty_version' => 'dev-c28b2bb734aab2b72cab7428bb41bb5d90eca072',
+            'version' => 'dev-c28b2bb734aab2b72cab7428bb41bb5d90eca072',
+            'reference' => 'c28b2bb734aab2b72cab7428bb41bb5d90eca072',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),
